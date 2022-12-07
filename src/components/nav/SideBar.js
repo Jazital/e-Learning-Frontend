@@ -157,7 +157,7 @@ class SideBar extends Component {
                                     <Link to="/course-materials">Course Materials</Link>
                                 </li>
                                 <li>
-                                    <Link to="/continuous-assessment">Continuous Assessment (C.A.)</Link>
+                                    <Link to="/continuous-assessment">Continuous Assessment</Link>
                                 </li>
                             </ul>
                         </li>
@@ -173,7 +173,7 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link
-                                className="has-arrow ai-icon"
+                                className="ai-icon"
                                 to="/discussion-board"
                             >
                                 <i className="flaticon-381-earth-globe-1"></i>
@@ -182,7 +182,7 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link
-                                className="has-arrow ai-icon"
+                                className="ai-icon"
                                 to="/timetable"
                             >
                                 <i className="flaticon-381-list"></i>
@@ -191,7 +191,7 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link
-                                className="has-arrow ai-icon"
+                                className=" ai-icon"
                                 to="/help"
                             >
                                 <i className="flaticon-381-help-1"></i>
@@ -200,7 +200,7 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link
-                                className="has-arrow ai-icon"
+                                className=" ai-icon"
                                 to="/logout"
                             >
                                 <i className="flaticon-381-exit-2"></i>

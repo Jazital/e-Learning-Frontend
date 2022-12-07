@@ -12,7 +12,7 @@ import ForgotPassword from "../components/ForgotPassword";
 
 /// Deshboard
 import Home from "../components/Home";
-import ProtectedContainer from "./hoc/ProtectedContainer";
+import ProtectedContainer from "../components/hoc/ProtectedContainer";
 import Error404 from "../components/Error404";
 
 const Markup = () => {

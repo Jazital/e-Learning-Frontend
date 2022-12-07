@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 
 /// Componetns
 import Nav from "../../components/nav";
-import Footer from "./Footer";
+import Footer from "../../components/nav/Footer";
 
 /// Deshboard
 import Home from "../../components/Home";
@@ -89,6 +89,7 @@ const Routes = () => {
       { url: "companies", component: Companies },
       { url: "search-job", component: SearchJobs },
       { url: "statistics", component: Statistics },
+
       /// Bootstrap
       { url: "ui-alert", component: UiAlert },
       { url: "ui-badge", component: UiBadge },
@@ -107,12 +108,14 @@ const Routes = () => {
       { url: "ui-pagination", component: UiPagination },
       { url: "ui-typography", component: UiTypography },
       { url: "ui-grid", component: UiGrid },
+
       /// Apps
       { url: "app-profile", component: AppProfile },
       { url: "email-compose", component: Compose },
       { url: "email-inbox", component: Inbox },
       { url: "email-read", component: Read },
       { url: "app-calender", component: Calendar },
+
       /// Shop
       { url: "ecom-product-grid", component: ProductGrid },
       { url: "ecom-product-list", component: ProductList },
@@ -149,7 +152,6 @@ const Routes = () => {
       { url: "form-validation-jquery", component: Pickers },
 
       /// Plugin
-
       { url: "uc-select2", component: Select2 },
       { url: "uc-nestable", component: Nestable },
       { url: "uc-noui-slider", component: MainNouiSlider },

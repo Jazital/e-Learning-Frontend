@@ -1,7 +1,7 @@
 import React from "react"
-import Nav from "../../components/nav";
+import Nav from "../nav";
 import {Route, Switch} from "react-router-dom";
-import Footer from "../layouts/Footer";
+import Footer from "../nav/Footer";
 
 function ProtectedContainer(props) {
     return (

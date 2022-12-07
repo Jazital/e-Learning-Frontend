@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="footer">
          <div className="copyright">
             <p>
-               Copyright © e-Learning System &amp; Developed by{" "}
+               Copyright © e-Learning System &mdash; Developed by{" "}
                <Link to="https://jazital.com/" target="_blank">
                   Jazital
                </Link>{" "}
