@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
    const [loginData, setLoginData] = useState({});
+
+   useEffect(() => {
+      document.title = 'Login &amp; LMS';
+   }, []);
+
    const handleBlur = (e) => {
       const newLoginData = { ...loginData };
       newLoginData[e.target.name] = e.target.value;

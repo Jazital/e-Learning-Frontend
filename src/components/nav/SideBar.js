@@ -176,7 +176,7 @@ class SideBar extends Component {
                                 className="has-arrow ai-icon"
                                 to="/discussion-board"
                             >
-                                <i className="flaticon-381-send"></i>
+                                <i className="flaticon-381-earth-globe-1"></i>
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
@@ -196,6 +196,15 @@ class SideBar extends Component {
                             >
                                 <i className="flaticon-381-help-1"></i>
                                 <span className="nav-text">Help</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className="has-arrow ai-icon"
+                                to="/logout"
+                            >
+                                <i className="flaticon-381-exit-2"></i>
+                                <span className="nav-text">Logout</span>
                             </Link>
                         </li>
 
