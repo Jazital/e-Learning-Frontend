@@ -10,11 +10,10 @@ const Login = () => {
    };
    const submitHandler = (e) => {
       e.preventDefault();
-      
    };
    return (
       <div className="row justify-content-center h-100 align-items-center h-80">
-         <div className="col-md-6">
+         <div className="col-md-5">
             <div className="authincation-content">
                <div className="row no-gutters">
                   <div className="col-xl-12">
@@ -36,16 +35,13 @@ const Login = () => {
 								</div>
                               </div>
                               <div className="form-group">
-                                 <Link  className=""  to="/page-forgot-password"  > Forgot Password?  </Link>
+                                 <Link  className=""  to="/forgot-password"  > Forgot Password?  </Link>
                               </div>
                            </div>
                            <div className="text-center">
                               <button  type="submit"  className="btn btn-primary btn-block"  onClick={() => submitHandler} > Sign Me In </button>
                            </div>
                         </form>
-                        <div className="new-account mt-3">
-                           <p className=""> Don't have an account?{" "}   <Link className="text-primary" to="/page-register">  Sign up   </Link>  </p>
-                        </div>
                      </div>
                   </div>
                </div>

@@ -10,12 +10,12 @@ const ForgotPassword = () => {
 
    const submitHandler = (e) => {
       e.preventDefault();
-      
+
    };
 
    return (
       <div className="row justify-content-center  align-items-center h-80">
-         <div className="col-md-6">
+         <div className="col-md-5">
             <div className="authincation-content">
                <div className="row no-gutters">
                   <div className="col-xl-12">
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                               <input
                                  type="email"
                                  className="form-control"
-                                 value="hello@example.com"
+                                 value="student@example.com"
                                  onChange={handleBlur}
                               />
                            </div>
