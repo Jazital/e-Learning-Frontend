@@ -1,5 +1,5 @@
 import React from "react"
-import Nav from "../layouts/nav";
+import Nav from "../../components/nav";
 import {Route, Switch} from "react-router-dom";
 import Footer from "../layouts/Footer";
 

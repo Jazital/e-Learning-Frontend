@@ -5,9 +5,9 @@ import { Tab, Nav } from "react-bootstrap";
 //** Import Image */
 
 import {  Sparklines,  SparklinesLine,  } from "react-sparklines";
-import Apexspline from './Apexspline';
-import ApexchartsNegPost from './ApexNagetivePosative';
-import ApexchartsNegPost1 from './ApexNagetivePosative1';
+import Apexspline from '../jsx/components/Dashboard/Home/Apexspline';
+import ApexchartsNegPost from '../jsx/components/Dashboard/Home/ApexNagetivePosative';
+import ApexchartsNegPost1 from '../jsx/components/Dashboard/Home/ApexNagetivePosative1';
 
 const sampleData1 = [8, 7, 6, 3, 2, 4, 6, 8, 12, 6, 12, 13, 10, 18, 14, 24, 16, 12, 19, 21, 16, 14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17,];
 const sampleData2 = [19, 21, 16, 14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17, 12, 6, 12, 13, 10, 18, 14, 24, 16, 12, 8, 7, 6, 3, 2, 7, 6, 8,];

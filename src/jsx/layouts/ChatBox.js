@@ -14,8 +14,6 @@ const ChatBox = ({ onClick, toggle }) => {
    );
 
    const dataToggle = [
-      { href: "#notes", name: "Notes" },
-      { href: "#alerts", name: "Alerts" },
       { href: "#chat", name: "Chat" },
    ];
 
@@ -24,37 +22,22 @@ const ChatBox = ({ onClick, toggle }) => {
          <div className="chatbox-close" onClick={() => onClick()}></div>
          <div className="custom-tab-1">
             <ul className="nav nav-tabs">
-               {dataToggle.map((data, i) => (
-                  <li className="nav-item" key={i}>
+
+                  <li className="nav-item" >
                      <a
-                        className={`nav-link ${
-                           toggleTab === data.name.toLocaleLowerCase()
-                              ? "active"
-                              : ""
-                        }`}
+                        className={`nav-link active`}
                         data-toggle="tab"
-                        href={data.href}
+                        href={dataToggle.href}
                         onClick={() =>
-                           settoggleTab(data.name.toLocaleLowerCase())
+                           settoggleTab(dataToggle.name)
                         }
                      >
-                        {data.name}
+                        {dataToggle.name}
                      </a>
                   </li>
-               ))}
             </ul>
             <div className="tab-content">
                <Chat
-                  PerfectScrollbar={PerfectScrollbar}
-                  toggle={toggle}
-                  toggleTab={toggleTab}
-               />
-               <Notes
-                  PerfectScrollbar={PerfectScrollbar}
-                  toggle={toggle}
-                  toggleTab={toggleTab}
-               />
-               <Alerts
                   PerfectScrollbar={PerfectScrollbar}
                   toggle={toggle}
                   toggleTab={toggleTab}

@@ -140,10 +140,10 @@ class SideBar extends Component {
                         <li>
                             <Link
                                 className="has-arrow ai-icon"
-                                to="#"
+                                to="/courses"
 
                             >
-                                <i className="flaticon-381-layer-1"></i>
+                                <i className="flaticon-381-book"></i>
                                 <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
@@ -164,10 +164,10 @@ class SideBar extends Component {
 
                         <li>
                             <Link
-                                className="has-arrow ai-icon"
+                                className="ai-icon"
                                 to="/virtual-classroom"
                             >
-                                <i className="flaticon-381-layer-1"></i>
+                                <i className="flaticon-381-video-player-1"></i>
                                 <span className="nav-text">Virtual Classroom</span>
                             </Link>
                         </li>
@@ -176,7 +176,7 @@ class SideBar extends Component {
                                 className="has-arrow ai-icon"
                                 to="/discussion-board"
                             >
-                                <i className="flaticon-381-layer-1"></i>
+                                <i className="flaticon-381-send"></i>
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
@@ -185,8 +185,8 @@ class SideBar extends Component {
                                 className="has-arrow ai-icon"
                                 to="/timetable"
                             >
-                                <i className="flaticon-381-layer-1"></i>
-                                <span className="nav-text">Time Table</span>
+                                <i className="flaticon-381-list"></i>
+                                <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
                         <li>
@@ -194,7 +194,7 @@ class SideBar extends Component {
                                 className="has-arrow ai-icon"
                                 to="/help"
                             >
-                                <i className="flaticon-381-layer-1"></i>
+                                <i className="flaticon-381-help-1"></i>
                                 <span className="nav-text">Help</span>
                             </Link>
                         </li>

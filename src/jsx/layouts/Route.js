@@ -3,11 +3,11 @@ import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 
 /// Componetns
-import Nav from "./nav";
+import Nav from "../../components/nav";
 import Footer from "./Footer";
 
 /// Deshboard
-import Home from "../components/Dashboard/Home/Home";
+import Home from "../../components/Home";
 import Application from "../components/Dashboard/Application/Application";
 import Profile from "../components/Dashboard/Profile/Profile";
 import Companies from "../components/Dashboard/Companies/Companies";
