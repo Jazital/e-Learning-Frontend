@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-import data from "./tableData.js.js.js";
+import data from "./tableData.js.js";
 
 const SimpleDataTable = () => {
    return (

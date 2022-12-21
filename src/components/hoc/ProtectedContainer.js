@@ -3,6 +3,7 @@ import Nav from "../nav";
 import {Route, Switch} from "react-router-dom";
 import Footer from "../nav/Footer";
 
+
 function ProtectedContainer(props) {
     return (
         <div id="main-wrapper" className="show">
@@ -12,7 +13,7 @@ function ProtectedContainer(props) {
                     {props.children}
                 </div>
             </div>
-            <Footer />
+           <Footer />
         </div>
     )
 }

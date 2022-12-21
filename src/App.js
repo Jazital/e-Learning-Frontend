@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 /// Components
-import Markup from "./jsx";
+import Markup from "./components/index";
 
 /// Style
 import "./css/style.css";

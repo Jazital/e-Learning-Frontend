@@ -5,37 +5,8 @@ import { Tab, Nav } from "react-bootstrap";
 //** Import Image */
 
 import {  Sparklines,  SparklinesLine,  } from "react-sparklines";
-import Apexspline from '../jsx/components/Dashboard/Home/Apexspline';
-import ApexchartsNegPost from '../jsx/components/Dashboard/Home/ApexNagetivePosative';
-import ApexchartsNegPost1 from '../jsx/components/Dashboard/Home/ApexNagetivePosative1';
 
-const sampleData1 = [8, 7, 6, 3, 2, 4, 6, 8, 12, 6, 12, 13, 10, 18, 14, 24, 16, 12, 19, 21, 16, 14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17,];
-const sampleData2 = [19, 21, 16, 14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17, 12, 6, 12, 13, 10, 18, 14, 24, 16, 12, 8, 7, 6, 3, 2, 7, 6, 8,];
-const sampleData3 = [8, 7, 6, 3, 2, 4, 6, 8, 10, 6, 12, 15, 13, 15, 14, 13, 21, 11, 14, 10, 21, 10, 13, 10, 12, 14, 16, 14, 12, 10, 9, 8, 4, 1,];
-const sampleData4 = [20, 18, 16, 12, 8, 10, 13, 15, 12, 6, 12, 13, 10, 18, 14, 16, 17, 15, 19, 16, 16, 14, 18, 21, 13, 15, 18, 17, 21, 11, 14, 19, 21, 17,];
-const tabData = [
-      {
-         name: "Home",
-         content:
-            <ApexchartsNegPost1 />,
-      },
-      {
-         name: "Profile",
-         content:
-            <ApexchartsNegPost />,
-      },
-      {
-         name: "Contact",
-         content:
-            <ApexchartsNegPost />,
-      },
 
-      {
-         name: "Message",
-         content:
-           <ApexchartsNegPost />,
-      },
-   ];
 
 const Home = () => {
 
@@ -46,7 +17,7 @@ const Home = () => {
 				<div className="card overflow-hidden">
 					<div className="card-header media border-0 pb-0">
 						<div className="media-body">
-							<h2 className="text-black">5</h2>
+							<h2 className="text-black">1</h2>
 							<p className="mb-0 text-black">Pending Assignments</p>
 						</div>
 						<svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +36,7 @@ const Home = () => {
 				<div className="card overflow-hidden">
 					<div className="card-header media border-0 pb-0">
 						<div className="media-body">
-							<h2 className="text-black">3</h2>
+							<h2 className="text-black">2</h2>
 							<p className="mb-0 text-black">Upcoming Classes</p>
 						</div>
 						<svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +58,7 @@ const Home = () => {
 				<div className="card overflow-hidden">
 					<div className="card-header media border-0 pb-0">
 						<div className="media-body">
-							<h2 className="text-black">1</h2>
+							<h2 className="text-black">3</h2>
 							<p className="mb-0 text-black">Timetable</p>
 						</div>
 						<svg width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +70,7 @@ const Home = () => {
 					<div className="card-body pt-4 p-0">
 					</div>
 					<div className="text-center">
-						<a href="#">view all</a>
+						<a href="/courses">view all</a>
 					</div>
 				</div>
 			</div>
@@ -107,7 +78,7 @@ const Home = () => {
 				<div className="card overflow-hidden">
 					<div className="card-header media border-0 pb-0">
 						<div className="media-body">
-							<h2 className="text-black">12</h2>
+							<h2 className="text-black">4</h2>
 							<p className="mb-0 text-black">Course Materials</p>
 						</div>
 
@@ -115,95 +86,14 @@ const Home = () => {
 					<div className="card-body pt-4 p-0">
 					</div>
 					<div className="text-center">
-						<a href="#">view all</a>
+						<a href="/coursematerial">view all</a>
 					</div>
 				</div>
 			</div>
 
-			<div className="col-xl-6 col-lg-12">
-				<div className="card">
-					<div className="card-header pb-0 border-0">
-						<div>
-							<h4 className="card-title mb-2">Quizzes</h4>
-							<p className="fs-13 mb-0">Lorem ipsum dolor sit amet,consecteture</p>
-						</div>
-						<div className="dropdown">
-							<button type="button" className="btn border btn-rounded text-black dropdown-toggle" data-toggle="dropdown">
-								Monthly
-							</button>
-							<div className="dropdown-menu">
-								<Link to={"#"} className="dropdown-item" >2020</Link>
-								<Link to={"#"} className="dropdown-item" >2019</Link>
-								<Link to={"#"} className="dropdown-item" >2018</Link>
-							</div>
-						</div>
-					</div>
-					<div className="card-body px-0 px-sm-3">
-						<div className="d-flex justify-content-center">
-							<div className="text-center px-2 px-md-5">
-								<p className="fs-14 mb-1">Passed</p>
-								<h4 className="text-black font-w600 mb-0 fs-22">32</h4>
-							</div>
-							<div className="text-center px-2 px-md-5">
-								<p className="fs-14 mb-1">Failed</p>
-								<h4 className="text-black font-w600 mb-0 fs-22">18</h4>
-							</div>
-						</div>
-						<div>
-							<Apexspline />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col-xl-6 col-lg-12">
-				<div className="card">
-					<Tab.Container defaultActiveKey={tabData[0].name.toLowerCase()}>
-						<div className="card-header border-0 d-sm-flex d-block">
-							<div>
-								<h4 className="card-title mb-2">Statistic Info</h4>
-								<p className="fs-13 mb-0">Lorem ipsum dolor</p>
-							</div>
-							<div className="card-action card-tabs mt-3 mt-sm-0 mt-3 mt-sm-0 ">
-									<Nav as="ul" className="nav nav-tabs ">
-									   {tabData.map(
-										  (data, i) =>
-											 i !== tabData.length - 1 && (
-												<Nav.Item as="li" key={i}>
-												   <Nav.Link
-													  eventKey={data.name.toLowerCase()}
-												   >
-													  {" "}
-													  {i === 1
-														 ? "Weekly"
-														 : i === 2
-														 ? "Today"
-														 : "Monthly"}
-												   </Nav.Link>
-												</Nav.Item>
-											 )
-									   )}
-									</Nav>
-							</div>
-						</div>
-						<div className="card-body">
-							<Tab.Content className="">
-							   {tabData.map(
-								  (data, i) =>
-									 i !== tabData.length - 1 && (
-										<Tab.Pane
-										   eventKey={data.name.toLowerCase()}
-										   key={i}
-										>
-										   <div>{data.content}</div>
-
-										</Tab.Pane>
-									 )
-							   )}
-							</Tab.Content>
-						</div>
-					</Tab.Container>
-				</div>
-			</div>
+			
+			
+			
 
         </div>
 
