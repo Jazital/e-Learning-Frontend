@@ -49,7 +49,7 @@ class SideBar extends Component {
         const path = window.location.pathname;
 
         /// Active menu
-        let deshBoard = [
+        let dashBoard = [
                 "",
                 "analytics",
                 "companies",
@@ -120,7 +120,7 @@ class SideBar extends Component {
                     <MM className="metismenu" id="menu">
                         <li
                             className={`${
-                                deshBoard.includes(path.slice(1)) ? "mm-active" : ""
+                                dashBoard.includes(path.slice(1)) ? "mm-active" : ""
                             }`}
                         >
                             <Link
@@ -141,20 +141,19 @@ class SideBar extends Component {
                             <Link
                                 className="has-arrow ai-icon"
                                 to="/courses"
-
                             >
                                 <i className="flaticon-381-book"></i>
                                 <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/courses">All Courses</Link>
+                                    <Link to="/enrolledcourses">Enrolled Courses</Link>
                                 </li>
                                 <li>
                                     <Link to="/assignments">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-materials">Course Materials</Link>
+                                    <Link to="/CourseMaterial">Course Materials</Link>
                                 </li>
                                 <li>
                                     <Link to="/continuous-assessment">Continuous Assessment</Link>
@@ -183,7 +182,7 @@ class SideBar extends Component {
                         <li>
                             <Link
                                 className="ai-icon"
-                                to="/timetable"
+                                to="/SimpleDataTable"
                             >
                                 <i className="flaticon-381-list"></i>
                                 <span className="nav-text">Timetable</span>
