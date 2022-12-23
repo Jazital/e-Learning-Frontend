@@ -1,118 +1,13 @@
-.order-request{
-	
-	 tbody{
-		
-		tr{
-			display: block;
-			padding: 0 20px;
-			position: relative;
-			box-shadow: 0 1px 0 0 #f8f8f8;
-			@include transitionMedium;
-			&.active,
-			&:hover{
-				box-shadow: 0 0 20px -3px rgba(0, 0, 0, 0.15);
-				z-index: 1;
-			}
-			th,
-			td{
-				border: 0;
-				padding:18px 8px;
-				&:nth-child(1){
-					width:35%;
-					@include respond('laptop') {
-						width:40%;
-					}
-				}
-				&:nth-child(2){
-					width:17%;
-					@include respond('laptop') {
-						width:20%;
-					}
-				}
-				&:nth-child(4){
-					width:18%;
-				}
-			}
-			.media{
-				@include respond('phone-land') {
-					width:250px;
-				}
-				img{
-					min-width: 75px;
-				}
-			}
-		}
-	}
-	@include respond('phone') {
-		width:500px;
-	}	
-}
-.wspace-no{
-	white-space:nowrap;
-}
-.star-review{
-	i{
-		font-size:16px;
-		&.text-gray{
-			color:#d9d9d9;
-		}
-	}
-	span{
-		color:$black;
-	}
-}
-.chart-deta{
-	.col{
-		display: flex;
-		padding: 0;
-		margin-right: 15px;
-		margin-bottom: 30px;
-		&:last-child{
-			margin-bottom:0;
-		}
-		@include respond('phone') {
-			margin-bottom: 5px;
-		}	
-		p{
-			margin-bottom:5px;
-			line-height:1.5;
-			font-weight: 500;
-			@include respond('phone') {
-				font-size: 14px;
-				display: inline-block;
-			}	
-		}
-		h3{
-			font-size:34px;
-			margin-bottom:0;
-			color:$black;
-			@include respond('phone') {
-				font-size: 14px;
-				display: inline-block;
-			}	
-		}
-		[class*="bg-"]{
-			height: 30px;
-			width: 30px;
-			border-radius: 50px;
-			margin-right: 25px;
-			@include respond('phone') {
-				height: 16px;
-				width: 16px;
-				margin-right: 10px;
-				margin-top: 5px;
-			}	
-		}
-		
-	}
-}
+
 .trending-menus{
+	
 	.timeline {
 		.timeline-panel{ 
 			padding: 25px 30px 30px 30px;
 			@include transitionMedium;
 			border-bottom: 1px solid $border-color;
 			margin-bottom: 0;
+			padding: 45px;
 			@include respond('phone') {
 				display:block;
 				padding: 15px 15px 30px 15px;
