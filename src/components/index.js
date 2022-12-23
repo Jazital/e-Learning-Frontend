@@ -55,6 +55,11 @@ const Markup = () => {
 
                       <Route
                         
+                        exact path={`/`}
+                        component={Home}
+                    />
+                      <Route
+                        
                         path={`/dashboard`}
                         component={Home}
                     />
