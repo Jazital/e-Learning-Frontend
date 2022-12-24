@@ -31,12 +31,12 @@ const Home = () => {
 							src={pendinassingment}
 							/>
 							<div className="text-home"> 
-							<h2 className="text-black">1</h2>
+							<h2 className="text-black">2</h2>
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
-							<p className="mb-0 text-black">Pending Assignments</p>
+					    <div className="card-body pt-4 p-0 text-center">
+							<p className="mb-0 text-black">Pending Assignment</p>
 						</div>
 					<div className="text-center">
 						<a href="#">view all</a>
@@ -58,8 +58,8 @@ const Home = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
-							<p className="mb-0 text-black">Pending Assignments</p>
+					    <div className="card-body pt-4 p-0 text-center">
+							<p className="mb-0 text-black">Upcoming Classes</p>
 						</div>
 					<div className="text-center">
 						<a href="#">view all</a>
@@ -81,8 +81,8 @@ const Home = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
-							<p className="mb-0 text-black">Pending Assignments</p>
+					    <div className="card-body pt-4 p-0 text-center">
+							<p className="mb-0 text-black">timetable</p>
 						</div>
 					<div className="text-center">
 						<a href="#">view all</a>
@@ -104,8 +104,8 @@ const Home = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
-							<p className="mb-0 text-black">Pending Assignments</p>
+					    <div className="card-body pt-4 p-0 text-center">
+							<p className="mb-0 text-black">coursematerial</p>
 						</div>
 					<div className="text-center">
 						<a href="#">view all</a>
