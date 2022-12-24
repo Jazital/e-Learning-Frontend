@@ -1,7 +1,14 @@
 .card{
-    padding: 44px;
+    padding: 30px;
     
 }
 .text-home{
-    padding-left: 55%;
+    padding-left: 25px;
+}
+
+.centercoursetext{
+    text-align: center;
+}
+.the {
+    display: flex;
 }
