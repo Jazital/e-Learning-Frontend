@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 //** Import Image */
 import "../CSS/Home.css";
 
-import coursematerial from "../../images/otherpages/Vectorcourses.png"
+import coursematerial from "../images/Vectorcourses.png"
 
 
 

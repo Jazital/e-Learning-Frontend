@@ -105,7 +105,7 @@ const Home = () => {
 						</div>
 
 					    <div className="card-body pt-4 p-0 text-center">
-							<p className="mb-0 text-black">coursematerial</p>
+							<p className="mb-0 text-black">course material</p>
 						</div>
 					<div className="text-center">
 						<a href="#">view all</a>

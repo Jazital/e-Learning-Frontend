@@ -150,7 +150,7 @@ class SideBar extends Component {
                                     <Link to="/enrolledcourses">Enrolled Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/assignments">Assignments</Link>
+                                    <Link to="/AssignmentList">Assignments</Link>
                                 </li>
                                 <li>
                                     <Link to="/CourseMaterial">Course Materials</Link>
@@ -182,7 +182,7 @@ class SideBar extends Component {
                         <li>
                             <Link
                                 className="ai-icon"
-                                to="/SimpleDataTable"
+                                to="/timetable"
                             >
                                 <i className="flaticon-381-list"></i>
                                 <span className="nav-text">Timetable</span>
