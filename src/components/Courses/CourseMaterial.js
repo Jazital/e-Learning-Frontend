@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 import { Table, Pagination } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
-import ProfileDatatable from "./table/ProfileDatatable";
+import CourseMaterialTable from "./table/CourseMaterialTable";
+
 import "../CSS/Home.css";
 
 import classroom from "../../images/HomePageIcons/classroom.png"
 import pendinassingment from "../../images/HomePageIcons/pendinassingment.png"
-import discussion from "../../images/otherpages/discussion board icondiscussionboard.png"
-import coursematerial from "../../images/otherpages/Vectorcourses.png"
-import coursematerial1 from "../../images/otherpages/Group 56.png"
+import discussion from "../images/discussion board icondiscussionboard.png"
+import coursematerial from "../images/Vectorcourses.png"
+
 
 
 
@@ -39,7 +39,7 @@ const CourseMaterial = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
+					    <div className="text-center card-body pt-4 p-0">
 							<p className="mb-0 text-black">Pending Assignments</p>
 						</div>
 					<div className="text-center">
@@ -62,11 +62,11 @@ const CourseMaterial = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
-							<p className="mb-0 text-black">Countinous Assignment</p>
+					    <div className="text-center card-body pt-4 p-0">
+							<p className="mb-0 text-black">UpComing Classes</p>
 						</div>
 					<div className="text-center">
-						<a href="#">view C.A Score</a>
+						<a href="/upcomingclass">view C.A Score</a>
 					</div>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ const CourseMaterial = () => {
 							</div>
 						</div>
 
-					    <div className="card-body pt-4 p-0">
+					    <div className="text-center card-body pt-4 p-0">
 							<p className="mb-0 text-black">Countinous Assignment</p>
 						</div>
 					<div className="text-center">
@@ -97,8 +97,8 @@ const CourseMaterial = () => {
 		
             </div>
             
-
-			    <ProfileDatatable />
+					<CourseMaterialTable />
+			    
             </div>
           
          

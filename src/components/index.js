@@ -19,9 +19,13 @@ import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./Courses/EnrolledCourses";
 import BasicDatatable from "../components/Courses/table/BasicDatatable";
-import Assignment from "../components/Courses/Assignment";
+import AssignmentList from "../components/Courses/table/AssignmentList";
+import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
-import PatientTable from "../components/Courses/table/PatientTable";
+import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
+import TimeTable from "../components/TimeTable/TimeTable";
+
+
 
 
 const Markup = () => {
@@ -71,30 +75,38 @@ const Markup = () => {
                     />
                       <Route
                         
-                        path={`/assignments`}
-                        component={BasicDatatable}
+                        path={`/AssignmentList`}
+                        component={AssignmentList}
                     />
                       <Route
                         
-                        path={`/assignments-file`}
-                        component={Assignment}
+                        path={`/checkingtable`}
+                        component={CheckingTable}
+                    />
+                     
+                      <Route
+                        
+                        path={`/upcomingclass`}
+                        component={UpComingClasses}
+                    />
+                      <Route
+                        
+                        path={`/timetable`}
+                        component={TimeTable}
                     />
                       <Route
                         
                         path={`/CourseMaterial`}
                         component={CourseMaterial}
                     />
-                        <Route
-                          
-                          path={`/virtual-classroom`}
-                          component={PatientTable}
-                      />
+                      
                                                      
                       <Route
                         
                         path={`/Profile`}
                         component={Profile}
                     /> 
+                    
 
                 </ProtectedContainer>
                 <Route
