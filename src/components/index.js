@@ -18,10 +18,10 @@ import Profile from "../components/Dashboard/Profile/Profile";
 import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./Courses/EnrolledCourses";
-import BasicDatatable from "../components/Courses/table/BasicDatatable";
 import AssignmentList from "../components/Courses/table/AssignmentList";
 import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
+import Assignment from "../components/Courses/Assignment";
 import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
 import TimeTable from "../components/TimeTable/TimeTable";
 
@@ -77,6 +77,11 @@ const Markup = () => {
                         
                         path={`/AssignmentList`}
                         component={AssignmentList}
+                    />
+                      <Route
+                        
+                        path={`/assignment`}
+                        component={Assignment}
                     />
                       <Route
                         
