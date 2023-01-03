@@ -22,6 +22,7 @@ import AssignmentList from "../components/Courses/table/AssignmentList";
 import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
 import Assignment from "../components/Courses/Assignment";
+import CourseMat from "../components/Courses/CourseMat";
 import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
 import TimeTable from "../components/TimeTable/TimeTable";
 
@@ -53,15 +54,15 @@ const Markup = () => {
                     path={`/forgot-password`}
                     component={ForgotPassword}
                     /> 
+                      <Route
+                        
+                        exact path={`/`}
+                        component={Login}
+                    />
 
               {/*Protected Routes*/} 
                 <ProtectedContainer>
 
-                      <Route
-                        
-                        exact path={`/`}
-                        component={Home}
-                    />
                       <Route
                         
                         path={`/dashboard`}
@@ -72,6 +73,11 @@ const Markup = () => {
                         
                         path={`/enrolledcourses`}
                         component={EnrolledCourses}
+                    />
+                      <Route
+                        
+                        path={`/coursemat`}
+                        component={CourseMat}
                     />
                       <Route
                         
