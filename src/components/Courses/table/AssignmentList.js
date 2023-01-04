@@ -60,10 +60,13 @@ const AssignmentList = () => {
     options: {
     filter: true,
     sort: false,
+    
     }
     },
     ];
+
     
+   
     const data = [
     { Number: "1",Course: "CSC 401", DateGiven: "24-03-2022 04:30PM", DueDate:  "24-03-2022 04:30PM", Status: "open", Lecturer: "Dr. E. Dayo", Action: "View, Download, Upload Solution"  },
     { Number: "1",Course: "CSC 401", DateGiven: "24-03-2022 04:30PM", DueDate:  "24-03-2022 04:30PM", Status: "open", Lecturer: "Dr. E. Dayo", Action: "View, Download, Upload Solution"  },
@@ -75,9 +78,6 @@ const AssignmentList = () => {
     const options = {
     filterType: 'checkbox',
     };
-
-
-
 
 
    return (

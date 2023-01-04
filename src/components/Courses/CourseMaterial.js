@@ -43,7 +43,7 @@ const CourseMaterial = () => {
 							<p className="mb-0 text-black">Pending Assignments</p>
 						</div>
 					<div className="text-center">
-						<a href="#">view Assignment</a>
+						<a href= "/assignment">view Assignment</a>
 					</div>
 				</div>
 			</div>
