@@ -90,6 +90,7 @@ const AssignmentList = () => {
             data={data}
             columns={columns}
             options={options}
+            pagination
             />
       </div>
    );

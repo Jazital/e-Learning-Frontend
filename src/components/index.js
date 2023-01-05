@@ -18,15 +18,16 @@ import Profile from "../components/Dashboard/Profile/Profile";
 import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./Courses/EnrolledCourses";
-import AssignmentList from "../components/Courses/table/AssignmentList";
+import AssignmentList from "../components/Courses/table/AssignmentList"; 
+import CourseReg from "../components/Courses/table/CourseReg";
 import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
 import Assignment from "../components/Courses/Assignment";
 import CourseMat from "../components/Courses/CourseMat";
+import ChatRoom from "../components/Courses/ChatRoom";
 import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
+import OnlineClass from "../components/virtual-classroom/OnlineClass";
 import TimeTable from "../components/TimeTable/TimeTable";
-
-
 
 
 const Markup = () => {
@@ -54,12 +55,12 @@ const Markup = () => {
                     path={`/forgot-password`}
                     component={ForgotPassword}
                     /> 
+
                       <Route
                         
                         exact path={`/`}
                         component={Login}
                     />
-
               {/*Protected Routes*/} 
                 <ProtectedContainer>
 
@@ -81,8 +82,18 @@ const Markup = () => {
                     />
                       <Route
                         
+                        path={`/discussion-board`}
+                        component={ChatRoom}
+                    />
+                      <Route
+                        
                         path={`/AssignmentList`}
                         component={AssignmentList}
+                    />
+                      <Route
+                        
+                        path={`/CourseReg`}
+                        component={CourseReg}
                     />
                       <Route
                         
@@ -99,6 +110,12 @@ const Markup = () => {
                         
                         path={`/upcomingclass`}
                         component={UpComingClasses}
+                    />
+                      <Route
+                    
+                        
+                        path={`/virtual-classroom`}
+                        component={OnlineClass}
                     />
                       <Route
                         

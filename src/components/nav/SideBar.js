@@ -124,18 +124,14 @@ class SideBar extends Component {
                             }`}
                         >
                             <Link
-                                className="has-arrow ai-icon"
+                                
                                 to="/dashboard"
 
                             >
                                 <i className="flaticon-381-networking"></i>
                                 <span className="nav-text">Dashboard</span>
                             </Link>
-                            <ul>
-                                <li>
-                                    <Link to="/dashboard">Dashboard</Link>
-                                </li>
-                            </ul>
+                          
                         </li>
                         <li>
                             <Link
