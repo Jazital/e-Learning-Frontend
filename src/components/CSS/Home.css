@@ -46,6 +46,10 @@
     border-radius: 20px;
 }
 
+.card-header{
+    background-color: #fff !important;
+}
+
 #assignn{
     margin-right: 19px;
 }

@@ -1,11 +1,6 @@
 /*
     Table of Contents
 
-    Name                 : Koki
-    Author               : DexignZone
-    Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
-
-
 
     Table of Sass Contents
 
@@ -3886,6 +3881,7 @@ input[type="button"].btn-block {
   margin-left: 1.25rem; }
 
 .card-header {
+  text-align: center;
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);

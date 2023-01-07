@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.card-header{
+  background-color: #fff !important;
+}
+
+.card-header {
+  text-align: center !important;
+}
+
+.media-body {
+  text-align: center !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
