@@ -71,7 +71,7 @@ const Markup = () => {
              
                       <Route
                         
-                        path={`/enrolledcourses`}
+                        path={`/enrolled-courses`}
                         component={EnrolledCourses}
                     />
                       <Route
@@ -81,7 +81,7 @@ const Markup = () => {
                     />
                       <Route
                         
-                        path={`/AssignmentList`}
+                        path={`/assignment-list`}
                         component={AssignmentList}
                     />
                       <Route
@@ -97,7 +97,7 @@ const Markup = () => {
                      
                       <Route
                         
-                        path={`/upcomingclass`}
+                        path={`/upcoming-class`}
                         component={UpComingClasses}
                     />
                       <Route
@@ -107,14 +107,14 @@ const Markup = () => {
                     />
                       <Route
                         
-                        path={`/CourseMaterial`}
+                        path={`/course-material`}
                         component={CourseMaterial}
                     />
                       
                                                      
                       <Route
                         
-                        path={`/Profile`}
+                        path={`/profile`}
                         component={Profile}
                     /> 
                     

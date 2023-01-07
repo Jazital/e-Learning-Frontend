@@ -45,74 +45,9 @@ class SideBar extends Component {
     }
 
     render() {
-        /// Path
+        /// Get the URL path
         const path = window.location.pathname;
-
-        /// Active menu
-        let dashBoard = [
-                "",
-                "analytics",
-                "companies",
-                "statistics",
-
-            ],
-            app = [
-                "app-profile",
-                "app-calender",
-                "email-compose",
-                "email-inbox",
-                "email-read",
-                "ecom-product-grid",
-                "ecom-product-list",
-                "ecom-product-list",
-                "ecom-product-order",
-                "ecom-checkout",
-                "ecom-invoice",
-                "ecom-customers",
-            ],
-            charts = [
-                "chart-morris",
-                "chart-chartjs",
-                "chart-chartist",
-                "chart-sparkline",
-                "chart-peity",
-            ],
-            bootstrap = [
-                "ui-accordion",
-                "ui-badge",
-                "ui-alert",
-                "ui-button",
-                "ui-modal",
-                "ui-button-group",
-                "ui-list-group",
-                "ui-media-object",
-                "ui-card",
-                "ui-carousel",
-                "ui-dropdown",
-                "ui-popover",
-                "ui-progressbar",
-                "ui-tab",
-                "ui-typography",
-                "ui-pagination",
-                "ui-grid",
-            ],
-            plugins = [
-                "uc-select2",
-                "uc-nestable",
-                "uc-sweetalert",
-                "uc-toastr",
-                "uc-jqvmap",
-                "uc-noui-slider",
-            ],
-            widget = ["widget"],
-            forms = [
-                "form-element",
-                "form-wizard",
-                "form-editor-summernote",
-                "form-pickers",
-                "form-validation-jquery",
-            ],
-            table = ["table-bootstrap-basic", "table-datatable-basic"];
+        const currentUrlPath = path.slice(1);
 
         return (
             <div className="deznav">
@@ -120,40 +55,33 @@ class SideBar extends Component {
                     <MM className="metismenu" id="menu">
                         <li
                             className={`${
-                                dashBoard.includes(path.slice(1)) ? "mm-active" : ""
+                                (currentUrlPath == "dashboard") ? "mm-active" : ""
                             }`}
                         >
                             <Link
-                                className="has-arrow ai-icon"
+                                className="ai-icon"
                                 to="/dashboard"
-
                             >
                                 <i className="flaticon-381-networking"></i>
                                 <span className="nav-text">Dashboard</span>
                             </Link>
-                            <ul>
-                                <li>
-                                    <Link to="/dashboard">Dashboard</Link>
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <Link
                                 className="has-arrow ai-icon"
                                 to="/courses"
                             >
-                                <i className="flaticon-381-book"></i>
                                 <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/enrolledcourses">Enrolled Courses</Link>
+                                    <Link to="/enrolled-courses">Enrolled Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/AssignmentList">Assignments</Link>
+                                    <Link to="/assignment-list">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/CourseMaterial">Course Materials</Link>
+                                    <Link to="/course-material">Course Materials</Link>
                                 </li>
                                 <li>
                                     <Link to="/continuous-assessment">Continuous Assessment</Link>
@@ -161,7 +89,11 @@ class SideBar extends Component {
                             </ul>
                         </li>
 
-                        <li>
+                        <li 
+                        className={`${
+                            (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
                                 className="ai-icon"
                                 to="/virtual-classroom"
@@ -170,7 +102,11 @@ class SideBar extends Component {
                                 <span className="nav-text">Virtual Classroom</span>
                             </Link>
                         </li>
-                        <li>
+                        <li
+                        className={`${
+                            (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
                                 className="ai-icon"
                                 to="/discussion-board"
@@ -179,7 +115,11 @@ class SideBar extends Component {
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
-                        <li>
+                        <li 
+                        className={`${
+                            (currentUrlPath == "timetable") ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
                                 className="ai-icon"
                                 to="/timetable"
@@ -188,7 +128,11 @@ class SideBar extends Component {
                                 <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
-                        <li>
+                        <li
+                        className={`${
+                            (currentUrlPath == "help") ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
                                 className=" ai-icon"
                                 to="/help"
