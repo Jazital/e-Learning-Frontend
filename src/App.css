@@ -19,6 +19,15 @@
   text-align: center !important;
 }
 
+.card-header.media.border-0.pb-788 {
+  align-self: center !important;
+  justify-self: center !important;
+}
+
+.card{
+  display: flex;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -102,7 +102,7 @@ const Markup = () => {
                       <Route
                         
                         path={`/checkingtable`}
-                        component={CheckingTable}
+                        component={CheckingTable} 
                     />
                      
                       <Route

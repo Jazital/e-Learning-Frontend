@@ -149,8 +149,7 @@ class SideBar extends Component {
                                 <i className="flaticon-381-exit-2"></i>
                                 <span className="nav-text">Logout</span>
                             </Link>
-                        </li>
-
+                        </li> 
                     </MM>
 
                 </PerfectScrollbar>
@@ -159,4 +158,4 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar;
+export default SideBar; 
