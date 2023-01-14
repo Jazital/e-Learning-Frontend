@@ -24,11 +24,19 @@ import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
 import Assignment from "../components/Courses/Assignment";
 import CourseMat from "../components/Courses/CourseMat";
+
 import ChatRoom from "../components/Courses/ChatRoom";
 import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
-import OnlineClass from "../components/virtual-classroom/OnlineClass";
 import TimeTable from "../components/TimeTable/TimeTable";
 
+//Staff profile
+import SubmittedAssignment  from "./Workers/Courses/table/AssignmentList";
+import AssignedCourse  from "./Workers/Courses/AssignedCourses";
+import OnlineClasses  from "./Workers/virtual-classroom/OnlineClass";
+import Upload_Assignment  from "./Workers/Courses/UploadAssignment";
+import SProfile  from "./Workers/Dashboard/Profile/SProfile";
+import ProtectedContainers   from "./Workers/hoc/ProtectedContainerss";
+import CourseMats from "./Workers/Courses/CourseMat";
 
 const Markup = () => {
 
@@ -44,14 +52,43 @@ const Markup = () => {
                     component={Login}
                     />
             
+                <ProtectedContainers>
+                  <Route
+                      path={`/uploadAssignment`}
+                      component={Upload_Assignment}
+                      />
 
-            <Route
-                    
-                    path={`/registration`}
-                    component={Registration}
+                  <Route
+                      path={`/sprofile`}
+                      component={SProfile}
+                      />
+
+                  <Route
+                      path={`/AssignedCourse`}
+                      component={AssignedCourse}
+                      />
+                  <Route
+                      path={`/Submitted-Assignment`}
+                      component={SubmittedAssignment}
+                      />
+
+                    <Route
+                        
+                        path={`/coursemats`}
+                        component={CourseMats}
                     />
-                <Route
+                  <Route
+                        
+                        path={`/OnlineClasses`}
+                        component={OnlineClasses}
+                    />
+                </ProtectedContainers>
+                  <Route
+                      path={`/registration`}
+                      component={Registration}
+                      />
                     
+                 <Route
                     path={`/forgot-password`}
                     component={ForgotPassword}
                     /> 
@@ -61,6 +98,9 @@ const Markup = () => {
                         exact path={`/`}
                         component={Login}
                     />
+
+               
+
               {/*Protected Routes*/} 
                 <ProtectedContainer>
 
@@ -75,11 +115,7 @@ const Markup = () => {
                         path={`/enrolled-courses`}
                         component={EnrolledCourses}
                     />
-                      <Route
-                        
-                        path={`/coursemat`}
-                        component={CourseMat}
-                    />
+                    
                       <Route
                         
                         path={`/discussion-board`}
@@ -110,12 +146,12 @@ const Markup = () => {
                         path={`/upcoming-class`}
                         component={UpComingClasses}
                     />
-                      <Route
+                      {/* <Route
                     
                         
                         path={`/virtual-classroom`}
                         component={OnlineClass}
-                    />
+                    /> */}
                       <Route
                         
                         path={`/timetable`}
@@ -136,10 +172,13 @@ const Markup = () => {
                     
 
                 </ProtectedContainer>
+
+                
                 <Route
                     path="*"
                     component={Error404}
                     /> 
+
                    
 
             </Switch>

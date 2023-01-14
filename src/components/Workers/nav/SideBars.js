@@ -9,6 +9,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 /// Menu
 import MetisMenu from "metismenujs";
 
+
 class MM extends Component {
     componentDidMount() {
         this.$el = this.el;
@@ -30,10 +31,10 @@ class MM extends Component {
     }
 }
 
-class SideBar extends Component {
+class SideBars extends Component {
     /// Open menu
     componentDidMount() {
-        // sidebar open/close
+        // SideBars open/close
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
 
@@ -71,20 +72,23 @@ class SideBar extends Component {
                                 className="has-arrow ai-icon"
                                 to="/courses"
                             >
-                                <span className="nav-text">Courses</span>
+                                <span className="nav-text">Class to Leacture</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/enrolled-courses">Enrolled Courses</Link>
+                                    <Link to="/AssignedCourse">Assigned Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/assignment-list">Assignments</Link>
+                                    <Link to="/uploadAssignment">Upload Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-material">SubmittedAssignment</Link>
+                                    <Link to="/course-material">Course Materials</Link>
                                 </li>
                                 <li>
-                                    <Link to="/continuous-assessment">Continuous Assessment</Link>
+                                    <Link to="/Submitted-Assignment">Submitted Assignment</Link>
+                                </li>
+                                <li>
+                                    <Link to="/CourseMats">UpComing Classes</Link>
                                 </li>
                             </ul>
                         </li>
@@ -158,4 +162,4 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar; 
+export default SideBars; 
