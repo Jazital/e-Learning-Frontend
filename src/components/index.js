@@ -18,7 +18,7 @@ import Profile from "../components/Dashboard/Profile/Profile";
 import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./Courses/EnrolledCourses";
-import AssignmentList from "../components/Courses/table/AssignmentList"; 
+import AssignmentList from "../components/Courses/table/AssignmentList";
 import CourseReg from "../components/Courses/table/CourseReg";
 import CheckingTable from "../components/Courses/CheckingTable";
 import CourseMaterial from "../components/Courses/CourseMaterial";
@@ -30,163 +30,139 @@ import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
 import TimeTable from "../components/TimeTable/TimeTable";
 
 //Staff profile
-import SubmittedAssignment  from "./Workers/Courses/table/AssignmentList";
-import AssignedCourse  from "./Workers/Courses/AssignedCourses";
-import OnlineClasses  from "./Workers/virtual-classroom/OnlineClass";
-import Upload_Assignment  from "./Workers/Courses/UploadAssignment";
-import SProfile  from "./Workers/Dashboard/Profile/SProfile";
-import ProtectedContainers   from "./Workers/hoc/ProtectedContainerss";
+import SubmittedAssignment from "./Workers/Courses/table/AssignmentList";
+import AssignedCourse from "./Workers/Courses/AssignedCourses";
+import OnlineClasses from "./Workers/virtual-classroom/OnlineClass";
+import UploadAssignment from "./Workers/Courses/UploadAssignment";
+import SProfile from "./Workers/Dashboard/Profile/SProfile";
+import ProtectedContainers from "./Workers/hoc/ProtectedContainerss";
 import CourseMats from "./Workers/Courses/CourseMat";
+import Logout from "./Logout";
 
 const Markup = () => {
-
     return (
         <Router basename="/">
             <Switch>
-                
-                
-                  {/*Unprotected Routes*/} 
+                {/* Unprotected Routes*/}
+
                 <Route
-                    
-                    path={`/login`}
-                    component={Login}
-                    />
-            
-                <ProtectedContainers>
-                  <Route
-                      path={`/uploadAssignment`}
-                      component={Upload_Assignment}
-                      />
-
-                  <Route
-                      path={`/sprofile`}
-                      component={SProfile}
-                      />
-
-                  <Route
-                      path={`/AssignedCourse`}
-                      component={AssignedCourse}
-                      />
-                  <Route
-                      path={`/Submitted-Assignment`}
-                      component={SubmittedAssignment}
-                      />
-
-                    <Route
-                        
-                        path={`/coursemats`}
-                        component={CourseMats}
-                    />
-                  <Route
-                        
-                        path={`/OnlineClasses`}
-                        component={OnlineClasses}
-                    />
-                </ProtectedContainers>
-                  <Route
-                      path={`/registration`}
-                      component={Registration}
-                      />
-                    
-                 <Route
+                    path={`/registration`}
+                    component={Registration}
+                />
+                <Route
                     path={`/forgot-password`}
                     component={ForgotPassword}
-                    /> 
+                />
+                <Route
+                    exact path={`/`}
+                    component={Login}
+                />
+                <Route
+                    path={`/login`}
+                    component={Login}
+                />
+                <Route
+                path={`/logout`}
+                component={Logout}
+            />
 
-                      <Route
-                        
-                        exact path={`/`}
-                        component={Login}
-                    />
-
-               
-
-              {/*Protected Routes*/} 
+                {/*Protected Routes*/}
+                {/*Students Routes*/}
                 <ProtectedContainer>
-
-                      <Route
-                        
+                    <Route
                         path={`/dashboard`}
                         component={Home}
                     />
-             
-                      <Route
-                        
+                    <Route
                         path={`/enrolled-courses`}
                         component={EnrolledCourses}
                     />
-                    
-                      <Route
-                        
+                    <Route
                         path={`/discussion-board`}
                         component={ChatRoom}
                     />
-                      <Route
+                    <Route
                         path={`/assignment-list`}
                         component={AssignmentList}
                     />
-                      <Route
-                        
-                        path={`/CourseReg`}
+                    <Route
+                        path={`/course-reg`}
                         component={CourseReg}
                     />
-                      <Route
-                        
+                    <Route
                         path={`/assignment`}
                         component={Assignment}
                     />
-                      <Route
-                        
+                    <Route
                         path={`/checkingtable`}
-                        component={CheckingTable} 
+                        component={CheckingTable}
                     />
-                     
-                      <Route
-                        
+                    <Route
                         path={`/upcoming-class`}
                         component={UpComingClasses}
                     />
-                      {/* <Route
-                    
-                        
-                        path={`/virtual-classroom`}
-                        component={OnlineClass}
-                    /> */}
-                      <Route
-                        
+                    {/* <Route
+                     path={`/virtual-classroom`}
+                     component={OnlineClass}
+                     /> */}
+                    <Route
                         path={`/timetable`}
                         component={TimeTable}
                     />
-                      <Route
-                        
+                    <Route
                         path={`/course-material`}
                         component={CourseMaterial}
                     />
-                      
-                                                     
-                      <Route
-                        
+                    <Route
                         path={`/profile`}
                         component={Profile}
-                    /> 
-                    
+                    />
 
+                    {/*Lecturers Routes*/}
+                    <Route
+                        path={`/lecturer-dashboard`}
+                        component={Profile}
+                    />
                 </ProtectedContainer>
-
-                
                 <Route
                     path="*"
                     component={Error404}
-                    /> 
-
-                   
-
+                />
             </Switch>
         </Router>
     );
 };
 
 export default Markup;
+
+
+// <ProtectedContainers>
+//     <Route
+//         path={`/uploadAssignment`}
+//         component={Upload_Assignment}
+//     />
+//
+//     <Route
+//         path={`/sprofile`}
+//         component={SProfile}
+//     />
+//     <Route
+//         path={`/AssignedCourse`}
+//         component={AssignedCourse}
+//     />
+//     <Route
+//         path={`/Submitted-Assignment`}
+//         component={SubmittedAssignment}
+//     />
+//     <Route
+//         path={`/coursemats`}
+//         component={CourseMats}
+//     />
+//     <Route
+//         path={`/OnlineClasses`}
+//         component={OnlineClasses}
+//     />
+// </ProtectedContainers>
 
 
 

@@ -6,15 +6,18 @@ import Footer from "../nav/Footer";
 
 function ProtectedContainer(props) {
     return (
-        <div id="main-wrapper" className="show">
-            <Nav />
-            <div className="content-body">
-                <div className="container-fluid">
-                    {props.children}
+        <>
+            <div id="main-wrapper" className="show">
+                <Nav />
+                <div className="content-body">
+                    <div className="container-fluid">
+                        {props.children}
+                    </div>
                 </div>
+
             </div>
-           <Footer />
-        </div>
+            <Footer />
+        </>
     )
 }
 

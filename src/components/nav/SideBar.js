@@ -15,9 +15,9 @@ class MM extends Component {
         this.mm = new MetisMenu(this.$el);
     }
 
-    componentWillUnmount() {
-        this.mm("dispose");
-    }
+    // componentWillUnmount() {
+    //     this.mm("dispose");
+    // }
 
     render() {
         return (
@@ -81,7 +81,7 @@ class SideBar extends Component {
                                     <Link to="/assignment-list">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-material">SubmittedAssignment</Link>
+                                    <Link to="/course-material">Submitted Assignment</Link>
                                 </li>
                                 <li>
                                     <Link to="/continuous-assessment">Continuous Assessment</Link>
@@ -89,7 +89,7 @@ class SideBar extends Component {
                             </ul>
                         </li>
 
-                        <li 
+                        <li
                         className={`${
                             (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
                         }`}
@@ -115,7 +115,7 @@ class SideBar extends Component {
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
-                        <li 
+                        <li
                         className={`${
                             (currentUrlPath == "timetable") ? "mm-active" : ""
                         }`}
@@ -149,7 +149,7 @@ class SideBar extends Component {
                                 <i className="flaticon-381-exit-2"></i>
                                 <span className="nav-text">Logout</span>
                             </Link>
-                        </li> 
+                        </li>
                     </MM>
 
                 </PerfectScrollbar>
@@ -158,4 +158,4 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar; 
+export default SideBar;
