@@ -17,15 +17,16 @@ import ProtectedContainer from "./hoc/ProtectedContainer";
 import Profile from "../components/Dashboard/Profile/Profile";
 import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
-import EnrolledCourses from "./Courses/EnrolledCourses";
-import AssignmentList from "../components/Courses/table/AssignmentList";
-import CourseReg from "../components/Courses/table/CourseReg";
-import CheckingTable from "../components/Courses/CheckingTable";
-import CourseMaterial from "../components/Courses/CourseMaterial";
-import Assignment from "../components/Courses/Assignment";
-import CourseMat from "../components/Courses/CourseMat";
+import EnrolledCourses from "./courses/EnrolledCourses";
+import AssignmentList from "../components/courses/table/AssignmentList";
+import CourseReg from "../components/courses/table/CourseReg";
+import CheckingTable from "../components/courses/CheckingTable";
+import SingleCourse from "../components/courses/SingleCourse";
+import Assignment from "../components/courses/Assignment";
+import CourseMat from "../components/courses/CourseMat";
+import SingleCourseMaterial from "../components/course-materials/SingleCourseMaterial";
 
-import ChatRoom from "../components/Courses/ChatRoom";
+import ChatRoom from "../components/courses/ChatRoom";
 import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
 import TimeTable from "../components/TimeTable/TimeTable";
 
@@ -79,6 +80,14 @@ const Markup = () => {
                         component={EnrolledCourses}
                     />
                     <Route
+                        path={`/single-course`}
+                        component={SingleCourse}
+                    />
+                    <Route
+                        path={`/course-material/:id`}
+                        component={SingleCourseMaterial}
+                    />
+                    <Route
                         path={`/discussion-board`}
                         component={ChatRoom}
                     />course-material
@@ -109,10 +118,6 @@ const Markup = () => {
                     <Route
                         path={`/timetable`}
                         component={TimeTable}
-                    />
-                    <Route
-                        path={`/course-material`}
-                        component={CourseMaterial}
                     />
                     <Route
                         path={`/profile`}

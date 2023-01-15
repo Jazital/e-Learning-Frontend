@@ -82,7 +82,6 @@ const Login = () => {
             setTimeout(() => {
                 history.push('/dashboard')
             }, 2000)
-
         }
         else {
             // If the login is not successful

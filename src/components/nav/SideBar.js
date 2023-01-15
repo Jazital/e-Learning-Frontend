@@ -81,7 +81,7 @@ class SideBar extends Component {
                                     <Link to="/assignment-list">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-material">Submitted Assignment</Link>
+                                    <Link to="/course-material">Course Materials</Link>
                                 </li>
                                 <li>
                                     <Link to="/continuous-assessment">Continuous Assessment</Link>
