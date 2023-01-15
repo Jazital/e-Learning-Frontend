@@ -128,19 +128,19 @@ class SideBar extends Component {
                                 <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
-                        <li
-                        className={`${
-                            (currentUrlPath == "help") ? "mm-active" : ""
-                        }`}
-                        >
-                            <Link
-                                className=" ai-icon"
-                                to="/help"
-                            >
-                                <i className="flaticon-381-help-1"></i>
-                                <span className="nav-text">Help</span>
-                            </Link>
-                        </li>
+                        {/*<li*/}
+                        {/*className={`${*/}
+                        {/*    (currentUrlPath == "help") ? "mm-active" : ""*/}
+                        {/*}`}*/}
+                        {/*>*/}
+                        {/*    <Link*/}
+                        {/*        className=" ai-icon"*/}
+                        {/*        to="/help"*/}
+                        {/*    >*/}
+                        {/*        <i className="flaticon-381-help-1"></i>*/}
+                        {/*        <span className="nav-text">Help</span>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         <li>
                             <Link
                                 className=" ai-icon"
