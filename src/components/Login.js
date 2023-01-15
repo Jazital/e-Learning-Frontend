@@ -1,10 +1,10 @@
 import "./login.css";
 import {Email, Password} from "@mui/icons-material";
 import React, {useState, useEffect} from "react";
-import {Link, Outlet, Navigate} from "react-router-dom";
+import {Link, Outlet, Redirect, useHistory} from "react-router-dom";
 
 const Login = () => {
-    // const history = useHistory();
+    const history = useHistory();
 
     const [login, setLogin] = useState("./login");
     const [loginAttempt, setLoginAttempt] = useState(
@@ -63,12 +63,12 @@ const Login = () => {
 
             // Redirect to dashboard after successful login
             setTimeout(() => {
-                // history.push('/dashboard')
-                <Navigate to="/dashboard" />
+                history.push('/dashboard')
             }, 2000)
         }
         else if (((submittedUsername == dbLecturerUsername) && (submittedPassword == dbLecturerPassword))) {
             // Or if the details match lecturer details, sign in
+
             // Update the state as successful login
             setLoginAttempt({
                 loginState: "success",
@@ -80,8 +80,7 @@ const Login = () => {
 
             // Redirect to dashboard after successful login
             setTimeout(() => {
-                // history.push('/dashboard')
-                <Navigate to="/dashboard" />
+                history.push('/dashboard')
             }, 2000)
 
         }

@@ -1,7 +1,7 @@
 import React from "react";
 
 /// React router dom
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -42,94 +42,94 @@ import Logout from "./Logout";
 const Markup = () => {
     return (
         <Router basename="/">
-            <Routes>
+            <Switch>
                 {/* Unprotected Routes*/}
 
                 <Route
-                    path="/registration"
-                    element={<Registration />}
+                    path={`/registration`}
+                    component={Registration}
                 />
                 <Route
-                    path="/forgot-password"
-                    element={<ForgotPassword />}
+                    path={`/forgot-password`}
+                    component={ForgotPassword}
                 />
                 <Route
-                    path="/"
-                    element={<Login />}
+                    path={`/`}
+                    component={Login}
                     exact
                 />
                 <Route
-                    path="/login"
-                    element={<Login />}
+                    path={`/login`}
+                    component={Login}
                 />
                 <Route
-                    path="/logout"
-                    element={<Logout />}
+                    path={`/logout`}
+                    component={Logout}
                 />
 
                 {/*Protected Routes*/}
                 {/*Students Routes*/}
                 <ProtectedContainer>
                     <Route
-                        path="/dashboard"
-                        element={<Home />}
+                        path={`/dashboard`}
+                        component={Home}
                     />
                     <Route
-                        path="/enrolled-courses"
-                        element={<EnrolledCourses />}
+                        path={`/enrolled-courses`}
+                        component={EnrolledCourses}
                     />
                     <Route
-                        path="/discussion-board"
-                        element={<ChatRoom />}
+                        path={`/discussion-board`}
+                        component={ChatRoom}
                     />course-material
                     <Route
-                        path="/assignment-list"
-                        element={<AssignmentList />}
+                        path={`/assignment-list`}
+                        component={AssignmentList}
                     />
                     <Route
-                        path="/course-reg"
-                        element={<CourseReg />}
+                        path={`/course-reg`}
+                        component={CourseReg}
                     />
                     <Route
-                        path="/assignment"
-                        element={<Assignment />}
+                        path={`/assignment`}
+                        component={Assignment}
                     />
                     <Route
-                        path="/checkingtable"
-                        element={<CheckingTable />}
+                        path={`/checkingtable`}
+                        component={CheckingTable}
                     />
                     <Route
-                        path="/upcoming-class"
-                        element={<UpComingClasses />}
+                        path={`/upcoming-class`}
+                        component={UpComingClasses}
                     />
                     {/* <Route
                      path={`/virtual-classroom`}
-                     element={<OnlineClass}
+                     component={OnlineClass}
                      /> */}
                     <Route
-                        path="/timetable"
-                        element={<TimeTable />}
+                        path={`/timetable`}
+                        component={TimeTable}
                     />
                     <Route
-                        path="/course-material"
-                        element={<CourseMaterial />}
+                        path={`/course-material`}
+                        component={CourseMaterial}
                     />
                     <Route
-                        path="/profile"
-                        element={<Profile />}
+                        path={`/profile`}
+                        component={Profile}
                     />
 
                     {/*Lecturers Routes*/}
                     <Route
-                        path="/lecturer-dashboard"
-                        element={<Profile />}
+                        path={`/lecturer-dashboard`}
+                        component={Profile}
                     />
                 </ProtectedContainer>
                 <Route
                     path="*"
-                    element={<Error404 />}
+                    component={Error404}
                 />
-            </Routes>
+            </Switch>
         </Router>
     );
 };
@@ -140,28 +140,28 @@ export default Markup;
 // <ProtectedContainers>
 //     <Route
 //         path={`/uploadAssignment`}
-//         element={<Upload_Assignment}
+//         component={<Upload_Assignment}
 //     />
 //
 //     <Route
 //         path={`/sprofile`}
-//         element={<SProfile}
+//         component={<SProfile}
 //     />
 //     <Route
 //         path={`/AssignedCourse`}
-//         element={<AssignedCourse}
+//         component={<AssignedCourse}
 //     />
 //     <Route
 //         path={`/Submitted-Assignment`}
-//         element={<SubmittedAssignment}
+//         component={<SubmittedAssignment}
 //     />
 //     <Route
 //         path={`/coursemats`}
-//         element={<CourseMats}
+//         component={<CourseMats}
 //     />
 //     <Route
 //         path={`/OnlineClasses`}
-//         element={<OnlineClasses}
+//         component={<OnlineClasses}
 //     />
 // </ProtectedContainers>
 
