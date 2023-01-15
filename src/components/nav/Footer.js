@@ -7,9 +7,9 @@ const Footer = () => {
          <div className="copyright">
             <p>
                Copyright © e-Learning System &mdash; Developed by{" "}
-               <Link to="https://jazital.com/" target="_blank">
+               <a href="https://jazital.com/" target="_blank">
                   Jazital
-               </Link>{" "}
+               </a>{" "}
             </p>
          </div>
       </div>

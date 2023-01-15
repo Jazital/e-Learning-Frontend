@@ -54,17 +54,18 @@ const Markup = () => {
                     component={ForgotPassword}
                 />
                 <Route
-                    exact path={`/`}
+                    path={`/`}
                     component={Login}
+                    exact
                 />
                 <Route
                     path={`/login`}
                     component={Login}
                 />
                 <Route
-                path={`/logout`}
-                component={Logout}
-            />
+                    path={`/logout`}
+                    component={Logout}
+                />
 
                 {/*Protected Routes*/}
                 {/*Students Routes*/}

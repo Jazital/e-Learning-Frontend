@@ -6,7 +6,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 /// Image
 import profile from "../../images/profile/12.png";
 import avatar from "../../images/avatar/1.jpg";
-
+ 
 const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
    var path = window.location.pathname.split("/");
    var name = path[path.length - 1].split("-");

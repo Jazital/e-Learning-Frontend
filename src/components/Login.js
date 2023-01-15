@@ -91,11 +91,7 @@ const Login = () => {
                 message: "Sorry, username or password is incorrect. Please try again!"
             });
         }
-        ;
-
     }
-
-
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
             <div className="col-md-5">
