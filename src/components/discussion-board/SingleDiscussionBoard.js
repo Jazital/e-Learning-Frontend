@@ -43,7 +43,7 @@ const SingleDiscussionBoard = () => {
         var chatMainContainer = document.getElementById('main-chat-container');
         var chatInput = document.getElementById('discussion-input-field');
 
-        isRightBubble ? chatMainContainer.appendChild(rightChatBubble()) : chatMainContainer.appendChild(leftChatBubble())
+        // isRightBubble ? chatMainContainer.appendChild(rightChatBubble()) : chatMainContainer.appendChild(leftChatBubble())
 
         chatInput.value = ''
         setIsRightBubble(!isRightBubble)

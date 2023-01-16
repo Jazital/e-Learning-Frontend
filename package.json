@@ -29,7 +29,6 @@
       "@mui/material": "^5.11.1",
       "@svg-maps/usa": "^1.1.1",
       "@svg-maps/world": "^1.0.1",
-      "@sweetalert/with-react": "^0.1.1",
       "@syncfusion/ej2-base": "^18.3.52",
       "@syncfusion/ej2-react-charts": "^18.3.52",
       "@testing-library/jest-dom": "^5.11.6",
@@ -87,7 +86,6 @@
       "recharts": "^1.8.5",
       "simple-react-lightbox": "^3.5.0",
       "slick-carousel": "^1.8.1",
-      "sweetalert": "^2.1.2",
       "sweetalert2": "^10.10.4",
       "web-vitals": "^0.2.4"
    },
