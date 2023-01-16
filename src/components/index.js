@@ -88,12 +88,14 @@ const Markup = () => {
                         component={CourseMaterials}
                     />
                     <Route
-                        path={`/course-materials/course/:id`}
+                        path={`/course-material/course/:id`}
                         component={SingleCourseMaterial}
+                        exact
                     />
                     <Route
                         path={`/course-registration`}
                         component={CourseRegistration}
+                        exact
                     />
                     <Route
                         path={`/discussion-board/course/:id`}

@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 
 import {Link} from "react-router-dom"
 
-import SingleCourseMaterials from "./SingleCourseMaterialsTable";
+import SingleCourseMaterialsTable from "./SingleCourseMaterialsTable";
 
 import "../CSS/Home.css";
 
@@ -18,7 +18,7 @@ const SingleCourseMaterial = () => {
                     </div>
                     <div>
                         {/*Pass course ID to fetch the course material of a single course*/}
-                        <SingleCourseMaterials courseID={15} />
+                        <SingleCourseMaterialsTable courseID={15} />
                     </div>
 
                 </div>

@@ -63,7 +63,7 @@ const SingleCourseUpcomingClassTable = (props) => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href="#" className="btn btn-primary">Attend</a>
+                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A" className="btn btn-primary">Attend</a>
                         {/*<FormControlLabel*/}
                         {/*    label=""*/}
                         {/*    value={value}*/}
@@ -79,30 +79,27 @@ const SingleCourseUpcomingClassTable = (props) => {
     const data = [
         {
             Number: "1",
-            Course: "CSC 401",
+            Course: "CSC 405",
             Platform: "Google Meet",
             // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
         },
         {
             Number: "2",
-            Course: "CSC 401",
-            Platform: "Google Meet",
+            Course: "CSC 405",
+            Platform: "Zoom",
             // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
         },
         {
             Number: "3",
-            Course: "CSC 401",
-            Platform: "Google Meet",
+            Course: "CSC 405",
+            Platform: "Microsoft Teams",
             // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
         }
 
     ];

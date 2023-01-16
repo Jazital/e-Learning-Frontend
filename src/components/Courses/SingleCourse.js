@@ -108,7 +108,7 @@ const SingleCourse = () => {
                                 <p className="mb-0 text-black">Course Materials</p>
                             </div>
                             <div className="text-center">
-                                <Link to={`/course-materials/course/3`}
+                                <Link to={`/course-material/course/3`}
                                       className="sub-links">view course materials</Link>
                             </div>
                         </div>

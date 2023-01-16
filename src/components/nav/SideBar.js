@@ -15,14 +15,10 @@ class MM extends Component {
         this.mm = new MetisMenu(this.$el);
     }
 
-    // componentWillUnmount() {
-    //     this.mm("dispose");
-    // }
-
     render() {
         return (
             <div className="mm-wrapper">
-                <ul className="metismenu" ref={(el) => (this.el = el)}>
+                <ul className="" ref={(el) => (this.el = el)}>
                     {this.props.children}
                 </ul>
             </div>
@@ -37,6 +33,7 @@ class SideBar extends Component {
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
 
+
         function toggleFunc() {
             return aaa.classList.toggle("menu-toggle");
         }
@@ -49,10 +46,30 @@ class SideBar extends Component {
         const path = window.location.pathname;
         const currentUrlPath = path.slice(1);
 
+        var aaa = document.querySelector(".course-link");
+
+        function navSelection(e) {
+            var dashboard = document.querySelector(".dashboard");
+            var courses = document.querySelector("#courses-nav-wrapper");
+            var virtualClassroom = document.querySelector(".virtual-classroom");
+            var discussionBoard = document.querySelector(".virtual-classroom");
+            var otherElements = document.querySelector(".single-nav-wrapper");
+            // (! e.target.classList.contains("courses")) && courseMenu.classList.remove("mm-active") ||
+            // otherElements.classList.remove("mm-active")
+
+            // (e.target.classList.contains("courses"))&&
+            // courses.classList.add("mm-active")||courses.classList.remove("mm-active")
+            // console.log((e.target.classList.contains("courses")))
+
+            // (e.target.classList.contains("timetable")) && timetable.classList.add("mm-active") ||
+            // timetable.classList.remove("mm-active");
+
+        }
+
         return (
             <div className="deznav">
                 <PerfectScrollbar className="deznav-scroll">
-                    <MM className="metismenu" id="menu">
+                    <MM className="" id="menu">
                         <li
                             className={`${
                                 (currentUrlPath == "dashboard") ? "mm-active" : ""
@@ -66,28 +83,36 @@ class SideBar extends Component {
                                 <span className="nav-text">Dashboard</span>
                             </Link>
                         </li>
-                        <li>
+                        <li className={`${
+                            (currentUrlPath == ("courses" || "enrolled-courses" || "assignment-list" || "course-materials" || "continuous-assessment" || "course-registration")) ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
-                                className="has-arrow ai-icon"
+                                className="ai-icon"
                                 to="/courses"
                             >
                                 <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/enrolled-courses">Enrolled Courses</Link>
+                                    <Link
+                                        to="/enrolled-courses">Enrolled Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/assignment-list">Assignments</Link>
+                                    <Link
+                                        to="/assignment-list">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-materials">Course Materials</Link>
+                                    <Link
+                                        to="/course-materials">Course Materials</Link>
                                 </li>
                                 <li>
-                                    <Link to="/continuous-assessment">Continuous Assessment</Link>
+                                    <Link
+                                        to="/continuous-assessment">Continuous Assessment</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-registration">Course Registration</Link>
+                                    <Link
+                                        to="/course-registration">Course Registration</Link>
                                 </li>
                             </ul>
                         </li>
@@ -98,7 +123,7 @@ class SideBar extends Component {
                             }`}
                         >
                             <Link
-                                className="ai-icon"
+                                className="ai-icon single-nav-wrapper"
                                 to="/virtual-classroom"
                             >
                                 <i className="flaticon-381-video-player-1"></i>
@@ -111,7 +136,7 @@ class SideBar extends Component {
                             }`}
                         >
                             <Link
-                                className="ai-icon"
+                                className="ai-icon single-nav-wrapper"
                                 to="/discussion-board"
                             >
                                 <i className="flaticon-381-earth-globe-1"></i>
@@ -119,7 +144,7 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li
-                            className={`${
+                            className={`single-nav-wrapper ${
                                 (currentUrlPath == "timetable") ? "mm-active" : ""
                             }`}
                         >
@@ -144,7 +169,7 @@ class SideBar extends Component {
                         {/*        <span className="nav-text">Help</span>*/}
                         {/*    </Link>*/}
                         {/*</li>*/}
-                        <li>
+                        <li className="single-nav-wrapper">
                             <Link
                                 className=" ai-icon"
                                 to="/logout"

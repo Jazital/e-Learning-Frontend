@@ -60,7 +60,7 @@ const VirtualClassroomTable = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href="#" className="btn btn-primary">Attend</a>
+                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A" className="btn btn-primary">Attend</a>
                         {/*<FormControlLabel*/}
                         {/*    label=""*/}
                         {/*    value={value}*/}

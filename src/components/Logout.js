@@ -5,6 +5,7 @@ const Logout = () => {
     const history = useHistory();
     localStorage.removeItem('username')
     localStorage.removeItem('user_role')
+    localStorage.removeItem('page_title')
 
 
     return (<>

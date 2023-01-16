@@ -4,7 +4,7 @@ import MUIDataTable from "mui-datatables";
 import {Link} from 'react-router-dom';
 
 
-const SingleCourseMaterials = (props) => {
+const SingleCourseMaterialsTable = (props) => {
     if (props.courseID) {
         // A course ID was passed, so we fetch the course materials for the passed course ID
     }
@@ -18,51 +18,53 @@ const SingleCourseMaterials = (props) => {
             }
         },
         {
-            name: "Course",
-            label: "Courses",
+            name: "Format",
+            label: "Format",
             options: {
                 filter: true,
                 sort: true,
             }
         },
         {
-            name: "Platform",
-            label: "Platform",
+            name: "Title",
+            label: "Title",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "LectureURL",
-            label: "Lecture URL",
+            name: "DocumentType",
+            label: "Document Type",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "Status",
-            label: "Status",
+            name: "Lecturer",
+            label: "Lecturer",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "DateTime",
-            label: "Date & Time",
+            name: "Actions",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
-            }
-        },
-        {
-            name: "Action",
-            label: "Action",
-            options: {
-                filter: true,
-                sort: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        <a href="#" className="btn btn-primary pb-2">Download</a>
+                        {/*<FormControlLabel*/}
+                        {/*    label=""*/}
+                        {/*    value={value}*/}
+                        {/*    control={<TextField value={value} />}*/}
+                        {/*    onChange={event => updateValue(event.target.value)}*/}
+                        {/*/>*/}
+                    </>
+                )
             }
         },
     ];
@@ -70,31 +72,40 @@ const SingleCourseMaterials = (props) => {
     const data = [
         {
             Number: "1",
-            Course: "CSC 401",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Format: "PDF",
+            Title: "Introduction to computer",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
         },
         {
             Number: "2",
-            Course: "CSC 401",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Format: "PDF",
+            Title: "Generations of computer",
+            DocumentType: "Handout",
+            Lecturer: "Mr. Joel T.",
         },
         {
             Number: "3",
-            Course: "CSC 401",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
-        }
+            Format: "MP4",
+            Title: "Data structures and algorithms",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
+        },
+        {
+            Number: "4",
+            Format: "PDF",
+            Title: "Data structures and algorithms",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
+        },
+        {
+            Number: "5",
+            Format: "PDF",
+            Title: "Data structures and algorithms",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
+        },
+
 
     ];
 
@@ -114,5 +125,5 @@ const SingleCourseMaterials = (props) => {
     );
 };
 
-export default SingleCourseMaterials;
+export default SingleCourseMaterialsTable;
 
