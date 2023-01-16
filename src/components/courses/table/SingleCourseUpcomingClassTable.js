@@ -33,14 +33,14 @@ const SingleCourseUpcomingClassTable = (props) => {
                 sort: false,
             }
         },
-        {
+        /*{
             name: "LectureURL",
             label: "Lecture URL",
             options: {
                 filter: true,
                 sort: false,
             }
-        },
+        },*/
         {
             name: "Status",
             label: "Status",
@@ -72,7 +72,7 @@ const SingleCourseUpcomingClassTable = (props) => {
             Number: "1",
             Course: "CSC 401",
             Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
+            // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
             Action: "Attend Lecture"
@@ -81,7 +81,7 @@ const SingleCourseUpcomingClassTable = (props) => {
             Number: "2",
             Course: "CSC 401",
             Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
+            // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
             Action: "Attend Lecture"
@@ -90,7 +90,7 @@ const SingleCourseUpcomingClassTable = (props) => {
             Number: "3",
             Course: "CSC 401",
             Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
+            // LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
             Action: "Attend Lecture"

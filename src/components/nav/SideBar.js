@@ -86,13 +86,16 @@ class SideBar extends Component {
                                 <li>
                                     <Link to="/continuous-assessment">Continuous Assessment</Link>
                                 </li>
+                                <li>
+                                    <Link to="/course-registration">Course Registration</Link>
+                                </li>
                             </ul>
                         </li>
 
                         <li
-                        className={`${
-                            (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
-                        }`}
+                            className={`${
+                                (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -103,9 +106,9 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li
-                        className={`${
-                            (currentUrlPath == "discussion-board") ? "mm-active" : ""
-                        }`}
+                            className={`${
+                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -116,9 +119,9 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li
-                        className={`${
-                            (currentUrlPath == "timetable") ? "mm-active" : ""
-                        }`}
+                            className={`${
+                                (currentUrlPath == "timetable") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"

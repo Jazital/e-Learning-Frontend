@@ -11,11 +11,9 @@ import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 import Registration from "./Registration";
 
-// Deshboard
 import Home from "./dashboard/Home";
 import ProtectedContainer from "./hoc/ProtectedContainer";
 import Profile from "./Profile/Profile";
-import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./courses/EnrolledCourses";
 import AssignmentList from "./assignments/AssignmentList";
@@ -39,6 +37,7 @@ import UploadAssignment from "./lecturers/Courses/UploadAssignment";
 import SProfile from "./lecturers/Dashboard/Profile/SProfile";
 import ProtectedContainers from "./lecturers/hoc/ProtectedContainerss";
 import CourseMats from "./lecturers/Courses/CourseMat";
+import CourseRegistration from "./courses/CourseRegistration";
 
 
 const Markup = () => {
@@ -92,6 +91,10 @@ const Markup = () => {
                         component={SingleCourseMaterial}
                     />
                     <Route
+                        path={`/course-registration`}
+                        component={CourseRegistration}
+                    />
+                    <Route
                         path={`/discussion-board`}
                         component={ChatRoom}
                     />
@@ -111,14 +114,10 @@ const Markup = () => {
                         path={`/checkingtable`}
                         component={CheckingTable}
                     />
-                    {/*<Route
-                        path={`/upcoming-class`}
-                        component={VirtualClassroom}
-                    />*/}
                     <Route
-                     path={`/virtual-classroom`}
-                     component={VirtualClassroom}
-                     />
+                        path={`/virtual-classroom`}
+                        component={VirtualClassroom}
+                    />
                     <Route
                         path={`/timetable`}
                         component={TimeTable}
