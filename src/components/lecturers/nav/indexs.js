@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import SideBars from "./SideBars";
+// import SideBars from "./SideBars";
 import NavHeaders from "./NavHeaders";
 import Headers from "./Headers";
 
@@ -10,7 +10,7 @@ const KokiNavs = ({ title }) => {
    return (
       <Fragment>
          <NavHeaders />
-         <SideBars />
+         {/*<SideBars />*/}
          <Headers
             onActivity={() => onClick("activity")}
             onNotification={() => onClick("notification")}
@@ -18,7 +18,7 @@ const KokiNavs = ({ title }) => {
             toggle={toggle}
             title={title}
          />
-           
+
         </Fragment>
    );
 };

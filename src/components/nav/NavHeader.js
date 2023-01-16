@@ -13,7 +13,7 @@ const NavHader = () => {
       <div className="nav-header">
          <Link to="/" className="brand-logo">
             <img className="logo-abbr" src={logo} alt="" />
-            <img className="brand-title" src={logo} alt="" />
+            {/*<img className="brand-title" src={logo} alt="" />*/}
          </Link>
 
          <div className="nav-control" onClick={() => setToggle(!toggle)}>

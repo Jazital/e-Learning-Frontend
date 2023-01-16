@@ -9,16 +9,15 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 /// Menu
 import MetisMenu from "metismenujs";
 
-
 class MM extends Component {
     componentDidMount() {
         this.$el = this.el;
         this.mm = new MetisMenu(this.$el);
     }
 
-    componentWillUnmount() {
-        this.mm("dispose");
-    }
+    // componentWillUnmount() {
+    //     this.mm("dispose");
+    // }
 
     render() {
         return (
@@ -31,10 +30,10 @@ class MM extends Component {
     }
 }
 
-class SideBars extends Component {
+class SideBarLecturer extends Component {
     /// Open menu
     componentDidMount() {
-        // SideBars open/close
+        // sidebar open/close
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
 
@@ -64,7 +63,7 @@ class SideBars extends Component {
                                 to="/dashboard"
                             >
                                 <i className="flaticon-381-networking"></i>
-                                <span className="nav-text">Dashboard</span>
+                                <span className="nav-text">Dashboard (Lecturer</span>
                             </Link>
                         </li>
                         <li>
@@ -72,31 +71,27 @@ class SideBars extends Component {
                                 className="has-arrow ai-icon"
                                 to="/courses"
                             >
-                                <span className="nav-text">Class to Leacture</span>
+                                <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/AssignedCourse">Assigned Courses</Link>
+                                    <Link to="/enrolled-courses">My Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/uploadAssignment">Upload Assignments</Link>
+                                    <Link to="/assignment-list">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-material">Course Materials</Link>
+                                    <Link to="/course-materials">Course Materials</Link>
                                 </li>
                                 <li>
-                                    <Link to="/Submitted-Assignment">Submitted Assignment</Link>
-                                </li>
-                                <li>
-                                    <Link to="/CourseMats">UpComing Classes</Link>
+                                    <Link to="/continuous-assessment">Continuous Assessment</Link>
                                 </li>
                             </ul>
                         </li>
-
-                        <li 
-                        className={`${
-                            (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
-                        }`}
+                        <li
+                            className={`${
+                                (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -107,9 +102,9 @@ class SideBars extends Component {
                             </Link>
                         </li>
                         <li
-                        className={`${
-                            (currentUrlPath == "discussion-board") ? "mm-active" : ""
-                        }`}
+                            className={`${
+                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -119,10 +114,10 @@ class SideBars extends Component {
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
-                        <li 
-                        className={`${
-                            (currentUrlPath == "timetable") ? "mm-active" : ""
-                        }`}
+                        <li
+                            className={`${
+                                (currentUrlPath == "timetable") ? "mm-active" : ""
+                            }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -132,19 +127,19 @@ class SideBars extends Component {
                                 <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
-                        <li
-                        className={`${
-                            (currentUrlPath == "help") ? "mm-active" : ""
-                        }`}
-                        >
-                            <Link
-                                className=" ai-icon"
-                                to="/help"
-                            >
-                                <i className="flaticon-381-help-1"></i>
-                                <span className="nav-text">Help</span>
-                            </Link>
-                        </li>
+                        {/*<li*/}
+                        {/*className={`${*/}
+                        {/*    (currentUrlPath == "help") ? "mm-active" : ""*/}
+                        {/*}`}*/}
+                        {/*>*/}
+                        {/*    <Link*/}
+                        {/*        className=" ai-icon"*/}
+                        {/*        to="/help"*/}
+                        {/*    >*/}
+                        {/*        <i className="flaticon-381-help-1"></i>*/}
+                        {/*        <span className="nav-text">Help</span>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         <li>
                             <Link
                                 className=" ai-icon"
@@ -153,7 +148,7 @@ class SideBars extends Component {
                                 <i className="flaticon-381-exit-2"></i>
                                 <span className="nav-text">Logout</span>
                             </Link>
-                        </li> 
+                        </li>
                     </MM>
 
                 </PerfectScrollbar>
@@ -162,4 +157,4 @@ class SideBars extends Component {
     }
 }
 
-export default SideBars; 
+export default SideBarLecturer;
