@@ -27,7 +27,10 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
                                 className="dashboard_bar"
                                 style={{textTransform: "capitalize"}}
                             >
-                                {page_name}
+                                {/*{page_name}*/}
+                                {
+                                    (localStorage.getItem('page_title') || "e-Learning")
+                                }
                             </div>
                         </div>
 
@@ -106,5 +109,4 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
         </div>
     );
 };
-
 export default Header;

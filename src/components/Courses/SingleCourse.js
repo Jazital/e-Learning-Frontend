@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 
 import {Link} from "react-router-dom"
 
-import CourseMaterialTable from "./table/CourseMaterialTable";
+import SingleCourseUpcomingClassTable from "./table/SingleCourseUpcomingClassTable";
 
 import "../CSS/Home.css";
 
@@ -12,6 +12,7 @@ import discussion from "../images/discussion board icondiscussionboard.png"
 import coursematerial from "../images/Vectorcourses.png"
 
 const SingleCourse = () => {
+    localStorage.setItem('page_title', 'CSC 405');
     return (
         <fragment>
 
@@ -39,7 +40,7 @@ const SingleCourse = () => {
                                     <p className="mb-0 text-black">Pending Assignments</p>
                                 </div>
                                 <div className="text-center">
-                                    <a href="/assignment">view assignment</a>
+                                    <Link to="/assignment/course/43" className="sub-links">view assignment</Link>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +63,7 @@ const SingleCourse = () => {
                                     <p className="mb-0 text-black">Upcoming Classes</p>
                                 </div>
                                 <div className="text-center">
-                                    <Link to="/virtual-classroom">view classes</Link>
+                                    <Link to="/virtual-classroom/course/343" className="sub-links">view classes</Link>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@ const SingleCourse = () => {
                                         src={pendinassingment}
                                     />
                                     <div className="text-home">
-                                        <h2 className="text-black">3</h2>
+                                        <h2 className="text-black">30%</h2>
                                     </div>
                                 </div>
 
@@ -85,31 +86,15 @@ const SingleCourse = () => {
                                     <p className="mb-0 text-black">Continuous Assignment</p>
                                 </div>
                                 <div className="text-center">
-                                    <a href="#">view C.A scores</a>
+                                    <Link to="/continuous-assessment/course/345"
+                                          className="sub-links">view C.A scores</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <CourseMaterialTable />
+                    <SingleCourseUpcomingClassTable />
                 </div>
                 <div className="col-xl-3 col-lg-6 col-sm-6">
-
-                    <div className="col-xl col-lg-6 col-sm-6">
-                        <div className="card overflow-hidden">
-                            <div className="card-header media border-0 pb-0">
-                                <div className="media-body">
-                                </div>
-                                <img src={pendinassingment} />
-                            </div>
-                            <br />
-                            <div className="text-center">
-                                <p className="mb-0 text-black">All Assignments</p>
-                            </div>
-                            <div className="text-center">
-                                <a href="#">view assignments</a>
-                            </div>
-                        </div>
-                    </div>
 
                     <div className="col-xl col-lg-6 col-sm-6">
                         <div className="card overflow-hidden">
@@ -123,7 +108,8 @@ const SingleCourse = () => {
                                 <p className="mb-0 text-black">Course Materials</p>
                             </div>
                             <div className="text-center">
-                                <Link to={`/course-material/3`}>view course materials</Link>
+                                <Link to={`/course-materials/course/3`}
+                                      className="sub-links">view course materials</Link>
                             </div>
                         </div>
                     </div>
@@ -138,10 +124,10 @@ const SingleCourse = () => {
                             <br />
 
                             <div className="text-center">
-                                <p className="mb-0 text-black">Discussion Board</p>
+                                <p className="mb-0 text-black">CSC301 </p>
                             </div>
                             <div className="text-center">
-                                <a href="#">go to discussion</a>
+                                <Link to={`/discussion-board/course/3`} className="sub-links">go to room</Link>
                             </div>
                         </div>
                     </div>

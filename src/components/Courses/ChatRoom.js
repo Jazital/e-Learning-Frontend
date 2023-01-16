@@ -6,6 +6,8 @@ import '@chatui/core/dist/index.css';
 const ChatRoom = () => {
     const {messages, appendMsg, setTyping} = useMessages([]);
 
+    localStorage.setItem('page_title', 'Discussion Board');
+
     function handleSend(type, val) {
         if (type === 'text' && val.trim()) {
             appendMsg({

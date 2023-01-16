@@ -7,7 +7,7 @@ import Nav from "../../components/nav";
 import Footer from "../../components/nav/Footer";
 
 /// Deshboard
-import Home from "../../components/Home";
+import Home from "../../components/dashboard/Home";
 import Application from "../components/Dashboard/Application/Application";
 import Profile from "../components/Dashboard/Profile/Profile";
 import Companies from "../components/Dashboard/Companies/Companies";

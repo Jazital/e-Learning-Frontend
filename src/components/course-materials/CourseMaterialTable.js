@@ -4,9 +4,13 @@ import MUIDataTable from "mui-datatables";
 import {Link} from 'react-router-dom';
 
 
-const CourseMaterialTable = () => {
+const CourseMaterialTable = (props) => {
+    if (props.courseID) {
+        // A course ID was passed, so we fetch the course materials for the passed course ID; else we fetch all the
+        // course materials for all courses.
+        //This is passed in SingleCourseMaterial.js
+    }
     const columns = [
-
         {
             name: "Number",
             label: "S/N",
@@ -73,43 +77,43 @@ const CourseMaterialTable = () => {
             LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Action: "View"
         },
         {
             Number: "2",
-            Course: "CSC 401",
+            Course: "BCH 302",
             Platform: "Google Meet",
             LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Action: "View"
         },
         {
             Number: "3",
-            Course: "CSC 401",
+            Course: "POL 204",
             Platform: "Google Meet",
             LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Action: "View"
         },
         {
             Number: "4",
-            Course: "CSC 401",
+            Course: "GST 302",
             Platform: "Google Meet",
             LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Action: "View"
         },
         {
             Number: "5",
-            Course: "CSC 401",
+            Course: "ECO 301",
             Platform: "Google Meet",
             LectureURL: "https://meet.google.com/gtw-3fhk",
             Status: "pending",
             DateTime: "24-03-2022 04:30PM",
-            Action: "Attend Lecture"
+            Action: "View"
         },
 
     ];
@@ -121,7 +125,7 @@ const CourseMaterialTable = () => {
     return (
         <div>
             <MUIDataTable
-                title={"Upcoming Lecturers"}
+                // title={"Upcoming Lecturers"}
                 data={data}
                 columns={columns}
                 options={options}

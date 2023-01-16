@@ -7,6 +7,7 @@ import coursematerial from "../images/Vectorcourses.png"
 
 
 const EnrolledCourses = () => {
+    localStorage.setItem('page_title', 'Enrolled Courses');
     return (
         <fragment>
             <div className="row">

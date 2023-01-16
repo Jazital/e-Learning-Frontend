@@ -12,40 +12,40 @@ import ForgotPassword from "./ForgotPassword";
 import Registration from "./Registration";
 
 // Deshboard
-import Home from "./Home";
+import Home from "./dashboard/Home";
 import ProtectedContainer from "./hoc/ProtectedContainer";
-import Profile from "../components/Dashboard/Profile/Profile";
+import Profile from "./Profile/Profile";
 import UnprotectedContainer from "../components/hoc/UnprotectedContainer";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./courses/EnrolledCourses";
-import AssignmentList from "../components/courses/table/AssignmentList";
+import AssignmentList from "./assignments/AssignmentList";
 import CourseReg from "../components/courses/table/CourseReg";
 import CheckingTable from "../components/courses/CheckingTable";
 import SingleCourse from "../components/courses/SingleCourse";
-import Assignment from "../components/courses/Assignment";
-import CourseMat from "../components/courses/CourseMat";
+import Assignment from "./assignments/Assignment";
 import SingleCourseMaterial from "../components/course-materials/SingleCourseMaterial";
+import Logout from "./Logout";
+import CourseMaterials from "./course-materials/CourseMaterials";
 
 import ChatRoom from "../components/courses/ChatRoom";
-import UpComingClasses from "../components/virtual-classroom/UpComingClasses";
-import TimeTable from "../components/TimeTable/TimeTable";
+import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
+import TimeTable from "./time-table/TimeTable";
 
 //Staff profile
-import SubmittedAssignment from "./Workers/Courses/table/AssignmentList";
-import AssignedCourse from "./Workers/Courses/AssignedCourses";
-import OnlineClasses from "./Workers/virtual-classroom/OnlineClass";
-import UploadAssignment from "./Workers/Courses/UploadAssignment";
-import SProfile from "./Workers/Dashboard/Profile/SProfile";
-import ProtectedContainers from "./Workers/hoc/ProtectedContainerss";
-import CourseMats from "./Workers/Courses/CourseMat";
-import Logout from "./Logout";
+import SubmittedAssignment from "./lecturers/Courses/table/AssignmentList";
+import AssignedCourse from "./lecturers/Courses/AssignedCourses";
+import OnlineClasses from "./lecturers/virtual-classroom/OnlineClass";
+import UploadAssignment from "./lecturers/Courses/UploadAssignment";
+import SProfile from "./lecturers/Dashboard/Profile/SProfile";
+import ProtectedContainers from "./lecturers/hoc/ProtectedContainerss";
+import CourseMats from "./lecturers/Courses/CourseMat";
+
 
 const Markup = () => {
     return (
         <Router basename="/">
             <Switch>
                 {/* Unprotected Routes*/}
-
                 <Route
                     path={`/registration`}
                     component={Registration}
@@ -84,13 +84,17 @@ const Markup = () => {
                         component={SingleCourse}
                     />
                     <Route
-                        path={`/course-material/:id`}
+                        path={`/course-materials`}
+                        component={CourseMaterials}
+                    />
+                    <Route
+                        path={`/course-materials/course/:id`}
                         component={SingleCourseMaterial}
                     />
                     <Route
                         path={`/discussion-board`}
                         component={ChatRoom}
-                    />course-material
+                    />
                     <Route
                         path={`/assignment-list`}
                         component={AssignmentList}
@@ -107,14 +111,14 @@ const Markup = () => {
                         path={`/checkingtable`}
                         component={CheckingTable}
                     />
-                    <Route
+                    {/*<Route
                         path={`/upcoming-class`}
-                        component={UpComingClasses}
-                    />
-                    {/* <Route
+                        component={VirtualClassroom}
+                    />*/}
+                    <Route
                      path={`/virtual-classroom`}
-                     component={OnlineClass}
-                     /> */}
+                     component={VirtualClassroom}
+                     />
                     <Route
                         path={`/timetable`}
                         component={TimeTable}
