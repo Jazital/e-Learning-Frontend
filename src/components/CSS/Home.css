@@ -1,0 +1,78 @@
+.card {
+    padding: 20px;
+}
+
+.text-home {
+    padding-left: 25px;
+}
+
+.centercoursetext {
+    text-align: center;
+}
+
+.the {
+    display: flex;
+}
+
+.Formdiv {
+    border-style: dashed;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    border-color: black;
+    padding: 10%;
+    margin: 10px;
+}
+
+.asgn1 {
+    border-color: azure;
+    border-style: dashed;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    padding: 10%;
+    margin: 10px;
+    box-shadow: 44px;
+}
+
+.indicator-open {
+    padding: 1px 2px;
+    background-color: #b8ffd4;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+#Red-color {
+    color: red;
+}
+
+#bttn {
+    border-radius: 20px;
+    background-color: #05011b;
+    color: #fff;
+}
+
+.card-header {
+    background-color: #fff !important;
+}
+
+#assignn {
+    margin-right: 19px;
+}
+
+.sub-links {
+    font-size: .8em;
+    color: #00519d;
+    text-decoration: underline;
+}
+
+.sub-links:hover {
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #05011b !important;
+    border: 0;
+}
+
+.btn-primary:hover {
+    background-color: #0b0539 !important;
+}
