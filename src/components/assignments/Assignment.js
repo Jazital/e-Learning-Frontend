@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import InputGroup from 'react-bootstrap/InputGroup';
 import coursematerial from "../images/Vectorcourses.png"
+import "./Assignments.css";
 
 
 function Assignment() {
@@ -18,8 +19,7 @@ function Assignment() {
                         <img className="center-image"
                              src={coursematerial}
                         />
-                        <p classNa
-                           me="indicator-open">Open</p>
+                        <p className="indicator-open">Open</p>
                     </div>
                     <div id="firstAssignText">
                         <p>

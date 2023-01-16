@@ -55,11 +55,20 @@ const VirtualClassroomTable = () => {
             }
         },
         {
-            name: "Action",
-            label: "Action",
+            name: "Actions",
             options: {
-                filter: true,
-                sort: false,
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        <a href="#" className="btn btn-primary">Attend</a>
+                        {/*<FormControlLabel*/}
+                        {/*    label=""*/}
+                        {/*    value={value}*/}
+                        {/*    control={<TextField value={value} />}*/}
+                        {/*    onChange={event => updateValue(event.target.value)}*/}
+                        {/*/>*/}
+                    </>
+                )
             }
         },
     ];

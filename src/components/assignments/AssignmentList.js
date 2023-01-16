@@ -5,6 +5,10 @@ import {Link} from 'react-router-dom';
 
 
 const AssignmentList = () => {
+    const clickHandler = (e, id) => {
+        e.preventDefault();
+        console.log("Row Id", id);
+    };
     localStorage.setItem('page_title', 'Assignments');
     const columns = [
         {
@@ -56,11 +60,23 @@ const AssignmentList = () => {
             }
         },
         {
-            name: "Action",
-            label: "Action",
+            name: "Actions",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        <Link to="/assignment/3554" className="btn btn-primary">view</Link>
+                        <a href="#" className="btn btn-primary">download</a>
+                        <a href="#" className="btn btn-primary">submit</a>
+
+                        {/*<FormControlLabel*/}
+                        {/*    label=""*/}
+                        {/*    value={value}*/}
+                        {/*    control={<TextField value={value} />}*/}
+                        {/*    onChange={event => updateValue(event.target.value)}*/}
+                        {/*/>*/}
+                    </>
+                )
             }
         },
     ];
@@ -110,12 +126,8 @@ const AssignmentList = () => {
         filterType: 'checkbox',
     };
 
-
     return (
-
         <div>
-
-
             <MUIDataTable
                 title={"All Assignment"}
                 data={data}

@@ -20,51 +20,53 @@ const CourseMaterialTable = (props) => {
             }
         },
         {
-            name: "Course",
-            label: "Courses",
+            name: "Format",
+            label: "Format",
             options: {
                 filter: true,
                 sort: true,
             }
         },
         {
-            name: "Platform",
-            label: "Platform",
+            name: "Course",
+            label: "Course",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "LectureURL",
-            label: "Lecture URL",
+            name: "DocumentType",
+            label: "Document Type",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "Status",
-            label: "Status",
+            name: "Lecturer",
+            label: "Lecturer",
             options: {
                 filter: true,
-                sort: false,
+                sort: true,
             }
         },
         {
-            name: "DateTime",
-            label: "Date & Time",
+            name: "Actions",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
-            }
-        },
-        {
-            name: "Action",
-            label: "Action",
-            options: {
-                filter: true,
-                sort: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        <a href="#" className="btn btn-primary pb-2">Download</a>
+                        {/*<FormControlLabel*/}
+                        {/*    label=""*/}
+                        {/*    value={value}*/}
+                        {/*    control={<TextField value={value} />}*/}
+                        {/*    onChange={event => updateValue(event.target.value)}*/}
+                        {/*/>*/}
+                    </>
+                )
             }
         },
     ];
@@ -72,49 +74,40 @@ const CourseMaterialTable = (props) => {
     const data = [
         {
             Number: "1",
+            Format: "PDF",
             Course: "CSC 401",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "View"
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
         },
         {
             Number: "2",
-            Course: "BCH 302",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "View"
+            Format: "PDF",
+            Course: "GES 101",
+            DocumentType: "Handout",
+            Lecturer: "Mr. Joel T.",
         },
         {
             Number: "3",
-            Course: "POL 204",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "View"
+            Format: "MP4",
+            Course: "BCH 302",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
         },
         {
             Number: "4",
-            Course: "GST 302",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "View"
+            Format: "PDF",
+            Course: "CSC 401",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
         },
         {
             Number: "5",
-            Course: "ECO 301",
-            Platform: "Google Meet",
-            LectureURL: "https://meet.google.com/gtw-3fhk",
-            Status: "pending",
-            DateTime: "24-03-2022 04:30PM",
-            Action: "View"
+            Format: "PDF",
+            Course: "CSC 401",
+            DocumentType: "Journal",
+            Lecturer: "Dr. Ibe Ken",
         },
+
 
     ];
 

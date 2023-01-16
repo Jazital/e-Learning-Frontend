@@ -114,7 +114,7 @@ const Markup = () => {
                         component={CourseReg}
                     />
                     <Route
-                        path={`/assignment`}
+                        path={`/assignment/:id`}
                         component={Assignment}
                     />
                     <Route
