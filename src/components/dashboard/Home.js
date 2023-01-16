@@ -82,7 +82,7 @@ const Home = () => {
                             <p className="mb-0 text-black">Lecture Timetable</p>
                         </div>
                         <div className="text-center">
-                            <Link to={`/time-table`} className="sub-links">view timetable</Link>
+                            <Link to={`/timetable`} className="sub-links">view timetable</Link>
                         </div>
                     </div>
                 </div>

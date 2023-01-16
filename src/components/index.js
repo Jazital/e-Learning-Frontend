@@ -25,7 +25,7 @@ import SingleCourseMaterial from "../components/course-materials/SingleCourseMat
 import Logout from "./Logout";
 import CourseMaterials from "./course-materials/CourseMaterials";
 
-import ChatRoom from "../components/courses/ChatRoom";
+import DiscussionBoard from "./discussion-board/DiscussionBoard";
 import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
 import TimeTable from "./time-table/TimeTable";
 
@@ -38,6 +38,7 @@ import SProfile from "./lecturers/Dashboard/Profile/SProfile";
 import ProtectedContainers from "./lecturers/hoc/ProtectedContainerss";
 import CourseMats from "./lecturers/Courses/CourseMat";
 import CourseRegistration from "./courses/CourseRegistration";
+import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 
 
 const Markup = () => {
@@ -95,9 +96,15 @@ const Markup = () => {
                         component={CourseRegistration}
                     />
                     <Route
-                        path={`/discussion-board`}
-                        component={ChatRoom}
+                        path={`/discussion-board/course/:id`}
+                        component={SingleDiscussionBoard}
                     />
+                    <Route
+                        path={`/discussion-board`}
+                        component={DiscussionBoard}
+                        exact
+                    />
+
                     <Route
                         path={`/assignment-list`}
                         component={AssignmentList}
