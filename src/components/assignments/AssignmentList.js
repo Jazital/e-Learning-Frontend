@@ -28,14 +28,6 @@ const AssignmentList = () => {
             }
         },
         {
-            name: "DateGiven",
-            label: "Date Given",
-            options: {
-                filter: true,
-                sort: true,
-            }
-        },
-        {
             name: "DueDate",
             label: "Due Date",
             options: {
@@ -66,7 +58,6 @@ const AssignmentList = () => {
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
                         <Link to="/assignment/3554" className="btn btn-primary">view</Link>
-                        <a href="#" className="btn btn-primary">download</a>
                         <a href="#" className="btn btn-primary">submit</a>
 
                         {/*<FormControlLabel*/}
@@ -81,43 +72,34 @@ const AssignmentList = () => {
         },
     ];
 
-
     const data = [
         {
             Number: "1",
             Course: "CSC 401",
-            DateGiven: "24-03-2022 04:30PM",
             DueDate: "24-03-2022 04:30PM",
             Status: "open",
             Lecturer: "Dr. E. Dayo",
-            Action: "View, Download, Upload Solution"
         },
         {
             Number: "2",
             Course: "CSC 401",
-            DateGiven: "24-03-2022 04:30PM",
             DueDate: "24-03-2022 04:30PM",
             Status: "open",
             Lecturer: "Dr. E. Dayo",
-            Action: "View, Download, Upload Solution"
         },
         {
             Number: "3",
             Course: "CSC 401",
-            DateGiven: "24-03-2022 04:30PM",
             DueDate: "24-03-2022 04:30PM",
-            Status: "open",
+            Status: "closed",
             Lecturer: "Dr. E. Dayo",
-            Action: "View, Download, Upload Solution"
         },
         {
             Number: "4",
             Course: "CSC 401",
-            DateGiven: "24-03-2022 04:30PM",
             DueDate: "24-03-2022 04:30PM",
-            Status: "open",
+            Status: "closed",
             Lecturer: "Dr. E. Dayo",
-            Action: "View, Download, Upload Solution"
         },
 
     ];
