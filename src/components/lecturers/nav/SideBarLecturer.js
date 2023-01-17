@@ -15,14 +15,10 @@ class MM extends Component {
         this.mm = new MetisMenu(this.$el);
     }
 
-    // componentWillUnmount() {
-    //     this.mm("dispose");
-    // }
-
     render() {
         return (
             <div className="mm-wrapper">
-                <ul className="metismenu" ref={(el) => (this.el = el)}>
+                <ul className="" ref={(el) => (this.el = el)}>
                     {this.props.children}
                 </ul>
             </div>
@@ -30,12 +26,13 @@ class MM extends Component {
     }
 }
 
-class SideBarLecturer extends Component {
+class SideBar extends Component {
     /// Open menu
     componentDidMount() {
         // sidebar open/close
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
+
 
         function toggleFunc() {
             return aaa.classList.toggle("menu-toggle");
@@ -49,53 +46,67 @@ class SideBarLecturer extends Component {
         const path = window.location.pathname;
         const currentUrlPath = path.slice(1);
 
+        // var aaa = document.querySelector(".course-link");
+        //
+        // function navSelection(e) {
+        //
+        // }
+
         return (
             <div className="deznav">
                 <PerfectScrollbar className="deznav-scroll">
-                    <MM className="metismenu" id="menu">
+                    <MM className="" id="menu">
                         <li
                             className={`${
-                                (currentUrlPath == "dashboard") ? "mm-active" : ""
+                                (currentUrlPath == "dashboard-staff") ? "mm-active" : ""
                             }`}
                         >
                             <Link
                                 className="ai-icon"
-                                to="/dashboard"
+                                to="/dashboard-staff"
                             >
                                 <i className="flaticon-381-networking"></i>
-                                <span className="nav-text">Dashboard (Lecturer</span>
+                                <span className="nav-text">Dashboard (Lecturer)</span>
                             </Link>
                         </li>
-                        <li>
+                        <li className={`${
+                            (currentUrlPath == ("courses-staff" || "enrolled-courses-staff" || "assignment-list-staff" || "course-materials-staff" || "continuous-assessment-staff" || "course-registration-staff")) ? "mm-active" : ""
+                        }`}
+                        >
                             <Link
-                                className="has-arrow ai-icon"
-                                to="/courses"
+                                className="ai-icon"
+                                to="/courses-staff"
                             >
-                                <span className="nav-text">Courses</span>
+                                <span className="nav-text">Courses (Lecturer)</span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="/enrolled-courses">My Courses</Link>
+                                    <Link
+                                        to="/enrolled-courses-staff">Assigned Courses</Link>
                                 </li>
                                 <li>
-                                    <Link to="/assignment-list">Assignments</Link>
+                                    <Link
+                                        to="/assignment-list-staff">Assignments</Link>
                                 </li>
                                 <li>
-                                    <Link to="/course-materials">Course Materials</Link>
+                                    <Link
+                                        to="/course-materials-staff">Course Materials</Link>
                                 </li>
                                 <li>
-                                    <Link to="/continuous-assessment">Continuous Assessment</Link>
+                                    <Link
+                                        to="/continuous-assessment-staff">Continuous Assessment</Link>
                                 </li>
                             </ul>
                         </li>
+
                         <li
                             className={`${
-                                (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
+                                (currentUrlPath == "virtual-classroom-staff") ? "mm-active" : ""
                             }`}
                         >
                             <Link
                                 className="ai-icon"
-                                to="/virtual-classroom"
+                                to="/virtual-classroom-staff"
                             >
                                 <i className="flaticon-381-video-player-1"></i>
                                 <span className="nav-text">Virtual Classroom</span>
@@ -103,11 +114,11 @@ class SideBarLecturer extends Component {
                         </li>
                         <li
                             className={`${
-                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                                (currentUrlPath == "discussion-board-staff") ? "mm-active" : ""
                             }`}
                         >
                             <Link
-                                className="ai-icon"
+                                className="ai-icon single-nav-wrapper"
                                 to="/discussion-board"
                             >
                                 <i className="flaticon-381-earth-globe-1"></i>
@@ -115,8 +126,8 @@ class SideBarLecturer extends Component {
                             </Link>
                         </li>
                         <li
-                            className={`${
-                                (currentUrlPath == "timetable") ? "mm-active" : ""
+                            className={` ${
+                                (currentUrlPath == "timetable-staff") ? "mm-active" : ""
                             }`}
                         >
                             <Link
@@ -127,20 +138,7 @@ class SideBarLecturer extends Component {
                                 <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
-                        {/*<li*/}
-                        {/*className={`${*/}
-                        {/*    (currentUrlPath == "help") ? "mm-active" : ""*/}
-                        {/*}`}*/}
-                        {/*>*/}
-                        {/*    <Link*/}
-                        {/*        className=" ai-icon"*/}
-                        {/*        to="/help"*/}
-                        {/*    >*/}
-                        {/*        <i className="flaticon-381-help-1"></i>*/}
-                        {/*        <span className="nav-text">Help</span>*/}
-                        {/*    </Link>*/}
-                        {/*</li>*/}
-                        <li>
+                        <li className="single-nav-wrapper">
                             <Link
                                 className=" ai-icon"
                                 to="/logout"
@@ -157,4 +155,4 @@ class SideBarLecturer extends Component {
     }
 }
 
-export default SideBarLecturer;
+export default SideBar;

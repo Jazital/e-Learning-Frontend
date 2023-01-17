@@ -46,25 +46,11 @@ class SideBar extends Component {
         const path = window.location.pathname;
         const currentUrlPath = path.slice(1);
 
-        var aaa = document.querySelector(".course-link");
+        // var aaa = document.querySelector(".course-link");
 
-        function navSelection(e) {
-            var dashboard = document.querySelector(".dashboard");
-            var courses = document.querySelector("#courses-nav-wrapper");
-            var virtualClassroom = document.querySelector(".virtual-classroom");
-            var discussionBoard = document.querySelector(".virtual-classroom");
-            var otherElements = document.querySelector(".single-nav-wrapper");
-            // (! e.target.classList.contains("courses")) && courseMenu.classList.remove("mm-active") ||
-            // otherElements.classList.remove("mm-active")
-
-            // (e.target.classList.contains("courses"))&&
-            // courses.classList.add("mm-active")||courses.classList.remove("mm-active")
-            // console.log((e.target.classList.contains("courses")))
-
-            // (e.target.classList.contains("timetable")) && timetable.classList.add("mm-active") ||
-            // timetable.classList.remove("mm-active");
-
-        }
+        // function navSelection(e) {
+        //
+        // }
 
         return (
             <div className="deznav">
@@ -156,19 +142,6 @@ class SideBar extends Component {
                                 <span className="nav-text">Timetable</span>
                             </Link>
                         </li>
-                        {/*<li*/}
-                        {/*className={`${*/}
-                        {/*    (currentUrlPath == "help") ? "mm-active" : ""*/}
-                        {/*}`}*/}
-                        {/*>*/}
-                        {/*    <Link*/}
-                        {/*        className=" ai-icon"*/}
-                        {/*        to="/help"*/}
-                        {/*    >*/}
-                        {/*        <i className="flaticon-381-help-1"></i>*/}
-                        {/*        <span className="nav-text">Help</span>*/}
-                        {/*    </Link>*/}
-                        {/*</li>*/}
                         <li className="single-nav-wrapper">
                             <Link
                                 className=" ai-icon"
