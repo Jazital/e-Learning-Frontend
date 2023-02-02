@@ -12,8 +12,8 @@ const KokiNav = ({ title }) => {
    return (
       <Fragment>
          <NavHader />
-          {localStorage.getItem("user_role") == "student" && (<SideBar />)}
-          {localStorage.getItem("user_role") == "lecturer" && (<SideBarLecturer />)}
+          {localStorage.getItem("userRole") == "student" && (<SideBar />)}
+          {localStorage.getItem("userRole") == "lecturer" && (<SideBarLecturer />)}
 
          <Header
             onActivity={() => onClick("activity")}

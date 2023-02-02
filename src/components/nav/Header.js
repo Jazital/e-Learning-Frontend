@@ -48,6 +48,7 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
                                     <div className="header-info">
                                         <small>Good day!</small>
                                         <span>John Doe</span>
+                                        <small className='alert-info text-center'>{localStorage.getItem('userRole')}</small>
                                     </div>
                                     <img src={profile} width="20" alt="" />
                                 </Link>

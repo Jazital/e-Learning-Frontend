@@ -3,8 +3,11 @@ import {useHistory} from "react-router-dom";
 
 const Logout = () => {
     const history = useHistory();
-    localStorage.removeItem('username')
-    localStorage.removeItem('user_role')
+    localStorage.removeItem('userToken')
+    localStorage.removeItem('userRole')
+    localStorage.removeItem('firstName')
+    localStorage.removeItem('lastName')
+    localStorage.removeItem('userID')
     localStorage.removeItem('page_title')
 
 

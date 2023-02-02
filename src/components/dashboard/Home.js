@@ -10,9 +10,6 @@ import pendinassingment from "../../images/HomePageIcons/pendinassingment.png"
 import coursematerial from "../../images/HomePageIcons/coursematerial.png"
 import timetable from "../../images/HomePageIcons/timetable.png"
 
-import {Sparklines, SparklinesLine,} from "react-sparklines";
-
-
 const Home = () => {
     localStorage.setItem('page_title', 'Dashboard');
 

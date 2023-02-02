@@ -1,16 +1,20 @@
-import "./login.css";
-import {Email, Password} from "@mui/icons-material";
 import React, {useState, useEffect} from "react";
-import {Link, Outlet, Redirect, useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import axios from "axios";
+
+import "./login.css";
 
 const Login = () => {
     const history = useHistory();
 
-    const [login, setLogin] = useState("./login");
-    const [loginAttempt, setLoginAttempt] = useState(
+    const [loading, setLoading] = useState(null)
+
+    const BACKEND_BASE_URL = "https://dev-e-learning-backend.pantheonsite.io/api/v1"
+
+    const [login, setLogin] = useState(
         {
-            loginState: "",
-            message: ''
+            loginState: null,
+            message: null
         }
     );
 
@@ -28,68 +32,81 @@ const Login = () => {
 
     // Reset the error div element when the user starts typing
     const handleOnChange = (event) => {
-        setLoginAttempt({
+        setLoading(false);
+        setLogin({
             loginState: "",
             message: ''
         });
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
+        setLoading("Loading...");
+        setLogin({loginState: ''})
 
         e.preventDefault();
-        // Get the pre-defined user details
-        var dbStudentUsername = loginDetails.student.username;
-        var dbStudentPassword = loginDetails.student.password;
-
-        var dbLecturerUsername = loginDetails.lecturer.username;
-        var dbLecturerPassword = loginDetails.lecturer.password;
 
         // Get the submitted user details
         var submittedUsername = document.getElementById("username_input").value;
         var submittedPassword = document.getElementById("password_input").value;
 
-        // Compare the submitted user details with the pre-defined user details
-        if (((submittedUsername == dbStudentUsername) && (submittedPassword == dbStudentPassword))) {
-            // If the login details match student details
-
-            // Update the state as successful login
-            setLoginAttempt({
-                loginState: "success",
-                message: "Login successful!"
-            });
-
-            localStorage.setItem('username', 'dbLecturerUsername')
-            localStorage.setItem('user_role', 'student')
-
-            // Redirect to dashboard after successful login
-            setTimeout(() => {
-                history.push('/dashboard')
-            }, 2000)
+        var args = {
+            username: submittedUsername,
+            password: submittedPassword
         }
-        else if (((submittedUsername == dbLecturerUsername) && (submittedPassword == dbLecturerPassword))) {
-            // Or if the details match lecturer details, sign in
 
-            // Update the state as successful login
-            setLoginAttempt({
-                loginState: "success",
-                message: "Login successful!"
-            });
+        // Making request to backend API
+        const endpoint = '/auth/login'
+        await axios.post(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then((res) => {
+            if ((res.data.code && res.data.code == 'login_success')) {
+                var data = res.data;
+                var userDetails = data.data.user;
+                localStorage.setItem('userRole', userDetails.user_role);
+                setLogin({loginState: "success", message: data.message});
+                localStorage.setItem('userToken', data.token)
+                localStorage.setItem('userID', userDetails.id)
+                localStorage.setItem('firstName', userDetails.first_name)
+                localStorage.setItem('lastName', userDetails.last_name)
 
-            localStorage.setItem('username', 'dbLecturerUsername')
-            localStorage.setItem('user_role', 'lecturer')
+                setLoading(false)
+                setTimeout(() => {
+                    history.push('/dashboard')
+                }, 2000)
+            }
+            else {
+                setLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: "Sorry, we could not sign you in at the moment. Please try again"
+                });
+            }
+            // console.log(data);
+        }).catch(error => {
+            if (error.response) {
+                if (error.response.data.message) {
+                    setLogin({loginState: "failed", message: error.response.data.message});
+                    setLoading(false)
+                }
+                else {
+                    setLogin({
+                        loginState: "failed",
+                        message: "Sorry, we could not sign you in at the moment. Please try again"
+                    });
+                    setLoading(false)
+                }
 
-            // Redirect to dashboard after successful login
-            setTimeout(() => {
-                history.push('/dashboard')
-            }, 2000)
-        }
-        else {
-            // If the login is not successful
-            setLoginAttempt({
-                loginState: "failed",
-                message: "Sorry, username or password is incorrect. Please try again!"
-            });
-        }
+            }
+            else {
+                setLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: "Sorry, we could not sign you in at the moment. Please try again"
+                });
+            }
+        })
+
     }
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
@@ -98,12 +115,14 @@ const Login = () => {
                     <div className="row no-gutters">
                         <div className="col-xl-12">
                             <div className="auth-form">
-                                {/* Display success or error messages to the user when available */}
-                                {(loginAttempt.loginState == "success") && (
-                                    <div className="alert alert-success">{loginAttempt.message}</div>) || ""}
-                                {(loginAttempt.loginState == "failed") && (
-                                    <div className="alert alert-error">{loginAttempt.message}</div>) || ""}
                                 <h4 className="text-center mb-4 "> Sign in your account </h4>
+                                {/* Display success or error messages to the user when available */}
+                                {(login.loginState == "success") && (
+                                    <div className="alert alert-success">{login.message}</div>) || ""}
+                                {(login.loginState == "failed") && (
+                                    <div className="alert alert-error">{login.message}</div>) || ""}
+                                {loading && (
+                                    <div className="text-center">{loading}</div>)}
 
                                 <form action="" onSubmit={submitHandler}>
                                     <div className="form-group"><label className="mb-1 "> <strong>Email</strong>
@@ -127,8 +146,8 @@ const Login = () => {
                                             </div>
                                         </div>
                                         {/*<div className="form-group">
-                                            <Link className="" to="/forgot-password"> Forgot Password? </Link>
-                                        </div>*/} 
+                                         <Link className="" to="/forgot-password"> Forgot Password? </Link>
+                                         </div>*/}
                                     </div>
                                     <div className="text-center">
                                         <button type="submit" className="btn btn-primary btn-block"
