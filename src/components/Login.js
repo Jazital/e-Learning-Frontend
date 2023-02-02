@@ -96,13 +96,12 @@ const Login = () => {
                     });
                     setLoading(false)
                 }
-
             }
             else {
                 setLoading(false)
                 setLogin({
                     loginState: "failed",
-                    message: "Sorry, we could not sign you in at the moment. Please try again"
+                    message: "Sorry, we could not sign you in at the moment. Kindly check your internet connection"
                 });
             }
         })
