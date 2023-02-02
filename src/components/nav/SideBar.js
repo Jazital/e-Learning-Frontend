@@ -77,6 +77,7 @@ class SideBar extends Component {
                                 className="ai-icon"
                                 to="/courses"
                             >
+                                <i className="flaticon-381-folder-5"></i>
                                 <span className="nav-text">Courses</span>
                             </Link>
                             <ul>
@@ -112,7 +113,7 @@ class SideBar extends Component {
                                 className="ai-icon single-nav-wrapper"
                                 to="/virtual-classroom"
                             >
-                                <i className="flaticon-381-video-player-1"></i>
+                                <i className="flaticon-381-news"></i>
                                 <span className="nav-text">Virtual Classroom</span>
                             </Link>
                         </li>
@@ -125,7 +126,7 @@ class SideBar extends Component {
                                 className="ai-icon single-nav-wrapper"
                                 to="/discussion-board"
                             >
-                                <i className="flaticon-381-earth-globe-1"></i>
+                                <i className="flaticon-381-background-1"></i>
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>

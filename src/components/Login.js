@@ -123,12 +123,12 @@ const Login = () => {
                                                 <input type="checkbox" className="custom-control-input"
                                                        id="basic_checkbox_1" />
                                                 <label className="custom-control-label"
-                                                       htmlFor="basic_checkbox_1"> Remember my preference </label>
+                                                       htmlFor="basic_checkbox_1"> Remember me </label>
                                             </div>
                                         </div>
                                         {/*<div className="form-group">
                                             <Link className="" to="/forgot-password"> Forgot Password? </Link>
-                                        </div>*/}
+                                        </div>*/} 
                                     </div>
                                     <div className="text-center">
                                         <button type="submit" className="btn btn-primary btn-block"

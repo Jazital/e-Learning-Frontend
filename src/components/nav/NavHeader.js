@@ -11,7 +11,7 @@ const NavHader = () => {
 
    return (
       <div className="nav-header">
-         <Link to="/" className="brand-logo">
+         <Link to="/dashboard" className="brand-logo">
             <img className="logo-abbr" src={logo} alt="" />
             {/*<img className="brand-title" src={logo} alt="" />*/}
          </Link>
