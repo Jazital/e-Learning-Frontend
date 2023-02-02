@@ -11,7 +11,7 @@ const AssignmentList = () => {
     };
     localStorage.setItem('page_title', 'Assignments');
     const columns = [
-        {
+        { 
             name: "Number",
             label: "S/N",
             options: {
