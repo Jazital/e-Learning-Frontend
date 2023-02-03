@@ -52,6 +52,7 @@
       "metismenujs": "^1.2.1",
       "mui-datatables": "^4.2.2",
       "nouislider-react": "^3.3.9",
+      "rayloading": "^1.0.6",
       "react": "^17.0.1",
       "react-bootstrap": "^1.4.0",
       "react-bootstrap-sweetalert": "^5.2.0",

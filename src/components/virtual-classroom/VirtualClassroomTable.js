@@ -1,9 +1,6 @@
 import React from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link} from 'react-router-dom';
-
-
 const VirtualClassroomTable = () => {
     const columns = [
         {

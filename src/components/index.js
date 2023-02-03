@@ -80,7 +80,7 @@ const Markup = () => {
                         component={EnrolledCourses}
                     />
                     <Route
-                        path={`/single-course`}
+                        path={`/single-course/:course_id`}
                         component={SingleCourse}
                     />
                     <Route
@@ -88,7 +88,7 @@ const Markup = () => {
                         component={CourseMaterials}
                     />
                     <Route
-                        path={`/course-material/course/:id`}
+                        path={`/course-material/course/:course_id`}
                         component={SingleCourseMaterial}
                         exact
                     />
@@ -98,7 +98,7 @@ const Markup = () => {
                         exact
                     />
                     <Route
-                        path={`/discussion-board/course/:id`}
+                        path={`/discussion-board/course/:course_id`}
                         component={SingleDiscussionBoard}
                     />
                     <Route
@@ -125,6 +125,10 @@ const Markup = () => {
                     />
                     <Route
                         path={`/virtual-classroom`}
+                        component={VirtualClassroom}
+                    />
+                    <Route
+                        path={`/virtual-classroom/:course_id`}
                         component={VirtualClassroom}
                     />
                     <Route
