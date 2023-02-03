@@ -9,7 +9,8 @@ const Login = () => {
 
     const [loading, setLoading] = useState(null)
 
-    const BACKEND_BASE_URL = "https://dev-e-learning-backend.pantheonsite.io/api/v1"
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    const endpoint = '/auth/login';
 
     const [login, setLogin] = useState(
         {
@@ -17,18 +18,6 @@ const Login = () => {
             message: null
         }
     );
-
-    // Some pre-defined login details for various user types
-    const [loginDetails, setLoginDetails] = useState({
-        student: {
-            username: 'FUO/13/CSI/960',
-            password: 'student@123'
-        },
-        lecturer: {
-            username: 'lecturer',
-            password: 'lecturer@123'
-        }
-    });
 
     // Reset the error div element when the user starts typing
     const handleOnChange = (event) => {
@@ -45,6 +34,11 @@ const Login = () => {
 
         e.preventDefault();
 
+        await signIn();
+    }
+
+    const signIn = async () => {
+
         // Get the submitted user details
         var submittedUsername = document.getElementById("username_input").value;
         var submittedPassword = document.getElementById("password_input").value;
@@ -55,7 +49,6 @@ const Login = () => {
         }
 
         // Making request to backend API
-        const endpoint = '/auth/login'
         await axios.post(
             BACKEND_BASE_URL + endpoint,
             args
@@ -76,14 +69,27 @@ const Login = () => {
                 }, 2000)
             }
             else {
+                localStorage.removeItem('userToken')
+                localStorage.removeItem('userRole')
+                localStorage.removeItem('firstName')
+                localStorage.removeItem('lastName')
+                localStorage.removeItem('userID')
+                localStorage.removeItem('page_title')
+
                 setLoading(false)
                 setLogin({
                     loginState: "failed",
                     message: "Sorry, we could not sign you in at the moment. Please try again"
                 });
             }
-            // console.log(data);
         }).catch(error => {
+            localStorage.removeItem('userToken')
+            localStorage.removeItem('userRole')
+            localStorage.removeItem('firstName')
+            localStorage.removeItem('lastName')
+            localStorage.removeItem('userID')
+            localStorage.removeItem('page_title')
+
             if (error.response) {
                 if (error.response.data.message) {
                     setLogin({loginState: "failed", message: error.response.data.message});
@@ -105,7 +111,6 @@ const Login = () => {
                 });
             }
         })
-
     }
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
