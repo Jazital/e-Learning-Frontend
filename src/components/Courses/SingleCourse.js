@@ -26,6 +26,7 @@ const SingleCourse = (props) => {
     });
     const [isLoading, setIsLoading] = useState(true);
     const [showContent, setShowContent] = useState(false);
+    const [courseLectures, setCourseLectures] = useState([]);
 
     localStorage.setItem('page_title', course.course_code + "  " + course.course_title);
     let userToken = localStorage.getItem('userToken') || '';
@@ -114,8 +115,6 @@ const SingleCourse = (props) => {
             }
         })
     }
-
-
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -123,7 +122,6 @@ const SingleCourse = (props) => {
             </Modal>
         );
     };
-
     return (
         <>
             {loadingModal(isLoading)}
@@ -134,7 +132,6 @@ const SingleCourse = (props) => {
                             <div className="card overflow-hidden">
                                 <div className="card-header media border-0 pb-788">
                                     <div className="media-body">
-
                                     </div>
                                     <img
                                         src={coursematerial}
@@ -143,7 +140,6 @@ const SingleCourse = (props) => {
                                         <h2 className="text-black">2</h2>
                                     </div>
                                 </div>
-
                                 <div className="text-center card-body pt-4 p-0">
                                     <p className="mb-0 text-black">Pending Assignments</p>
                                 </div>
@@ -172,7 +168,7 @@ const SingleCourse = (props) => {
                                     <p className="mb-0 text-black">Upcoming Classes</p>
                                 </div>
                                 <div className="text-center">
-                                    <Link to="/virtual-classroom/course/343" className="sub-links">view classes</Link>
+                                    <Link to={`/virtual-classroom/course/${course_id}`} className="sub-links">view classes</Link>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +191,7 @@ const SingleCourse = (props) => {
                                     <p className="mb-0 text-black">Continuous Assignment</p>
                                 </div>
                                 <div className="text-center">
-                                    <Link to="/continuous-assessment/course/345"
+                                    <Link to={`/continuous-assessment/course/${course_id}`}
                                           className="sub-links">view C.A scores</Link>
                                 </div>
                             </div>
@@ -217,7 +213,7 @@ const SingleCourse = (props) => {
                                 <p className="mb-0 text-black">Course Materials</p>
                             </div>
                             <div className="text-center">
-                                <Link to={`/course-material/course/3`}
+                                <Link to={`/course-material/course/${course_id}`}
                                       className="sub-links">view course materials</Link>
                             </div>
                         </div>
@@ -233,10 +229,10 @@ const SingleCourse = (props) => {
                             <br />
 
                             <div className="text-center">
-                                <p className="mb-0 text-black">CSC301 </p>
+                                <p className="mb-0 text-black">{course.course_code} </p>
                             </div>
                             <div className="text-center">
-                                <Link to={`/discussion-board/course/3`} className="sub-links">go to room</Link>
+                                <Link to={`/discussion-board/course/${course_id}`} className="sub-links">go to room</Link>
                             </div>
                         </div>
                     </div>

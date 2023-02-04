@@ -8,6 +8,9 @@ const SingleCourseUpcomingClassTable = (props) => {
     if (props.courseID) {
         // A course ID would be passed, so we fetch the upcoming lectures for that course alone
     }
+    else{
+
+    }
     const columns = [
         {
             name: "Number",
@@ -63,7 +66,7 @@ const SingleCourseUpcomingClassTable = (props) => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A" className="btn btn-primary">Attend</a>
+                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A" className="btn btn-primary-attend">Attend</a>
                         {/*<FormControlLabel*/}
                         {/*    label=""*/}
                         {/*    value={value}*/}

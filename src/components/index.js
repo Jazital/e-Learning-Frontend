@@ -24,7 +24,6 @@ import Assignment from "./assignments/Assignment";
 import SingleCourseMaterial from "../components/course-materials/SingleCourseMaterial";
 import Logout from "./Logout";
 import CourseMaterials from "./course-materials/CourseMaterials";
-
 import DiscussionBoard from "./discussion-board/DiscussionBoard";
 import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
 import TimeTable from "./time-table/TimeTable";
