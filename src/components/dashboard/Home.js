@@ -12,6 +12,7 @@ import timetable from "../../images/HomePageIcons/timetable.png"
 
 const Home = () => {
     localStorage.setItem('page_title', 'Dashboard');
+    document.title = localStorage.getItem('page_title')
 
     return (
         <Fragment>

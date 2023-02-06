@@ -23,15 +23,17 @@ const SingleCourse = (props) => {
 
     const [course, setCourse] = useState({
         courseID: '',
-        course_code: '',
+        courseCode: '',
         course_title: '',
     });
     const [isLoading, setIsLoading] = useState(true);
     const [showContent, setShowContent] = useState(false);
     const [courseLectures, setCourseLectures] = useState([]);
 
-    localStorage.setItem('page_title', course.course_code + "  " + course.course_title);
+    localStorage.setItem('page_title', course.courseCode + "  " + course.course_title);
     let userToken = localStorage.getItem('userToken') || '';
+
+    document.title = localStorage.getItem('page_title')
 
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
 
@@ -54,7 +56,7 @@ const SingleCourse = (props) => {
             if (res.data.code && res.data.code == "courses_fetched") {
                 setCourse({
                     courseID: res.data.data.course.course_id,
-                    course_code: res.data.data.course.course_code,
+                    courseCode: res.data.data.course.course_code,
                     course_title: res.data.data.course.course_title,
                 })
                 setShowContent(true)
@@ -110,7 +112,7 @@ const SingleCourse = (props) => {
         }).catch(error => {
             setShowContent(false)
             setIsLoading(false)
-            console.log(error.response.data.code)
+            // console.log(error.response.data.code)
             if(error.response.data.code && (error.response.data.code=="user_not_signed_in") ){
                 history.push('/')
             }
@@ -138,7 +140,7 @@ const SingleCourse = (props) => {
                                         src={coursematerial}
                                     />
                                     <div className="text-home">
-                                        <h2 className="text-black">2</h2>
+                                        {/*<h2 className="text-black">2</h2>*/}
                                     </div>
                                 </div>
                                 <div className="text-center card-body pt-4 p-0">
@@ -161,7 +163,7 @@ const SingleCourse = (props) => {
                                         src={classroom}
                                     />
                                     <div className="text-home">
-                                        <h2 className="text-black">2</h2>
+                                        {/*<h2 className="text-black">2</h2>*/}
                                     </div>
                                 </div>
 
@@ -184,7 +186,7 @@ const SingleCourse = (props) => {
                                         src={pendinassingment}
                                     />
                                     <div className="text-home">
-                                        <h2 className="text-black">30%</h2>
+                                        {/*<h2 className="text-black">30%</h2>*/}
                                     </div>
                                 </div>
 
@@ -198,7 +200,7 @@ const SingleCourse = (props) => {
                             </div>
                         </div>
                     </div>
-                    <SingleCourseUpcomingClassTable course_code={course.courseCode} />
+                    <SingleCourseUpcomingClassTable courseCode={course.courseCode} />
                 </div>
                 <div className="col-xl-3 col-lg-6 col-sm-6">
 

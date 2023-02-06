@@ -6,12 +6,13 @@ import {Modal} from "react-bootstrap";
 
 import "../CSS/Home.css";
 import coursematerial from "../images/Vectorcourses.png"
-
+import {getRandomId} from "@syncfusion/ej2-base";
 
 
 const EnrolledCourses = () => {
     localStorage.setItem('page_title', 'Enrolled Courses');
-    let userToken = localStorage.getItem('userToken') || '';
+    document.title = localStorage.getItem('page_title')
+    let userToken = localStorage.getItem('userToken');
 
     const [isLoading, setIsLoading] = useState(true);
     const [courses, setCourses] = useState(null)
@@ -22,7 +23,6 @@ const EnrolledCourses = () => {
     useEffect(() => {
         fetchEnrolledCourses();
     }, [])
-
 
     const fetchEnrolledCourses = async () => {
         const endpoint = '/courses/enrolled';
@@ -66,7 +66,8 @@ const EnrolledCourses = () => {
         <>
             {loadingModal(isLoading)}
             <div className="row">
-                {courses && courses.map((course) => <div className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
+                {courses && courses.map((course) => <div key={Math.random()}
+                    className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <Link to={`/single-course/${course['course_id']}`}>
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
