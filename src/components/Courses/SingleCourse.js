@@ -19,8 +19,10 @@ const SingleCourse = (props) => {
 
     // Get ID from URL
     const {course_id} = useParams();
+    // console.log("Course ID: "+course_id)
+
     const [course, setCourse] = useState({
-        course_id: '',
+        courseID: '',
         course_code: '',
         course_title: '',
     });
@@ -35,7 +37,6 @@ const SingleCourse = (props) => {
 
     useEffect(() => {
         fetchSingleCourse();
-        // fetchCourseLectures()
     }, [])
 
     async function fetchSingleCourse() {
@@ -52,7 +53,7 @@ const SingleCourse = (props) => {
         ).then((res) => {
             if (res.data.code && res.data.code == "courses_fetched") {
                 setCourse({
-                    course_id: res.data.data.course.course_id,
+                    courseID: res.data.data.course.course_id,
                     course_code: res.data.data.course.course_code,
                     course_title: res.data.data.course.course_title,
                 })
@@ -94,7 +95,7 @@ const SingleCourse = (props) => {
 
             // if (res.data.code && res.data.code == "courses_fetched") {
             //     setCourse({
-            //         course_id: res.data.data.course.course_id,
+            //         courseID: res.data.data.course.courseID,
             //         course_code: res.data.data.course.course_code,
             //         course_title: res.data.data.course.course_title,
             //     })
@@ -197,7 +198,7 @@ const SingleCourse = (props) => {
                             </div>
                         </div>
                     </div>
-                    <SingleCourseUpcomingClassTable />
+                    <SingleCourseUpcomingClassTable course_code={course.courseCode} />
                 </div>
                 <div className="col-xl-3 col-lg-6 col-sm-6">
 

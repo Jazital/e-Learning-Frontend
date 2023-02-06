@@ -5,11 +5,13 @@ import {Link} from 'react-router-dom';
 
 
 const SingleCourseUpcomingClassTable = (props) => {
-    if (props.courseID) {
+    if (props.course_code) {
         // A course ID would be passed, so we fetch the upcoming lectures for that course alone
+        //URL for fetch with course ID here
+
     }
     else{
-
+        // URL for fetch all without course ID
     }
     const columns = [
         {
