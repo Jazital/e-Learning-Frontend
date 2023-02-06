@@ -70,15 +70,7 @@ const CourseMaterialTable = (props) => {
         },
         {
             name: "Title",
-            label: "Title",
-            options: {
-                filter: true,
-                sort: true,
-            }
-        },
-        {
-            name: "Format",
-            label: "FORMAT",
+            label: "TITLE",
             options: {
                 filter: true,
                 sort: true,
@@ -92,6 +84,15 @@ const CourseMaterialTable = (props) => {
                 sort: true,
             }
         },
+        {
+            name: "Format",
+            label: "FORMAT",
+            options: {
+                filter: true,
+                sort: true,
+            }
+        },
+
         {
             name: "DocumentType",
             label: "TYPE",
