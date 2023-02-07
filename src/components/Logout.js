@@ -8,6 +8,7 @@ const Logout = () => {
     localStorage.removeItem('userID')
     localStorage.removeItem('firstName')
     localStorage.removeItem('lastName')
+    localStorage.removeItem('otherName')
     localStorage.removeItem('email')
     localStorage.removeItem('userID')
     localStorage.removeItem('matricNumber')

@@ -20,6 +20,7 @@ const VirtualClassroomTable = (props) => {
                 'course_id': props.courseID,
             }
         }
+        endpoint = '/lectures/fetch-by-course-id';
     }
     else {
         args = {
@@ -27,6 +28,7 @@ const VirtualClassroomTable = (props) => {
                 'Token': userToken,
             },
         }
+        endpoint = '/lectures/fetch-student-upcoming-lectures';
     }
     const [lectures, setLectures] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -43,13 +45,12 @@ const VirtualClassroomTable = (props) => {
     }, [])
 
     const fetchLectures = async () => {
-        endpoint = '/lectures/fetch-student-upcoming-lectures';
+
 
         await axios.get(
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            // console.log(response.data.code)
             if(response.data.code === 'lecture_fetched'){
                 setLectures(response.data.data.lectures)
             }

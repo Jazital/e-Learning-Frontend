@@ -1,16 +1,78 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
+import {Modal} from "react-bootstrap";
+import ScaleLoader from "rayloading/lib/ScaleLoader";
+import axios from "axios";
 
 
 const AssignmentList = () => {
     /*const clickHandler = (e, id) => {
-        e.preventDefault();
-        console.log("Row Id", id);
-    };*/
-
+     e.preventDefault();
+     console.log("Row Id", id);
+     };*/
     localStorage.setItem('page_title', 'Assignments');
+
+    const {course_id} = useParams();
+
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    let endpoint = ''
+    let args = {}
+
+    let userToken = localStorage.getItem('userToken') || '';
+
+    if (course_id) {
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+            params: {
+                'course_id': course_id,
+            }
+        }
+        endpoint = '/assignments/fetch-by-course-id';
+    }
+    else {
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        endpoint = '/assignments/fetch-student-assignments';
+    }
+
+    const [assignments, setAssignments] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+    const loadingModal = (isOpen = false) => {
+        return (
+            <Modal show={isOpen}>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+            </Modal>
+        );
+    };
+
+    useEffect(() => {
+        fetchAssignments();
+    }, [])
+
+    const fetchAssignments = async () => {
+
+        await axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then(response => {
+            if(response.data.code === 'assignment_fetched'){
+                setAssignments(response.data.data.lecture_assignments)
+            }
+            setIsLoading(false)
+        }).catch(error => {
+            console.error(error)
+            setIsLoading(false)
+        })
+    }
+
+
     const columns = [
         {
             name: "Number",
@@ -29,14 +91,6 @@ const AssignmentList = () => {
             }
         },
         {
-            name: "DueDate",
-            label: "Due Date",
-            options: {
-                filter: true,
-                sort: true,
-            }
-        },
-        {
             name: "Status",
             label: "Status",
             options: {
@@ -45,13 +99,21 @@ const AssignmentList = () => {
             }
         },
         {
-            name: "Lecturer",
-            label: "Lecturer",
+            name: "DueDate",
+            label: "Due Date",
             options: {
                 filter: true,
                 sort: true,
             }
         },
+        // {
+        //     name: "Lecturer",
+        //     label: "Lecturer",
+        //     options: {
+        //         filter: true,
+        //         sort: true,
+        //     }
+        // },
         {
             name: "Actions",
             options: {
@@ -66,37 +128,31 @@ const AssignmentList = () => {
         },
     ];
 
-    const data = [
-        {
-            Number: "1",
-            Course: "CSC 401",
-            DueDate: "24-03-2022 04:30PM",
-            Status: "open",
-            Lecturer: "Dr. E. Dayo",
-        },
-        {
-            Number: "2",
-            Course: "CSC 401",
-            DueDate: "24-03-2022 04:30PM",
-            Status: "open",
-            Lecturer: "Dr. E. Dayo",
-        },
-        {
-            Number: "3",
-            Course: "CSC 401",
-            DueDate: "24-03-2022 04:30PM",
-            Status: "closed",
-            Lecturer: "Dr. E. Dayo",
-        },
-        {
-            Number: "4",
-            Course: "CSC 401",
-            DueDate: "24-03-2022 04:30PM",
-            Status: "closed",
-            Lecturer: "Dr. E. Dayo",
-        },
+    let data2 = []
+    if (assignments.length > 0) {
+        let sn = 1;
+        assignments.forEach((data) => {
+            data2.push({
+                Number: sn,
+                Course: data.course_code,
+                Status: "open",
+                DueDate: data.due_date,
+                // Lecturer: "Dr. E. Dayo",
+            })
+            sn++;
+        })
+    }
 
-    ];
+    /*{
+        Number: sn,
+            Course: data.course_code,
+        Platform: data.lecture_platform.replace("-", " "),
+        LectureURL: data.lecture_url,
+        Status: "pending",
+        DateTime: data.lecture_date,
+        Action: "Attend"
+    }*/
+
 
     const options = {
         filterType: 'checkbox',
@@ -104,9 +160,10 @@ const AssignmentList = () => {
 
     return (
         <div>
+            {loadingModal(isLoading)}
             <MUIDataTable
                 title={"All Assignment"}
-                data={data}
+                data={data2}
                 columns={columns}
                 options={options}
                 pagination

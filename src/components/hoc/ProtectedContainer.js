@@ -3,7 +3,6 @@ import Nav from "../nav";
 import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 
-
 function ProtectedContainer(props) {
     const history = useHistory();
     let userRole, userToken, userID = null;
@@ -15,7 +14,6 @@ function ProtectedContainer(props) {
     (!(userRole || userToken || userID)) && history.push('/')
 
     const [signedIn, setSignedIn] = useState(true);
-
 
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
 
@@ -48,12 +46,11 @@ function ProtectedContainer(props) {
             if (error.response.data.code && (error.response.data.code === "user_signed_in")) {
                 setSignedIn(true);
             }
-            else{
+            else {
                 setSignedIn(false);
             }
         })
     }
-
 
     return (
         < div className="">
@@ -66,7 +63,6 @@ function ProtectedContainer(props) {
                 </div>
 
             </div>
-            {/*<Footer />*/}
         </div>
     )
 }

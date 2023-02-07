@@ -39,6 +39,17 @@ const Profile = () => {
                                                 </div>
                                                 <div className="col-xl-6 col-sm-6">
                                                     <div className="form-group">
+                                                        <label>Other Name</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={localStorage.getItem('otherName')}
+                                                            disabled
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-xl-6 col-sm-6">
+                                                    <div className="form-group">
                                                         <label>Username/Matric. No:</label>
                                                         <input
                                                             type="text"

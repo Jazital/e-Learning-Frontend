@@ -102,7 +102,7 @@ const SingleCourse = (props) => {
                                     <p className="mb-0 text-black">Pending Assignments</p>
                                 </div>
                                 <div className="text-center">
-                                    <Link to={`/assignment/course/${course_id}`}
+                                    <Link to={`/assignments/course/${course_id}`}
                                           className="sub-links">view assignment</Link>
                                 </div>
                             </div>
