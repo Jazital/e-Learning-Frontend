@@ -33,12 +33,63 @@ class SideBar extends Component {
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
 
-
         function toggleFunc() {
-            // return aaa.classList.toggle("menu-toggle");
+            return aaa.classList.toggle("menu-toggle");
         }
 
-        // btn.addEventListener("click", toggleFunc);
+        btn.addEventListener("click", toggleFunc);
+
+        ////////////////////////////////--------------------------------////////////////////////////////
+        var dashboardLi = document.querySelector("#dashboard-li");
+        var coursesLi = document.querySelector("#courses-li");
+        var virtualLi = document.querySelector("#virtual-li");
+        var discussionLi = document.querySelector("#discussion-li");
+        var timetableLi = document.querySelector("#timetable-li");
+
+        function dashboardClicked() {
+            coursesLi.classList.remove("mm-active");
+            virtualLi.classList.remove("mm-active");
+            discussionLi.classList.remove("mm-active");
+            return timetableLi.classList.remove("mm-active");
+        }
+        // Remove active class if another nav item is clicked
+        dashboardLi.addEventListener("click", dashboardClicked);
+
+        function coursesClicked() {
+            dashboardLi.classList.remove("mm-active");
+            virtualLi.classList.remove("mm-active");
+            discussionLi.classList.remove("mm-active");
+            return timetableLi.classList.remove("mm-active");
+        }
+        // Remove active class if another nav item is clicked
+        coursesLi.addEventListener("click", coursesClicked);
+
+        function virtualClassroomClicked() {
+            dashboardLi.classList.remove("mm-active");
+            coursesLi.classList.remove("mm-active");
+            discussionLi.classList.remove("mm-active");
+            return timetableLi.classList.remove("mm-active");
+        }
+        // Remove active class if another nav item is clicked
+        virtualLi.addEventListener("click", virtualClassroomClicked);
+
+        function discussionClassroomClicked() {
+            dashboardLi.classList.remove("mm-active");
+            coursesLi.classList.remove("mm-active");
+            virtualLi.classList.remove("mm-active");
+            return timetableLi.classList.remove("mm-active");
+        }
+        // Remove active class if another nav item is clicked
+        discussionLi.addEventListener("click", discussionClassroomClicked);
+
+        function timetableClassroomClicked() {
+            dashboardLi.classList.remove("mm-active");
+            coursesLi.classList.remove("mm-active");
+            virtualLi.classList.remove("mm-active");
+            return discussionLi.classList.remove("mm-active");
+        }
+        // Remove active class if another nav item is clicked
+        timetableLi.addEventListener("click", timetableClassroomClicked);
     }
 
     render() {
@@ -46,20 +97,16 @@ class SideBar extends Component {
         const path = window.location.pathname;
         const currentUrlPath = path.slice(1);
 
-        // var aaa = document.querySelector(".course-link");
-
-        // function navSelection(e) {
-        //
-        // }
-
         return (
             <div className="deznav">
                 <PerfectScrollbar className="deznav-scroll">
+
                     <MM className="" id="menu">
                         <li
-                            // className={`${
-                            //     (currentUrlPath == "dashboard") ? "mm-active" : ""
-                            // }`}
+                            id="dashboard-li"
+                            className={`${
+                                (currentUrlPath == "dashboard") ? "mm-active" : ""
+                            } non-course-link`}
                         >
                             <Link
                                 className="ai-icon"
@@ -69,13 +116,13 @@ class SideBar extends Component {
                                 <span className="nav-text">Dashboard</span>
                             </Link>
                         </li>
-                        <li
-                        //     className={`${
-                        //     (currentUrlPath == ("courses" || "enrolled-courses" || "assignment-list" || "course-materials" || "continuous-assessment" || "course-registration")) ? "mm-active" : ""
-                        // }`}
+                        <li id="courses-li"
+                            className={`${
+                                (currentUrlPath == ("courses" || "enrolled-courses" || "assignment-list" || "course-materials" || "continuous-assessment" || "course-registration")) ? "mm-active" : ""
+                            }`}
                         >
                             <Link
-                                className="ai-icon" aria-expanded="true"
+                                className="ai-icon" aria-expanded="false"
                                 to="/courses"
                             >
                                 <i className="flaticon-381-folder-5"></i>
@@ -105,10 +152,10 @@ class SideBar extends Component {
                             </ul>
                         </li>
 
-                        <li
-                            // className={`${
-                            //     (currentUrlPath == "virtual-classrooms") ? "mm-active" : ""
-                            // }`}
+                        <li id="virtual-li"
+                            className={`${
+                                (currentUrlPath == "virtual-classrooms") ? "mm-active" : ""
+                            } non-course-link`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
@@ -118,10 +165,10 @@ class SideBar extends Component {
                                 <span className="nav-text">Virtual Classroom</span>
                             </Link>
                         </li>
-                        <li
-                            // className={`${
-                            //     (currentUrlPath == "discussion-board") ? "mm-active" : ""
-                            // }`}
+                        <li id="discussion-li"
+                            className={`${
+                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                            } non-course-link`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
@@ -131,10 +178,10 @@ class SideBar extends Component {
                                 <span className="nav-text">Discussion Board</span>
                             </Link>
                         </li>
-                        <li
-                            // className={`single-nav-wrapper ${
-                            //     (currentUrlPath == "timetable") ? "mm-active" : ""
-                            // }`}
+                        <li id="timetable-li"
+                            className={`single-nav-wrapper ${
+                                (currentUrlPath == "timetable") ? "mm-active" : ""
+                            } non-course-link`}
                         >
                             <Link
                                 className="ai-icon"
