@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom"
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
@@ -28,7 +28,6 @@ const SingleCourse = (props) => {
     });
     const [isLoading, setIsLoading] = useState(true);
     const [showContent, setShowContent] = useState(false);
-    const [courseLectures, setCourseLectures] = useState([]);
 
     localStorage.setItem('page_title', course.courseCode + "  " + course.course_title);
     let userToken = localStorage.getItem('userToken') || '';
@@ -53,7 +52,7 @@ const SingleCourse = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if (res.data.code && res.data.code == "courses_fetched") {
+            if (res.data.code && res.data.code === "courses_fetched") {
                 setCourse({
                     courseID: res.data.data.course.course_id,
                     courseCode: res.data.data.course.course_code,
@@ -73,51 +72,6 @@ const SingleCourse = (props) => {
         })
     }
 
-    async function fetchCourseLectures() {
-        setShowContent(false)
-        setIsLoading(true)
-
-        const endpoint = '/lectures/fetch-by-course-code';
-        let args = {
-            headers: {
-                'Token': userToken,
-            },
-            params: {
-                'course_code': course.course_code,
-            },
-        }
-        // Making request to backend API
-        await axios.get(
-            BACKEND_BASE_URL + endpoint,
-            args
-        ).then((res) => {
-            console.log(res.data.data)
-            setShowContent(true)
-            setIsLoading(false)
-
-            // if (res.data.code && res.data.code == "courses_fetched") {
-            //     setCourse({
-            //         courseID: res.data.data.course.courseID,
-            //         course_code: res.data.data.course.course_code,
-            //         course_title: res.data.data.course.course_title,
-            //     })
-            //     setShowContent(true)
-            //     setIsLoading(false)
-            // }
-            // else {
-            //     console.log("No course(s) found")
-            //     setShowContent(false)
-            //     setIsLoading(false)
-            // }
-        }).catch(error => {
-            setShowContent(false)
-            setIsLoading(false)
-            // console.log(error.response.data.code)
-            if(error.response.data.code && (error.response.data.code=="user_not_signed_in") ){
-                history.push('/')
-            }
-        })
-    }
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -138,6 +92,7 @@ const SingleCourse = (props) => {
                                     </div>
                                     <img
                                         src={coursematerial}
+                                        alt=""
                                     />
                                     <div className="text-home">
                                         {/*<h2 className="text-black">2</h2>*/}
@@ -161,6 +116,7 @@ const SingleCourse = (props) => {
                                     </div>
                                     <img
                                         src={classroom}
+                                        alt=""
                                     />
                                     <div className="text-home">
                                         {/*<h2 className="text-black">2</h2>*/}
@@ -184,6 +140,7 @@ const SingleCourse = (props) => {
                                     </div>
                                     <img
                                         src={pendinassingment}
+                                        alt=''
                                     />
                                     <div className="text-home">
                                         {/*<h2 className="text-black">30%</h2>*/}
@@ -209,7 +166,7 @@ const SingleCourse = (props) => {
                             <div className="card-header media border-0 pb-0">
                                 <div className="media-body">
                                 </div>
-                                <img src={coursematerial} />
+                                <img src={coursematerial} alt="" />
                             </div>
                             <br />
                             <div className="text-center">
@@ -227,7 +184,7 @@ const SingleCourse = (props) => {
                             <div className="card-header media border-0 pb-0">
                                 <div className="media-body">
                                 </div>
-                                <img src={discussion} />
+                                <img src={discussion} alt="" />
                             </div>
                             <br />
 

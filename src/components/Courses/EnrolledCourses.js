@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
@@ -6,8 +6,6 @@ import {Modal} from "react-bootstrap";
 
 import "../CSS/Home.css";
 import coursematerial from "../images/Vectorcourses.png"
-import {getRandomId} from "@syncfusion/ej2-base";
-
 
 const EnrolledCourses = () => {
     localStorage.setItem('page_title', 'Enrolled Courses');
@@ -39,7 +37,7 @@ const EnrolledCourses = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if (res.data.code && res.data.code == "courses_fetched") {
+            if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
             }
@@ -72,7 +70,7 @@ const EnrolledCourses = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt='' src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">

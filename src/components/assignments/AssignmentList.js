@@ -5,13 +5,14 @@ import {Link} from 'react-router-dom';
 
 
 const AssignmentList = () => {
-    const clickHandler = (e, id) => {
+    /*const clickHandler = (e, id) => {
         e.preventDefault();
         console.log("Row Id", id);
-    };
+    };*/
+
     localStorage.setItem('page_title', 'Assignments');
     const columns = [
-        { 
+        {
             name: "Number",
             label: "S/N",
             options: {
@@ -59,13 +60,6 @@ const AssignmentList = () => {
                     <>
                         <Link to="/assignment/3554" className="btn btn-primary">view</Link>
                         <a href="#" className="btn btn-primary">submit</a>
-
-                        {/*<FormControlLabel*/}
-                        {/*    label=""*/}
-                        {/*    value={value}*/}
-                        {/*    control={<TextField value={value} />}*/}
-                        {/*    onChange={event => updateValue(event.target.value)}*/}
-                        {/*/>*/}
                     </>
                 )
             }

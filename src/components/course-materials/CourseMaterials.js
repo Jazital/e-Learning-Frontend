@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 
 import {Link} from "react-router-dom"
 
@@ -7,7 +7,7 @@ import CourseMaterialTable from "./CourseMaterialTable";
 import "../CSS/Home.css";
 
 const CourseMaterials = () => {
-    localStorage.setItem('page_title', 'All Materials');
+    localStorage.setItem('page_title', 'Course Materials');
     return (
         <>
             <div className="row">

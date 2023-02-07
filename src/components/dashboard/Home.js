@@ -26,7 +26,7 @@ const Home = () => {
                                 src={pendinassingment}
                             />
                             <div className="text-home">
-                                <h2 className="text-black">2</h2>
+                                {/*<h2 className="text-black">2</h2>*/}
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@ const Home = () => {
                                 src={classroom}
                             />
                             <div className="text-home">
-                                <h2 className="text-black">2</h2>
+                                {/*<h2 className="text-black">2</h2>*/}
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@ const Home = () => {
                             <p className="mb-0 text-black">Upcoming Classes</p>
                         </div>
                         <div className="text-center">
-                            <Link to={`/virtual-classroom`} className="sub-links">view all</Link>
+                            <Link to={`/virtual-classrooms`} className="sub-links">view all</Link>
                         </div>
                     </div>
                 </div>

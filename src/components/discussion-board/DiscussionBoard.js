@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-import Chat, {Bubble, useMessages} from '@chatui/core';
+// import Chat, {Bubble, useMessages} from '@chatui/core';
 import '@chatui/core/dist/index.css';
 import {Link} from "react-router-dom";
 import coursematerial from "../images/Vectorcourses.png";
 
 const DiscussionBoard = () => {
-    const {messages, appendMsg, setTyping} = useMessages([]);
+    // const {messages, appendMsg, setTyping} = useMessages([]);
 
     localStorage.setItem('page_title', 'Discussion Board');
 
@@ -19,7 +19,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt="" src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">
@@ -34,7 +34,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt="" src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">
@@ -48,7 +48,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt="" src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">
@@ -62,7 +62,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt="" src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">
@@ -76,7 +76,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial}
+                                    <img className="center-image" alt="" src={coursematerial}
                                     />
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image"
+                                    <img className="center-image" alt=""
                                          src={coursematerial}
                                     />
                                 </div>
@@ -107,7 +107,7 @@ const DiscussionBoard = () => {
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" src={coursematerial} />
+                                    <img className="center-image" alt="" src={coursematerial} />
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">

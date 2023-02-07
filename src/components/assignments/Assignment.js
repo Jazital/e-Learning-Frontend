@@ -17,6 +17,7 @@ function Assignment() {
                     <div className="centercoursetext">
                         <img className="center-image"
                              src={coursematerial}
+                             alt=""
                         />
                         <p className="indicator-open">Open</p>
                     </div>

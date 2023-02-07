@@ -1,9 +1,6 @@
 import React from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link} from 'react-router-dom';
-
-
 const CheckingTable = () => {
     const columns = [
         {
@@ -51,12 +48,8 @@ const CheckingTable = () => {
         filterType: 'checkbox',
     };
 
-
     return (
-
         <div>
-
-
             <MUIDataTable
                 title={"Employee List"}
                 data={data}

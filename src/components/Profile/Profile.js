@@ -1,27 +1,11 @@
-import React, {Fragment, useState} from "react";
-import ScaleLoader from 'rayloading/lib/ScaleLoader';
-import {Modal} from "react-bootstrap";
+import React from "react";
 
-//** Import Profile Img */
-import profileImg from "../../components/images/user.png";
 import "./Profile.css"
 
 const Profile = () => {
     localStorage.setItem('page_title', ' My Profile');
-
-    const [isLoading, setIsLoading] = useState(false);
-
-    const loadingModal = (isOpen = false) => {
-        return (
-            <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
-            </Modal>
-        );
-    };
-
     return (
         <>
-            {loadingModal(isLoading)}
             <div className="row">
                 <div className="col-xl-9 col-xxl-8 col-lg-8">
                     <div className="row">

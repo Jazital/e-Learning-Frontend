@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link} from 'react-router-dom';
 import axios from "axios";
+import {Modal} from "react-bootstrap";
+import ScaleLoader from "rayloading/lib/ScaleLoader";
 
 
 const CourseMaterialTable = (props) => {
@@ -13,7 +14,6 @@ const CourseMaterialTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
 
     if (props.courseID) {
-
         // A course ID was passed, so we fetch the course materials for the passed course ID; else we fetch all the
         // course materials for all courses.
         //This is passed in SingleCourseMaterial.js
@@ -34,7 +34,14 @@ const CourseMaterialTable = (props) => {
         }
     }
     const [documents, setDocuments] = useState([])
-
+    const [isLoading, setIsLoading] = useState(true);
+    const loadingModal = (isOpen = false) => {
+        return (
+            <Modal show={isOpen}>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+            </Modal>
+        );
+    };
 
     useEffect(() => {
         fetchCourseMaterials();
@@ -47,17 +54,15 @@ const CourseMaterialTable = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-
-            if(response.data.code == 'lecture_document_fetched'){
+            if(response.data.code === 'lecture_document_fetched'){
                 setDocuments(response.data.data.lecture_document)
             }
-            // console.log(response.data.code)
+            setIsLoading(false)
         }).catch(error => {
             console.error(error)
+            setIsLoading(false)
         })
-
     }
-
 
     const columns = [
         {
@@ -115,11 +120,6 @@ const CourseMaterialTable = (props) => {
         },
     ];
 
-    const onRowClicked = (row, event) => {
-        console.log("row", row);
-        // setActiveRow(row);
-    };
-
     let data2 = []
     if (documents.length > 0) {
         let sn = 1;
@@ -130,11 +130,9 @@ const CourseMaterialTable = (props) => {
                 Format: data.document_format.format_name,
                 Course: data.course_code,
                 DocumentType: data.document_type.type_name.replace("_", " "),
-
             })
             sn++;
         })
-
     }
 
     const options = {
@@ -143,8 +141,9 @@ const CourseMaterialTable = (props) => {
 
     return (
         <div>
+            {loadingModal(isLoading)}
             <MUIDataTable
-                // title={"Upcoming Lecturers"}
+                title={"Upcoming Lecturers"}
                 data={data2}
                 columns={columns}
                 options={options}

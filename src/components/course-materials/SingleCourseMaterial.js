@@ -1,13 +1,14 @@
 import React, {Fragment} from "react";
-
-import {Link} from "react-router-dom"
-
-import SingleCourseMaterialsTable from "./SingleCourseMaterialsTable";
+import {Link, useParams} from "react-router-dom"
 
 import "../CSS/Home.css";
+import CourseMaterialTable from "./CourseMaterialTable";
 
-const SingleCourseMaterial = () => {
-    localStorage.setItem('page_title', 'CSC 401 Materials');
+const SingleCourseMaterial = (props) => {
+
+    // Get ID from URL
+    const {course_id} = useParams();
+
     return (
         <>
             <div className="row">
@@ -18,9 +19,8 @@ const SingleCourseMaterial = () => {
                     </div>
                     <div>
                         {/*Pass course ID to fetch the course material of a single course*/}
-                        <SingleCourseMaterialsTable courseID={15} />
+                        <CourseMaterialTable courseID={course_id} />
                     </div>
-
                 </div>
             </div>
         </>

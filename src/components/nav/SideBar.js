@@ -106,12 +106,12 @@ class SideBar extends Component {
 
                         <li
                             className={`${
-                                (currentUrlPath == "virtual-classroom") ? "mm-active" : ""
+                                (currentUrlPath == "virtual-classrooms") ? "mm-active" : ""
                             }`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
-                                to="/virtual-classroom"
+                                to="/virtual-classrooms"
                             >
                                 <i className="flaticon-381-news"></i>
                                 <span className="nav-text">Virtual Classroom</span>

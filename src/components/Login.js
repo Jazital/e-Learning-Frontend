@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
@@ -22,11 +22,11 @@ const Login = () => {
     );
 
     // Reset the error div element when the user starts typing
-    const handleOnChange = (event) => {
+    const handleOnChange = () => {
         setIsLoading(false)
         setLogin({
-            loginState: "",
-            message: ''
+            loginState: null,
+            message: null
         });
     }
 
@@ -42,10 +42,10 @@ const Login = () => {
     const signIn = async () => {
 
         // Get the submitted user details
-        var submittedUsername = document.getElementById("username_input").value;
-        var submittedPassword = document.getElementById("password_input").value;
+        let submittedUsername = document.getElementById("username_input").value;
+        let submittedPassword = document.getElementById("password_input").value;
 
-        var args = {
+        let args = {
             username: submittedUsername,
             password: submittedPassword
         }
@@ -55,9 +55,9 @@ const Login = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if ((res.data.code && res.data.code == 'login_success')) {
-                var data = res.data;
-                var userDetails = data.data.user;
+            if ((res.data.code && res.data.code === 'login_success')) {
+                let data = res.data;
+                let userDetails = data.data.user;
                 setLogin({loginState: "success", message: data.message});
                 localStorage.setItem('userRole', userDetails.user_role);
                 localStorage.setItem('userToken', data.token)
@@ -146,13 +146,14 @@ const Login = () => {
                             <div className="auth-form">
                                 <h4 className="text-center mb-4 "> Sign in your account </h4>
                                 {/* Display success or error messages to the user when available */}
-                                {(login.loginState == "success") && (
-                                    <div className="alert alert-success">{login.message}</div>) || ""}
-                                {(login.loginState == "failed") && (
-                                    <div className="alert alert-error">{login.message}</div>) || ""}
+                                {(login.loginState === "success") && (
+                                    <div className="alert alert-success">{login.message}</div>) || ("")}
+                                {(login.loginState === "failed") && (
+                                    <div className="alert alert-error">{login.message}</div>) || ("")}
 
                                 <form action="" onSubmit={submitHandler}>
-                                    <div className="form-group"><label className="mb-1 "> <strong>Email / Matric no:</strong>
+                                    <div className="form-group"><label className="mb-1 ">
+                                        <strong>Email / Matric no:</strong>
                                     </label>
                                     </div>
                                     <input type="text" id="username_input" onChange={handleOnChange}
@@ -162,19 +163,9 @@ const Login = () => {
                                         <input type="password" id="password_input" onChange={handleOnChange}
                                                className="form-control" />
                                     </div>
-                                    {/*Remember sign-in in checkbox temporarily disabled*/}
                                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                                         <div className="form-group">
-                                            {/*<div className="custom-control custom-checkbox ml-1 ">
-                                                <input type="checkbox" className="custom-control-input"
-                                                       id="basic_checkbox_1" />
-                                                <label className="custom-control-label"
-                                                       htmlFor="basic_checkbox_1"> Remember me </label>
-                                            </div>*/}
                                         </div>
-                                        {/*<div className="form-group">
-                                         <Link className="" to="/forgot-password"> Forgot Password? </Link>
-                                         </div>*/}
                                     </div>
                                     <div className="text-center">
                                         <button type="submit" className="btn btn-primary btn-block"

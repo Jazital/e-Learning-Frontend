@@ -5,9 +5,7 @@ import {Link} from 'react-router-dom';
 
 
 const SingleCourseMaterialsTable = (props) => {
-    if (props.courseID) {
-        // A course ID was passed, so we fetch the course materials for the passed course ID
-    }
+
     const columns = [
         {
             name: "Number",

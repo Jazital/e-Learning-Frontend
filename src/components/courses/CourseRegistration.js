@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import CourseRegTable from "./table/CourseReg";
 import "../CSS/Home.css";
 
