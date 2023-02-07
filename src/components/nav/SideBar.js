@@ -35,10 +35,10 @@ class SideBar extends Component {
 
 
         function toggleFunc() {
-            return aaa.classList.toggle("menu-toggle");
+            // return aaa.classList.toggle("menu-toggle");
         }
 
-        btn.addEventListener("click", toggleFunc);
+        // btn.addEventListener("click", toggleFunc);
     }
 
     render() {
@@ -57,9 +57,9 @@ class SideBar extends Component {
                 <PerfectScrollbar className="deznav-scroll">
                     <MM className="" id="menu">
                         <li
-                            className={`${
-                                (currentUrlPath == "dashboard") ? "mm-active" : ""
-                            }`}
+                            // className={`${
+                            //     (currentUrlPath == "dashboard") ? "mm-active" : ""
+                            // }`}
                         >
                             <Link
                                 className="ai-icon"
@@ -69,12 +69,13 @@ class SideBar extends Component {
                                 <span className="nav-text">Dashboard</span>
                             </Link>
                         </li>
-                        <li className={`${
-                            (currentUrlPath == ("courses" || "enrolled-courses" || "assignment-list" || "course-materials" || "continuous-assessment" || "course-registration")) ? "mm-active" : ""
-                        }`}
+                        <li
+                        //     className={`${
+                        //     (currentUrlPath == ("courses" || "enrolled-courses" || "assignment-list" || "course-materials" || "continuous-assessment" || "course-registration")) ? "mm-active" : ""
+                        // }`}
                         >
                             <Link
-                                className="ai-icon"
+                                className="ai-icon" aria-expanded="true"
                                 to="/courses"
                             >
                                 <i className="flaticon-381-folder-5"></i>
@@ -105,9 +106,9 @@ class SideBar extends Component {
                         </li>
 
                         <li
-                            className={`${
-                                (currentUrlPath == "virtual-classrooms") ? "mm-active" : ""
-                            }`}
+                            // className={`${
+                            //     (currentUrlPath == "virtual-classrooms") ? "mm-active" : ""
+                            // }`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
@@ -118,9 +119,9 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li
-                            className={`${
-                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
-                            }`}
+                            // className={`${
+                            //     (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                            // }`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
@@ -131,9 +132,9 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li
-                            className={`single-nav-wrapper ${
-                                (currentUrlPath == "timetable") ? "mm-active" : ""
-                            }`}
+                            // className={`single-nav-wrapper ${
+                            //     (currentUrlPath == "timetable") ? "mm-active" : ""
+                            // }`}
                         >
                             <Link
                                 className="ai-icon"

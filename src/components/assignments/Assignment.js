@@ -9,7 +9,8 @@ import "./Assignments.css";
 
 
 function Assignment() {
-    localStorage.setItem('page_title', 'CSC 401 Assignment');
+
+    localStorage.setItem('page_title', 'Assignment');
     return (
         <div className='the col-xl-10 col-lg-12 col-sm-12'>
             <Card border="light" className='asgn1 main-body-card col-xl-6 col-lg-12 col-sm-12'>

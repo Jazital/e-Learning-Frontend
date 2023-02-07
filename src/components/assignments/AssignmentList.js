@@ -39,7 +39,7 @@ const AssignmentList = () => {
                 'Token': userToken,
             },
         }
-        endpoint = '/assignments/fetch-student-assignments';
+        endpoint = '/assignments/fetch-all-assignments';
     }
 
     const [assignments, setAssignments] = useState([])
@@ -66,8 +66,9 @@ const AssignmentList = () => {
                 setAssignments(response.data.data.lecture_assignments)
             }
             setIsLoading(false)
+            // console.log(response)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             setIsLoading(false)
         })
     }
@@ -106,14 +107,6 @@ const AssignmentList = () => {
                 sort: true,
             }
         },
-        // {
-        //     name: "Lecturer",
-        //     label: "Lecturer",
-        //     options: {
-        //         filter: true,
-        //         sort: true,
-        //     }
-        // },
         {
             name: "Actions",
             options: {
@@ -142,18 +135,6 @@ const AssignmentList = () => {
             sn++;
         })
     }
-
-    /*{
-        Number: sn,
-            Course: data.course_code,
-        Platform: data.lecture_platform.replace("-", " "),
-        LectureURL: data.lecture_url,
-        Status: "pending",
-        DateTime: data.lecture_date,
-        Action: "Attend"
-    }*/
-
-
     const options = {
         filterType: 'checkbox',
     };
