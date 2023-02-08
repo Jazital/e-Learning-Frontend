@@ -52,6 +52,7 @@ class SideBar extends Component {
             discussionLi.classList.remove("mm-active");
             return timetableLi.classList.remove("mm-active");
         }
+
         // Remove active class if another nav item is clicked
         dashboardLi.addEventListener("click", dashboardClicked);
 
@@ -61,6 +62,7 @@ class SideBar extends Component {
             discussionLi.classList.remove("mm-active");
             return timetableLi.classList.remove("mm-active");
         }
+
         // Remove active class if another nav item is clicked
         coursesLi.addEventListener("click", coursesClicked);
 
@@ -70,6 +72,7 @@ class SideBar extends Component {
             discussionLi.classList.remove("mm-active");
             return timetableLi.classList.remove("mm-active");
         }
+
         // Remove active class if another nav item is clicked
         virtualLi.addEventListener("click", virtualClassroomClicked);
 
@@ -79,6 +82,7 @@ class SideBar extends Component {
             virtualLi.classList.remove("mm-active");
             return timetableLi.classList.remove("mm-active");
         }
+
         // Remove active class if another nav item is clicked
         discussionLi.addEventListener("click", discussionClassroomClicked);
 
@@ -88,6 +92,7 @@ class SideBar extends Component {
             virtualLi.classList.remove("mm-active");
             return discussionLi.classList.remove("mm-active");
         }
+
         // Remove active class if another nav item is clicked
         timetableLi.addEventListener("click", timetableClassroomClicked);
     }
@@ -165,19 +170,20 @@ class SideBar extends Component {
                                 <span className="nav-text">Virtual Classroom</span>
                             </Link>
                         </li>
-                        <li id="discussion-li"
-                            className={`${
-                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
-                            } non-course-link`}
-                        >
-                            <Link
-                                className="ai-icon single-nav-wrapper"
-                                to="/discussion-board"
-                            >
-                                <i className="flaticon-381-background-1"></i>
-                                <span className="nav-text">Discussion Board</span>
-                            </Link>
-                        </li>
+                        <li id="discussion-li"></li>
+                        {/*<li id="discussion-li"*/}
+                        {/*    className={`${*/}
+                        {/*        (currentUrlPath == "discussion-board") ? "mm-active" : ""*/}
+                        {/*    } non-course-link`}*/}
+                        {/*>*/}
+                        {/*    <Link*/}
+                        {/*        className="ai-icon single-nav-wrapper"*/}
+                        {/*        to="/discussion-board"*/}
+                        {/*    >*/}
+                        {/*        <i className="flaticon-381-background-1"></i>*/}
+                        {/*        <span className="nav-text">Discussion Board</span>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         <li id="timetable-li"
                             className={`single-nav-wrapper ${
                                 (currentUrlPath == "timetable") ? "mm-active" : ""

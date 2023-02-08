@@ -113,8 +113,7 @@ const AssignmentList = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <Link to="/assignment/3554" className="btn btn-primary">view</Link>
-                        <a href="#" className="btn btn-primary">submit</a>
+                        <Link to="/assignment/226" className="btn btn-primary">view</Link>
                     </>
                 )
             }

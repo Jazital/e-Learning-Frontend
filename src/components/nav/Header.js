@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-/// Image
-import profile from "../../images/profile/12.png";
+// Image
+import profile from "../images/user.png"
 
 const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
     var path = window.location.pathname.split("/");
@@ -47,7 +47,7 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
                                         <span>{localStorage.getItem('firstName')+" "+localStorage.getItem('lastName')}</span>
                                         <small className='alert-info text-center'>{localStorage.getItem('userRole')}</small>
                                     </div>
-                                    <img src={profile} width="20" alt="" />
+                                    <img src={profile} height="10" alt="" />
                                 </Link>
                                 <div
                                     className={`dropdown-menu dropdown-menu-right ${toggle === "profile" ? "show" : ""}`}

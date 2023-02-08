@@ -15,22 +15,16 @@
 }
 
 .Formdiv {
-    border-style: dashed;
     border-radius: 10px;
-    background-color: #F4F4F4;
-    border-color: black;
-    padding: 10%;
-    margin: 10px;
+    background-color: #f3f3f3;
 }
 
 .asgn1 {
     border-color: azure;
     border-style: dashed;
     border-radius: 10px;
-    border-color: antiquewhite;
     padding: 10%;
     margin: 10px;
-    box-shadow: 44px;
 }
 
 .indicator-open {

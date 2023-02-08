@@ -116,13 +116,14 @@ const Markup = () => {
                         component={AssignmentList}
                     />
                     <Route
+                        path={`/assignment/:assignment_id`}
+                        component={Assignment}
+                    />
+                    <Route
                         path={`/course-reg`}
                         component={CourseReg}
                     />
-                    <Route
-                        path={`/assignment/:id`}
-                        component={Assignment}
-                    />
+
                     <Route
                         path={`/checkingtable`}
                         component={CheckingTable}
