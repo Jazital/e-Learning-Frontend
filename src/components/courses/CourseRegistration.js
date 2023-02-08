@@ -7,6 +7,7 @@ const CourseRegistration = () => {
     return (
         <div>
             <CourseRegTable />
+            <button className="btn btn-primary mt-3">Register Courses</button>
         </div>
     );
 };

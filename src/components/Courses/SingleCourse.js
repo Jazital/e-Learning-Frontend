@@ -198,7 +198,6 @@ const SingleCourse = (props) => {
                     {/*</div>*/}
                 </div>
             </div>)}
-
         </>
     );
 };

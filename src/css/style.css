@@ -30371,3 +30371,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0 0 0 .25);
 }
+
+.timetable-img{
+    max-width: 70vw;
+}
