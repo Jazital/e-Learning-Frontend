@@ -9,6 +9,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 const SingleCourseUpcomingClassTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
     const [lectures, setLectures] = useState([])
+    const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
 
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
     let endpoint = ''
@@ -67,11 +68,37 @@ const SingleCourseUpcomingClassTable = (props) => {
             if (res.data.code && res.data.code === "lecture_fetched") {
                 setLectures(res.data.data.lectures);
             }
-            else {
-            }
             setIsLoading(false)
         }).catch(error => {
             setIsLoading(false)
+        })
+    }
+
+    const attendLecture = async (lectureId) => {
+        // Making request to backend API
+        endpoint = '/lecture-attendance/add';
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        let data = {
+            'lecture_id': lectureId
+        }
+       await axios.post(
+            BACKEND_BASE_URL + endpoint,
+           data,
+            args
+        ).then((res) => {
+            if (res.data.code && res.data.code === "attendance_submitted") {
+                setAttendanceSubmitted(true)
+            }
+            setIsLoading(false)
+            // console.log(res)
+
+        }).catch(error => {
+            setIsLoading(false)
+            // console.log(error)
         })
     }
 
@@ -81,39 +108,23 @@ const SingleCourseUpcomingClassTable = (props) => {
             name: "Number",
             label: "S/N",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Course",
             label: "COURSE",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Platform",
             label: "PLATFORM",
             options: {
-                filter: true,
-                sort: false,
-            }
-        },
-        /*{
-         name: "LectureURL",
-         label: "Lecture URL",
-         options: {
-         filter: true,
-         sort: false,
-         }
-         },*/
-        {
-            name: "Status",
-            label: "STATUS",
-            options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -121,7 +132,7 @@ const SingleCourseUpcomingClassTable = (props) => {
             name: "DateTime",
             label: "DATE",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -129,9 +140,14 @@ const SingleCourseUpcomingClassTable = (props) => {
             name: "ACTION",
             options: {
                 filter: false,
+                sort: false,
+                empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A"
+                        <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
                            className="btn btn-primary">Attend</a>
                     </>
                 )
@@ -148,7 +164,7 @@ const SingleCourseUpcomingClassTable = (props) => {
                 Number: sn,
                 Course: data.course_code,
                 Platform: (data.lecture_platform).replace("-", " "),
-                // LectureURL: "https://meet.google.com/gtw-3fhk",
+                // LectureURL: data.lecture_url,
                 Status: "pending",
                 DateTime: data.lecture_date,
             })
@@ -158,7 +174,14 @@ const SingleCourseUpcomingClassTable = (props) => {
     }
 
     const options = {
-        filterType: 'checkbox',
+        search: true,
+        download: false,
+        print: false,
+        viewColumns: false,
+        filter: false,
+        responsive: "standard",
+        tableBodyMaxHeight: '400px',
+        selectableRowsHideCheckboxes: true
     };
     return (
         <div>
@@ -166,7 +189,6 @@ const SingleCourseUpcomingClassTable = (props) => {
             {data2 &&
             <MUIDataTable
                 title={"Upcoming Lecturers"}
-                // data={data}
                 data={data2}
                 columns={columns}
                 options={options}

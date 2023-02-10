@@ -29,7 +29,7 @@ const SingleCourse = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [showContent, setShowContent] = useState(false);
 
-    localStorage.setItem('page_title', course.courseCode + "  " + course.course_title);
+    localStorage.setItem('page_title', course.courseCode + " - " + course.course_title);
     let userToken = localStorage.getItem('userToken') || '';
 
     document.title = localStorage.getItem('page_title')
@@ -82,9 +82,32 @@ const SingleCourse = (props) => {
     return (
         <>
             {loadingModal(isLoading)}
+
+            <div className="pb-4">
+                <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>
+            </div>
             {showContent && (<div className="row">
-                <div className="col-xl-9 col-lg-6 col-sm-6">
+                <div className="col-xl-12 col-lg-8 col-sm-10">
                     <div className="the">
+                        <div className="col-xl col-lg-6 col-sm-6">
+                            <div className="card overflow-hidden">
+                                <div className="card-header media border-0 pb-0">
+                                    <div className="media-body">
+                                    </div>
+                                    <img src={coursematerial} alt="" />
+                                </div>
+                                <br />
+                                <div className="text-center">
+                                    <p className="mb-0 text-black">Course Materials</p>
+                                </div>
+                                <div className="text-center">
+                                    <Link to={`/course-material/course/${course_id}`}
+                                          className="sub-links">view course materials</Link>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div className=" main-body-card col-xl-4 col-lg-6 col-sm-6">
                             <div className="card overflow-hidden">
                                 <div className="card-header media border-0 pb-788">
@@ -132,71 +155,29 @@ const SingleCourse = (props) => {
                             </div>
                         </div>
 
-                        <div className=" main-body-card col-xl-4 col-lg-6 col-sm-6">
-                            <div className="card overflow-hidden">
-                                <div className="card-header media border-0 pb-788">
-                                    <div className="media-body">
-
-                                    </div>
-                                    <img
-                                        src={pendinassingment}
-                                        alt=''
-                                    />
-                                    <div className="text-home">
-                                        {/*<h2 className="text-black">30%</h2>*/}
-                                    </div>
-                                </div>
-
-                                <div className="text-center card-body pt-4 p-0">
-                                    <p className="mb-0 text-black">Continuous Assignment</p>
-                                </div>
-                                <div className="text-center">
-                                    <Link to={`/continuous-assessment/course/${course_id}`}
-                                          className="sub-links">view C.A scores</Link>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <SingleCourseUpcomingClassTable courseCode={course.courseCode} />
                 </div>
-                <div className="col-xl-3 col-lg-6 col-sm-6">
+                {/*<div className="col-xl-3 col-lg-6 col-sm-6 pt-4">*/}
 
-                    <div className="col-xl col-lg-6 col-sm-6">
-                        <div className="card overflow-hidden">
-                            <div className="card-header media border-0 pb-0">
-                                <div className="media-body">
-                                </div>
-                                <img src={coursematerial} alt="" />
-                            </div>
-                            <br />
-                            <div className="text-center">
-                                <p className="mb-0 text-black">Course Materials</p>
-                            </div>
-                            <div className="text-center">
-                                <Link to={`/course-material/course/${course_id}`}
-                                      className="sub-links">view course materials</Link>
-                            </div>
-                        </div>
-                    </div>
+                {/*    /!*<div className="col-xl col-lg-6 col-sm-6">*!/*/}
+                {/*    /!*    <div className="card overflow-hidden">*!/*/}
+                {/*    /!*        <div className="card-header media border-0 pb-0">*!/*/}
+                {/*    /!*            <div className="media-body">*!/*/}
+                {/*    /!*            </div>*!/*/}
+                {/*    /!*            <img src={discussion} alt="" />*!/*/}
+                {/*    /!*        </div>*!/*/}
+                {/*    /!*        <br />*!/*/}
 
-                    {/*<div className="col-xl col-lg-6 col-sm-6">*/}
-                    {/*    <div className="card overflow-hidden">*/}
-                    {/*        <div className="card-header media border-0 pb-0">*/}
-                    {/*            <div className="media-body">*/}
-                    {/*            </div>*/}
-                    {/*            <img src={discussion} alt="" />*/}
-                    {/*        </div>*/}
-                    {/*        <br />*/}
-
-                    {/*        <div className="text-center">*/}
-                    {/*            <p className="mb-0 text-black">{course.course_code} </p>*/}
-                    {/*        </div>*/}
-                    {/*        <div className="text-center">*/}
-                    {/*            <Link to={`/discussion-board/course/${course_id}`} className="sub-links">go to room</Link>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                </div>
+                {/*    /!*        <div className="text-center">*!/*/}
+                {/*    /!*            <p className="mb-0 text-black">{course.course_code} </p>*!/*/}
+                {/*    /!*        </div>*!/*/}
+                {/*    /!*        <div className="text-center">*!/*/}
+                {/*    /!*            <Link to={`/discussion-board/course/${course_id}`} className="sub-links">go to room</Link>*!/*/}
+                {/*    /!*        </div>*!/*/}
+                {/*    /!*    </div>*!/*/}
+                {/*    /!*</div>*!/*/}
+                {/*</div>*/}
             </div>)}
         </>
     );

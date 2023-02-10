@@ -30375,3 +30375,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .timetable-img{
     max-width: 70vw;
 }
+
+.btn-primary {
+    background-color: #0a0024 !important;
+}
+.btn-primary:hover {
+    background-color: #05011b !important;
+}

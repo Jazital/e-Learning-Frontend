@@ -32,6 +32,7 @@ const VirtualClassroomTable = (props) => {
     }
     const [lectures, setLectures] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -56,8 +57,37 @@ const VirtualClassroomTable = (props) => {
             }
             setIsLoading(false)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             setIsLoading(false)
+        })
+    }
+
+
+    const attendLecture = async (lectureId) => {
+        // Making request to backend API
+        endpoint = '/lecture-attendance/add';
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        let data = {
+            'lecture_id': lectureId
+        }
+        await axios.post(
+            BACKEND_BASE_URL + endpoint,
+            data,
+            args
+        ).then((res) => {
+            if (res.data.code && res.data.code === "attendance_submitted") {
+                setAttendanceSubmitted(true)
+            }
+            setIsLoading(false)
+            // console.log(res)
+
+        }).catch(error => {
+            setIsLoading(false)
+            // console.log(error)
         })
     }
 
@@ -66,23 +96,23 @@ const VirtualClassroomTable = (props) => {
             name: "Number",
             label: "S/N",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Course",
             label: "Courses",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Platform",
             label: "Platform",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -90,7 +120,7 @@ const VirtualClassroomTable = (props) => {
             name: "LectureURL",
             label: "Lecture URL",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -98,7 +128,7 @@ const VirtualClassroomTable = (props) => {
             name: "Status",
             label: "Status",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -106,7 +136,7 @@ const VirtualClassroomTable = (props) => {
             name: "DateTime",
             label: "Date & Time",
             options: {
-                filter: true,
+                filter: false,
                 sort: false,
             }
         },
@@ -114,9 +144,15 @@ const VirtualClassroomTable = (props) => {
             name: "Actions",
             options: {
                 filter: false,
+                sort: false,
+                empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href="https://www.youtube.com/watch?v=DE8KYo_g96A" className="btn btn-primary">Attend</a>
+                        <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                           className="btn btn-primary">Attend</a>
                     </>
                 )
             }
@@ -141,7 +177,15 @@ const VirtualClassroomTable = (props) => {
     }
 
     const options = {
-        filterType: 'checkbox',
+        search: true,
+        download: false,
+        print: false,
+        viewColumns: false,
+        filter: false,
+        responsive: "standard",
+        tableBodyMaxHeight:'400px',
+        selectableRowsHideCheckboxes:true
+
     };
 
     return (

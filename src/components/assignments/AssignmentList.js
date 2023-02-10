@@ -113,7 +113,8 @@ const AssignmentList = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <Link to="/assignment/226" className="btn btn-primary">view</Link>
+                        <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
+                        }}>view</Link>
                     </>
                 )
             }

@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import InputGroup from 'react-bootstrap/InputGroup';
 import coursematerial from "../images/Vectorcourses.png"
 import "./Assignments.css";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
@@ -37,7 +37,7 @@ function Assignment() {
     const [isLoading, setIsLoading] = useState(true);
     const [assignmentDocumentURI, setAssignmentDocumentURI] = useState(null);
     const [submissionResponse, setSubmissionResponse] = useState({
-        status:'', //success or error
+        status: '', //success or error
         message: ''
     }); // either success or failed
 
@@ -114,57 +114,63 @@ function Assignment() {
         })
     }
 
-    return (
-        <div className='the col-xl-10 col-lg-12 col-sm-12'>
-            {loadingModal(isLoading)}
-
-            <Card border="light" className='asgn1 main-body-card col-xl-6 col-lg-12 col-sm-12'>
-                <div>
-                    <div className="centercoursetext">
-                        <img className="center-image mb-5"
-                             src={coursematerial}
-                             alt=""
-                        />
-                        {/*<p className="indicator-open">Open</p>*/}
-                    </div>
-                    <div id="firstAssignText">
-                        <p>
-                            <strong> Course: {assignment.course_code}</strong> <br />
-                            Assigned Date: {assignment.creation_date} <br />
-                            <strong>Due Date: {assignment.due_date}</strong> <br />
-
-                        </p>
-                    </div>
-                    <div className="centercoursetext">
-                        {
-                            assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}>
-                                Download Assignment
-                            </a>)
-                        }
-
-                    </div>
-                </div>
-            </Card>
-            <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
-                <div className="centercoursetext">
-                    <h2 className="pb-3">Submit Assignment</h2>
-                    {submissionResponse.status==="success" && (<div className="alert alert-success mb-2">
-                        {submissionResponse.message}
-                    </div>)}
-                    {submissionResponse.status==="error" && (<div className="alert alert-danger mb-2">
-                        {submissionResponse.message}
-                    </div>)}
-                    <p className="pb-0 pt-1">Upload your assignment below to submit</p>
-                </div>
-                <form onSubmit={handleAssignmentSubmit}>
-                    <input type="file" id="assignment-file-input" className="form-control mb-3" />
-                    <label htmlFor="assignment-comment-input">Comment (optional)</label>
-                    <textarea rows="5" id="assignment-comment-input" className="form-control mb-3" placeholder="Enter your comment here..."></textarea>
-                    <input className="btn btn-primary" type="submit" value="Submit Assignment" />
-                </form>
-
+    return (<>
+            <div className="pb-4">
+                <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>
             </div>
-        </div>
+
+            <div className='the col-xl-10 col-lg-12 col-sm-12'>
+                {loadingModal(isLoading)}
+
+                <Card border="light" className='asgn1 main-body-card col-xl-6 col-lg-12 col-sm-12'>
+                    <div>
+                        <div className="centercoursetext">
+                            <img className="center-image mb-5"
+                                 src={coursematerial}
+                                 alt=""
+                            />
+                            {/*<p className="indicator-open">Open</p>*/}
+                        </div>
+                        <div id="firstAssignText">
+                            <p>
+                                <strong> Course: {assignment.course_code}</strong> <br />
+                                Assigned Date: {assignment.creation_date} <br />
+                                <strong>Due Date: {assignment.due_date}</strong> <br />
+
+                            </p>
+                        </div>
+                        <div className="centercoursetext">
+                            {
+                                assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}>
+                                    Download Assignment
+                                </a>)
+                            }
+
+                        </div>
+                    </div>
+                </Card>
+                <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
+                    <div className="centercoursetext">
+                        <h2 className="pb-3">Submit Assignment</h2>
+                        {submissionResponse.status === "success" && (<div className="alert alert-success mb-2">
+                            {submissionResponse.message}
+                        </div>)}
+                        {submissionResponse.status === "error" && (<div className="alert alert-danger mb-2">
+                            {submissionResponse.message}
+                        </div>)}
+                        <p className="pb-0 pt-1">Upload your assignment below to submit</p>
+                    </div>
+                    <form onSubmit={handleAssignmentSubmit}>
+                        <input type="file" id="assignment-file-input" className="form-control mb-3" />
+                        <label htmlFor="assignment-comment-input">Comment (optional)</label>
+                        <textarea rows="5" id="assignment-comment-input" className="form-control mb-3"
+                                  placeholder="Enter your comment here..."></textarea>
+                        <input className="btn btn-primary" type="submit" value="Submit Assignment" />
+                    </form>
+
+                </div>
+            </div>
+        </>
     )
 }
 

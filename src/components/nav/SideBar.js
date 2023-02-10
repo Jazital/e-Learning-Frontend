@@ -32,7 +32,15 @@ class SideBar extends Component {
         // sidebar open/close
         var btn = document.querySelector(".nav-control");
         var aaa = document.querySelector("#main-wrapper");
+        var mainContainer = document.querySelector(".container-fluid");
+        mainContainer.addEventListener("click", hideSidebar);
 
+        // Hide the sidebar when any other container is clicked outside the sidebar
+        function hideSidebar(){
+            return aaa.classList.remove("menu-toggle");
+        }
+
+        // Toggle the sidebar when the hamburger is clicked
         function toggleFunc() {
             return aaa.classList.toggle("menu-toggle");
         }
@@ -148,7 +156,7 @@ class SideBar extends Component {
                                 </li>
                                 <li>
                                     <Link
-                                        to="/continuous-assessment">Continuous Assessment</Link>
+                                        to="/continuous-assessments">Continuous Assessments</Link>
                                 </li>
                                 <li>
                                     <Link

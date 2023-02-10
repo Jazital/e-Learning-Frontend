@@ -1,9 +1,6 @@
 import React from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link} from 'react-router-dom';
-
-
 const CourseRegTable = () => {
     const columns = [
         {
@@ -62,12 +59,27 @@ const CourseRegTable = () => {
 
     const options = {
         filterType: 'checkbox',
+            search: true,
+            download: false,
+            print: false,
+            viewColumns: false,
     };
+    // const options = {
+    //     search: true,
+    //     download: false,
+    //     print: false,
+    //     viewColumns: false,
+    //     filterType: 'checkbox',
+    //     filter: true,
+    //     responsive: "standard",
+    //     tableBodyMaxHeight: '400px',
+    //     selectableRowsHideCheckboxes: true
+    // };
 
     return (
         <div>
             <MUIDataTable
-                title={"All Assignment"}
+                title={"All Courses"}
                 data={data}
                 columns={columns}
                 options={options}

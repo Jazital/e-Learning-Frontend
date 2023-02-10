@@ -17,8 +17,6 @@ import Profile from "./Profile/Profile";
 import Error404 from "../components/Error404";
 import EnrolledCourses from "./courses/EnrolledCourses";
 import AssignmentList from "./assignments/AssignmentList";
-import CourseReg from "../components/courses/table/CourseReg";
-import CheckingTable from "../components/courses/CheckingTable";
 import SingleCourse from "../components/courses/SingleCourse";
 import Assignment from "./assignments/Assignment";
 import SingleCourseMaterial from "../components/course-materials/SingleCourseMaterial";
@@ -39,6 +37,8 @@ import TimeTable from "./time-table/TimeTable";
 import CourseRegistration from "./courses/CourseRegistration";
 import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 import SingleVirtualClassroom from "./virtual-classroom/SingleVirtualClassroom";
+import ContinuousAssessment from "./continuous-assessment/ContinuousAssessment";
+import SingleContinuousAssessment from "./continuous-assessment/SingleContinuousAssessment";
 
 
 const Markup = () => {
@@ -106,7 +106,6 @@ const Markup = () => {
                         component={DiscussionBoard}
                         exact
                     />
-
                     <Route
                         path={`/assignment-list`}
                         component={AssignmentList}
@@ -118,15 +117,6 @@ const Markup = () => {
                     <Route
                         path={`/assignment/:assignment_id`}
                         component={Assignment}
-                    />
-                    <Route
-                        path={`/course-reg`}
-                        component={CourseReg}
-                    />
-
-                    <Route
-                        path={`/checkingtable`}
-                        component={CheckingTable}
                     />
                     <Route
                         path={`/virtual-classroom/course/:course_id`}
@@ -143,6 +133,16 @@ const Markup = () => {
                     <Route
                         path={`/profile`}
                         component={Profile}
+                    />
+
+                    <Route
+                        path={`/continuous-assessments`}
+                        component={ContinuousAssessment}
+                    />
+                    <Route
+                        path={`/continuous-assessment/course/:course_id`}
+                        component={SingleContinuousAssessment}
+                        exact
                     />
 
                     {/*Lecturers Routes*/}
