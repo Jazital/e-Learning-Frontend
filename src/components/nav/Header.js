@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 // Image
 import profile from "../images/user.png"
+import wait from "../images/wait.png"
+import {Modal} from "react-bootstrap";
+import axios from "axios";
 
 const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
     var path = window.location.pathname.split("/");
     var name = path[path.length - 1].split("-");
+    const [unauthorized, setUnauthorized] = useState(false);
+    const [unauthorizedMessage, setUnauthorizedMessage] = useState(false);
+    const [unauthorizedHeading, setUnauthorizedHeading] = useState(false);
+    let userToken = localStorage.getItem('userToken');
     var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
     var finalName = filterName.includes("app")
                     ? filterName.filter((f) => f !== "app")
@@ -14,8 +21,60 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
 
     var page_name = (finalName.join(" ") === '') ? 'Dashboard' : finalName.join(" ");
 
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+
+    useEffect(() => {
+        verifyCopyright();
+    }, [])
+
+    const verifyCopyright = async () => {
+        const endpoint = '/courses/all';
+        let args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        // Making request to backend API
+        await axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then((res) => {
+            if (res.data.code && res.data.code === "d_in") {
+                setUnauthorizedMessage(res.data.message)
+                setUnauthorizedHeading(res.data.heading)
+                setUnauthorized(true);
+            }
+            else {
+                setUnauthorized(false);
+            }
+            // console.log(res.data)
+        }).catch(error => {
+            setUnauthorized(false);
+        })
+    }
+
+
+
+    const infoModal = (isOpen = false) => {
+        return (
+            <Modal show={isOpen}>
+                <div className="text-center info-modal-content-wrapper">
+                    <img className="wait" src={wait} alt="" />
+                    <h1>{unauthorizedHeading}</h1>
+
+                <Modal.Body>
+                    <p className="color-white">{unauthorizedMessage}</p>
+                </Modal.Body>
+                </div>
+            </Modal>
+        );
+    };
+
+
+
     return (
         <div className="header">
+            {infoModal(unauthorized)}
             <div className="header-content">
                 <nav className="navbar navbar-expand">
                     <div className="collapse navbar-collapse justify-content-between">

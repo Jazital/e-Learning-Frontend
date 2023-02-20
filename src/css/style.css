@@ -12577,7 +12577,7 @@ a:hover, a:focus, a.active {
     justify-content: flex-start;
     align-items: center;
     font-size: 1.125rem;
-    color: #fff;
+    color: #242424;
     text-decoration: none;
     padding-left: 50px;
     padding-right: 50px;
@@ -16631,7 +16631,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     position: absolute;
     top: 7.5rem;
     padding-top: 0;
-    z-index: 5;
+    z-index: 120;
     background-color: #07001f;
     transition: all .2s ease;
 }
@@ -30381,4 +30381,21 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 }
 .btn-primary:hover {
     background-color: #05011b !important;
+}
+
+.wait{
+    max-height: 300px;
+}
+
+.info-modal-content-wrapper{
+    background-color: white;
+    border-radius: 7px;
+}
+
+.signin-logo{
+    max-height: 100px;
+}
+
+.header-brand-name{
+    font-size: 1rem !important;
 }

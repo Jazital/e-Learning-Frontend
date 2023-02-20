@@ -3,10 +3,13 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
+import logo from "./images/ospolylogo.png"
 
 import "./login.css";
 
 const Login = () => {
+    document.title = 'Login - Osun State Polytechnic';
+
     const history = useHistory();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -131,7 +134,6 @@ const Login = () => {
         })
     }
 
-
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -147,6 +149,9 @@ const Login = () => {
                     <div className="row no-gutters">
                         <div className="col-xl-12">
                             <div className="auth-form">
+                                <div className="text-center">
+                                    <img className="signin-logo mb-3" alt="logo" src={logo} />
+                                </div>
                                 <h4 className="text-center mb-4 "> Sign in your account </h4>
                                 {/* Display success or error messages to the user when available */}
                                 {(login.loginState === "success") && (
@@ -155,15 +160,18 @@ const Login = () => {
                                     <div className="alert alert-error">{login.message}</div>) || ("")}
 
                                 <form action="" onSubmit={submitHandler}>
-                                    <div className="form-group"><label className="mb-1 ">
-                                        <strong>Email / Matric no:</strong>
-                                    </label>
+                                    <div className="form-group">
+                                        <label>
+                                            <strong>Email / Matric no:</strong>
+                                        </label>
+                                        <input type="text" placeholder="Enter matric number/username..."
+                                               id="username_input" onChange={handleOnChange}
+                                               className="form-control" />
                                     </div>
-                                    <input type="text" id="username_input" onChange={handleOnChange}
-                                           className="form-control" />
                                     <div className="form-group">
                                         <label className="mb-1 "> <strong>Password:</strong> </label>
-                                        <input type="password" id="password_input" onChange={handleOnChange}
+                                        <input type="password" placeholder="Enter password..." id="password_input"
+                                               onChange={handleOnChange}
                                                className="form-control" />
                                     </div>
                                     <div className="form-row d-flex justify-content-between mt-4 mb-2">

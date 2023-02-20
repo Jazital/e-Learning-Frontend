@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 /// React router dom
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -39,9 +39,11 @@ import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 import SingleVirtualClassroom from "./virtual-classroom/SingleVirtualClassroom";
 import ContinuousAssessment from "./continuous-assessment/ContinuousAssessment";
 import SingleContinuousAssessment from "./continuous-assessment/SingleContinuousAssessment";
+import StaffAssignedCourses from "./courses/StaffAssignedCourses";
 
 
 const Markup = () => {
+
     return (
         <Router basename="/">
             <Switch>
@@ -149,6 +151,10 @@ const Markup = () => {
                     <Route
                         path={`/lecturer-dashboard`}
                         component={Profile}
+                    />
+                    <Route
+                        path={`/assigned-courses`}
+                        component={StaffAssignedCourses}
                     />
                 </ProtectedContainer>
                 <Route

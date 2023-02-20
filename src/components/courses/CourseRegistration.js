@@ -39,11 +39,13 @@ const CourseRegistration = () => {
             args
         ).then((res) => {
             if (res.data.code && res.data.code === "lecture_fetched") {
-                setLectures(res.data.data.lectures);
+                setCourses(res.data.data.courses);
             }
             setIsLoading(false)
+            console.log(res.data)
         }).catch(error => {
             setIsLoading(false)
+            console.error(error)
         })
     }
 

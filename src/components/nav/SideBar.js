@@ -36,7 +36,7 @@ class SideBar extends Component {
         mainContainer.addEventListener("click", hideSidebar);
 
         // Hide the sidebar when any other container is clicked outside the sidebar
-        function hideSidebar(){
+        function hideSidebar() {
             return aaa.classList.remove("menu-toggle");
         }
 
@@ -141,11 +141,16 @@ class SideBar extends Component {
                                 <i className="flaticon-381-folder-5"></i>
                                 <span className="nav-text">Courses</span>
                             </Link>
-                            <ul>
+                            <ul>{localStorage.getItem('userRole') == "student" &&
+                            <li>
+                                <Link
+                                    to="/enrolled-courses">Enrolled Courses</Link>
+                            </li>}
+                                {localStorage.getItem('userRole') == "lecturer" &&
                                 <li>
                                     <Link
-                                        to="/enrolled-courses">Enrolled Courses</Link>
-                                </li>
+                                        to="/assigned-courses">Assigned Courses</Link>
+                                </li>}
                                 <li>
                                     <Link
                                         to="/assignment-list">Assignments</Link>
@@ -158,10 +163,10 @@ class SideBar extends Component {
                                     <Link
                                         to="/continuous-assessments">Continuous Assessments</Link>
                                 </li>
-                                <li>
+                                {localStorage.getItem('userRole') == "student" && <li>
                                     <Link
                                         to="/course-registration">Course Registration</Link>
-                                </li>
+                                </li>}
                             </ul>
                         </li>
 

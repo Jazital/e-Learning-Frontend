@@ -88,8 +88,9 @@ const SingleCourse = (props) => {
             </div>
             {showContent && (<div className="row">
                 <div className="col-xl-12 col-lg-8 col-sm-10">
-                    <div className="the">
-                        <div className="col-xl col-lg-6 col-sm-6">
+                    <div className="the flex-column flex-md-row">
+
+                        <div className="col-12 col-md-4">
                             <div className="card overflow-hidden">
                                 <div className="card-header media border-0 pb-0">
                                     <div className="media-body">
@@ -108,7 +109,7 @@ const SingleCourse = (props) => {
                         </div>
 
 
-                        <div className=" main-body-card col-xl-4 col-lg-6 col-sm-6">
+                        <div className=" main-body-card col-12 col-md-4">
                             <div className="card overflow-hidden">
                                 <div className="card-header media border-0 pb-788">
                                     <div className="media-body">
@@ -131,7 +132,7 @@ const SingleCourse = (props) => {
                             </div>
                         </div>
 
-                        <div className=" main-body-card col-xl-4 col-lg-6 col-sm-6">
+                        <div className=" main-body-card col-12 col-md-4">
                             <div className="card overflow-hidden">
                                 <div className="card-header media border-0 pb-788">
                                     <div className="media-body">

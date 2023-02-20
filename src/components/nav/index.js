@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from "react";
 import SideBar from "./SideBar";
-import SideBarLecturer from "../lecturers/nav/SideBarLecturer";
 import NavHader from "./NavHeader";
 import Header from "./Header";
-
-
 
 const KokiNav = ({ title }) => {
    const [toggle, setToggle] = useState("");
@@ -12,9 +9,7 @@ const KokiNav = ({ title }) => {
    return (
       <Fragment>
          <NavHader />
-          {localStorage.getItem("userRole") == "student" && (<SideBar />)}
-          {localStorage.getItem("userRole") == "lecturer" && (<SideBarLecturer />)}
-
+          <SideBar />
          <Header
             onActivity={() => onClick("activity")}
             onNotification={() => onClick("notification")}

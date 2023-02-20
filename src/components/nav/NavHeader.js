@@ -3,17 +3,20 @@ import React, { useState } from "react";
 /// React router dom
 import { Link } from "react-router-dom";
 
-/// images
-import logo from "../../images/logo-new.png";
+/// image
+import logo from "../images/ospolylogo.png";
 
 const NavHader = () => {
    const [toggle, setToggle] = useState(false);
 
    return (
       <div className="nav-header">
-         <Link to="/dashboard" className="brand-logo">
-            <img className="logo-abbr" src={logo} alt="" />
-            {/*<img className="brand-title" src={logo} alt="" />*/}
+         <Link to="/dashboard" className="brand-logo text-yellow flex-column pt-4">
+             <div>
+                 <img className="logo-abbr" src={logo} alt="" />
+             </div>
+
+             <div className="ml-4 header-brand-name">Osun State Polytechnic, Iree</div>
          </Link>
 
          <div className="nav-control" onClick={() => setToggle(!toggle)}>
