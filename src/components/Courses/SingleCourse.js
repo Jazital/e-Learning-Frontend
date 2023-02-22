@@ -17,6 +17,7 @@ import coursematerial from "../images/Vectorcourses.png"
 const SingleCourse = (props) => {
     const history = useHistory();
 
+    let userRole = localStorage.getItem('userRole');
     // Get ID from URL
     const {course_id} = useParams();
     // console.log("Course ID: "+course_id)
@@ -79,15 +80,16 @@ const SingleCourse = (props) => {
             </Modal>
         );
     };
+
     return (
         <>
             {loadingModal(isLoading)}
-
             <div className="pb-4">
-                <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>
+                {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
+                {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
             </div>
             {showContent && (<div className="row">
-                <div className="col-xl-12 col-lg-8 col-sm-10">
+                <div className="col-xl-12 col-lg-12 col-sm-12">
                     <div className="the flex-column flex-md-row">
 
                         <div className="col-12 col-md-4">
@@ -115,14 +117,14 @@ const SingleCourse = (props) => {
                                     <div className="media-body">
                                     </div>
                                     <img
-                                        src={coursematerial}
+                                        src={pendinassingment}
                                         alt=""
                                     />
                                     <div className="text-home">
                                         {/*<h2 className="text-black">2</h2>*/}
                                     </div>
                                 </div>
-                                <div className="text-center card-body pt-4 p-0">
+                                <div className="text-center pt-4 card-body p-0">
                                     <p className="mb-0 text-black">Pending Assignments</p>
                                 </div>
                                 <div className="text-center">
@@ -147,11 +149,12 @@ const SingleCourse = (props) => {
                                     </div>
                                 </div>
 
-                                <div className="text-center card-body pt-4 p-0">
+                                <div className="text-center card-body p-0">
                                     <p className="mb-0 text-black">Upcoming Classes</p>
                                 </div>
                                 <div className="text-center">
-                                    <Link to={`/virtual-classroom/course/${course_id}`} className="sub-links">view classes</Link>
+                                    <Link to={`/virtual-classroom/course/${course_id}`}
+                                          className="sub-links">view classes</Link>
                                 </div>
                             </div>
                         </div>

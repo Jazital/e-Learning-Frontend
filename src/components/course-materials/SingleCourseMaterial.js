@@ -6,6 +6,8 @@ import CourseMaterialTable from "./CourseMaterialTable";
 
 const SingleCourseMaterial = (props) => {
 
+    let userRole = localStorage.getItem('userRole');
+
     // Get ID from URL
     const {course_id} = useParams();
 
@@ -15,7 +17,8 @@ const SingleCourseMaterial = (props) => {
                 <div className="col-xl-12 col-lg-12 col-sm-12">
                     {/*<h2>CSC 401 Course Materials</h2>*/}
                     <div className="pb-4">
-                        <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>
+                        {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
+                        {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
                     </div>
                     <div>
                         {/*Pass course ID to fetch the course material of a single course*/}

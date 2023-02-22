@@ -184,19 +184,19 @@ class SideBar extends Component {
                             </Link>
                         </li>
                         <li id="discussion-li"></li>
-                        {/*<li id="discussion-li"*/}
-                        {/*    className={`${*/}
-                        {/*        (currentUrlPath == "discussion-board") ? "mm-active" : ""*/}
-                        {/*    } non-course-link`}*/}
-                        {/*>*/}
-                        {/*    <Link*/}
-                        {/*        className="ai-icon single-nav-wrapper"*/}
-                        {/*        to="/discussion-board"*/}
-                        {/*    >*/}
-                        {/*        <i className="flaticon-381-background-1"></i>*/}
-                        {/*        <span className="nav-text">Discussion Board</span>*/}
-                        {/*    </Link>*/}
-                        {/*</li>*/}
+                        <li id="discussion-li"
+                            className={`${
+                                (currentUrlPath == "discussion-board") ? "mm-active" : ""
+                            } non-course-link`}
+                        >
+                            <Link
+                                className="ai-icon single-nav-wrapper"
+                                to="/discussion-board"
+                            >
+                                <i className="flaticon-381-background-1"></i>
+                                <span className="nav-text">Discussion Board</span>
+                            </Link>
+                        </li>
                         <li id="timetable-li"
                             className={`single-nav-wrapper ${
                                 (currentUrlPath == "timetable") ? "mm-active" : ""

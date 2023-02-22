@@ -8,6 +8,8 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 
 const SingleCourseUpcomingClassTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
+    let userRole = localStorage.getItem('userRole');
+
     const [lectures, setLectures] = useState([])
     const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
 
@@ -83,7 +85,8 @@ const SingleCourseUpcomingClassTable = (props) => {
             },
         }
         let data = {
-            'lecture_id': lectureId
+            'lecture_id': lectureId,
+            // lecturer_id: lecturerID, // TODO: Add lecturer ID conditionally so that it can query only the lecturer's virtual classroom
         }
        await axios.post(
             BACKEND_BASE_URL + endpoint,
@@ -100,6 +103,60 @@ const SingleCourseUpcomingClassTable = (props) => {
             setIsLoading(false)
             // console.log(error)
         })
+    }
+    const modifyLecture = async (lectureId) => {
+        // Making request to backend API
+       //  endpoint = '/lecture-attendance/add';
+       //  args = {
+       //      headers: {
+       //          'Token': userToken,
+       //      },
+       //  }
+       //  let data = {
+       //      'lecture_id': lectureId
+       //  }
+       // await axios.post(
+       //      BACKEND_BASE_URL + endpoint,
+       //     data,
+       //      args
+       //  ).then((res) => {
+       //      if (res.data.code && res.data.code === "attendance_submitted") {
+       //          setAttendanceSubmitted(true)
+       //      }
+       //      setIsLoading(false)
+       //      // console.log(res)
+       //
+       //  }).catch(error => {
+       //      setIsLoading(false)
+       //      // console.log(error)
+       //  })
+    }
+    const deleteLecture = async (lectureId) => {
+        // Making request to backend API
+       //  endpoint = '/lecture-attendance/add';
+       //  args = {
+       //      headers: {
+       //          'Token': userToken,
+       //      },
+       //  }
+       //  let data = {
+       //      'lecture_id': lectureId
+       //  }
+       // await axios.post(
+       //      BACKEND_BASE_URL + endpoint,
+       //     data,
+       //      args
+       //  ).then((res) => {
+       //      if (res.data.code && res.data.code === "attendance_submitted") {
+       //          setAttendanceSubmitted(true)
+       //      }
+       //      setIsLoading(false)
+       //      // console.log(res)
+       //
+       //  }).catch(error => {
+       //      setIsLoading(false)
+       //      // console.log(error)
+       //  })
     }
 
 
@@ -144,11 +201,26 @@ const SingleCourseUpcomingClassTable = (props) => {
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                        {userRole=="student" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                           className="btn btn-primary">Attend</a>
+                           className="btn btn-primary">Attend</a>}
+                        {userRole=="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                           className="btn btn-primary">Start</a>}
+                        {userRole=="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                           className="btn btn-warning">Modify</a>}
+                        {userRole=="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                           className="btn btn-danger">Delete</a>}
                     </>
                 )
             }

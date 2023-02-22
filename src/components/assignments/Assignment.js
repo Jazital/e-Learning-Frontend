@@ -16,6 +16,7 @@ function Assignment() {
     // assignment_id
 
     localStorage.setItem('page_title', 'Assignment');
+    let userRole = localStorage.getItem('userRole');
 
     const {assignment_id} = useParams();
 
@@ -31,7 +32,6 @@ function Assignment() {
         },
     }
     endpoint = '/assignments/' + assignment_id;
-    // endpoint = '/assignments/' + 226;
 
     const [assignment, setAssignment] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -116,7 +116,8 @@ function Assignment() {
 
     return (<>
             <div className="pb-4">
-                <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>
+                {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
+                {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
             </div>
 
             <div className='the col-xl-10 col-lg-12 col-sm-12'>

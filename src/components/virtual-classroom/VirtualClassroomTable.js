@@ -10,26 +10,54 @@ const VirtualClassroomTable = (props) => {
     let args = {}
 
     let userToken = localStorage.getItem('userToken') || '';
+    let userRole = localStorage.getItem('userRole');
 
-    if (props.courseID) {
-        args = {
-            headers: {
-                'Token': userToken,
-            },
-            params: {
-                'course_id': props.courseID,
+    if (userRole === "student") {
+        if (props.courseID) {
+            args = {
+                headers: {
+                    'Token': userToken,
+                },
+                params: {
+                    'course_id': props.courseID,
+                }
             }
+            endpoint = '/lectures/fetch-by-course-id';
         }
-        endpoint = '/lectures/fetch-by-course-id';
-    }
-    else {
-        args = {
-            headers: {
-                'Token': userToken,
-            },
+        else {
+            args = {
+                headers: {
+                    'Token': userToken,
+                },
+            }
+            endpoint = '/lectures/fetch-student-upcoming-lectures';
         }
-        endpoint = '/lectures/fetch-student-upcoming-lectures';
+
     }
+    if (userRole === "lecturer") {
+        if (props.courseID) {
+            args = {
+                headers: {
+                    'Token': userToken,
+                },
+                params: {
+                    'course_id': props.courseID,
+                }
+            }
+            endpoint = '/lectures/fetch-by-course-id';
+        }
+        else {
+            args = {
+                headers: {
+                    'Token': userToken,
+                },
+            }
+            endpoint = '/lectures/fetch-lecturer-upcoming-lectures';
+        }
+
+    }
+
+
     const [lectures, setLectures] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
@@ -52,10 +80,11 @@ const VirtualClassroomTable = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            if(response.data.code === 'lecture_fetched'){
+            if (response.data.code === 'lecture_fetched') {
                 setLectures(response.data.data.lectures)
             }
             setIsLoading(false)
+            // console.log(response)
         }).catch(error => {
             // console.error(error)
             setIsLoading(false)
@@ -91,6 +120,13 @@ const VirtualClassroomTable = (props) => {
         })
     }
 
+    const modifyLecture = (e) => {
+        console.log("Modify lecture clicked")
+    }
+    const deleteLecture = (e) => {
+        console.log("Delete lecture clicked")
+    }
+
     const columns = [
         {
             name: "Number",
@@ -116,14 +152,14 @@ const VirtualClassroomTable = (props) => {
                 sort: false,
             }
         },
-        {
-            name: "LectureURL",
-            label: "Lecture URL",
-            options: {
-                filter: false,
-                sort: false,
-            }
-        },
+        // {
+        //     name: "LectureURL",
+        //     label: "Lecture URL",
+        //     options: {
+        //         filter: false,
+        //         sort: false,
+        //     }
+        // },
         {
             name: "Status",
             label: "Status",
@@ -148,11 +184,29 @@ const VirtualClassroomTable = (props) => {
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                        {userRole==="student" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                           className="btn btn-primary">Attend</a>
+                                                  className="btn btn-primary">Attend</a>}
+                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                                                   className="btn btn-primary">Start</a>}
+                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                                                   className="btn btn-warning">Modify</a>}
+                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                            setIsLoading(true);
+                            return deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
+                        }}
+                                                   className="btn btn-danger">Delete</a>}
+
+
+
                     </>
                 )
             }
@@ -183,8 +237,8 @@ const VirtualClassroomTable = (props) => {
         viewColumns: false,
         filter: false,
         responsive: "standard",
-        tableBodyMaxHeight:'400px',
-        selectableRowsHideCheckboxes:true
+        tableBodyMaxHeight: '400px',
+        selectableRowsHideCheckboxes: true
 
     };
 

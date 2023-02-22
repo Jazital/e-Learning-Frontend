@@ -13,6 +13,7 @@ const AssignmentList = () => {
      console.log("Row Id", id);
      };*/
     localStorage.setItem('page_title', 'Assignments');
+    let userRole = localStorage.getItem('userRole');
 
     const {course_id} = useParams();
 
@@ -142,6 +143,9 @@ const AssignmentList = () => {
     return (
         <div>
             {loadingModal(isLoading)}
+            <div className="pb-4">
+                {userRole=="lecturer" && <Link to={'/new-assignment'} className="btn btn-primary">New Assignment</Link> }
+            </div>
             <MUIDataTable
                 title={"All Assignment"}
                 data={data2}
