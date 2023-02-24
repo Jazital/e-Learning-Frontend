@@ -17108,7 +17108,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 }
 
 [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li.mm-active > a {
-    background: #fff;
+    background: #f8f8f8;
     font-weight: 600;
     color: #0a0024;
     box-shadow: 0 12px 15px 0 rgba(221, 47, 110, 0.13);

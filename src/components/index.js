@@ -41,6 +41,7 @@ import ContinuousAssessment from "./continuous-assessment/ContinuousAssessment";
 import SingleContinuousAssessment from "./continuous-assessment/SingleContinuousAssessment";
 import StaffAssignedCourses from "./courses/StaffAssignedCourses";
 import NewVirtualClassroom from "./virtual-classroom/NewVirtualClassroom";
+import NewAssignment from "./assignments/NewAssignment";
 
 
 const Markup = () => {
@@ -160,6 +161,10 @@ const Markup = () => {
                     <Route
                         path={`/new-virtual-classroom`}
                         component={NewVirtualClassroom}
+                    />
+                    <Route
+                        path={`/new-assignment`}
+                        component={NewAssignment}
                     />
                 </ProtectedContainer>
                 <Route

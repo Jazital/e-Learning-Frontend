@@ -3,11 +3,14 @@ import React from "react";
 import "./Profile.css"
 
 const Profile = () => {
+    let username = undefined;
     localStorage.setItem('page_title', ' My Profile');
+    let userRole = localStorage.getItem('userRole');
+
     return (
         <>
             <div className="row">
-                <div className="col-xl-9 col-xxl-8 col-lg-8">
+                <div className="col-xl-9 col-xxl-9 col-lg-9">
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="card profile-card">
@@ -48,7 +51,7 @@ const Profile = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-xl-6 col-sm-6">
+                                                {userRole==="student" && (<div className="col-xl-6 col-sm-6">
                                                     <div className="form-group">
                                                         <label>Username/Matric. No:</label>
                                                         <input
@@ -58,12 +61,9 @@ const Profile = () => {
                                                             disabled
                                                         />
                                                     </div>
-                                                </div>
+                                                </div>)}
 
-                                            </div>
-                                        </div>
-                                        <div className="mb-5">
-                                            <div className="row">
+
                                                 <div className="col-xl-6 col-sm-6">
                                                     <div className="form-group">
                                                         <label>Phone Number</label>
