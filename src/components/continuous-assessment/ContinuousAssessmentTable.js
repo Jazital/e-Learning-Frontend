@@ -44,7 +44,7 @@ const ContinuousAssessmentTable = (props) => {
                 setAssessments(response.data.data.assessments_fetched)
             }
             setIsLoading(false)
-            console.log(response)
+        
         }).catch(error => {
             // console.error(error)
             setIsLoading(false)

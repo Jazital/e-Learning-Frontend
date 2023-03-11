@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {Link} from 'react-router-dom';
 
 
 const CourseMaterialTable = (props) => {
@@ -12,7 +13,7 @@ const CourseMaterialTable = (props) => {
     let endpoint = ''
     let args = {}
 
-    let userToken = localStorage.getItem('userToken') || '';
+    let userToken = localStorage.getItem('userToken');
 
     if (props.courseID) {
         // A course ID was passed, so we fetch the course materials for the passed course ID; else we fetch all the
@@ -61,7 +62,7 @@ const CourseMaterialTable = (props) => {
             }
             setIsLoading(false)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             setIsLoading(false)
         })
     }
@@ -117,12 +118,13 @@ const CourseMaterialTable = (props) => {
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {/*<a href={documents[tableMeta.rowIndex].attachments[0].file_uri}*/}
-                        <a href="#" className="btn btn-primary pb-2">View</a>
+                        <Link to={`/course-material/view/${documents[tableMeta.rowIndex].lecture_doc_id}`} className="btn btn-primary" onClick={()=>{
+                        }}>view</Link>
                     </>
                 )
             }
-        }
+        },
+
     ];
 
     let data2 = []
@@ -142,7 +144,15 @@ const CourseMaterialTable = (props) => {
     }
 
     const options = {
-        filterType: 'checkbox',
+        search: true,
+        download: false,
+        print: false,
+        viewColumns: false,
+        filter: false,
+        responsive: "standard",
+        tableBodyMaxHeight:'400px',
+        selectableRowsHideCheckboxes:true
+
     };
 
     return (

@@ -42,6 +42,7 @@ import SingleContinuousAssessment from "./continuous-assessment/SingleContinuous
 import StaffAssignedCourses from "./courses/StaffAssignedCourses";
 import NewVirtualClassroom from "./virtual-classroom/NewVirtualClassroom";
 import NewAssignment from "./assignments/NewAssignment";
+import ViewCourseMaterial from "./course-materials/ViewCourseMaterial";
 
 
 const Markup = () => {
@@ -94,6 +95,11 @@ const Markup = () => {
                     <Route
                         path={`/course-material/course/:course_id`}
                         component={SingleCourseMaterial}
+                        exact
+                    />
+                    <Route
+                        path={`/course-material/view/:material_id`}
+                        component={ViewCourseMaterial}
                         exact
                     />
                     <Route
