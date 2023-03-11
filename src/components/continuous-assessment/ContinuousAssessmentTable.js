@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {Link, useParams} from 'react-router-dom';
 
 
 const ContinuousAssessmentTable = (props) => {
@@ -43,9 +44,9 @@ const ContinuousAssessmentTable = (props) => {
                 setAssessments(response.data.data.assessments_fetched)
             }
             setIsLoading(false)
-            // console.log(response)
+            console.log(response)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             setIsLoading(false)
         })
     }
@@ -91,7 +92,18 @@ const ContinuousAssessmentTable = (props) => {
                 sort: false,
             }
         },
-
+        {
+            name: "Actions",
+            options: {
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        <Link to={`/assignment/${assessments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
+                        }}>view assignment</Link>
+                    </>
+                )
+            }
+        },
     ];
 
     let data2 = []

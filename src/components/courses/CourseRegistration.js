@@ -111,31 +111,33 @@ const CourseRegistration = () => {
 
 
     const handleSemesterOnchange = (e) => {
-        setIsLoading(true)
+        // setIsLoading(true)
         var newSemester = e.target.value;
-        // setSelectedSemester(newSemester);
-        console.log(newSemester)
+        setSelectedSemester(newSemester);
+        // console.log(newSemester)
 
         // var newFilter = 
         // setTableCourses()
+
+
+        // var searchQuery = e.target.value;
+        // var newCourses = courses.filter(course => {
+        //     return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase()))&&(course.course_semester.semester_slug.lowerCase().includes(selectedSemester.toLowerCase())));
+        // })
+        // setIsLoading(false)
     }
 
     const filterCoursesOnchange = (e) => {
         var searchQuery = e.target.value;
         var newCourses = courses.filter(course => {
-            return course.course_code.toLowerCase().includes(searchQuery.toLowerCase());
+            // return course.course_code.toLowerCase().includes(searchQuery.toLowerCase());
+
+            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase()))&&(course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase())));
     })
 
         setTableCourses(newCourses);
     }
-    // const filterCoursesOnchange = (e) => {
-    //     var searchQuery = e.target.value;
-    //     var newCourses = courses.filter(course => {
-    //         return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) && (course.course_semester.semester_name===selectedSemester));
-    // })
-    //
-    //     setTableCourses(newCourses);
-    // }
+    
 
     function toggleCheckboxes(source) {
         var checkboxes = document.getElementsByName('foo');
@@ -198,7 +200,8 @@ const CourseRegistration = () => {
                         <td>Semester</td>
                         </thead>
                         <tbody>
-                        {tableCourses.map((course, index) => (
+                            {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
+                        {tableCourses.map((course, index) =>  (
                             <tr key={index}>
                                 <td><input className="form-check courses-checkbox" name="selectedCourses[]"
                                            value={course.course_code}

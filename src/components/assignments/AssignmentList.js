@@ -86,6 +86,14 @@ const AssignmentList = () => {
             }
         },
         {
+            name: "Title",
+            label: "Title",
+            options: {
+                filter: true,
+                sort: true,
+            }
+        },
+        {
             name: "Course",
             label: "Courses",
             options: {
@@ -129,6 +137,7 @@ const AssignmentList = () => {
         assignments.forEach((data) => {
             data2.push({
                 Number: sn,
+                Title: data.assignment_title,
                 Course: data.course_code,
                 Status: "open",
                 DueDate: data.due_date,
@@ -137,8 +146,17 @@ const AssignmentList = () => {
             sn++;
         })
     }
+
     const options = {
-        filterType: 'checkbox',
+        search: true,
+        download: false,
+        print: false,
+        viewColumns: false,
+        filter: false,
+        responsive: "standard",
+        tableBodyMaxHeight: '400px',
+        selectableRowsHideCheckboxes: true
+
     };
 
     return (

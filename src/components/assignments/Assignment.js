@@ -135,6 +135,7 @@ function Assignment() {
                         </div>
                         <div id="firstAssignText">
                             <p>
+                            <strong> Title: {assignment.assignment_title}</strong> <br />
                                 <strong> Course: {assignment.course_code}</strong> <br />
                                 Assigned Date: {assignment.creation_date} <br />
                                 <strong>Due Date: {assignment.due_date}</strong> <br />

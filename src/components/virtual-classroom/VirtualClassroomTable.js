@@ -152,14 +152,6 @@ const VirtualClassroomTable = (props) => {
                 sort: false,
             }
         },
-        // {
-        //     name: "LectureURL",
-        //     label: "Lecture URL",
-        //     options: {
-        //         filter: false,
-        //         sort: false,
-        //     }
-        // },
         {
             name: "Status",
             label: "Status",
