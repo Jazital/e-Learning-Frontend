@@ -8,6 +8,8 @@ import MUIDataTable from "mui-datatables";
 const CourseRegistration = () => {
     localStorage.setItem('page_title', 'Course Registration');
     let userToken = localStorage.getItem('userToken') || '';
+    const [responseOK, setResponseOK] = useState(null);
+    const [responseMessage, setResponseMessage] = useState('');
     const [courses, setCourses] = useState([])
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
@@ -53,38 +55,69 @@ const CourseRegistration = () => {
             // console.error(error)
         })
     }
-    const submitRegistredCourses = (e) => {
+
+    const submitRegistredCourses = async (e) => {
         e.preventDefault();
 
-        console.log('Courses submitted for registration');
+        setIsLoading(true)
 
-        setIsLoading(true);
-        endpoint = '/courses/all';
-        args = {
+        endpoint = '/courses/enrol-courses-by-course-code';
+
+        var items = document.getElementsByName("selectedCourses[]");
+
+      var arr=[];
+      for (var i = 0; i < items.length; i++) {
+         if (items[i].type == "checkbox" && items[i].checked == true){
+            arr.push(items[i].value);
+         }
+      }
+
+        var data = {
+            "course_codes": arr
+        };
+
+        let args = {
             headers: {
                 'Token': userToken,
             },
         }
-        // Making request to backend API
-        axios.get(
+
+        await axios.post(
             BACKEND_BASE_URL + endpoint,
+            data,
             args
-        ).then((res) => {
-            if (res.data.code && res.data.code === "courses_fetched") {
-                setCourses(res.data.data.courses);
+        ).then(response => {
+            if (response.data.code === 'courses_enrolled') {
+                setResponseMessage(response.data.message)
+                setResponseOK(true)
             }
             setIsLoading(false)
-            // console.log(res.data)
+
+            console.log(response.data)
         }).catch(error => {
+            console.error(error)
+            if(error.response.data.message){
+                setResponseMessage(error.response.data.message)
+                setResponseOK(false)
+            }
+            else{
+                setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseOK(false)
+            }
+
             setIsLoading(false)
         })
     }
 
 
     const handleSemesterOnchange = (e) => {
+        setIsLoading(true)
         var newSemester = e.target.value;
         // setSelectedSemester(newSemester);
         console.log(newSemester)
+
+        // var newFilter = 
+        // setTableCourses()
     }
 
     const filterCoursesOnchange = (e) => {
@@ -127,6 +160,9 @@ const CourseRegistration = () => {
         <>
             {loadingModal(isLoading)}
             <div className="col-lg-12">
+            <div className="row my-3">
+                <h4 className="text-danger" >*** Please note that clicking on the submit button replace your currently enrolled courses with the selected courses ***</h4>
+            </div>
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
                         {/*<div>*/}
