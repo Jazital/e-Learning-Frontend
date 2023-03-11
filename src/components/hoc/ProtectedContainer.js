@@ -15,12 +15,17 @@ function ProtectedContainer(props) {
 
     const [signedIn, setSignedIn] = useState(true);
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
 
     useEffect(() => {
-        !signedIn && history.push('/');
-        verifySignedIn()
+        let stateUpdated = false;
+        if (!stateUpdated) {
+            !signedIn && history.push('/');
+            verifySignedIn()
+        }
+
+        stateUpdated = false;
     }, [])
 
     async function verifySignedIn() {
@@ -35,19 +40,17 @@ function ProtectedContainer(props) {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            // console.log(res.data.code)
-            if (res.data.code == "user_signed_in") {
+            if (res.data.code === "user_signed_in") {
                 setSignedIn(true);
             }
-            else {
+            if (res.data.code === "user_not_signed_in") {
                 setSignedIn(false);
             }
-        }).catch(error => {
-            console.log(error.response.data.code)
-            if (error.response.data.code && (error.response.data.code === "user_signed_in")) {
+        }, (failure) => {}).catch(error => {
+            if (error.response.data.code === "user_signed_in") {
                 setSignedIn(true);
             }
-            else {
+            if (error.response.data.code === "user_not_signed_in") {
                 setSignedIn(false);
             }
         })

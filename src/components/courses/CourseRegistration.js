@@ -1,21 +1,23 @@
 import React, {useEffect, useState} from "react";
-import CourseRegTable from "./table/CourseRegistrationTable";
 import "../CSS/Home.css";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import MUIDataTable from "mui-datatables";
 
 const CourseRegistration = () => {
     localStorage.setItem('page_title', 'Course Registration');
     let userToken = localStorage.getItem('userToken') || '';
     const [courses, setCourses] = useState([])
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const [tableCourses, setTableCourses] = useState([])
+    const [selectedSemester, setSelectedSemester] = useState("first-semester")
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
     let endpoint = ''
     let args = ''
 
     useEffect(() => {
-        fetchLectures();
+        fetchAllCourses();
     }, [])
     const [isLoading, setIsLoading] = useState(true);
 
@@ -27,7 +29,8 @@ const CourseRegistration = () => {
         );
     };
 
-    const fetchLectures = () => {
+    const fetchAllCourses = () => {
+        setIsLoading(true);
         endpoint = '/courses/all';
         args = {
             headers: {
@@ -39,23 +42,144 @@ const CourseRegistration = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if (res.data.code && res.data.code === "lecture_fetched") {
+            if (res.data.code && res.data.code === "courses_fetched") {
+                setCourses(res.data.data.courses);
+                setTableCourses(res.data.data.courses);
+            }
+            setIsLoading(false)
+            // console.log(res.data)
+        }).catch(error => {
+            setIsLoading(false)
+            // console.error(error)
+        })
+    }
+    const submitRegistredCourses = (e) => {
+        e.preventDefault();
+
+        console.log('Courses submitted for registration');
+
+        setIsLoading(true);
+        endpoint = '/courses/all';
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        // Making request to backend API
+        axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then((res) => {
+            if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
             }
             setIsLoading(false)
-            console.log(res.data)
+            // console.log(res.data)
         }).catch(error => {
             setIsLoading(false)
-            console.error(error)
         })
     }
 
 
+    const handleSemesterOnchange = (e) => {
+        var newSemester = e.target.value;
+        // setSelectedSemester(newSemester);
+        console.log(newSemester)
+    }
+
+    const filterCoursesOnchange = (e) => {
+        var searchQuery = e.target.value;
+        var newCourses = courses.filter(course => {
+            return course.course_code.toLowerCase().includes(searchQuery.toLowerCase());
+    })
+
+        setTableCourses(newCourses);
+    }
+    // const filterCoursesOnchange = (e) => {
+    //     var searchQuery = e.target.value;
+    //     var newCourses = courses.filter(course => {
+    //         return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) && (course.course_semester.semester_name===selectedSemester));
+    // })
+    //
+    //     setTableCourses(newCourses);
+    // }
+
+    function toggleCheckboxes(source) {
+        var checkboxes = document.getElementsByName('foo');
+        for (var checkbox in checkboxes)
+            checkbox.checked = source.checked;
+    }
+
+    function handleMasterCheckboxClicked(e) {
+        var isMasterChecked = e.target.checked;
+        var allCoursesCheckboxes = document.querySelectorAll(".courses-checkbox");
+
+        if (isMasterChecked) {
+            for (var i = 0; i < allCoursesCheckboxes.length; i++) {
+                var courseCheckbox = document.querySelector(".courses-checkbox").item(i);
+                console.log(courseCheckbox)
+                // courseCheckbox.checked = true;
+            }
+        }
+    }
+
     return (
-        <div>
-            <CourseRegTable />
-            <button className="btn btn-primary mt-3">Register Courses</button>
-        </div>
+        <>
+            {loadingModal(isLoading)}
+            <div className="col-lg-12">
+                <div className="row mb-3">
+                    <div className="col-12 col-lg-6">
+                        {/*<div>*/}
+                        {/*    <input type="checkbox" onClick={toggleCheckboxes(this)} /> Toggle All<br />*/}
+
+                        {/*    <input type="checkbox" name="foo" value="bar1" />*/}
+                        {/*    <input type="checkbox" name="foo" value="bar2" />*/}
+                        {/*    <input type="checkbox" name="foo" value="bar3" />*/}
+                        {/*    <input type="checkbox" name="foo" value="bar4" />*/}
+                        {/*</div>*/}
+
+                        <select onChange={handleSemesterOnchange} className="form-control col-md-5 col-12">
+                            <option value="first-semester">First Semester</option>
+                            <option value="second-semester">Second Semester</option>
+                        </select>
+
+                    </div>
+                    <div className="col-12 col-lg-6 text-right">
+                        <input className="form-control" onChange={filterCoursesOnchange} type="search"
+                               id="course-ajax-search-input" placeholder="Search courses..." />
+                    </div>
+                </div>
+                <form onSubmit={submitRegistredCourses}>
+                    <table
+                        className="table table-borderless table-hover table-responsive table-striped table-">
+                        <thead>
+                        <td><input className="form-check" onClick={handleMasterCheckboxClicked} type="checkbox"
+                                   id="toggleAllCourses" /></td>
+                        <td>S/N</td>
+                        <td>Code</td>
+                        <td>Title</td>
+                        <td>Department</td>
+                        <td>Semester</td>
+                        </thead>
+                        <tbody>
+                        {tableCourses.map((course, index) => (
+                            <tr key={index}>
+                                <td><input className="form-check courses-checkbox" name="selectedCourses[]"
+                                           value={course.course_code}
+                                           type="checkbox" id="selectedCourses" /></td>
+                                <td>{index + 1}</td>
+                                <td>{course.course_code}</td>
+                                <td>{course.course_title}</td>
+                                <td>{course.course_department.department_name}</td>
+                                <td>{course.course_semester.semester_name}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    <button type="submit" className="btn btn-primary mt-3">Register Courses</button>
+                </form>
+            </div>
+        </>
     );
 };
 

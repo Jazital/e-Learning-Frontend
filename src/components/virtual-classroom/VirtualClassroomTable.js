@@ -5,8 +5,8 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 
 const VirtualClassroomTable = (props) => {
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
     let endpoint = ''
     let args = {}
 
@@ -33,7 +33,6 @@ const VirtualClassroomTable = (props) => {
             }
             endpoint = '/lectures/fetch-student-upcoming-lectures';
         }
-
     }
     if (userRole === "lecturer") {
         if (props.courseID) {
@@ -185,27 +184,26 @@ const VirtualClassroomTable = (props) => {
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole==="student" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                        {userRole === "student" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                  className="btn btn-primary">Attend</a>}
-                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                                                      className="btn btn-primary">Attend</a>}
+                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                   className="btn btn-primary">Start</a>}
-                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                                                       className="btn btn-primary">Start</a>}
+                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                   className="btn btn-warning">Modify</a>}
-                        {userRole==="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                                                       className="btn btn-warning">Modify</a>}
+                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                   className="btn btn-danger">Delete</a>}
-
+                                                       className="btn btn-danger">Delete</a>}
 
 
                     </>

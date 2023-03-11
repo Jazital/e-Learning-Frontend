@@ -11,8 +11,8 @@ const NewVirtualClassroom = () => {
     let userRole = localStorage.getItem('userRole');
     let userToken = localStorage.getItem('userToken') || '';
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
 
     const [responseOK, setResponseOK] = useState(null);
     const [responseMessage, setResponseMessage] = useState('');
@@ -33,35 +33,35 @@ const NewVirtualClassroom = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        setIsLoading(true)
-        let endpoint = '/lectures/add'
-
-        let args2 = {
-            headers: {
-                'Token': userToken,
-                'Content-Type': 'multipart/form-data',
-            },
-        }
 
         var vcTitle = document.querySelector("#vc-title"); // Get the file input
         var vcDescription = document.querySelector("#vc-description"); // Get the file input
         var vcLectureURL = document.querySelector("#vc-lecture-url"); // Get the file input
-        var vcLectureCourse = document.querySelector("#vc-course"); // Get the file input
+        var vcLectureCourse = document.querySelector("#vc-course-id"); // Get the file input
         var vcLectureDate = document.querySelector("#vc-lecture-date"); // Get the file input
         var vcLecturePlatform = document.querySelector("#vc-platform"); // Get the file input
 
-        var formData = new FormData();
-        // formData.append("attachments[]", fileInput.files[0]);
-        formData.append("lecture_title", vcTitle.value);
-        formData.append("lecture_description", vcDescription.value);
-        formData.append("course_id", vcLectureCourse.value);
-        formData.append("lecture_platform", vcLecturePlatform.value);
-        formData.append("lecture_url", vcLectureURL.value);
-        formData.append("lecture_date", vcLectureDate.value);
+        setIsLoading(true)
+        let endpoint = '/lectures/add'
+
+        var data = new FormData();
+        data.append("lecture_title", vcTitle.value);
+        data.append("lecture_description", vcDescription.value);
+        data.append("course_id", vcLectureCourse.value);
+        data.append("lecture_platform", vcLecturePlatform.value);
+        data.append("lecture_url", vcLectureURL.value);
+        data.append("lecture_date", vcLectureDate.value);
+
+        let args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+
         await axios.post(
             BACKEND_BASE_URL + endpoint,
-            formData,
-            args2
+            data,
+            args
         ).then(response => {
             if (response.data.code === 'lecture_created') {
                 setResponseMessage(response.data.message)
@@ -69,9 +69,9 @@ const NewVirtualClassroom = () => {
             }
             setIsLoading(false)
 
-            // console.log(response.data)
+            console.log(response.data)
         }).catch(error => {
-            // console.error(error)
+            console.error(error)
             if(error.response.data.message){
                 setResponseMessage(error.response.data.message)
                 setResponseOK(false)
@@ -115,7 +115,6 @@ const NewVirtualClassroom = () => {
         })
     }
 
-
     return (
         <>
             {loadingModal(isLoading)}
@@ -152,10 +151,10 @@ const NewVirtualClassroom = () => {
 
                         <div className="form-group">
                             {/*TODO: Fetch only assigned courses here*/}
-                            <label htmlFor="vc-course">Course:</label>
-                            <select className="form-control" id="vc-course">
-                                <option value="">Select course</option>
-                                {courses && courses.map((course) =><option value={`${course.course_id}`} key={Math.random()}>{`${course.course_code}`}</option>)}
+                            <label htmlFor="vc-course-id">Course:</label>
+                            <select className="form-control" id="vc-course-id">
+                                <option value="null">Select course</option>
+                                {courses && courses.map((course, index) =><option key={index} value={`${course.course_id}`} >{`${course.course_code}`}</option>)}
                             </select>
                         </div>
                         <div className="form-group">

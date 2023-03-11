@@ -14,8 +14,8 @@ const Login = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
     const endpoint = '/auth/login';
 
     const [login, setLogin] = useState(
@@ -68,7 +68,7 @@ const Login = () => {
                 localStorage.setItem('userID', userDetails.id)
                 localStorage.setItem('firstName', userDetails.first_name)
                 localStorage.setItem('lastName', userDetails.last_name)
-                localStorage.setItem('otherName', userDetails.other_name)
+                localStorage.setItem('otherName', userDetails.other_names)
                 localStorage.setItem('email', userDetails.user_email)
                 localStorage.setItem('userID', userDetails.id)
                 localStorage.setItem('matricNumber', userDetails.matric_number)
