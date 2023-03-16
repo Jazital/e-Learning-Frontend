@@ -6,7 +6,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from "react-router-dom"
 
 const LecturerCourses = () => {
-    localStorage.setItem('page_title', 'Lecturer Courses');
+    localStorage.setItem('page_title', 'Assigned Courses');
     let userToken = localStorage.getItem('userToken') || '';
     let departmentID = localStorage.getItem('department');
     const [responseOK, setResponseOK] = useState(null);
@@ -66,7 +66,7 @@ const LecturerCourses = () => {
     const filterCoursesOnchange = (e) => {
         var searchQuery = e.target.value;
         var newCourses = courses.filter(course => {
-            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())));
+            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) || (course.course_title.toLowerCase().includes(searchQuery.toLowerCase())));
     })
         setTableCourses(newCourses);
     }
@@ -99,21 +99,22 @@ const LecturerCourses = () => {
                         <thead>
                         <td>S/N</td>
                         <td>Course Code</td>
-                        {/* <td>Last Name</td> */}
-                        {/* <td>Action</td> */}
+                        <td>Title</td>
+                        <td>Unit(s)</td>
                         </thead>
                         <tbody>
                         {tableCourses.map((course, index) =>  (
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{course.course_code}</td>
-                                {/* <td>{course.last_name}</td> */}
+                                <td>{course.course_title}</td>
+                                <td>{course.course_unit}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <div>
-                        <td><Link className="btn btn-primary"to={`/modify-assigned-courses/${lecturer_id}`}>Modify Assigned Courses</Link></td>
+                        <Link className="btn btn-primary"to={`/modify-assigned-courses/${lecturer_id}`}>Modify Assigned Courses</Link>
                     </div>
                     </div>
             </div>

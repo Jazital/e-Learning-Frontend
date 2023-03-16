@@ -188,7 +188,7 @@ const Markup = () => {
                     />
 
                     <Route
-                        path={`/modify-assigned-courses`}
+                        path={`/modify-assigned-courses/:lecturer_id`}
                         component={ModifyAssignedCourses}
                     />
 

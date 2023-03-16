@@ -3,45 +3,49 @@ import "../CSS/Home.css";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom"
+import { VapingRooms } from "@mui/icons-material";
 
 const ModifyAssignedCourses = () => {
-    localStorage.setItem('page_title', 'Modify Assigned Courses');
+    localStorage.setItem('page_title', 'Assign Courses');
     let userToken = localStorage.getItem('userToken') || '';
-    let departmentID = localStorage.getItem('department');
     const [responseOK, setResponseOK] = useState(null);
     const [responseMessage, setResponseMessage] = useState('');
-    const [lecturers, setLecturers] = useState([])
-    const [tableLecturers, setTableLecturers] = useState([])
+    const [courses, setCourses] = useState([])
+    const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
     let endpoint = ''
     let args = ''
 
+        // Get ID from URL
+        const {lecturer_id} = useParams();
+
+    
     useEffect(() => {
-        fetchAssignedCourses();
+        fetchLecturerCourses();
     }, [])
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchAssignedCourses = async () => {
-        const endpoint = '/courses/assigned';
+    const fetchLecturerCourses = () => {
+        setIsLoading(true);
+        endpoint = `/courses/all`;
+
         let args = {
             headers: {
                 'Token': userToken,
             },
-            params: {
-                'lecturer_id': localStorage.getItem('userID')
-            },
         }
+        
         // Making request to backend API
         axios.get(
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if (res.data.code && res.data.code === "lecturers_fetched") {
-                setLecturers(res.data.data.lecturers);
-                setTableLecturers(res.data.data.lecturers);
+            if (res.data.code && res.data.code === "courses_fetched") {
+                setCourses(res.data.data.courses);
+                setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
             // console.log(res.data)
@@ -51,21 +55,66 @@ const ModifyAssignedCourses = () => {
         })
     }
 
+    const submitAssignedCourses = async (e) => {
+        e.preventDefault();
 
+        setIsLoading(true)
 
+        endpoint = '/departmental-admin/assign-courses-by-course-code';
 
+        var items = document.getElementsByName("selectedCourses[]");
 
+      var arr=[];
+      for (var i = 0; i < items.length; i++) {
+         if (items[i].type == "checkbox" && items[i].checked == true){
+            arr.push(items[i].value);
+         }
+      }
 
+        var data = {
+            "lecturer_id": lecturer_id,
+            "course_codes": arr,
+        };
 
+        let args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
 
+        await axios.post(
+            BACKEND_BASE_URL + endpoint,
+            data,
+            args
+        ).then(response => {
+            if (response.data.code === 'courses_assigned') {
+                setResponseMessage(response.data.message)
+                setResponseOK(true)
+            }
+            setIsLoading(false)
 
+            console.log(response.data)
+        }).catch(error => {
+            console.error(error)
+            if(error.response.data.message){
+                setResponseMessage(error.response.data.message)
+                setResponseOK(false)
+            }
+            else{
+                setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseOK(false)
+            }
 
-    const filterLecturerOnchange = (e) => {
+            setIsLoading(false)
+        })
+    }
+
+    const filterCoursesOnchange = (e) => {
         var searchQuery = e.target.value;
-        var newLecturers = lecturers.filter(lecturer => {
-            return ((lecturer.first_name.toLowerCase().includes(searchQuery.toLowerCase())) || (lecturer.last_name.toLowerCase().includes(searchQuery.toLowerCase())));
+        var newCourses = courses.filter(course => {
+            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) || (course.course_title.toLowerCase().includes(searchQuery.toLowerCase())));
     })
-        setTableLecturers(newLecturers);
+        setTableCourses(newCourses);
     }
 
     const loadingModal = (isOpen = false) => {
@@ -82,34 +131,48 @@ const ModifyAssignedCourses = () => {
             <div className="col-lg-12">
             <div className="row my-3">
             </div>
+            
                 <div className="row mb-3">
-                <div className="col-12 col-lg-6 text-right">
-                        <input className="form-control" onChange={filterLecturerOnchange} type="search"
-                               id="course-ajax-search-input" placeholder="Search lecturers..." />
-                    </div>
+                <div class="text-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</div>        
                     <div className="col-12 col-lg-6">
+                    </div>
+                    <div className="col-12 col-lg-6 text-right">
+                        <input className="form-control" onChange={filterCoursesOnchange} type="search"
+                               id="course-ajax-search-input" placeholder="Search courses..." />
                     </div>
                 </div>
                     <div className="table-responsive">
-                    <table
-                        className="table table-borderless table-hover table-striped department-lecturers-table">
+                        <form onSubmit={submitAssignedCourses}>
+
+                        <table
+                        className="table table-borderless table-hover table-responsive table-striped table-">
                         <thead>
+                        <td></td>
                         <td>S/N</td>
-                        <td>First Name</td>
-                        <td>Last Name</td>
-                        <td>Action</td>
+                        <td>Code</td>
+                        <td>Title</td>
+                        <td>Department</td>
+                        <td>Semester</td>
                         </thead>
                         <tbody>
-                        {tableLecturers.map((lecturer, index) =>  (
+                            {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
+                        {tableCourses.map((course, index) =>  (
                             <tr key={index}>
+                                <td><input className="form-check courses-checkbox" name="selectedCourses[]"
+                                           value={course.course_code}
+                                           type="checkbox" id="selectedCourses" /></td>
                                 <td>{index + 1}</td>
-                                <td>{lecturer.first_name}</td>
-                                <td>{lecturer.last_name}</td>
-                                <td><Link className="btn btn-primary"to={`/department-lecturers-courses/?lecturer_id=${lecturer.id}`}>View Courses</Link></td>
+                                <td>{course.course_code}</td>
+                                <td>{course.course_title}</td>
+                                <td>{course.course_department.department_name}</td>
+                                <td>{course.course_semester.semester_name}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
+                    <div><input type="submit" className="btn btn-primary" value="Submit Courses" /></div>
+
+                    </form>
                     </div>
             </div>
         </>
