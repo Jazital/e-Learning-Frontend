@@ -69,6 +69,7 @@ const Login = () => {
                 localStorage.setItem('firstName', userDetails.first_name)
                 localStorage.setItem('lastName', userDetails.last_name)
                 localStorage.setItem('otherName', userDetails.other_names)
+                localStorage.setItem('department', userDetails.department)
                 localStorage.setItem('email', userDetails.user_email)
                 localStorage.setItem('userID', userDetails.id)
                 localStorage.setItem('matricNumber', userDetails.matric_number)
@@ -79,6 +80,8 @@ const Login = () => {
                     history.push('/dashboard')
                 }, 1000)
 
+                // console.log(userDetails)
+
             }
             else {
                 localStorage.removeItem('userRole');
@@ -87,6 +90,7 @@ const Login = () => {
                 localStorage.removeItem('firstName')
                 localStorage.removeItem('lastName')
                 localStorage.removeItem('otherName')
+                localStorage.removeItem('department')
                 localStorage.removeItem('email')
                 localStorage.removeItem('userID')
                 localStorage.removeItem('matricNumber')
@@ -106,6 +110,7 @@ const Login = () => {
             localStorage.removeItem('firstName')
             localStorage.removeItem('lastName')
             localStorage.removeItem('otherName')
+            localStorage.removeItem('department')
             localStorage.removeItem('email')
             localStorage.removeItem('userID')
             localStorage.removeItem('matricNumber')

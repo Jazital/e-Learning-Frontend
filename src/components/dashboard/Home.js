@@ -13,9 +13,12 @@ import timetable from "../../images/HomePageIcons/timetable.png"
 const Home = () => {
     localStorage.setItem('page_title', 'Dashboard');
     document.title = localStorage.getItem('page_title')
+    let userRole = localStorage.getItem('userRole');
 
     return (
-        <Fragment>
+        <>
+        {/* Only student and lecturer can see this dashboard widgets */}
+        {(userRole.includes('student') || userRole.includes('lecturer') ) && 
             <div className="row">
                 <div className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <div className="card overflow-hidden">
@@ -107,7 +110,8 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+            }
+        </>
     );
 };
 

@@ -20,8 +20,6 @@ const SingleCourse = (props) => {
     let userRole = localStorage.getItem('userRole');
     // Get ID from URL
     const {course_id} = useParams();
-    // console.log("Course ID: "+course_id)
-
     const [course, setCourse] = useState({
         courseID: '',
         courseCode: '',

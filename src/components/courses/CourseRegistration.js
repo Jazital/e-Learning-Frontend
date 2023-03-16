@@ -167,19 +167,10 @@ const CourseRegistration = () => {
             </div>
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
-                        {/*<div>*/}
-                        {/*    <input type="checkbox" onClick={toggleCheckboxes(this)} /> Toggle All<br />*/}
-
-                        {/*    <input type="checkbox" name="foo" value="bar1" />*/}
-                        {/*    <input type="checkbox" name="foo" value="bar2" />*/}
-                        {/*    <input type="checkbox" name="foo" value="bar3" />*/}
-                        {/*    <input type="checkbox" name="foo" value="bar4" />*/}
-                        {/*</div>*/}
-
-                        <select onChange={handleSemesterOnchange} className="form-control col-md-5 col-12">
+                        {/* <select onChange={handleSemesterOnchange} className="form-control col-md-5 col-12">
                             <option value="first-semester">First Semester</option>
                             <option value="second-semester">Second Semester</option>
-                        </select>
+                        </select> */}
 
                     </div>
                     <div className="col-12 col-lg-6 text-right">
@@ -191,8 +182,7 @@ const CourseRegistration = () => {
                     <table
                         className="table table-borderless table-hover table-responsive table-striped table-">
                         <thead>
-                        <td><input className="form-check" onClick={handleMasterCheckboxClicked} type="checkbox"
-                                   id="toggleAllCourses" /></td>
+                        <td></td>
                         <td>S/N</td>
                         <td>Code</td>
                         <td>Title</td>

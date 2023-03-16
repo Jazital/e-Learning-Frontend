@@ -43,6 +43,9 @@ import StaffAssignedCourses from "./courses/StaffAssignedCourses";
 import NewVirtualClassroom from "./virtual-classroom/NewVirtualClassroom";
 import NewAssignment from "./assignments/NewAssignment";
 import ViewCourseMaterial from "./course-materials/ViewCourseMaterial";
+import DepartmentLecturers from "./department-admin-components/DepartmentLecturers";
+import LecturerCourses from "./department-admin-components/LecturerCourses";
+import ModifyAssignedCourses from "./department-admin-components/ModifyAssignedCourses";
 
 
 const Markup = () => {
@@ -172,6 +175,23 @@ const Markup = () => {
                         path={`/new-assignment`}
                         component={NewAssignment}
                     />
+
+                    {/* Department Admin Routes*/}
+                    <Route
+                        path={`/department-lecturers`}
+                        component={DepartmentLecturers}
+                    />
+
+                    <Route
+                        path={`/department-lecturers-courses/:lecturer_id`}
+                        component={LecturerCourses}
+                    />
+
+                    <Route
+                        path={`/modify-assigned-courses`}
+                        component={ModifyAssignedCourses}
+                    />
+
                 </ProtectedContainer>
                 <Route
                     path="*"
