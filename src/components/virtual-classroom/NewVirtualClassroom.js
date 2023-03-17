@@ -9,6 +9,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 const NewVirtualClassroom = () => {
     localStorage.setItem('page_title', 'New Virtual Classroom');
     let userRole = localStorage.getItem('userRole');
+    let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken') || '';
 
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
@@ -66,10 +67,13 @@ const NewVirtualClassroom = () => {
             if (response.data.code === 'lecture_created') {
                 setResponseMessage(response.data.message)
                 setResponseOK(true)
+                
+                document.getElementById("new-virtual-classroom-form").reset()
             }
+
             setIsLoading(false)
 
-            console.log(response.data)
+            // console.log(response.data)
         }).catch(error => {
             console.error(error)
             if(error.response.data.message){
@@ -92,7 +96,8 @@ const NewVirtualClassroom = () => {
                 'Token': userToken,
             },
             params: {
-                'lecturer_id': localStorage.getItem('userID')
+                'lecturer_id': localStorage.getItem('userID'),
+                'department_id': department_id,
             },
         }
         // Making request to backend API
@@ -124,7 +129,7 @@ const NewVirtualClassroom = () => {
             {responseOK === false && (<div className="alert alert-danger mb-2">
                 {responseMessage}
             </div>)}
-            <form action="" onSubmit={submitHandler}>
+            <form id="new-virtual-classroom-form" action="post" onSubmit={submitHandler}>
                 <div className="row shadow p-4 m-md-3 rounded">
 
                     <div className="col-12 col-md-8 pr-3">

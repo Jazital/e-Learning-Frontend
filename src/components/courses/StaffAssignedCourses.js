@@ -10,6 +10,7 @@ import coursematerial from "../images/Vectorcourses.png"
 const StaffAssignedCourses = () => {
     localStorage.setItem('page_title', 'Assigned Courses');
     document.title = localStorage.getItem('page_title')
+    let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken');
 
     const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,8 @@ const StaffAssignedCourses = () => {
                 'Token': userToken,
             },
             params: {
-                'lecturer_id': localStorage.getItem('userID')
+                'lecturer_id': localStorage.getItem('userID'),
+                'department_id': department_id
             },
         }
         // Making request to backend API
