@@ -46,6 +46,7 @@ import ViewCourseMaterial from "./course-materials/ViewCourseMaterial";
 import DepartmentLecturers from "./department-admin-components/DepartmentLecturers";
 import LecturerCourses from "./department-admin-components/LecturerCourses";
 import ModifyAssignedCourses from "./department-admin-components/ModifyAssignedCourses";
+import UnassignedLecturerCourses from "./department-admin-components/UnassignedLecturerCourses";
 
 
 const Markup = () => {
@@ -190,6 +191,10 @@ const Markup = () => {
                     <Route
                         path={`/modify-assigned-courses/:lecturer_id`}
                         component={ModifyAssignedCourses}
+                    />
+                    <Route
+                        path={`/unassigned-courses/:lecturer_id`}
+                        component={UnassignedLecturerCourses}
                     />
 
                 </ProtectedContainer>

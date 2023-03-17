@@ -94,7 +94,7 @@ const DepartmentLecturers = () => {
                                 <td>{index + 1}</td>
                                 <td>{lecturer.first_name}</td>
                                 <td>{lecturer.last_name}</td>
-                                <td><Link className="btn btn-primary"to={`/department-lecturers-courses/${lecturer.id}`}>View Courses</Link> <Link className="btn btn-warning"to={`/modify-assigned-courses/${lecturer.id}`}>Assign Courses</Link></td>
+                                <td><Link className="btn btn-primary"to={`/department-lecturers-courses/${lecturer.id}`}>View Courses</Link> <Link className="btn btn-warning"to={`/modify-assigned-courses/${lecturer.id}`}>Assign Courses</Link> <Link className="btn btn-danger"to={`/unassigned-courses/${lecturer.id}`}>Un-assign Courses</Link></td>
                             </tr>
                         ))}
                         </tbody>

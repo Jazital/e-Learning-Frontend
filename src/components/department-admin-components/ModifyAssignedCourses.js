@@ -7,8 +7,9 @@ import {Link, useParams} from "react-router-dom"
 import { VapingRooms } from "@mui/icons-material";
 
 const ModifyAssignedCourses = () => {
-    localStorage.setItem('page_title', 'Assign Courses');
+    localStorage.setItem('page_title', 'Assign New Courses');
     let userToken = localStorage.getItem('userToken') || '';
+    let department_id = localStorage.getItem('department') || '';
     const [responseOK, setResponseOK] = useState(null);
     const [responseMessage, setResponseMessage] = useState('');
     const [courses, setCourses] = useState([])
@@ -30,12 +31,16 @@ const ModifyAssignedCourses = () => {
 
     const fetchLecturerCourses = () => {
         setIsLoading(true);
-        endpoint = `/courses/all`;
+        endpoint = `/courses/courses-by-department`;
 
         let args = {
             headers: {
                 'Token': userToken,
             },
+            params: {
+                "lecturer_id": lecturer_id,
+                "department_id": department_id,
+            }
         }
         
         // Making request to backend API
@@ -133,7 +138,13 @@ const ModifyAssignedCourses = () => {
             </div>
             
                 <div className="row mb-3">
-                <div class="text-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</div>        
+                <h4 className="alert alert-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</h4> 
+
+                {responseOK && <div className="alert alert-success col-11">
+                    {responseMessage}
+                </div>}
+
+                       
                     <div className="col-12 col-lg-6">
                     </div>
                     <div className="col-12 col-lg-6 text-right">
@@ -143,7 +154,6 @@ const ModifyAssignedCourses = () => {
                 </div>
                     <div className="table-responsive">
                         <form onSubmit={submitAssignedCourses}>
-
                         <table
                         className="table table-borderless table-hover table-responsive table-striped table-">
                         <thead>
@@ -154,6 +164,7 @@ const ModifyAssignedCourses = () => {
                         <td>Department</td>
                         <td>Semester</td>
                         </thead>
+                        
                         <tbody>
                             {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
                         {tableCourses.map((course, index) =>  (
