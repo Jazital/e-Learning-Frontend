@@ -17,8 +17,8 @@ const StaffAssignedCourses = () => {
     const [courses, setCourses] = useState(null)
 
 
-    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
 
     useEffect(() => {
         fetchAssignedCourses();
@@ -67,7 +67,7 @@ const StaffAssignedCourses = () => {
         <>
             {loadingModal(isLoading)}
             <div className="row">
-                {courses && courses.map((course) => <div key={Math.random()}
+                {courses && courses.map((course, index) => <div key={index}
                                                          className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <Link to={`/single-course/${course['course_id']}`}>
                         <div className="card overflow-hidden">

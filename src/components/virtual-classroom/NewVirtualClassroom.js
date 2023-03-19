@@ -67,7 +67,7 @@ const NewVirtualClassroom = () => {
             if (response.data.code === 'lecture_created') {
                 setResponseMessage(response.data.message)
                 setResponseOK(true)
-                
+
                 document.getElementById("new-virtual-classroom-form").reset()
             }
 
@@ -159,7 +159,7 @@ const NewVirtualClassroom = () => {
                             <label htmlFor="vc-course-id">Course:</label>
                             <select className="form-control" id="vc-course-id">
                                 <option value="null">Select course</option>
-                                {courses && courses.map((course, index) =><option key={index} value={`${course.course_id}`} >{`${course.course_code}`}</option>)}
+                                {courses && courses.map((course, index) =><option key={index} value={`${course.course_id}`} >{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
                         <div className="form-group">

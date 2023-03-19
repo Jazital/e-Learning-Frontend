@@ -9,7 +9,9 @@ const CourseRegistration = () => {
     localStorage.setItem('page_title', 'Course Registration');
     let userToken = localStorage.getItem('userToken') || '';
     const [responseOK, setResponseOK] = useState(null);
-    const [responseMessage, setResponseMessage] = useState('');
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
     const [courses, setCourses] = useState([])
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
@@ -87,21 +89,24 @@ const CourseRegistration = () => {
             data,
             args
         ).then(response => {
-            if (response.data.code === 'courses_enrolled') {
-                setResponseMessage(response.data.message)
+            if (response.data.code == 'courses_enrolled') {
+                setResponseOKMessage(response.data.message)
                 setResponseOK(true)
+                setResponseError(false)
             }
             setIsLoading(false)
 
-            console.log(response.data)
+            // console.log(response.data)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             if(error.response.data.message){
-                setResponseMessage(error.response.data.message)
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
                 setResponseOK(false)
             }
             else{
-                setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseError(true)
                 setResponseOK(false)
             }
 
@@ -165,6 +170,15 @@ const CourseRegistration = () => {
             <div className="row my-3">
                 <h4 className="text-danger" >*** Please note that clicking on the submit button replace your currently enrolled courses with the selected courses ***</h4>
             </div>
+
+            {responseOK && <div className="alert alert-success col-11">
+                    {responseOKMessage}
+                </div>}
+
+                {responseError && <div className="alert alert-danger col-11">
+                    {responseErrorMessage}
+                </div>}
+
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
                         {/* <select onChange={handleSemesterOnchange} className="form-control col-md-5 col-12">
@@ -186,7 +200,7 @@ const CourseRegistration = () => {
                         <td>S/N</td>
                         <td>Code</td>
                         <td>Title</td>
-                        <td>Department</td>
+                        <td>Unit</td>
                         <td>Semester</td>
                         </thead>
                         <tbody>
@@ -199,7 +213,7 @@ const CourseRegistration = () => {
                                 <td>{index + 1}</td>
                                 <td>{course.course_code}</td>
                                 <td>{course.course_title}</td>
-                                <td>{course.course_department.department_name}</td>
+                                <td>{course.course_unit}</td>
                                 <td>{course.course_semester.semester_name}</td>
                             </tr>
                         ))}

@@ -11,7 +11,9 @@ const ModifyAssignedCourses = () => {
     let userToken = localStorage.getItem('userToken') || '';
     let department_id = localStorage.getItem('department') || '';
     const [responseOK, setResponseOK] = useState(null);
-    const [responseMessage, setResponseMessage] = useState('');
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
     const [courses, setCourses] = useState([])
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
@@ -93,20 +95,28 @@ const ModifyAssignedCourses = () => {
             args
         ).then(response => {
             if (response.data.code === 'courses_assigned') {
-                setResponseMessage(response.data.message)
+                setResponseOKMessage(response.data.message)
                 setResponseOK(true)
+                setResponseError(false)
+            }
+            else{
+                setResponseErrorMessage(response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
             }
             setIsLoading(false)
 
-            console.log(response.data)
+            // console.log(response.data)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             if(error.response.data.message){
-                setResponseMessage(error.response.data.message)
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
                 setResponseOK(false)
             }
             else{
-                setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseError(true)
                 setResponseOK(false)
             }
 
@@ -141,9 +151,12 @@ const ModifyAssignedCourses = () => {
                 <h4 className="alert alert-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</h4> 
 
                 {responseOK && <div className="alert alert-success col-11">
-                    {responseMessage}
+                    {responseOKMessage}
                 </div>}
 
+                {responseError && <div className="alert alert-danger col-11">
+                    {responseErrorMessage}
+                </div>}
                        
                     <div className="col-12 col-lg-6">
                     </div>
@@ -161,7 +174,7 @@ const ModifyAssignedCourses = () => {
                         <td>S/N</td>
                         <td>Code</td>
                         <td>Title</td>
-                        <td>Department</td>
+                        <td>Unit</td>
                         <td>Semester</td>
                         </thead>
                         
@@ -175,7 +188,7 @@ const ModifyAssignedCourses = () => {
                                 <td>{index + 1}</td>
                                 <td>{course.course_code}</td>
                                 <td>{course.course_title}</td>
-                                <td>{course.course_department.department_name}</td>
+                                <td>{course.course_unit}</td>
                                 <td>{course.course_semester.semester_name}</td>
                             </tr>
                         ))}

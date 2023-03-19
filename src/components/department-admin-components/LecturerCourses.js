@@ -95,7 +95,7 @@ const LecturerCourses = () => {
                         <td>S/N</td>
                         <td>Course Code</td>
                         <td>Title</td>
-                        <td>Unit(s)</td>
+                        <td>Unit</td>
                         </thead>
                         <tbody>
                         {tableCourses.map((course, index) =>  (

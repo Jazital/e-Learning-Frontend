@@ -108,10 +108,11 @@ const ViewCourseMaterial = (props) => {
                             />
                         </div>
                         <div className="text-left">
-                        <div> Title:  {document.document_title} </div>
-                            <div>Course Code: {document.course_code}</div>
-                            <div>Description: {document.document_description} </div>
-                            <div> Date Uploaded: {document.document_date}</div>
+                            <div className="mb-3"> Title:  <b>{document.document_title}</b></div>
+                            <div className="mb-3">Course Code: <b> {document.course_code}</b></div>
+                            <div className="mb-3"> Date Uploaded: <b>{document.document_date}</b></div>
+                            <div className="mb-1"><b>Description:</b></div>
+                            <div>{document.document_description}</div>
                         </div>
                     </div>
                 </Card>
@@ -119,7 +120,7 @@ const ViewCourseMaterial = (props) => {
                     <h3>Attachment(s)</h3>
                     {attachments.map((data, index) => {
                             var i = 1;
-                                return (<a className="btn btn-primary" href={data.file_uri} target="_blank">
+                                return (<a key={index} className="btn btn-primary" href={data.file_uri} target="_blank">
                                 {`Download Attachment ${i}`}
                             </a>)
                             i++;

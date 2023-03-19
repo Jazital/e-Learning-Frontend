@@ -83,9 +83,16 @@ const SingleCourse = (props) => {
     return (
         <>
             {loadingModal(isLoading)}
-            <div className="pb-4">
-                {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
-                {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
+
+            <div className="row">
+                <div className="col-xl-6 col-lg-6 col-sm-12 mb-3">
+                    {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
+                    {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
+                </div>
+                <div className="col-xl-6 col-lg-6 col-sm-12 mb-3 text-right justify-content-end">
+                        {userRole == "lecturer" &&
+                        <Link to={'/new-virtual-classroom'} className="btn btn-primary">New Virtual Classroom</Link>}
+                </div>
             </div>
             {showContent && (<div className="row">
                 <div className="col-xl-12 col-lg-12 col-sm-12">

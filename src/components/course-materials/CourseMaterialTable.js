@@ -6,6 +6,15 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link} from 'react-router-dom';
 
+function toTitleCase(string) {
+    var sentence = string.toLowerCase().split(" ");
+    for(var i = 0; i< sentence.length; i++){
+       sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+    }
+ document.write(sentence.join(" "));
+ return sentence;
+ }
+
 
 const CourseMaterialTable = (props) => {
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
@@ -61,6 +70,8 @@ const CourseMaterialTable = (props) => {
                 setDocuments(response.data.data.lecture_document)
             }
             setIsLoading(false)
+
+            console.log(response.data.data.lecture_document)
         }).catch(error => {
             // console.error(error)
             setIsLoading(false)
@@ -87,14 +98,6 @@ const CourseMaterialTable = (props) => {
         {
             name: "Course",
             label: "COURSE",
-            options: {
-                filter: false,
-                sort: false,
-            }
-        },
-        {
-            name: "Format",
-            label: "FORMAT",
             options: {
                 filter: false,
                 sort: false,
@@ -134,7 +137,7 @@ const CourseMaterialTable = (props) => {
             data2.push({
                 Number: sn,
                 Title: data.document_title,
-                Format: data.document_format.format_name,
+                // Format: data.document_format.format_name,
                 Course: data.course_code,
                 // FileURL: data.attachments[0],
                 DocumentType: data.document_type.type_name.replace("_", " "),
@@ -159,7 +162,7 @@ const CourseMaterialTable = (props) => {
         <div>
             {loadingModal(isLoading)}
             <MUIDataTable
-                title={"Upcoming Lecturers"}
+                title={"Lecturer Documents"}
                 data={data2}
                 columns={columns}
                 options={options}

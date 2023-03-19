@@ -24,7 +24,7 @@ const CourseMaterials = () => {
                         </div>
                         <div className="pb-4">
                             {userRole == "lecturer" &&
-                            <Link to={'/new-course-material'} className="btn btn-primary"><i className="fa fa-plus mr-2"></i>New Document</Link>}
+                            <Link to={'/new-course-material'} className="btn btn-primary">New Document</Link>}
                         </div>
                     </div>
                     <div>

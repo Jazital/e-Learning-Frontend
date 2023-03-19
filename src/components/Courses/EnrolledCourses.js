@@ -65,7 +65,7 @@ const EnrolledCourses = () => {
         <>
             {loadingModal(isLoading)}
             <div className="row">
-                {courses && courses.map((course) => <div key={Math.random()}
+                {courses && courses.map((course, index) => <div key={index}
                     className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <Link to={`/single-course/${course['course_id']}`}>
                         <div className="card overflow-hidden">

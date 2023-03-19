@@ -5,8 +5,8 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 
-const NewAssignment = () => {
-    localStorage.setItem('page_title', 'New Assignment');
+const NewCourseMaterial = () => {
+    localStorage.setItem('page_title', 'New Document');
     let userRole = localStorage.getItem('userRole');
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken');
@@ -16,7 +16,9 @@ const NewAssignment = () => {
     let endpoint = ''
 
     const [responseOK, setResponseOK] = useState(null);
-    const [responseMessage, setResponseMessage] = useState('');
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
     const [courses, setCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const loadingModal = (isOpen = false) => {
@@ -35,7 +37,7 @@ const NewAssignment = () => {
         e.preventDefault()
 
         setIsLoading(true)
-        let endpoint = '/assignments/add'
+        let endpoint = '/lecture-documents/add'
 
         let args2 = {
             headers: {
@@ -44,39 +46,48 @@ const NewAssignment = () => {
             },
         }
 
-        var assignmentTitle = document.querySelector("#new-assignment-title"); // Get the file input
-        var assignmentDescription = document.querySelector("#new-assignment-description"); // Get the file input
-        var assignmentAttachment = document.querySelector("#new-assignment-attachment"); // Get the file input
-        var assignmentCourse = document.querySelector("#new-assignment-course"); // Get the file input
-        var assignmentDueDate = document.querySelector("#new-assignment-due-date"); // Get the file input
+        var documentAttachments = document.querySelector("#document-attachments"); // 
+        var documentCourseID = document.querySelector("#document-course-id"); // 
+        var documentTitle = document.querySelector("#document-title"); // 
+        var documentDescription = document.querySelector("#document-description"); // 
+        var documentType = document.querySelector("#document-type"); // 
 
         var formData = new FormData();
-        formData.append("attachments[]", assignmentAttachment.files[0]);
-        formData.append("course_id", assignmentCourse.value);
-        formData.append("assignment_title", assignmentTitle.value);
-        formData.append("assignment_description", assignmentDescription.value);
-        formData.append("due_date", assignmentDueDate.value);
+        formData.append("attachments[]", documentAttachments.files[0]);
+        formData.append("course_id", documentCourseID.value);
+        formData.append("document_title", documentTitle.value);
+        formData.append("document_description", documentDescription.value);
+        formData.append("document_type", documentType.value);
+
+
+        // var value = e.options[e.selectedIndex].value;
+        // setIsLoading(false)
+        // return console.log(documentCourseID.value)
 
         await axios.post(
             BACKEND_BASE_URL + endpoint,
             formData,
             args2
         ).then(response => {
-            if (response.data.code === 'assignment_created') {
-                setResponseMessage(response.data.message)
+            if (response.data.code == 'document_uploaded') {
+                setResponseOKMessage(response.data.message)
                 setResponseOK(true)
+                setResponseError(false)
+                document.getElementById("upload-document-form").reset()
             }
             setIsLoading(false)
 
-            // console.log(response.data)
+            console.log(response.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
-                setResponseMessage(error.response.data.message)
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
                 setResponseOK(false)
             }
             else {
-                setResponseMessage("Sorry, we cannot create the assignment at the moment. Please try again later.")
+                setResponseErrorMessage("Sorry, we cannot create the assignment at the moment. Please try again later.")
+                setResponseError(true)
                 setResponseOK(false)
             }
 
@@ -119,52 +130,60 @@ const NewAssignment = () => {
     return (
         <>
             {loadingModal(isLoading)}
-            {responseOK && (<div className="alert alert-success mb-2">
-                {responseMessage}
-            </div>)}
-            {responseOK === false && (<div className="alert alert-danger mb-2">
-                {responseMessage}
-            </div>)}
-            <form action="" onSubmit={submitHandler}>
+            {responseOK && <div className="alert alert-success col-11">
+                    {responseOKMessage}
+                </div>}
+
+            {responseError && <div className="alert alert-danger col-11">
+                {responseErrorMessage}
+            </div>}
+
+            <form id="upload-document-form" action="" onSubmit={submitHandler}>
                 <div className="row shadow p-4 m-md-3 rounded">
                     <div className="col-12 col-md-8 pr-3">
                         <div className="form-group">
-                            <label htmlFor="vc-title">Title:</label>
+                            <label htmlFor="document-title">Title:</label>
                             <input className="form-control" type="text" placeholder="Enter title..."
-                                   id="new-assignment-title" />
+                                   id="document-title" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="vc-description">Description:</label>
-                            <textarea className="form-control" rows="8" id="new-assignment-description"
+                            <label htmlFor="document-description">Description:</label>
+                            <textarea className="form-control" rows="8" id="document-description"
                                       placeholder="Enter description..."></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="vc-lecture-url">Document Attachment:</label>
-                            <input type="file" id="new-assignment-attachment" className="form-control mb-3" />
+                            <label htmlFor="document-attachments">Document Attachment:</label>
+                            <input type="file" id="document-attachments" className="form-control mb-3" />
                         </div>
 
                         <div className="d-none d-md-block">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Upload Document" className="btn btn-primary" />
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
 
                         <div className="form-group">
-                            {/*TODO: Fetch only assigned courses here*/}
-                            <label htmlFor="new-assignment-course">Course:</label>
-                            <select className="form-control" id="new-assignment-course">
-                                <option value="">Select course</option>
+                            <label htmlFor="document-course-id">Course:</label>
+                            <select className="form-control" id="document-course-id">
                                 {courses && courses.map((course, index) => <option value={`${course.course_id}`}
                                                                             key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
+
                         <div className="form-group">
-                            <label htmlFor="vc-lecture-date">Due Date:</label>
-                            <input className="form-control" type="date" id="new-assignment-due-date" />
+                            <label htmlFor="document-type">Document Type:</label>
+                            <select className="form-control" id="document-type">
+                                <option value="3">Lecture Material</option>
+                                <option value="1">Journal</option>
+                                <option value="2">Textbook</option>
+                                <option value="4">Notebook</option>
+                                <option value="5">Course Outline</option>
+                                <option value="6">Others</option>
+                            </select>
                         </div>
 
                         <div className="d-md-none">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Upload Document" className="btn btn-primary" />
                         </div>
                     </div>
                 </div>
@@ -173,4 +192,4 @@ const NewAssignment = () => {
     );
 };
 
-export default NewAssignment;
+export default NewCourseMaterial;

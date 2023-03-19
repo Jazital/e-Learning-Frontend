@@ -54,8 +54,8 @@ const TimeTable = () => {
     return (
         <div>
             {loadingModal(isLoading)}
-            {(timetable2.length > 0) && (timetable2.map((data) => {
-               return <img src={data} key={Math.random()} alt="" className="m-2 timetable-img" />
+            {(timetable2.length > 0) && (timetable2.map((data, index) => {
+               return <img src={data} key={index} alt="" className="m-2 timetable-img" />
             }))}
             <br />
         </div>

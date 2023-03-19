@@ -10,8 +10,7 @@ const VirtualClassroom = () => {
         <div>
                 <div className="pb-4">
                     {userRole == "lecturer" &&
-                    <Link to={'/new-virtual-classroom'} className="btn btn-primary"><i className="fa fa-plus mr-2"></i>New Virtual Classroom</Link>}
-                </div>
+                    <Link to={'/new-virtual-classroom'} className="btn btn-primary">New Virtual Classroom</Link>}                </div>
 
             <VirtualClassroomTable />
         </div>
