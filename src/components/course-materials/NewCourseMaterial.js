@@ -130,11 +130,11 @@ const NewCourseMaterial = () => {
     return (
         <>
             {loadingModal(isLoading)}
-            {responseOK && <div className="alert alert-success col-11">
+            {responseOK && <div className="alert alert-success col-12">
                     {responseOKMessage}
                 </div>}
 
-            {responseError && <div className="alert alert-danger col-11">
+            {responseError && <div className="alert alert-danger col-12">
                 {responseErrorMessage}
             </div>}
 

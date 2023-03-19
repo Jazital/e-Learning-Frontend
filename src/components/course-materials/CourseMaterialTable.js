@@ -71,7 +71,7 @@ const CourseMaterialTable = (props) => {
             }
             setIsLoading(false)
 
-            console.log(response.data.data.lecture_document)
+            // console.log(response.data.data.lecture_document)
         }).catch(error => {
             // console.error(error)
             setIsLoading(false)

@@ -74,7 +74,7 @@ const ViewCourseMaterial = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            console.log(response);
+            // console.log(response);
             if (response.data.code === 'lecture_document_fetched') {
                 setDocument(response.data.data.lecture_document)
                 setAttachments(response.data.data.lecture_document.attachments)
