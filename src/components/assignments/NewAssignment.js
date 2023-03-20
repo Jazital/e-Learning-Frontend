@@ -67,6 +67,7 @@ const NewAssignment = () => {
                 setResponseOK(true)
             }
             setIsLoading(false)
+            document.getElementById("assignment-form").reset()
 
             // console.log(response.data)
         }).catch(error => {
@@ -125,7 +126,7 @@ const NewAssignment = () => {
             {responseOK === false && (<div className="alert alert-danger mb-2">
                 {responseMessage}
             </div>)}
-            <form action="" onSubmit={submitHandler}>
+            <form id="assignment-form" action="" onSubmit={submitHandler}>
                 <div className="row shadow p-4 m-md-3 rounded">
                     <div className="col-12 col-md-8 pr-3">
                         <div className="form-group">

@@ -166,7 +166,7 @@ const AssignmentList = () => {
                 {userRole=="lecturer" && <Link to={'/new-assignment'} className="btn btn-primary">New Assignment</Link> }
             </div>
             <MUIDataTable
-                title={"All Assignment"}
+                title={"Assignments"}
                 data={data2}
                 columns={columns}
                 options={options}

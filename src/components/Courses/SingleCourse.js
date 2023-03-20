@@ -166,28 +166,8 @@ const SingleCourse = (props) => {
                         </div>
 
                     </div>
-                    <SingleCourseUpcomingClassTable courseCode={course.courseCode} />
+                    <SingleCourseUpcomingClassTable courseID={course.courseID} />
                 </div>
-                {/*<div className="col-xl-3 col-lg-6 col-sm-6 pt-4">*/}
-
-                {/*    /!*<div className="col-xl col-lg-6 col-sm-6">*!/*/}
-                {/*    /!*    <div className="card overflow-hidden">*!/*/}
-                {/*    /!*        <div className="card-header media border-0 pb-0">*!/*/}
-                {/*    /!*            <div className="media-body">*!/*/}
-                {/*    /!*            </div>*!/*/}
-                {/*    /!*            <img src={discussion} alt="" />*!/*/}
-                {/*    /!*        </div>*!/*/}
-                {/*    /!*        <br />*!/*/}
-
-                {/*    /!*        <div className="text-center">*!/*/}
-                {/*    /!*            <p className="mb-0 text-black">{course.course_code} </p>*!/*/}
-                {/*    /!*        </div>*!/*/}
-                {/*    /!*        <div className="text-center">*!/*/}
-                {/*    /!*            <Link to={`/discussion-board/course/${course_id}`} className="sub-links">go to room</Link>*!/*/}
-                {/*    /!*        </div>*!/*/}
-                {/*    /!*    </div>*!/*/}
-                {/*    /!*</div>*!/*/}
-                {/*</div>*/}
             </div>)}
         </>
     );

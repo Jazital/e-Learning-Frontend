@@ -124,25 +124,16 @@ function Assignment() {
             <div className='the col-xl-10 col-lg-12 col-sm-12'>
                 {loadingModal(isLoading)}
 
-                <Card border="light" className='asgn1 main-body-card col-xl-6 col-lg-12 col-sm-12'>
+                <Card border="light" className='main-body-card col-xl-6 col-lg-12 col-sm-12'>
                     <div>
                         <div className="centercoursetext">
-                            <img className="center-image mb-5"
+                            <img className="center-image mb-2"
                                  src={coursematerial}
                                  alt=""
                             />
                             {/*<p className="indicator-open">Open</p>*/}
                         </div>
-                        <div id="firstAssignText">
-                            <p>
-                            <strong> Title: {assignment.assignment_title}</strong> <br />
-                                <strong> Course: {assignment.course_code}</strong> <br />
-                                Assigned Date: {assignment.creation_date} <br />
-                                <strong>Due Date: {assignment.due_date}</strong> <br />
-
-                            </p>
-                        </div>
-                        <div className="centercoursetext">
+                        <div className="centercoursetext mb-2">
                             {
                                 assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}>
                                     Download Assignment
@@ -150,6 +141,18 @@ function Assignment() {
                             }
 
                         </div>
+                        <div id="firstAssignText">
+                            <p>
+                            <strong> Title: {assignment.assignment_title}</strong> <br />
+                                <strong> Course: {assignment.course_code}</strong> <br />
+                                Assigned Date: {assignment.creation_date} <br />
+                                <strong>Due Date: {assignment.due_date}</strong> <br />
+                                <strong>Description:</strong> <br />
+                                <p>{assignment.assignment_description}</p>
+
+                            </p>
+                        </div>
+                        
                     </div>
                 </Card>
                 <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>

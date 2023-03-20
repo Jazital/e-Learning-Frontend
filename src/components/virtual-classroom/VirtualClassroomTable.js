@@ -13,7 +13,6 @@ const VirtualClassroomTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
     let userRole = localStorage.getItem('userRole');
 
-    if (userRole === "student") {
         if (props.courseID) {
             args = {
                 headers: {
@@ -33,30 +32,6 @@ const VirtualClassroomTable = (props) => {
             }
             endpoint = '/lectures/fetch-student-upcoming-lectures';
         }
-    }
-    if (userRole === "lecturer") {
-        if (props.courseID) {
-            args = {
-                headers: {
-                    'Token': userToken,
-                },
-                params: {
-                    'course_id': props.courseID,
-                }
-            }
-            endpoint = '/lectures/fetch-by-course-id';
-        }
-        else {
-            args = {
-                headers: {
-                    'Token': userToken,
-                },
-            }
-            endpoint = '/lectures/fetch-lecturer-upcoming-lectures';
-        }
-
-    }
-
 
     const [lectures, setLectures] = useState([])
     const [isLoading, setIsLoading] = useState(true);
