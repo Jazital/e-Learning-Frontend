@@ -15,8 +15,6 @@ const Logout = () => {
     localStorage.removeItem('matricNumber')
     localStorage.removeItem('phoneNumber')
     localStorage.removeItem('page_title')
-
-
     return (<>
         {history.push('/')}
     </>)

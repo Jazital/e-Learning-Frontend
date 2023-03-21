@@ -22,8 +22,11 @@ const LecturerCourses = () => {
     let {lecturer_id} = useParams();
 
     useEffect(() => {
-        fetchLecturerCourses();
+        setTimeout(() => {
+            fetchLecturerCourses();
+        }, 2000)
     }, [])
+
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchLecturerCourses = () => {

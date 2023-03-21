@@ -28,7 +28,9 @@ const NewVirtualClassroom = () => {
     };
 
     useEffect(() => {
-        fetchAssignedCourses();
+        setTimeout(() => {
+            fetchAssignedCourses();
+        }, 2000)
     }, [])
 
     const submitHandler = async (e) => {

@@ -33,7 +33,9 @@ const TimeTable = () => {
     };
 
     useEffect(() => {
-        fetchTimetable();
+        setTimeout(() => {
+            fetchTimetable();
+        }, 2000)
     }, [])
 
     const fetchTimetable = async () => {

@@ -52,7 +52,9 @@ function Assignment() {
     };
 
     useEffect(() => {
-        fetchAssignment();
+        setTimeout(() => {
+            fetchAssignment();
+        }, 2000)
     }, [submissionResponse])
 
     const fetchAssignment = async () => {

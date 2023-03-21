@@ -19,7 +19,9 @@ const SingleCourseUpcomingClassTable = (props) => {
     let args = ''
 
     useEffect(() => {
-        fetchLectures();
+        setTimeout(() => {
+            fetchLectures();
+        }, 2000)
     }, [])
 
     if (props.courseCode) {

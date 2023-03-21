@@ -48,8 +48,9 @@ import LecturerCourses from "./department-admin-components/LecturerCourses";
 import ModifyAssignedCourses from "./department-admin-components/ModifyAssignedCourses";
 import UnassignedLecturerCourses from "./department-admin-components/UnassignedLecturerCourses";
 import NewCourseMaterial from "./course-materials/NewCourseMaterial";
-import AssignmentSubmissions from "./assignments/AssignmentSubmissions";
 import EditAssignment from "./assignments/EditAssignment";
+import LecturerAssignmentView from "./assignments/LecturerAssignmentView";
+import SubmittedAssignments from "./assignments/SubmittedAssignments";
 
 
 const Markup = () => {
@@ -140,8 +141,12 @@ const Markup = () => {
                         component={Assignment}
                     />
                     <Route
-                        path={`/assignment/submission/:assignment_id`}
-                        component={AssignmentSubmissions}
+                        path={`/assignment/lecturer-view/:assignment_id`}
+                        component={LecturerAssignmentView}
+                    />
+                    <Route
+                        path={`/assignment/submissions/:assignment_id`}
+                        component={SubmittedAssignments}
                     />
                     <Route
                          path={`/assignment/edit/:assignment_id`}

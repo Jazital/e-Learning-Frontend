@@ -57,9 +57,10 @@ const AssignmentList = () => {
             </Modal>
         );
     };
-
     useEffect(() => {
-        fetchAssignments();
+        setTimeout(() => {
+            fetchAssignments();
+        }, 2000)
     }, [])
 
     const fetchAssignments = async () => {
@@ -180,15 +181,13 @@ const AssignmentList = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole === "student" && <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
-                        }}>view</Link>}
+                        {userRole === "student" && <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">view</Link>}
 
-                        {userRole === "lecturer" && <Link to={`/assignment/submission/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
-                        }}>view</Link>}
+                        {userRole === "lecturer" && <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-success">view submissions</Link>}
 
+                        {userRole === "lecturer" && <Link to={`/assignment/lecturer-view/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">view</Link>}
 
-                        {userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning" onClick={()=>{
-                        }}>modify</Link>}
+                        {userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}
 
                         {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger" onClick={() => {if(window.confirm('Are you sure to delete this record?')){ handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)};}}>delete</Link>}
 

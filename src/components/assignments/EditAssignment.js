@@ -40,7 +40,7 @@ const EditAssignment = () => {
         setTimeout(()=>{
             fetchAssignment();
             fetchAssignedCourses();
-        },100);
+        },500);
         
     }, [])
 

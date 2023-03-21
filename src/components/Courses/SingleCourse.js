@@ -37,7 +37,9 @@ const SingleCourse = (props) => {
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
 
     useEffect(() => {
-        fetchSingleCourse();
+        setTimeout(() => {
+            fetchSingleCourse();
+        }, 2000)
     }, [])
 
     async function fetchSingleCourse() {

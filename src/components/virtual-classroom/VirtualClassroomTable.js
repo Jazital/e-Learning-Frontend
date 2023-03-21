@@ -45,7 +45,9 @@ const VirtualClassroomTable = (props) => {
     };
 
     useEffect(() => {
-        fetchLectures();
+        setTimeout(() => {
+            fetchLectures();
+        }, 2000)
     }, [])
 
     const fetchLectures = async () => {

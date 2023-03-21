@@ -32,7 +32,6 @@ const CourseMat = () => {
                 </div>
             </Card>
 
-
             <div className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                 <h4>Other Materials</h4>
                 <div className=" main-body-card ">
@@ -52,7 +51,6 @@ const CourseMat = () => {
                         </div>
                     </div>
                 </div>
-
 
                 <div className=" main-body-card ">
                     <div className="card overflow-hidden">

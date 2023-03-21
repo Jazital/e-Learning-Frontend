@@ -20,7 +20,9 @@ const StaffAssignedCourses = () => {
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
 
     useEffect(() => {
-        fetchAssignedCourses();
+        setTimeout(() => {
+            fetchAssignedCourses();
+        }, 2000)
     }, [])
 
     const fetchAssignedCourses = async () => {

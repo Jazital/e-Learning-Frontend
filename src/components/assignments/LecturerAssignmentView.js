@@ -12,7 +12,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 
 
-function AssignmentSubmissions() {
+function LecturerAssignmentView() {
     // assignment_id
 
     localStorage.setItem('page_title', 'Assignment');
@@ -50,9 +50,10 @@ function AssignmentSubmissions() {
             </Modal>
         );
     };
-
     useEffect(() => {
-        fetchAssignment();
+        setTimeout(() => {
+            fetchAssignment();
+        }, 2000)
     }, [])
 
     const fetchAssignment = async () => {
@@ -71,49 +72,6 @@ function AssignmentSubmissions() {
         })
     }
 
-    async function handleAssignmentSubmit(e) {
-        e.preventDefault()
-        setIsLoading(true)
-
-        endpoint = '/assignments/submit';
-        let args2 = {
-            headers: {
-                'Token': userToken,
-                'Content-Type': 'multipart/form-data',
-            },
-        }
-
-        var fileInput = document.querySelector("#assignment-file-input"); // Get the file input
-        var studentCommentInput = document.querySelector("#assignment-comment-input"); // Get the file input
-
-        var formData = new FormData();
-        formData.append("attachments[]", fileInput.files[0]);
-        formData.append("assignment_id", assignment_id);
-        formData.append("student_comment", studentCommentInput.value);
-        await axios.post(
-            BACKEND_BASE_URL + endpoint,
-            formData,
-            args2
-        ).then(response => {
-            if (response.data.code === 'assignment_submitted') {
-                setSubmissionResponse({
-                    status: 'success',
-                    message: response.data.message
-                })
-                setIsLoading(false)
-            }
-            setIsLoading(false)
-            // console.log(response.data.data.lecture_assignment)
-            // console.log(response)
-        }).catch(error => {
-            setSubmissionResponse({
-                status: 'error',
-                message: error.response.data.message
-            })
-            // console.error(error.response.status)
-            setIsLoading(false)
-        })
-    }
 
     return (<>
             <div className="row">
@@ -121,11 +79,10 @@ function AssignmentSubmissions() {
                     <div className="row justify-content-between">
                         <div className="pb-4">
                             {userRole == "lecturer" &&
-                            <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link>}
+                            <Link to={'/assignment-list'} className="btn btn-primary">Back to assignments</Link>}
                         </div>
                         <div className="pb-4">
-                            {userRole === "lecturer" && <Link to={`/assignment/edit/${assignment_id}`} className="btn btn-warning" onClick={()=>{
-                        }}>Modify</Link>}
+                            {userRole === "lecturer" && <Link to={`/assignment/edit/${assignment_id}`} className="btn btn-warning">Modify</Link>}
                         </div>
                     </div>
                 </div>
@@ -134,7 +91,7 @@ function AssignmentSubmissions() {
             <div className='the col-xl-10 col-lg-12 col-sm-12'>
                 {loadingModal(isLoading)}
 
-                <Card border="light" className='main-body-card col-xl-6 col-lg-12 col-sm-12'>
+                <Card border="light" className='main-body-card col-12'>
                     <div>
                         <div className="centercoursetext">
                             <img className="center-image mb-2"
@@ -145,7 +102,7 @@ function AssignmentSubmissions() {
                         </div>
                         <div className="centercoursetext mb-2">
                             {
-                                assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}>
+                                assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}  target="_blank">
                                     View Assignment Attachment
                                 </a>)
                             }
@@ -165,26 +122,9 @@ function AssignmentSubmissions() {
                         
                     </div>
                 </Card>
-                <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
-                    <div className="centercoursetext">
-                        <h2 className="pb-3">Upload Assignment Score</h2>
-                        {submissionResponse.status === "success" && (<div className="alert alert-success mb-2">
-                            {submissionResponse.message}
-                        </div>)}
-                        {submissionResponse.status === "error" && (<div className="alert alert-danger mb-2">
-                            {submissionResponse.message}
-                        </div>)}
-                        <p className="pb-0 pt-1">Upload the CSV file having the assignment scores.</p>
-                    </div>
-                    <form onSubmit={handleAssignmentSubmit}>
-                        <input type="file" id="assignment-file-input" className="form-control mb-3" />
-                        <input className="btn btn-primary" type="submit" value="Submit Scores" />
-                    </form>
-
-                </div>
             </div>
         </>
     )
 }
 
-export default AssignmentSubmissions
+export default LecturerAssignmentView

@@ -20,7 +20,9 @@ const EnrolledCourses = () => {
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
 
     useEffect(() => {
-        fetchEnrolledCourses();
+        setTimeout(() => {
+            fetchEnrolledCourses();
+        }, 2000)
     }, [])
 
     const fetchEnrolledCourses = async () => {

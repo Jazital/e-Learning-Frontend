@@ -28,7 +28,9 @@ const NewAssignment = () => {
     };
 
     useEffect(() => {
-        fetchAssignedCourses();
+        setTimeout(() => {
+            fetchAssignedCourses();
+        }, 500)
     }, [])
 
     const submitHandler = async (e) => {

@@ -28,9 +28,11 @@ const NewCourseMaterial = () => {
             </Modal>
         );
     };
-
+    
     useEffect(() => {
-        fetchAssignedCourses();
+        setTimeout(() => {
+            fetchAssignedCourses();
+        }, 2000)
     }, [])
 
     const submitHandler = async (e) => {

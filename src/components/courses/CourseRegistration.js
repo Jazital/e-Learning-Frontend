@@ -21,8 +21,11 @@ const CourseRegistration = () => {
     let args = ''
 
     useEffect(() => {
-        fetchAllCourses();
+        setTimeout(() => {
+            fetchAllCourses();
+        }, 2000)
     }, [])
+
     const [isLoading, setIsLoading] = useState(true);
 
     const loadingModal = (isOpen = false) => {

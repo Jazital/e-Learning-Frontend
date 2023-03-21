@@ -20,8 +20,11 @@ const DepartmentLecturers = () => {
     let args = ''
 
     useEffect(() => {
-        fetchAllDepartmentLecturers();
+        setTimeout(() => {
+            fetchAllDepartmentLecturers();
+        }, 2000)
     }, [])
+
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchAllDepartmentLecturers = () => {

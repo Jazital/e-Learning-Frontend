@@ -63,9 +63,10 @@ const ViewCourseMaterial = (props) => {
     };
 
     useEffect(() => {
-        fetchCourseMaterials();
+        setTimeout(() => {
+            fetchCourseMaterials();
+        }, 2000)
     }, [])
-
 
     const fetchCourseMaterials = async () => {
         endpoint = '/lecture-documents/'+material_id;
