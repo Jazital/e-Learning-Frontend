@@ -34,8 +34,9 @@ function LecturerAssignmentView() {
     }
     endpoint = '/assignments/' + assignment_id;
 
-    const [assignment, setAssignment] = useState([])
+    
     const [isLoading, setIsLoading] = useState(true);
+    const [assignment, setAssignment] = useState([])
     const [assignmentDocumentURI, setAssignmentDocumentURI] = useState(null);
     const [submissionResponse, setSubmissionResponse] = useState({
         status: '', //success or error

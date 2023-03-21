@@ -183,9 +183,7 @@ const AssignmentList = () => {
                     <>
                         {userRole === "student" && <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">view</Link>}
 
-                        {userRole === "lecturer" && <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-success">view submissions</Link>}
-
-                        {userRole === "lecturer" && <Link to={`/assignment/lecturer-view/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">view</Link>}
+                        {userRole === "lecturer" && <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">score & submissions</Link>}
 
                         {userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}
 

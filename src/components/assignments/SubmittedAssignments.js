@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from "react"
 import MUIDataTable from "mui-datatables";
 
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useHistory} from 'react-router-dom';
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import coursematerial from "../images/Vectorcourses.png"
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
 
 
 const SubmittedAssignments = () => {
     const {assignment_id} = useParams();
+
+    const history = useHistory();
 
 
     localStorage.setItem('page_title', 'Assignment Submissions');
@@ -18,13 +22,20 @@ const SubmittedAssignments = () => {
     const [responseError, setResponseError] = useState(null);
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
+    const [assignment, setAssignment] = useState([])
+    const [assignmentDocumentURI, setAssignmentDocumentURI] = useState(null);
     const [submissionResponse, setSubmissionResponse] = useState({
         status: '', //success or error
         message: ''
     }); // either success or failed
 
+
+
     const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
     // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+
+    // URL to sample file for the uploading of students scores
+    var scoreCSVSampleURL = "http://elearning-backend.local/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv"
 
 
     let userToken = localStorage.getItem('userToken') || '';
@@ -43,6 +54,7 @@ const SubmittedAssignments = () => {
     useEffect(() => {
         setTimeout(() => {
             fetchAssignmentSubmissions();
+            fetchAssignment();
         }, 2000)
     }, [])
 
@@ -69,6 +81,29 @@ const SubmittedAssignments = () => {
             // console.log(response.data)
         }).catch(error => {
             // console.error(error)
+            setIsLoading(false)
+        })
+    }
+
+    const fetchAssignment = async () => {
+
+        var args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        var endpoint = '/assignments/' + assignment_id;
+
+        await axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then(response => {
+            if (response.data.code === 'assignment_fetched') {
+                setAssignment(response.data.data.lecture_assignment)
+                setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
+            }
+            setIsLoading(false)
+        }).catch(error => {
             setIsLoading(false)
         })
     }
@@ -179,21 +214,23 @@ const SubmittedAssignments = () => {
             formData,
             args2
         ).then(response => {
-            if (response.data.code === 'assignment_submitted') {
-                setSubmissionResponse({
-                    status: 'success',
-                    message: response.data.message
-                })
-                setIsLoading(false)
+            if (response.data.code === 'scores_uploaded') {
+                setResponseOKMessage(response.data.message)
+                setResponseOK(true)
+                setResponseError(false)
+
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 2000)
             }
             setIsLoading(false)
             // console.log(response.data.data.lecture_assignment)
-            // console.log(response)
+            // console.log(response.data)
         }).catch(error => {
-            setSubmissionResponse({
-                status: 'error',
-                message: error.response.data.message
-            })
+            setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
+
             // console.error(error.response.status)
             setIsLoading(false)
         })
@@ -215,7 +252,49 @@ const SubmittedAssignments = () => {
                 {userRole == "lecturer" && <Link to={'/assignment-list'} className="btn btn-primary">Back to assignments</Link>}
             </div>
 
-            <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
+            <MUIDataTable
+            className="mb-4"
+                title={"Assignment Submissions"}
+                data={data2}
+                columns={columns}
+                options={options}
+                pagination
+            /> 
+
+            <div className="d-flex">
+                <Card border="light" className='main-body-card col-xl-6 col-lg-6 col-sm-12'>
+                    <div>
+                        <div className="centercoursetext">
+                            <img className="center-image mb-2"
+                                    src={coursematerial}
+                                    alt=""
+                            />
+                            {/*<p className="indicator-open">Open</p>*/}
+                        </div>
+                        <div className="centercoursetext mb-2">
+                            {
+                                assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}  target="_blank">
+                                    View Assignment Attachment
+                                </a>)
+                            }
+
+                        </div>
+                        <div id="firstAssignText">
+                            <p>
+                            <strong> Title: {assignment.assignment_title}</strong> <br />
+                                <strong> Course: {assignment.course_code}</strong> <br />
+                                Assigned Date: {assignment.creation_date} <br />
+                                <strong>Due Date: {assignment.due_date}</strong> <br />
+                                <strong>Description:</strong> <br />
+                                <p>{assignment.assignment_description}</p>
+
+                            </p>
+                        </div>
+                        
+                    </div>
+                </Card>
+
+                <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column me-lg-3 p-3'>
                     <div className="centercoursetext">
                         <h2 className="pb-3">Upload Assignment Score</h2>
                         {submissionResponse.status === "success" && (<div className="alert alert-success mb-2">
@@ -230,15 +309,14 @@ const SubmittedAssignments = () => {
                         <input type="file" id="assignment-score-file-input" className="form-control mb-3" required />
                         <input className="btn btn-primary" type="submit" value="Submit Scores" />
                     </form>
-            </div>
 
-             <MUIDataTable
-                title={"Assignment Submissions"}
-                data={data2}
-                columns={columns}
-                options={options}
-                pagination
-            /> 
+                    <br />
+                    <br />
+                    <br />
+                    <a href={scoreCSVSampleURL} className="btn-warning p-2 ps-3">Click here to download scores CSV file sample</a>
+                </div>
+            </div>
+            
         </div>
     );
 };
