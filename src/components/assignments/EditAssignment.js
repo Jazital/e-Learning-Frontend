@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import "../CSS/Home.css";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 
-const NewAssignment = () => {
-    localStorage.setItem('page_title', 'New Assignment');
+const EditAssignment = () => {
+    localStorage.setItem('page_title', 'Modify Assignment');
     let userRole = localStorage.getItem('userRole');
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken');
@@ -16,9 +16,18 @@ const NewAssignment = () => {
     let endpoint = ''
 
     const [responseOK, setResponseOK] = useState(null);
-    const [responseMessage, setResponseMessage] = useState('');
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
+
+    // const [responseOK, setResponseOK] = useState(null);
+    // const [responseMessage, setResponseMessage] = useState('');
+    const [assignment, setAssignment] = useState([]);
+    const [assignmentDocumentURI, setAssignmentDocumentURI] = useState(null);
     const [courses, setCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const {assignment_id} = useParams();
+
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -28,56 +37,89 @@ const NewAssignment = () => {
     };
 
     useEffect(() => {
-        fetchAssignedCourses();
+        setTimeout(()=>{
+            fetchAssignment();
+            fetchAssignedCourses();
+        },100);
+        
     }, [])
+
+    const fetchAssignment = async () => {
+
+        var args = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+        var endpoint = '/assignments/' + assignment_id;
+
+        await axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then(response => {
+            if (response.data.code === 'assignment_fetched') {
+                setAssignment(response.data.data.lecture_assignment)
+                setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
+            }
+            setIsLoading(false)
+            // console.log(response.data)
+        }).catch(error => {
+            setIsLoading(false)
+        })
+    }
+
 
     const submitHandler = async (e) => {
         e.preventDefault()
 
         setIsLoading(true)
-        let endpoint = '/assignments/add'
+        let endpoint = '/assignments/update'
 
         let args2 = {
             headers: {
                 'Token': userToken,
                 'Content-Type': 'multipart/form-data',
             },
+            params: {
+                assignment_id: assignment_id
+            }
         }
 
-        var assignmentTitle = document.querySelector("#new-assignment-title"); // Get the file input
-        var assignmentDescription = document.querySelector("#new-assignment-description"); // Get the file input
         var assignmentAttachment = document.querySelector("#new-assignment-attachment"); // Get the file input
-        var assignmentCourse = document.querySelector("#new-assignment-course"); // Get the file input
-        var assignmentDueDate = document.querySelector("#new-assignment-due-date"); // Get the file input
 
         var formData = new FormData();
         formData.append("attachments[]", assignmentAttachment.files[0]);
-        formData.append("course_id", assignmentCourse.value);
-        formData.append("assignment_title", assignmentTitle.value);
-        formData.append("assignment_description", assignmentDescription.value);
-        formData.append("due_date", assignmentDueDate.value);
+        formData.append("course_id", assignment.course_id);
+        formData.append("assignment_title", assignment.assignment_title);
+        formData.append("assignment_description", assignment.assignment_description);
+        formData.append("due_date", assignment.due_date);
+
+        // console.log("State: "+formData.course_id)
 
         await axios.post(
             BACKEND_BASE_URL + endpoint,
             formData,
             args2
         ).then(response => {
-            if (response.data.code === 'assignment_created') {
-                setResponseMessage(response.data.message)
+            if (response.data.code === 'assignment_updated') {
+                setResponseOKMessage(response.data.message)
                 setResponseOK(true)
+                setResponseError(false)
             }
             setIsLoading(false)
-            document.getElementById("assignment-form").reset()
+            // document.getElementById("assignment-form").reset()
 
-            // console.log(response.data)
+            console.log(response.data);
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
-                setResponseMessage(error.response.data.message)
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
                 setResponseOK(false)
             }
             else {
-                setResponseMessage("Sorry, we cannot create the assignment at the moment. Please try again later.")
+                setResponseErrorMessage("Sorry, we could not update the assignment at the moment. Please try again later.")
+                setResponseError(true)
                 setResponseOK(false)
             }
 
@@ -116,36 +158,64 @@ const NewAssignment = () => {
         })
     }
 
+    const textOnchange = (e) => {
+        switch(e.target.id){
+            case 'new-assignment-title':
+                setAssignment({
+                    assignment_title: e.target.value,
+                })
+                break;
+            case 'new-assignment-description':
+                setAssignment({
+                    assignment_description: e.target.value,
+                })
+                break;
+            case 'new-assignment-course':
+                setAssignment({
+                    course_id: e.target.value,
+                })
+                break;
+            case 'new-assignment-due-date':
+                setAssignment({
+                    due_date: e.target.value,
+                })
+            break;
+
+            default:;
+        }
+    }
+
 
     return (
         <>
             {loadingModal(isLoading)}
-            {responseOK && (<div className="alert alert-success mb-2">
-                {responseMessage}
-            </div>)}
-            {responseOK === false && (<div className="alert alert-danger mb-2">
-                {responseMessage}
-            </div>)}
+            {responseOK && <div className="alert alert-success col-12">
+                    {responseOKMessage}
+                </div>}
+
+            {responseError && <div className="alert alert-danger col-12">
+                {responseErrorMessage}
+            </div>}
             <form id="assignment-form" action="" onSubmit={submitHandler}>
                 <div className="row shadow p-4 m-md-3 rounded">
                     <div className="col-12 col-md-8 pr-3">
                         <div className="form-group">
                             <label htmlFor="vc-title">Title:</label>
-                            <input className="form-control" type="text" placeholder="Enter title..."
+                            <input value={assignment.assignment_title} onChange={textOnchange} className="form-control" type="text" placeholder="Enter title..."
                                    id="new-assignment-title" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-description">Description:</label>
-                            <textarea className="form-control" rows="8" id="new-assignment-description"
+                            <textarea value={assignment.assignment_description} onChange={textOnchange} className="form-control" rows="8" id="new-assignment-description"
                                       placeholder="Enter description..." required></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="vc-lecture-url">Document Attachment:</label>
+                            <label htmlFor="vc-lecture-url">Attach New Document:</label>
                             <input type="file" id="new-assignment-attachment" className="form-control mb-3" />
                         </div>
 
                         <div className="d-none d-md-block">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Update Assignment" className="btn btn-primary" />
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
@@ -153,7 +223,7 @@ const NewAssignment = () => {
                         <div className="form-group">
                             {/*TODO: Fetch only assigned courses here*/}
                             <label htmlFor="new-assignment-course">Course:</label>
-                            <select className="form-control" id="new-assignment-course">
+                            <select className="form-control" id="new-assignment-course" onChange={textOnchange}>
                                 <option value="">Select course</option>
                                 {courses && courses.map((course, index) => <option value={`${course.course_id}`}
                                                                             key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
@@ -161,11 +231,11 @@ const NewAssignment = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-date">Due Date:</label>
-                            <input className="form-control" type="date" id="new-assignment-due-date" required />
+                            <input value={assignment.due_date} className="form-control" onChange={textOnchange} type="date" id="new-assignment-due-date" required />
                         </div>
 
                         <div className="d-md-none">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Update Assignment" className="btn btn-primary" />
                         </div>
                     </div>
                 </div>
@@ -174,4 +244,4 @@ const NewAssignment = () => {
     );
 };
 
-export default NewAssignment;
+export default EditAssignment;

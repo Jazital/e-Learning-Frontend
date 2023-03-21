@@ -12,7 +12,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 
 
-function Assignment() {
+function AssignmentSubmissions() {
     // assignment_id
 
     localStorage.setItem('page_title', 'Assignment');
@@ -25,7 +25,7 @@ function Assignment() {
     let endpoint = ''
     let args = {}
 
-    let userToken = localStorage.getItem('userToken');
+    let userToken = localStorage.getItem('userToken') || '';
 
     args = {
         headers: {
@@ -53,7 +53,7 @@ function Assignment() {
 
     useEffect(() => {
         fetchAssignment();
-    }, [submissionResponse])
+    }, [])
 
     const fetchAssignment = async () => {
 
@@ -71,8 +71,6 @@ function Assignment() {
         })
     }
 
-
-    
     async function handleAssignmentSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
@@ -118,9 +116,19 @@ function Assignment() {
     }
 
     return (<>
-            <div className="pb-4">
-                {userRole=="student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link> }
-                {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
+            <div className="row">
+                <div className="col-xl-12 col-lg-12 col-sm-12">
+                    <div className="row justify-content-between">
+                        <div className="pb-4">
+                            {userRole == "lecturer" &&
+                            <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link>}
+                        </div>
+                        <div className="pb-4">
+                            {userRole === "lecturer" && <Link to={`/assignment/edit/${assignment_id}`} className="btn btn-warning" onClick={()=>{
+                        }}>Modify</Link>}
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className='the col-xl-10 col-lg-12 col-sm-12'>
@@ -138,7 +146,7 @@ function Assignment() {
                         <div className="centercoursetext mb-2">
                             {
                                 assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}>
-                                    Download Assignment
+                                    View Assignment Attachment
                                 </a>)
                             }
 
@@ -159,21 +167,18 @@ function Assignment() {
                 </Card>
                 <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
                     <div className="centercoursetext">
-                        <h2 className="pb-3">Submit Assignment</h2>
+                        <h2 className="pb-3">Upload Assignment Score</h2>
                         {submissionResponse.status === "success" && (<div className="alert alert-success mb-2">
                             {submissionResponse.message}
                         </div>)}
                         {submissionResponse.status === "error" && (<div className="alert alert-danger mb-2">
                             {submissionResponse.message}
                         </div>)}
-                        <p className="pb-0 pt-1">Upload your assignment below to submit</p>
+                        <p className="pb-0 pt-1">Upload the CSV file having the assignment scores.</p>
                     </div>
                     <form onSubmit={handleAssignmentSubmit}>
                         <input type="file" id="assignment-file-input" className="form-control mb-3" />
-                        <label htmlFor="assignment-comment-input">Comment (optional)</label>
-                        <textarea rows="5" id="assignment-comment-input" className="form-control mb-3"
-                                  placeholder="Enter your comment here..."></textarea>
-                        <input className="btn btn-primary" type="submit" value="Submit Assignment" />
+                        <input className="btn btn-primary" type="submit" value="Submit Scores" />
                     </form>
 
                 </div>
@@ -182,4 +187,4 @@ function Assignment() {
     )
 }
 
-export default Assignment
+export default AssignmentSubmissions

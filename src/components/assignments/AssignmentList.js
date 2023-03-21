@@ -14,6 +14,10 @@ const AssignmentList = () => {
      };*/
     localStorage.setItem('page_title', 'Assignments');
     let userRole = localStorage.getItem('userRole');
+    const [responseOK, setResponseOK] = useState(null);
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
     const {course_id} = useParams();
 
@@ -75,6 +79,59 @@ const AssignmentList = () => {
         })
     }
 
+    const handleAssignmentDelete = async (assignmentID) => {
+
+        setIsLoading(true)
+        // return console.log(assignmentID)
+
+
+        endpoint = '/assignments/delete';
+
+        let args2 = {
+            headers: {
+                'Token': userToken,
+                'Content-Type': 'multipart/form-data',
+            },
+            params: {
+                assignment_id: assignmentID
+            }
+        }
+
+        await axios.delete(
+            BACKEND_BASE_URL + endpoint,
+            args2
+        ).then(response => {
+            if (response.data.code === 'assignment_deleted') {
+                setResponseOKMessage(response.data.message)
+                setResponseOK(true)
+                setResponseError(false)
+            }
+            else{
+                setResponseErrorMessage(response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
+            }
+            setIsLoading(false)
+
+            console.log(response.data.data)
+        }).catch(error => {
+            // console.error(error)
+            if(error.response.data.message){
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
+            }
+            else{
+                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseError(true)
+                setResponseOK(false)
+            }
+
+            setIsLoading(false)
+        })
+    }
+
+
 
     const columns = [
         {
@@ -123,8 +180,18 @@ const AssignmentList = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
-                        }}>view</Link>
+                        {userRole === "student" && <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
+                        }}>view</Link>}
+
+                        {userRole === "lecturer" && <Link to={`/assignment/submission/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary" onClick={()=>{
+                        }}>view</Link>}
+
+
+                        {userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning" onClick={()=>{
+                        }}>modify</Link>}
+
+                        {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger" onClick={() => {if(window.confirm('Are you sure to delete this record?')){ handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)};}}>delete</Link>}
+
                     </>
                 )
             }
@@ -162,6 +229,15 @@ const AssignmentList = () => {
     return (
         <div>
             {loadingModal(isLoading)}
+
+            {responseOK && <div className="alert alert-success col-12">
+                    {responseOKMessage}
+                </div>}
+
+                {responseError && <div className="alert alert-danger col-12">
+                    {responseErrorMessage}
+                </div>}
+
             <div className="pb-4">
                 {userRole=="lecturer" && <Link to={'/new-assignment'} className="btn btn-primary">New Assignment</Link> }
             </div>
