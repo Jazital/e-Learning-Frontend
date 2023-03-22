@@ -17,8 +17,8 @@ function toTitleCase(string) {
 
 
 const CourseMaterialTable = (props) => {
-    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
     let endpoint = ''
     let args = {}
 

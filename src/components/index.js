@@ -25,15 +25,6 @@ import CourseMaterials from "./course-materials/CourseMaterials";
 import DiscussionBoard from "./discussion-board/DiscussionBoard";
 import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
 import TimeTable from "./time-table/TimeTable";
-
-//Staff profile
-// import SubmittedAssignment from "./lecturers/Courses/table/AssignmentList";
-// import AssignedCourse from "./lecturers/Courses/AssignedCourses";
-// import OnlineClasses from "./lecturers/virtual-classroom/OnlineClass";
-// import UploadAssignment from "./lecturers/Courses/UploadAssignment";
-// import SProfile from "./lecturers/Dashboard/Profile/SProfile";
-// import ProtectedContainers from "./lecturers/hoc/ProtectedContainerss";
-// import CourseMats from "./lecturers/Courses/CourseMat";
 import CourseRegistration from "./courses/CourseRegistration";
 import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 import SingleVirtualClassroom from "./virtual-classroom/SingleVirtualClassroom";

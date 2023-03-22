@@ -31,11 +31,13 @@ const SubmittedAssignments = () => {
 
 
 
-    const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    // const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
+    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+
+    var scoreCSVSampleURL = BACKEND_BASE_URL.slice(0, -7);
 
     // URL to sample file for the uploading of students scores
-    var scoreCSVSampleURL = "http://elearning-backend.local/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv"
+    // var scoreCSVSampleURL = "http://elearning-backend.local/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv"
 
 
     let userToken = localStorage.getItem('userToken') || '';
