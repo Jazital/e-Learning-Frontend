@@ -155,7 +155,7 @@ const SubmittedAssignments = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole === "lecturer" && <Link to={`/${submissions[tableMeta.rowIndex].attachments[0].file_uri}`} className="btn btn-primary">Download attachment</Link>}
+                        {userRole === "lecturer" && <Link to={`/${submissions[tableMeta.rowIndex].attachments[0].file_uri}`} className="btn btn-primary">Download solution</Link>}
                     </>
                 )
             }

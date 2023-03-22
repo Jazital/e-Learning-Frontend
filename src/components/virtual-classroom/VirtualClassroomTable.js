@@ -12,6 +12,13 @@ const VirtualClassroomTable = (props) => {
 
     let userToken = localStorage.getItem('userToken') || '';
     let userRole = localStorage.getItem('userRole');
+    const [lectures, setLectures] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+    const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
+    const [responseOK, setResponseOK] = useState(null);
+    const [responseOKMessage, setResponseOKMessage] = useState('');
+    const [responseError, setResponseError] = useState(null);
+    const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
         if (props.courseID) {
             args = {
@@ -33,9 +40,6 @@ const VirtualClassroomTable = (props) => {
             endpoint = '/lectures/fetch-student-upcoming-lectures';
         }
 
-    const [lectures, setLectures] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
-    const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
@@ -97,11 +101,64 @@ const VirtualClassroomTable = (props) => {
         })
     }
 
-    const modifyLecture = (e) => {
+    const modifyLecture = (lectureId) => {
         console.log("Modify lecture clicked")
     }
-    const deleteLecture = (e) => {
-        console.log("Delete lecture clicked")
+
+    const deleteLecture = async (lectureId) => {
+
+        setIsLoading(true)
+        // return console.log(assignmentID)
+
+
+        endpoint = '/lectures/delete';
+
+        let args2 = {
+            headers: {
+                'Token': userToken,
+                'Content-Type': 'multipart/form-data',
+            },
+            params: {
+                lecture_id: lectureId
+            }
+        }
+
+        await axios.delete(
+            BACKEND_BASE_URL + endpoint,
+            args2
+        ).then(response => {
+            if (response.data.code === 'lecture_deleted') {
+                setResponseOKMessage(response.data.message)
+                setResponseOK(true)
+                setResponseError(false)
+
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 2000)
+            }
+            else{
+                setResponseErrorMessage(response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
+            }
+            setIsLoading(false)
+
+            console.log(response.data.data)
+        }).catch(error => {
+            // console.error(error)
+            if(error.response.data.message){
+                setResponseErrorMessage(error.response.data.message)
+                setResponseError(true)
+                setResponseOK(false)
+            }
+            else{
+                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseError(true)
+                setResponseOK(false)
+            }
+
+            setIsLoading(false)
+        })
     }
 
     const columns = [
@@ -162,17 +219,18 @@ const VirtualClassroomTable = (props) => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                       className="btn btn-primary">Start</a>}
+                                                       className="btn btn-primary">Start Lecture</a>}
                         {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
                                                        className="btn btn-warning">Modify</a>}
-                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
-                            setIsLoading(true);
-                            return deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
-                        }}
-                                                       className="btn btn-danger">Delete</a>}
+
+                        {userRole === "lecturer" && <a href={`#`} 
+                        
+                        onClick={() => {if(window.confirm('Are you sure to delete this record?')){ deleteLecture(lectures[tableMeta.rowIndex].lecture_id)};}}
+                        
+                        className="btn btn-danger">Delete</a>}
 
 
                     </>
@@ -213,6 +271,15 @@ const VirtualClassroomTable = (props) => {
     return (
         <div>
             {loadingModal(isLoading)}
+
+            {responseOK && <div className="alert alert-success col-11">
+                    {responseOKMessage}
+                </div>}
+
+                {responseError && <div className="alert alert-danger col-11">
+                    {responseErrorMessage}
+                </div>}
+
             <MUIDataTable
                 title={"Upcoming Lecturers"}
                 data={data2}

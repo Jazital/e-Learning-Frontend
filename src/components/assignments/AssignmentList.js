@@ -106,6 +106,10 @@ const AssignmentList = () => {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
                 setResponseError(false)
+
+                setTimeout(()=>{
+                    window.location.reload(false);
+                }, 2000)
             }
             else{
                 setResponseErrorMessage(response.data.message)
@@ -131,8 +135,6 @@ const AssignmentList = () => {
             setIsLoading(false)
         })
     }
-
-
 
     const columns = [
         {
