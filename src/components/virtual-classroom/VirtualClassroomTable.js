@@ -220,11 +220,11 @@ const VirtualClassroomTable = (props) => {
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
                                                        className="btn btn-primary">Start Lecture</a>}
-                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
+                        {/*{userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                                                       className="btn btn-warning">Modify</a>}
+                                                       className="btn btn-warning">Modify</a>}*/}
 
                         {userRole === "lecturer" && <a href={`#`}
 

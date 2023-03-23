@@ -187,10 +187,9 @@ const AssignmentList = () => {
 
                         {userRole === "lecturer" && <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">score & submissions</Link>}
 
-                        {userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}
+                        {/*{userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}*/}
 
                         {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger" onClick={() => {if(window.confirm('Are you sure to delete this record?')){ handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)};}}>delete</Link>}
-
                     </>
                 )
             }

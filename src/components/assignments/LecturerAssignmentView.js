@@ -83,7 +83,7 @@ function LecturerAssignmentView() {
                             <Link to={'/assignment-list'} className="btn btn-primary">Back to assignments</Link>}
                         </div>
                         <div className="pb-4">
-                            {userRole === "lecturer" && <Link to={`/assignment/edit/${assignment_id}`} className="btn btn-warning">Modify</Link>}
+                            {/*{userRole === "lecturer" && <Link to={`/assignment/edit/${assignment_id}`} className="btn btn-warning">Modify</Link>}*/}
                         </div>
                     </div>
                 </div>
