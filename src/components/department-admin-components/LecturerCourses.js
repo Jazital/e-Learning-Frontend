@@ -4,6 +4,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from "react-router-dom"
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const LecturerCourses = () => {
     localStorage.setItem('page_title', 'Assigned Courses');
@@ -15,8 +16,7 @@ const LecturerCourses = () => {
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = ''
     // Get ID from URL
@@ -43,7 +43,7 @@ const LecturerCourses = () => {
                 "department_id": department_id,
             },
         }
-        
+
         // Making request to backend API
         axios.get(
             BACKEND_BASE_URL + endpoint,

@@ -12,6 +12,7 @@ import classroom from "../../images/HomePageIcons/classroom.png"
 import pendinassingment from "../../images/HomePageIcons/pendinassingment.png"
 import discussion from "../images/discussion board icondiscussionboard.png"
 import coursematerial from "../images/Vectorcourses.png"
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 const SingleCourse = (props) => {
@@ -33,8 +34,7 @@ const SingleCourse = (props) => {
 
     document.title = localStorage.getItem('page_title')
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
     useEffect(() => {
         setTimeout(() => {

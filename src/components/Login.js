@@ -6,6 +6,7 @@ import {Modal} from "react-bootstrap";
 import logo from "./images/ospolylogo.png"
 
 import "./login.css";
+import {JazitalBackendBaseURL} from "./helpers/Constants";
 
 const Login = () => {
     document.title = 'Login - Osun State Polytechnic';
@@ -13,9 +14,7 @@ const Login = () => {
     const history = useHistory();
 
     const [isLoading, setIsLoading] = useState(false);
-
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     const endpoint = '/auth/login';
 
     const [login, setLogin] = useState(

@@ -4,6 +4,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import MUIDataTable from "mui-datatables";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const CourseRegistration = () => {
     localStorage.setItem('page_title', 'Course Registration');
@@ -15,9 +16,8 @@ const CourseRegistration = () => {
     const [courses, setCourses] = useState([])
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
-    
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = ''
 
@@ -125,7 +125,7 @@ const CourseRegistration = () => {
         setSelectedSemester(newSemester);
         // console.log(newSemester)
 
-        // var newFilter = 
+        // var newFilter =
         // setTableCourses()
 
 
@@ -146,7 +146,7 @@ const CourseRegistration = () => {
 
         setTableCourses(newCourses);
     }
-    
+
 
     function toggleCheckboxes(source) {
         var checkboxes = document.getElementsByName('foo');

@@ -219,36 +219,3 @@ const Markup = () => {
 };
 
 export default Markup;
-
-
-// <ProtectedContainers>
-//     <Route
-//         path={`/uploadAssignment`}
-//         component={<Upload_Assignment}
-//     />
-//
-//     <Route
-//         path={`/sprofile`}
-//         component={<SProfile}
-//     />
-//     <Route
-//         path={`/AssignedCourse`}
-//         component={<AssignedCourse}
-//     />
-//     <Route
-//         path={`/Submitted-Assignment`}
-//         component={<SubmittedAssignment}
-//     />
-//     <Route
-//         path={`/coursemats`}
-//         component={<CourseMats}
-//     />
-//     <Route
-//         path={`/OnlineClasses`}
-//         component={<OnlineClasses}
-//     />
-// </ProtectedContainers>
-
-
-
-

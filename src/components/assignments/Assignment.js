@@ -10,6 +10,7 @@ import {Link, useParams} from "react-router-dom";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 function Assignment() {
@@ -20,8 +21,7 @@ function Assignment() {
 
     const {assignment_id} = useParams();
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = {}
 
@@ -74,7 +74,7 @@ function Assignment() {
     }
 
 
-    
+
     async function handleAssignmentSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
@@ -156,7 +156,7 @@ function Assignment() {
 
                             </p>
                         </div>
-                        
+
                     </div>
                 </Card>
                 <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>

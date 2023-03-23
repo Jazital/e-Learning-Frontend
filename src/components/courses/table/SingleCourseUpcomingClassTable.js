@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {JazitalBackendBaseURL} from "../../helpers/Constants";
 
 const SingleCourseUpcomingClassTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
@@ -13,8 +14,7 @@ const SingleCourseUpcomingClassTable = (props) => {
     const [lectures, setLectures] = useState([])
     const [attendanceSubmitted, setAttendanceSubmitted] = useState(false)
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = ''
 

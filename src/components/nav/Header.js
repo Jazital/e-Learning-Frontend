@@ -6,6 +6,7 @@ import profile from "../images/user.png"
 import wait from "../images/wait.png"
 import {Modal} from "react-bootstrap";
 import axios from "axios";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
     var path = window.location.pathname.split("/");
@@ -21,8 +22,7 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
 
     var page_name = (finalName.join(" ") === '') ? 'Dashboard' : finalName.join(" ");
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
     useEffect(() => {
         verifyCopyright();

@@ -6,6 +6,7 @@ import {Modal} from "react-bootstrap";
 
 import "../CSS/Home.css";
 import coursematerial from "../images/Vectorcourses.png"
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const EnrolledCourses = () => {
     localStorage.setItem('page_title', 'Enrolled Courses');
@@ -15,9 +16,7 @@ const EnrolledCourses = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [courses, setCourses] = useState(null)
 
-
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
     useEffect(() => {
         setTimeout(() => {

@@ -5,6 +5,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from "react-router-dom"
 import { VapingRooms } from "@mui/icons-material";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const ModifyAssignedCourses = () => {
     localStorage.setItem('page_title', 'Assign New Courses');
@@ -18,8 +19,7 @@ const ModifyAssignedCourses = () => {
     const [tableCourses, setTableCourses] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = ''
 
@@ -47,7 +47,7 @@ const ModifyAssignedCourses = () => {
                 "department_id": department_id,
             }
         }
-        
+
         // Making request to backend API
         axios.get(
             BACKEND_BASE_URL + endpoint,
@@ -149,9 +149,9 @@ const ModifyAssignedCourses = () => {
             <div className="col-lg-12">
             <div className="row my-3">
             </div>
-            
+
                 <div className="row mb-3">
-                <h4 className="alert alert-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</h4> 
+                <h4 className="alert alert-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned to this lecturer***</h4>
 
                 {responseOK && <div className="alert alert-success col-11">
                     {responseOKMessage}
@@ -160,7 +160,7 @@ const ModifyAssignedCourses = () => {
                 {responseError && <div className="alert alert-danger col-11">
                     {responseErrorMessage}
                 </div>}
-                       
+
                     <div className="col-12 col-lg-6">
                     </div>
                     <div className="col-12 col-lg-6 text-right">
@@ -180,7 +180,7 @@ const ModifyAssignedCourses = () => {
                         <td>Unit</td>
                         <td>Semester</td>
                         </thead>
-                        
+
                         <tbody>
                             {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
                         {tableCourses.map((course, index) =>  (

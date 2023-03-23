@@ -5,11 +5,11 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from 'react-router-dom';
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 const ContinuousAssessmentTable = (props) => {
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = {}
 
@@ -47,7 +47,7 @@ const ContinuousAssessmentTable = (props) => {
                 setAssessments(response.data.data.assessments_fetched)
             }
             setIsLoading(false)
-        
+
         }).catch(error => {
             // console.error(error)
             setIsLoading(false)

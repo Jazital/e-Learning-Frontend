@@ -3,10 +3,10 @@ import MUIDataTable from "mui-datatables";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const VirtualClassroomTable = (props) => {
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = {}
 
@@ -226,10 +226,10 @@ const VirtualClassroomTable = (props) => {
                         }}
                                                        className="btn btn-warning">Modify</a>}
 
-                        {userRole === "lecturer" && <a href={`#`} 
-                        
+                        {userRole === "lecturer" && <a href={`#`}
+
                         onClick={() => {if(window.confirm('Are you sure to delete this record?')){ deleteLecture(lectures[tableMeta.rowIndex].lecture_id)};}}
-                        
+
                         className="btn btn-danger">Delete</a>}
 
 

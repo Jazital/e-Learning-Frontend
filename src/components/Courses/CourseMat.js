@@ -9,7 +9,7 @@ const CourseMat = () => {
     localStorage.setItem('page_title', 'CSC 401 Doc');
     return (
 
-        <div className="row ">
+        <div className="row">
             <Card border="light" className='asgn1 main-body-card col-xl-8 col-lg-12 col-sm-12' id="assignn">
                 <div>
                     <div>

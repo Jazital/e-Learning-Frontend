@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const NewVirtualClassroom = () => {
     localStorage.setItem('page_title', 'New Virtual Classroom');
@@ -12,8 +13,7 @@ const NewVirtualClassroom = () => {
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken') || '';
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
     const [responseOK, setResponseOK] = useState(null);
     const [responseMessage, setResponseMessage] = useState('');
@@ -78,11 +78,11 @@ const NewVirtualClassroom = () => {
             // console.log(response.data)
         }).catch(error => {
             console.error(error)
-            if(error.response.data.message){
+            if (error.response.data.message) {
                 setResponseMessage(error.response.data.message)
                 setResponseOK(false)
             }
-            else{
+            else {
                 setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseOK(false)
             }
@@ -161,7 +161,8 @@ const NewVirtualClassroom = () => {
                             <label htmlFor="vc-course-id">Course:</label>
                             <select className="form-control" id="vc-course-id">
                                 <option value="null">Select course</option>
-                                {courses && courses.map((course, index) =><option key={index} value={`${course.course_id}`} >{`${course.course_code} - ${course.course_title}`}</option>)}
+                                {courses && courses.map((course, index) => <option key={index}
+                                                                                   value={`${course.course_id}`}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
                         <div className="form-group">

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import Nav from "../nav";
 import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 function ProtectedContainer(props) {
     const history = useHistory();
@@ -15,8 +16,7 @@ function ProtectedContainer(props) {
 
     const [signedIn, setSignedIn] = useState(true);
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
     useEffect(() => {
         let stateUpdated = false;

@@ -7,13 +7,13 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import coursematerial from "../images/Vectorcourses.png"
 import axios from "axios";
 import Card from 'react-bootstrap/Card';
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 const SubmittedAssignments = () => {
     const {assignment_id} = useParams();
 
     const history = useHistory();
-
 
     localStorage.setItem('page_title', 'Assignment Submissions');
     let userRole = localStorage.getItem('userRole');
@@ -30,18 +30,13 @@ const SubmittedAssignments = () => {
     }); // either success or failed
 
 
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
-
-    var scoreCSVSampleURL = BACKEND_BASE_URL.slice(0, -7);
-
-    // URL to sample file for the uploading of students scores
-    // var scoreCSVSampleURL = "http://elearning-backend.local/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv"
+    var scoreCSVSampleURL = BACKEND_BASE_URL.slice(0, -7)+"/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv";
 
 
     let userToken = localStorage.getItem('userToken') || '';
-    
+
 
     const [submissions, setSubmissions] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -261,7 +256,7 @@ const SubmittedAssignments = () => {
                 columns={columns}
                 options={options}
                 pagination
-            /> 
+            />
 
             <div className="d-flex">
                 <Card border="light" className='main-body-card col-xl-6 col-lg-6 col-sm-12'>
@@ -292,7 +287,7 @@ const SubmittedAssignments = () => {
 
                             </p>
                         </div>
-                        
+
                     </div>
                 </Card>
 
@@ -318,7 +313,7 @@ const SubmittedAssignments = () => {
                     <a href={scoreCSVSampleURL} className="btn-warning p-2 ps-3">Click here to download scores CSV file sample</a>
                 </div>
             </div>
-            
+
         </div>
     );
 };

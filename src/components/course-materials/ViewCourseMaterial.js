@@ -13,6 +13,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import coursematerial from "../images/Vectorcourses.png"
 
 import Card from 'react-bootstrap/Card';
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 
@@ -24,8 +25,7 @@ const ViewCourseMaterial = (props) => {
     // Get ID from URL
     const {material_id} = useParams();
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = {}
 
@@ -79,7 +79,7 @@ const ViewCourseMaterial = (props) => {
             if (response.data.code === 'lecture_document_fetched') {
                 setDocument(response.data.data.lecture_document)
                 setAttachments(response.data.data.lecture_document.attachments)
-                
+
             }
             setIsLoading(false)
         }).catch(error => {
@@ -126,7 +126,7 @@ const ViewCourseMaterial = (props) => {
                             </a>)
                             i++;
                         })
-                    }  
+                    }
                         </div>
                     </div>
 

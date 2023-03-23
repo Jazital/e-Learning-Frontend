@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const EditAssignment = () => {
     localStorage.setItem('page_title', 'Modify Assignment');
@@ -11,8 +12,7 @@ const EditAssignment = () => {
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken');
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
 
     const [responseOK, setResponseOK] = useState(null);
@@ -41,7 +41,7 @@ const EditAssignment = () => {
             fetchAssignment();
             fetchAssignedCourses();
         },500);
-        
+
     }, [])
 
     const fetchAssignment = async () => {

@@ -6,13 +6,13 @@ import {Link, useHistory} from "react-router-dom";
 /// image
 import logo from "../images/ospolylogo.png";
 import axios from "axios";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const NavHader = () => {
     const [toggle, setToggle] = useState(false);
     const history = useHistory();
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = "/courses/all";
 
     let userToken = localStorage.getItem('userToken') || '';

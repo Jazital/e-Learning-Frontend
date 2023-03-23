@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 const NewCourseMaterial = () => {
     localStorage.setItem('page_title', 'New Document');
@@ -11,8 +12,7 @@ const NewCourseMaterial = () => {
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken');
 
-    // const BACKEND_BASE_URL = "http://elearning-backend.local/api/v1";
-    const BACKEND_BASE_URL = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+    const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
 
     const [responseOK, setResponseOK] = useState(null);
@@ -28,7 +28,7 @@ const NewCourseMaterial = () => {
             </Modal>
         );
     };
-    
+
     useEffect(() => {
         setTimeout(() => {
             fetchAssignedCourses();
@@ -48,11 +48,11 @@ const NewCourseMaterial = () => {
             },
         }
 
-        var documentAttachments = document.querySelector("#document-attachments"); // 
-        var documentCourseID = document.querySelector("#document-course-id"); // 
-        var documentTitle = document.querySelector("#document-title"); // 
-        var documentDescription = document.querySelector("#document-description"); // 
-        var documentType = document.querySelector("#document-type"); // 
+        var documentAttachments = document.querySelector("#document-attachments"); //
+        var documentCourseID = document.querySelector("#document-course-id"); //
+        var documentTitle = document.querySelector("#document-title"); //
+        var documentDescription = document.querySelector("#document-description"); //
+        var documentType = document.querySelector("#document-type"); //
 
         var formData = new FormData();
         formData.append("attachments[]", documentAttachments.files[0]);
