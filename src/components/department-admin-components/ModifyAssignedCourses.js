@@ -172,14 +172,16 @@ const ModifyAssignedCourses = () => {
                         <form onSubmit={submitAssignedCourses}>
                         <table
                         className="table table-borderless table-hover table-responsive table-striped table-">
-                        <thead>
-                        <td></td>
-                        <td>S/N</td>
-                        <td>Code</td>
-                        <td>Title</td>
-                        <td>Unit</td>
-                        <td>Semester</td>
-                        </thead>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>S/N</th>
+                                <th>Code</th>
+                                <th>Title</th>
+                                <th>Unit</th>
+                                <th>Semester</th>
+                            </tr>
+                            </thead>
 
                         <tbody>
                             {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}

@@ -16,6 +16,7 @@ const StaffAssignedCourses = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [courses, setCourses] = useState(null)
+    const [tableCourses, setTableCourses] = useState([])
 
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
@@ -44,15 +45,16 @@ const StaffAssignedCourses = () => {
         ).then((res) => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
+                setTableCourses(res.data.data.courses);
                 setIsLoading(false)
             }
             else {
-                console.log("No course(s) found!")
+                // console.log("No course(s) found!")
                 setIsLoading(false)
             }
             // console.log(res.data)
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
             setIsLoading(false)
         })
     }
@@ -65,11 +67,30 @@ const StaffAssignedCourses = () => {
         );
     };
 
+    const filterCoursesOnchange = (e) => {
+        var searchQuery = e.target.value;
+        var newCourses = courses.filter(course => {
+            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) || (course.course_title.toLowerCase().includes(searchQuery.toLowerCase())));
+        })
+        setTableCourses(newCourses);
+    }
+
     return (
         <>
             {loadingModal(isLoading)}
+
+            <div className="row mb-3">
+                <div className="col-12 col-lg-6">
+
+                </div>
+                <div className="col-12 col-lg-6 text-right">
+                    <input className="form-control" onChange={filterCoursesOnchange} type="search"
+                           id="course-ajax-search-input" placeholder="Search courses..." />
+                </div>
+            </div>
+
             <div className="row">
-                {courses && courses.map((course, index) => <div key={index}
+                {tableCourses && tableCourses.map((course, index) => <div key={index}
                                                          className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <Link to={`/single-course/${course['course_id']}`}>
                         <div className="card overflow-hidden">

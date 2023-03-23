@@ -44,12 +44,12 @@ const StaffAssignedCourses = () => {
                 setIsLoading(false)
             }
             else {
-                console.log("No course(s) found!")
+                // console.log("No course(s) found!")
                 setIsLoading(false)
             }
             // console.log(res.data)
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
             setIsLoading(false)
         })
     }

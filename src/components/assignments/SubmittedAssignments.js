@@ -110,40 +110,40 @@ const SubmittedAssignments = () => {
             name: "Number",
             label: "S/N",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "MatricNumber",
             label: "Mat. No",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Name",
             label: "Name ",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Score",
             label: "Score",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "SubmissionDate",
             label: "Submission Date",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
@@ -277,15 +277,15 @@ const SubmittedAssignments = () => {
 
                         </div>
                         <div id="firstAssignText">
-                            <p>
+                            <div>
                             <strong> Title: {assignment.assignment_title}</strong> <br />
                                 <strong> Course: {assignment.course_code}</strong> <br />
                                 Assigned Date: {assignment.creation_date} <br />
                                 <strong>Due Date: {assignment.due_date}</strong> <br />
                                 <strong>Description:</strong> <br />
-                                <p>{assignment.assignment_description}</p>
+                                <div>{assignment.assignment_description}</div>
 
-                            </p>
+                            </div>
                         </div>
 
                     </div>

@@ -79,7 +79,7 @@ const NewCourseMaterial = () => {
             }
             setIsLoading(false)
 
-            console.log(response.data)
+            // console.log(response.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {

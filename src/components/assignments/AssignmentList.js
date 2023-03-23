@@ -118,7 +118,7 @@ const AssignmentList = () => {
             }
             setIsLoading(false)
 
-            console.log(response.data.data)
+            // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
             if(error.response.data.message){
@@ -141,40 +141,40 @@ const AssignmentList = () => {
             name: "Number",
             label: "S/N",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Title",
             label: "Title",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Course",
             label: "Courses",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "Status",
             label: "Status",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {
             name: "DueDate",
             label: "Due Date",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
             }
         },
         {

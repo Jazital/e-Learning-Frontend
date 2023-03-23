@@ -134,7 +134,7 @@ const VirtualClassroomTable = (props) => {
 
                 setTimeout(()=>{
                     window.location.reload(false);
-                }, 2000)
+                }, 500)
             }
             else{
                 setResponseErrorMessage(response.data.message)
@@ -143,7 +143,7 @@ const VirtualClassroomTable = (props) => {
             }
             setIsLoading(false)
 
-            console.log(response.data.data)
+            // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
             if(error.response.data.message){

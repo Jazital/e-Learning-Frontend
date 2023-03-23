@@ -47,7 +47,7 @@ const SingleDiscussionBoard = () => {
 
         chatInput.value = ''
         setIsRightBubble(!isRightBubble)
-        console.log(e)
+        // console.log(e)
     }
 
     return (

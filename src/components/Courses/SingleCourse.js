@@ -64,7 +64,7 @@ const SingleCourse = (props) => {
                 setIsLoading(false)
             }
             else {
-                console.log("No course(s) found")
+                // console.log("No course(s) found")
                 setShowContent(false)
                 setIsLoading(false)
             }

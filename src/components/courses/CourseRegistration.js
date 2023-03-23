@@ -71,12 +71,12 @@ const CourseRegistration = () => {
 
         var items = document.getElementsByName("selectedCourses[]");
 
-      var arr=[];
-      for (var i = 0; i < items.length; i++) {
-         if (items[i].type == "checkbox" && items[i].checked == true){
-            arr.push(items[i].value);
-         }
-      }
+        var arr = [];
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == "checkbox" && items[i].checked == true) {
+                arr.push(items[i].value);
+            }
+        }
 
         var data = {
             "course_codes": arr
@@ -103,12 +103,12 @@ const CourseRegistration = () => {
             // console.log(response.data)
         }).catch(error => {
             // console.error(error)
-            if(error.response.data.message){
+            if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
-            else{
+            else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -119,31 +119,11 @@ const CourseRegistration = () => {
     }
 
 
-    const handleSemesterOnchange = (e) => {
-        // setIsLoading(true)
-        var newSemester = e.target.value;
-        setSelectedSemester(newSemester);
-        // console.log(newSemester)
-
-        // var newFilter =
-        // setTableCourses()
-
-
-        // var searchQuery = e.target.value;
-        // var newCourses = courses.filter(course => {
-        //     return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase()))&&(course.course_semester.semester_slug.lowerCase().includes(selectedSemester.toLowerCase())));
-        // })
-        // setIsLoading(false)
-    }
-
     const filterCoursesOnchange = (e) => {
         var searchQuery = e.target.value;
         var newCourses = courses.filter(course => {
-            // return course.course_code.toLowerCase().includes(searchQuery.toLowerCase());
-
-            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase()))&&(course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase())));
-    })
-
+            return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) || (course.course_title.toLowerCase().includes(searchQuery.toLowerCase())));
+        })
         setTableCourses(newCourses);
     }
 
@@ -161,7 +141,7 @@ const CourseRegistration = () => {
         if (isMasterChecked) {
             for (var i = 0; i < allCoursesCheckboxes.length; i++) {
                 var courseCheckbox = document.querySelector(".courses-checkbox").item(i);
-                console.log(courseCheckbox)
+                // console.log(courseCheckbox)
                 // courseCheckbox.checked = true;
             }
         }
@@ -171,11 +151,11 @@ const CourseRegistration = () => {
         <>
             {loadingModal(isLoading)}
             <div className="col-lg-12">
-            <div className="row my-3">
-                <h4 className="text-danger" >*** Please note that clicking on the submit button replace your currently enrolled courses with the selected courses ***</h4>
-            </div>
+                <div className="row my-3">
+                    <h4 className="text-danger">*** Please note that clicking on the submit button replace your currently enrolled courses with the selected courses ***</h4>
+                </div>
 
-            {responseOK && <div className="alert alert-success col-11">
+                {responseOK && <div className="alert alert-success col-11">
                     {responseOKMessage}
                 </div>}
 
@@ -185,10 +165,6 @@ const CourseRegistration = () => {
 
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
-                        {/* <select onChange={handleSemesterOnchange} className="form-control col-md-5 col-12">
-                            <option value="first-semester">First Semester</option>
-                            <option value="second-semester">Second Semester</option>
-                        </select> */}
 
                     </div>
                     <div className="col-12 col-lg-6 text-right">
@@ -200,16 +176,18 @@ const CourseRegistration = () => {
                     <table
                         className="table table-borderless table-hover table-responsive table-striped table-">
                         <thead>
-                        <td></td>
-                        <td>S/N</td>
-                        <td>Code</td>
-                        <td>Title</td>
-                        <td>Unit</td>
-                        <td>Semester</td>
+                        <tr>
+                            <th></th>
+                            <th>S/N</th>
+                            <th>Code</th>
+                            <th>Title</th>
+                            <th>Unit</th>
+                            <th>Semester</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
-                        {tableCourses.map((course, index) =>  (
+
+                        {tableCourses.map((course, index) => (
                             <tr key={index}>
                                 <td><input className="form-check courses-checkbox" name="selectedCourses[]"
                                            value={course.course_code}
