@@ -46,13 +46,8 @@ function ProtectedContainer(props) {
             if (res.data.code === "user_not_signed_in") {
                 setSignedIn(false);
             }
-        }, (failure) => {}).catch(error => {
-            if (error.response.data.code === "user_signed_in") {
-                setSignedIn(true);
-            }
-            if (error.response.data.code === "user_not_signed_in") {
-                setSignedIn(false);
-            }
+        }).catch(error => {
+            
         })
     }
 

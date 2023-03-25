@@ -49,7 +49,6 @@ const StaffAssignedCourses = () => {
                 setIsLoading(false)
             }
             else {
-                // console.log("No course(s) found!")
                 setIsLoading(false)
             }
             // console.log(res.data)

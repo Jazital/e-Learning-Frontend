@@ -64,7 +64,6 @@ const SingleCourse = (props) => {
                 setIsLoading(false)
             }
             else {
-                // console.log("No course(s) found")
                 setShowContent(false)
                 setIsLoading(false)
             }
@@ -117,7 +116,6 @@ const SingleCourse = (props) => {
                                 </div>
                             </div>
                         </div>
-
 
                         <div className=" main-body-card col-12 col-md-4">
                             <div className="card overflow-hidden">

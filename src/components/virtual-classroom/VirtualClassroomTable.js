@@ -106,10 +106,7 @@ const VirtualClassroomTable = (props) => {
     }
 
     const deleteLecture = async (lectureId) => {
-
         setIsLoading(true)
-        // return console.log(assignmentID)
-
 
         endpoint = '/lectures/delete';
 

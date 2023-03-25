@@ -217,18 +217,17 @@ const SubmittedAssignments = () => {
                 setResponseError(false)
 
                 setTimeout(()=>{
-                    window.location.reload(false);
-                }, 2000)
+                //     // window.location.reload(false);
+                }, 3000)
             }
             setIsLoading(false)
-            // console.log(response.data.data.lecture_assignment)
             // console.log(response.data)
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
 
-            // console.error(error.response.status)
+            // console.error(error.response)
             setIsLoading(false)
         })
     }

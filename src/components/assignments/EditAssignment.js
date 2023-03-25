@@ -19,9 +19,6 @@ const EditAssignment = () => {
     const [responseOKMessage, setResponseOKMessage] = useState('');
     const [responseError, setResponseError] = useState(null);
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
-
-    // const [responseOK, setResponseOK] = useState(null);
-    // const [responseMessage, setResponseMessage] = useState('');
     const [assignment, setAssignment] = useState([]);
     const [assignmentDocumentURI, setAssignmentDocumentURI] = useState(null);
     const [courses, setCourses] = useState([]);

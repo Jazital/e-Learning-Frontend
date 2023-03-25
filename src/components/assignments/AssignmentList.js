@@ -9,10 +9,6 @@ import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 const AssignmentList = () => {
-    /*const clickHandler = (e, id) => {
-     e.preventDefault();
-     console.log("Row Id", id);
-     };*/
     localStorage.setItem('page_title', 'Assignments');
     let userRole = localStorage.getItem('userRole');
     const [responseOK, setResponseOK] = useState(null);
@@ -81,10 +77,7 @@ const AssignmentList = () => {
     }
 
     const handleAssignmentDelete = async (assignmentID) => {
-
         setIsLoading(true)
-        // return console.log(assignmentID)
-
 
         endpoint = '/assignments/delete';
 

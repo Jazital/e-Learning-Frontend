@@ -14,8 +14,6 @@ import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 function LecturerAssignmentView() {
-    // assignment_id
-
     localStorage.setItem('page_title', 'Assignment');
     let userRole = localStorage.getItem('userRole');
 
@@ -99,7 +97,6 @@ function LecturerAssignmentView() {
                                  src={coursematerial}
                                  alt=""
                             />
-                            {/*<p className="indicator-open">Open</p>*/}
                         </div>
                         <div className="centercoursetext mb-2">
                             {

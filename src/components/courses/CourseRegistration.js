@@ -141,8 +141,6 @@ const CourseRegistration = () => {
         if (isMasterChecked) {
             for (var i = 0; i < allCoursesCheckboxes.length; i++) {
                 var courseCheckbox = document.querySelector(".courses-checkbox").item(i);
-                // console.log(courseCheckbox)
-                // courseCheckbox.checked = true;
             }
         }
     }

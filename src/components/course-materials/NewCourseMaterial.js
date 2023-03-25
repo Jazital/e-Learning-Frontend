@@ -63,8 +63,6 @@ const NewCourseMaterial = () => {
 
 
         // var value = e.options[e.selectedIndex].value;
-        // setIsLoading(false)
-        // return console.log(documentCourseID.value)
 
         await axios.post(
             BACKEND_BASE_URL + endpoint,

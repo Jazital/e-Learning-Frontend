@@ -3,19 +3,13 @@ import {Link, useParams} from "react-router-dom"
 
 import "../CSS/Home.css";
 import CourseMaterialTable from "./CourseMaterialTable";
-
-
 import MUIDataTable from "mui-datatables";
-
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import coursematerial from "../images/Vectorcourses.png"
-
 import Card from 'react-bootstrap/Card';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
-
-
 
 
 const ViewCourseMaterial = (props) => {
@@ -34,7 +28,7 @@ const ViewCourseMaterial = (props) => {
     if (props.courseID) {
         // A course ID was passed, so we fetch the course materials for the passed course ID; else we fetch all the
         // course materials for all courses.
-        //This is passed in SingleCourseMaterial.js
+        // This is passed in SingleCourseMaterial.js
         args = {
             headers: {
                 'Token': userToken,

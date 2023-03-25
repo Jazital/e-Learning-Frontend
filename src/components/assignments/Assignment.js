@@ -14,7 +14,6 @@ import {JazitalBackendBaseURL} from "../helpers/Constants";
 
 
 function Assignment() {
-    // assignment_id
 
     localStorage.setItem('page_title', 'Assignment');
     let userRole = localStorage.getItem('userRole');
@@ -107,7 +106,6 @@ function Assignment() {
                 setIsLoading(false)
             }
             setIsLoading(false)
-            // console.log(response.data.data.lecture_assignment)
             // console.log(response)
         }).catch(error => {
             setSubmissionResponse({
