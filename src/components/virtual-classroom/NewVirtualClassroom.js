@@ -33,9 +33,38 @@ const NewVirtualClassroom = () => {
         }, 2000)
     }, [])
 
+    const fetchAssignedCourses = async () => {
+        const endpoint = '/courses/assigned';
+        let args = {
+            headers: {
+                'Token': userToken,
+            },
+            params: {
+                'lecturer_id': localStorage.getItem('userID'),
+                'department_id': department_id,
+            },
+        }
+        // Making request to backend API
+        await axios.get(
+            BACKEND_BASE_URL + endpoint,
+            args
+        ).then((res) => {
+            if (res.data.code && res.data.code === "courses_fetched") {
+                setCourses(res.data.data.courses);
+                setIsLoading(false)
+            }
+            else {
+                setIsLoading(false)
+            }
+            // console.log(res)
+        }).catch(error => {
+            // console.log(error)
+            setIsLoading(false)
+        })
+    }
+
     const submitHandler = async (e) => {
         e.preventDefault()
-
 
         var vcTitle = document.querySelector("#vc-title"); // Get the file input
         var vcDescription = document.querySelector("#vc-description"); // Get the file input
@@ -75,7 +104,7 @@ const NewVirtualClassroom = () => {
 
             setIsLoading(false)
 
-            // console.log(response.data)
+            console.log(response)
         }).catch(error => {
             console.error(error)
             if (error.response.data.message) {
@@ -87,36 +116,6 @@ const NewVirtualClassroom = () => {
                 setResponseOK(false)
             }
 
-            setIsLoading(false)
-        })
-    }
-
-    const fetchAssignedCourses = async () => {
-        const endpoint = '/courses/assigned';
-        let args = {
-            headers: {
-                'Token': userToken,
-            },
-            params: {
-                'lecturer_id': localStorage.getItem('userID'),
-                'department_id': department_id,
-            },
-        }
-        // Making request to backend API
-        await axios.get(
-            BACKEND_BASE_URL + endpoint,
-            args
-        ).then((res) => {
-            if (res.data.code && res.data.code === "courses_fetched") {
-                setCourses(res.data.data.courses);
-                setIsLoading(false)
-            }
-            else {
-                setIsLoading(false)
-            }
-            // console.log(res)
-        }).catch(error => {
-            // console.log(error)
             setIsLoading(false)
         })
     }

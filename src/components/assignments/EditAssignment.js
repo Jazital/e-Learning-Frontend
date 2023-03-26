@@ -104,7 +104,7 @@ const EditAssignment = () => {
                 setResponseError(false)
             }
             setIsLoading(false)
-            // document.getElementById("assignment-form").reset()
+            document.getElementById("assignment-form").reset()
 
             // console.log(response.data);
         }).catch(error => {

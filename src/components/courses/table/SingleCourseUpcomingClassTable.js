@@ -93,11 +93,12 @@ const SingleCourseUpcomingClassTable = (props) => {
         }
         let data = {
             'lecture_id': lectureId,
-            // lecturer_id: lecturerID, // TODO: Add lecturer ID conditionally so that it can query only the lecturer's virtual classroom
+            // lecturer_id: lecturerID, // TODO: Add lecturer ID conditionally so that it can query only the lecturer's
+            // virtual classroom
         }
-       await axios.post(
+        await axios.post(
             BACKEND_BASE_URL + endpoint,
-           data,
+            data,
             args
         ).then((res) => {
             if (res.data.code && res.data.code === "attendance_submitted") {
@@ -141,11 +142,11 @@ const SingleCourseUpcomingClassTable = (props) => {
                 setResponseOK(true)
                 setResponseError(false)
 
-                setTimeout(()=>{
-                    window.location.reload(false);
+                setTimeout(() => {
+                    // window.location.reload(false);
                 }, 2000)
             }
-            else{
+            else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -155,12 +156,12 @@ const SingleCourseUpcomingClassTable = (props) => {
             // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
-            if(error.response.data.message){
+            if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
-            else{
+            else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -212,26 +213,26 @@ const SingleCourseUpcomingClassTable = (props) => {
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole=="student" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                        {userRole == "student" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                           className="btn btn-primary">Attend</a>}
-                        {userRole=="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
+                                                     className="btn btn-primary">Attend</a>}
+                        {userRole == "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
-                           className="btn btn-primary">Start</a>}
+                                                      className="btn btn-primary">Start</a>}
                         {/*{userRole=="lecturer" &&<a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() =>  {
-                            setIsLoading(true);
-                            return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
-                        }}
-                           className="btn btn-warning">Modify</a>}*/}
+                         setIsLoading(true);
+                         return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
+                         }}
+                         className="btn btn-warning">Modify</a>}*/}
                         {userRole === "lecturer" && <a href={`#`}
 
-                           onClick={() => {if(window.confirm('Are you sure to delete this record?')){ deleteLecture(lectures[tableMeta.rowIndex].lecture_id)};}}
+                                                       onClick={()=>{deleteLecture(lectures[tableMeta.rowIndex].lecture_id)}}
 
-                           className="btn btn-danger">Delete</a>}
+                                                       className="btn btn-danger">Delete</a>}
                     </>
                 )
             }

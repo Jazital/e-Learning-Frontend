@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 /// React router dom
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {/*BrowserRouter*/ HashRouter as Router, Switch, Route} from "react-router-dom";
 
 /// Css
 import "./index.css";

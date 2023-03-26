@@ -217,7 +217,7 @@ const SubmittedAssignments = () => {
                 setResponseError(false)
 
                 setTimeout(()=>{
-                //     // window.location.reload(false);
+                   window.location.reload(false);
                 }, 3000)
             }
             setIsLoading(false)

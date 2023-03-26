@@ -20,25 +20,25 @@ const VirtualClassroomTable = (props) => {
     const [responseError, setResponseError] = useState(null);
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
-        if (props.courseID) {
-            args = {
-                headers: {
-                    'Token': userToken,
-                },
-                params: {
-                    'course_id': props.courseID,
-                }
+    if (props.courseID) {
+        args = {
+            headers: {
+                'Token': userToken,
+            },
+            params: {
+                'course_id': props.courseID,
             }
-            endpoint = '/lectures/fetch-by-course-id';
         }
-        else {
-            args = {
-                headers: {
-                    'Token': userToken,
-                },
-            }
-            endpoint = '/lectures/fetch-student-upcoming-lectures';
+        endpoint = '/lectures/fetch-by-course-id';
+    }
+    else {
+        args = {
+            headers: {
+                'Token': userToken,
+            },
         }
+        endpoint = '/lectures/fetch-student-upcoming-lectures';
+    }
 
     const loadingModal = (isOpen = false) => {
         return (
@@ -129,11 +129,11 @@ const VirtualClassroomTable = (props) => {
                 setResponseOK(true)
                 setResponseError(false)
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     window.location.reload(false);
-                }, 500)
+                }, 1000)
             }
-            else{
+            else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -143,12 +143,12 @@ const VirtualClassroomTable = (props) => {
             // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
-            if(error.response.data.message){
+            if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
-            else{
+            else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -218,18 +218,15 @@ const VirtualClassroomTable = (props) => {
                         }}
                                                        className="btn btn-primary">Start Lecture</a>}
                         {/*{userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
-                            setIsLoading(true);
-                            return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
-                        }}
-                                                       className="btn btn-warning">Modify</a>}*/}
+                         setIsLoading(true);
+                         return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
+                         }}
+                         className="btn btn-warning">Modify</a>}*/}
 
                         {userRole === "lecturer" && <a href={`#`}
 
-                        onClick={() => {if(window.confirm('Are you sure to delete this record?')){ deleteLecture(lectures[tableMeta.rowIndex].lecture_id)};}}
-
-                        className="btn btn-danger">Delete</a>}
-
-
+                                                       onClick={()=>{deleteLecture(lectures[tableMeta.rowIndex].lecture_id)}}
+                                                       className="btn btn-danger">Delete</a>}
                     </>
                 )
             }
@@ -270,12 +267,12 @@ const VirtualClassroomTable = (props) => {
             {loadingModal(isLoading)}
 
             {responseOK && <div className="alert alert-success col-11">
-                    {responseOKMessage}
-                </div>}
+                {responseOKMessage}
+            </div>}
 
-                {responseError && <div className="alert alert-danger col-11">
-                    {responseErrorMessage}
-                </div>}
+            {responseError && <div className="alert alert-danger col-11">
+                {responseErrorMessage}
+            </div>}
 
             <MUIDataTable
                 title={"Upcoming Lecturers"}

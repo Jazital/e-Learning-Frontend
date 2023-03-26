@@ -65,7 +65,7 @@ const AssignmentList = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            if(response.data.code === 'assignment_fetched'){
+            if (response.data.code === 'assignment_fetched') {
                 setAssignments(response.data.data.lecture_assignments)
             }
             setIsLoading(false)
@@ -100,11 +100,11 @@ const AssignmentList = () => {
                 setResponseOK(true)
                 setResponseError(false)
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     window.location.reload(false);
                 }, 2000)
             }
-            else{
+            else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -114,12 +114,12 @@ const AssignmentList = () => {
             // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
-            if(error.response.data.message){
+            if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
-            else{
+            else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -176,13 +176,18 @@ const AssignmentList = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole === "student" && <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">view</Link>}
+                        {userRole === "student" &&
+                        <Link to={`/assignment/${assignments[tableMeta.rowIndex].assignment_id}`}
+                              className="btn btn-primary">view</Link>}
 
-                        {userRole === "lecturer" && <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-primary">score & submissions</Link>}
+                        {userRole === "lecturer" &&
+                        <Link to={`/assignment/submissions/${assignments[tableMeta.rowIndex].assignment_id}`}
+                              className="btn btn-primary">score & submissions</Link>}
 
                         {/*{userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}*/}
 
-                        {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger" onClick={() => {if(window.confirm('Are you sure to delete this record?')){ handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)};}}>delete</Link>}
+                        {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger"
+                                                          onClick={()=>{handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)}}>delete</Link>}
                     </>
                 )
             }
@@ -222,15 +227,16 @@ const AssignmentList = () => {
             {loadingModal(isLoading)}
 
             {responseOK && <div className="alert alert-success col-12">
-                    {responseOKMessage}
-                </div>}
+                {responseOKMessage}
+            </div>}
 
-                {responseError && <div className="alert alert-danger col-12">
-                    {responseErrorMessage}
-                </div>}
+            {responseError && <div className="alert alert-danger col-12">
+                {responseErrorMessage}
+            </div>}
 
             <div className="pb-4">
-                {userRole=="lecturer" && <Link to={'/new-assignment'} className="btn btn-primary">New Assignment</Link> }
+                {userRole == "lecturer" &&
+                <Link to={'/new-assignment'} className="btn btn-primary">New Assignment</Link>}
             </div>
             <MUIDataTable
                 title={"Assignments"}
