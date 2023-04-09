@@ -159,10 +159,10 @@ class SideBar extends Component {
                                     <Link
                                         to="/course-materials">Course Materials</Link>
                                 </li>
-                                <li>
+                               {localStorage.getItem('userRole') == "student" &&  <li>
                                     <Link
                                         to="/continuous-assessments">Continuous Assessments</Link>
-                                </li>
+                                </li>}
                                 {localStorage.getItem('userRole') == "student" && <li>
                                     <Link
                                         to="/course-registration">Course Registration</Link>

@@ -182,8 +182,16 @@ const SingleCourseUpcomingClassTable = (props) => {
             }
         },
         {
+            name: "Title",
+            label: "Title",
+            options: {
+                filter: false,
+                sort: false,
+            }
+        },
+        {
             name: "Course",
-            label: "COURSE",
+            label: "Course",
             options: {
                 filter: false,
                 sort: false,
@@ -191,7 +199,7 @@ const SingleCourseUpcomingClassTable = (props) => {
         },
         {
             name: "Platform",
-            label: "PLATFORM",
+            label: "Platform",
             options: {
                 filter: false,
                 sort: false,
@@ -199,14 +207,14 @@ const SingleCourseUpcomingClassTable = (props) => {
         },
         {
             name: "DateTime",
-            label: "DATE",
+            label: "Date",
             options: {
                 filter: false,
                 sort: false,
             }
         },
         {
-            name: "ACTION",
+            name: "Action",
             options: {
                 filter: false,
                 sort: false,
@@ -246,10 +254,11 @@ const SingleCourseUpcomingClassTable = (props) => {
         lectures.forEach((data) => {
             data2.push({
                 Number: sn,
+                Title: data.lecture_title,
                 Course: data.course_code,
                 Platform: (data.lecture_platform).replace("-", " "),
                 // LectureURL: data.lecture_url,
-                Status: "pending",
+                // Status: "pending",
                 DateTime: data.lecture_date,
             })
             sn++;

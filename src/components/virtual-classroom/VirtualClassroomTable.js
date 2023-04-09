@@ -168,6 +168,14 @@ const VirtualClassroomTable = (props) => {
             }
         },
         {
+            name: "Title",
+            label: "Title",
+            options: {
+                filter: false,
+                sort: false,
+            }
+        },
+        {
             name: "Course",
             label: "Courses",
             options: {
@@ -183,14 +191,7 @@ const VirtualClassroomTable = (props) => {
                 sort: false,
             }
         },
-        {
-            name: "Status",
-            label: "Status",
-            options: {
-                filter: false,
-                sort: false,
-            }
-        },
+        
         {
             name: "DateTime",
             label: "Date & Time",
@@ -239,10 +240,11 @@ const VirtualClassroomTable = (props) => {
         lectures.forEach((data) => {
             data2.push({
                 Number: sn,
+                Title: data.lecture_title,
                 Course: data.course_code,
                 Platform: data.lecture_platform.replace("-", " "),
                 LectureURL: data.lecture_url,
-                Status: "pending",
+                // Status: "pending",
                 DateTime: data.lecture_date,
                 Action: "Attend"
             })

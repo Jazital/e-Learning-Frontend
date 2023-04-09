@@ -12,6 +12,21 @@ const NewVirtualClassroom = () => {
     let userRole = localStorage.getItem('userRole');
     let department_id = localStorage.getItem('department');
     let userToken = localStorage.getItem('userToken') || '';
+    const [selectedPlatform, setSelectedPlatform] = useState("Google Meet");
+    const [platformCreationURL, setPlatformCreationURL] = useState("https://meet.google.com/new");
+    const [platformPlaceholderURL, setPlatformPlaceholderURL] = useState("https://meet.google.com/pqd-chdf-apf");
+    
+
+//     var isDevelopmentMode = true;
+// var url = '';
+// if (isDevelopmentMode) {
+//     url = "http://elearning-backend.local/api/v1";
+// }
+// else {
+//     url = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
+// }
+
+
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
 
@@ -120,6 +135,43 @@ const NewVirtualClassroom = () => {
         })
     }
 
+
+    const handlePlatformOnchange = (event) => {
+        // console.log(event.target.value);
+
+        var creationLink = document.getElementById("obtain-lecture-url-link");
+
+        switch (event.target.value){
+            case "Google Meet":
+                setPlatformPlaceholderURL("https://meet.google.com/pqd-chdf-apf");
+                setPlatformCreationURL("https://meet.google.com/new");
+                creationLink.classList.remove("d-none")
+                break;
+            case "Zoom":
+                setPlatformPlaceholderURL("https://us04web.zoom.us/j/788749353943?pwd=9caQUku435faq01IfbEI7ZXARvzU68.1");
+                setPlatformCreationURL("https://www.zoom.us");
+                creationLink.classList.remove("d-none")
+                break;
+            case "Microsoft Teams":
+                setPlatformPlaceholderURL("https://teams.microsoft.com/l/meetup-join/19%3ameeting_YmUzMzM5MzAtNmMwNy00NTdGUz%40thread.v2/0?context=%7b%22Tid%22%3a%2");
+                setPlatformCreationURL("https://teams.microsoft.com");
+                creationLink.classList.remove("d-none")
+                break;
+            case "YouTube":
+                setPlatformPlaceholderURL("https://www.youtube.com/watch?v=S6jkuAGRESzI");
+                setPlatformCreationURL("https://youtube.com");
+                creationLink.classList.remove("d-none")
+                break;
+            case "Others":
+                setPlatformPlaceholderURL("https://the-url.com");
+                setPlatformCreationURL("#");
+                creationLink.classList.add("d-none")
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <>
             {loadingModal(isLoading)}
@@ -143,9 +195,9 @@ const NewVirtualClassroom = () => {
                                       placeholder="Enter description..."></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="vc-lecture-url">Lecture URL:</label>
+                            <label htmlFor="vc-lecture-url">Meeting URL:</label>
                             <input className="form-control" type="text"
-                                   placeholder="E.g. https://teams.microsoft.com/g8forteams" id="vc-lecture-url" />
+                                   placeholder={`E.g. ${platformPlaceholderURL}`} id="vc-lecture-url" />
                         </div>
 
                         <div className="d-none d-md-block">
@@ -169,9 +221,9 @@ const NewVirtualClassroom = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-platform">Platform:</label>
-                            <select className="form-control" id="vc-platform">
-                                <option value="Zoom">Zoom</option>
+                            <select className="form-control" onChange={handlePlatformOnchange} id="vc-platform">
                                 <option value="Google Meet">Google Meet</option>
+                                <option value="Zoom">Zoom</option>
                                 <option value="YouTube">YouTube</option>
                                 <option value="Microsoft Teams">Microsoft Teams</option>
                                 <option value="Others">Others</option>
@@ -182,6 +234,7 @@ const NewVirtualClassroom = () => {
                             <input type="submit" value="Create Classroom" className="btn btn-primary" />
                         </div>
 
+                        <a href={`${platformCreationURL}`} id="obtain-lecture-url-link" class="text-info" target="_blank">Click here to obtain <b>meeting URL</b></a>
                     </div>
                 </div>
             </form>

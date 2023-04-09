@@ -14,6 +14,7 @@ const Login = () => {
     const history = useHistory();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoginPasswordHidden, setIsLoginPasswordHidden] = useState(false);
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
     const endpoint = '/auth/login';
 
@@ -146,6 +147,13 @@ const Login = () => {
             </Modal>
         );
     };
+
+    const togglePasswordEyeIcon = (e) => {
+        setIsLoginPasswordHidden(!isLoginPasswordHidden)
+        // var iconElement = document.querySelector("#toggle-password-eye");
+
+        // console.log(iconElement)
+    }
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
             {loadingModal(isLoading)}
@@ -175,9 +183,26 @@ const Login = () => {
                                     </div>
                                     <div className="form-group">
                                         <label className="mb-1 "> <strong>Password:</strong> </label>
-                                        <input type="password" placeholder="Enter password..." id="password_input"
-                                               onChange={handleOnChange}
-                                               className="form-control" />
+
+                                        {isLoginPasswordHidden ?
+                                         (<>
+                                             <input type="password" placeholder="Enter password..." id="password_input"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" />
+                                             <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
+                                                   onClick={togglePasswordEyeIcon}></span>
+                                         </>) :
+                                         <>
+                                             <input type="text" placeholder="Enter password..." id="password_input"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" />
+                                             <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
+                                                   onClick={togglePasswordEyeIcon}></span>
+                                         </>
+                                        }
+
+                                        {/*<span id="toggle-password-eye" className="eye-icon mdi mdi-eye" onClick={togglePasswordEyeIcon}></span>*/}
+                                        {/*<span className="eye-icon mdi mdi-eye-off"></span>*/}
                                     </div>
                                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                                         <div className="form-group">
