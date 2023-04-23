@@ -187,17 +187,17 @@ const NewVirtualClassroom = () => {
                     <div className="col-12 col-md-8 pr-3">
                         <div className="form-group">
                             <label htmlFor="vc-title">Title:</label>
-                            <input className="form-control" type="text" placeholder="Enter title..." id="vc-title" />
+                            <input className="form-control" type="text" placeholder="Enter title..." id="vc-title" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-description">Description:</label>
                             <textarea className="form-control" rows="8" id="vc-description"
-                                      placeholder="Enter description..."></textarea>
+                                      placeholder="Enter description..." ></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-url">Meeting URL:</label>
                             <input className="form-control" type="text"
-                                   placeholder={`E.g. ${platformPlaceholderURL}`} id="vc-lecture-url" />
+                                   placeholder={`E.g. ${platformPlaceholderURL}`} id="vc-lecture-url" required />
                         </div>
 
                         <div className="d-none d-md-block">
@@ -217,7 +217,7 @@ const NewVirtualClassroom = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-date">Lecture Date:</label>
-                            <input className="form-control" type="datetime-local" id="vc-lecture-date" />
+                            <input className="form-control" type="datetime-local" id="vc-lecture-date" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-platform">Platform:</label>

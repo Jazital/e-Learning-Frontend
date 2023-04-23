@@ -1,23 +1,20 @@
 import React, {useEffect, useState} from "react";
-import {Link} from 'react-router-dom';
 import "../CSS/Home.css";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
+import {Link} from "react-router-dom";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 
-const DepartmentLecturers = () => {
-    localStorage.setItem('page_title', 'Department Lecturers');
+const AssignCourses = () => {
+    localStorage.setItem('page_title', 'Assign  Courses');
     let userToken = localStorage.getItem('userToken') || '';
     let departmentID = localStorage.getItem('department');
+    const [responseOK, setResponseOK] = useState(null);
+    const [responseMessage, setResponseMessage] = useState('');
     const [lecturers, setLecturers] = useState([])
     const [tableLecturers, setTableLecturers] = useState([])
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
-
-    const [responseOK, setResponseOK] = useState(null);
-    const [responseOKMessage, setResponseOKMessage] = useState('');
-    const [responseError, setResponseError] = useState(null);
-    const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
@@ -72,81 +69,18 @@ const DepartmentLecturers = () => {
         );
     };
 
-    const handleLecturerDelete = async (lecturer_id) => {
-        setIsLoading(true)
-
-        endpoint = '/users/delete';
-
-        let args2 = {
-            headers: {
-                'Token': userToken,
-                'Content-Type': 'multipart/form-data',
-            },
-            params: {
-                lecturer_id: lecturer_id
-            }
-        }
-
-        await axios.delete(
-            BACKEND_BASE_URL + endpoint,
-            args2
-        ).then(response => {
-            if (response.data.code === 'user_deleted') {
-                setResponseOKMessage(response.data.message)
-                setResponseOK(true)
-                setResponseError(false)
-
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 1000)
-            }
-            else {
-                setResponseErrorMessage(response.data.message)
-                setResponseError(true)
-                setResponseOK(false)
-            }
-            setIsLoading(false)
-
-            // console.log(response.data.data)
-        }).catch(error => {
-            // console.error(error)
-            if (error.response.data.message) {
-                setResponseErrorMessage(error.response.data.message)
-                setResponseError(true)
-                setResponseOK(false)
-            }
-            else {
-                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
-                setResponseError(true)
-                setResponseOK(false)
-            }
-
-            setIsLoading(false)
-        })
-    }
-
     return (
         <>
             {loadingModal(isLoading)}
-
-             {responseOK && <div className="alert alert-success col-12">
-                {responseOKMessage}
-            </div>}
-
-            {responseError && <div className="alert alert-danger col-12">
-                {responseErrorMessage}
-            </div>}
-
             <div className="col-lg-12">
             <div className="row my-3">
             </div>
                 <div className="row mb-3">
-                    <div className="col-12 col-lg-6">
-                        <Link className="btn btn-primary"to={`/add-new-user`}>Add New Lecturer</Link> 
-                    </div>
-                    <div className="col-12 col-lg-6 text-right">
+                <div className="col-12 col-lg-6 text-right">
                         <input className="form-control" onChange={filterLecturerOnchange} type="search"
                                id="course-ajax-search-input" placeholder="Search lecturers..." />
+                    </div>
+                    <div className="col-12 col-lg-6">
                     </div>
                 </div>
                     <div className="table-responsive">
@@ -164,9 +98,7 @@ const DepartmentLecturers = () => {
                                 <td>{index + 1}</td>
                                 <td>{lecturer.first_name}</td>
                                 <td>{lecturer.last_name}</td>
-                                <td>
-                                    {/* <Link className="btn btn-primary"to={`/modify-user-details/${lecturer.id}`}>Modify details</Link>  */}
-                                <Link className="btn btn-danger" to={`#`} onClick={()=>{handleLecturerDelete(lecturer.id)}}>Delete lecturer</Link></td>
+                                <td><Link className="btn btn-primary"to={`/department-lecturers-courses/${lecturer.id}`}>View Courses</Link> <Link className="btn btn-warning"to={`/modify-assigned-courses/${lecturer.id}`}>Assign Courses</Link> <Link className="btn btn-danger"to={`/unassigned-courses/${lecturer.id}`}>Un-assign Courses</Link></td>
                             </tr>
                         ))}
                         </tbody>
@@ -177,4 +109,4 @@ const DepartmentLecturers = () => {
     );
 };
 
-export default DepartmentLecturers;
+export default AssignCourses;

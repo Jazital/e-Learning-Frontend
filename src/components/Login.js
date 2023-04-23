@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
@@ -14,7 +14,7 @@ const Login = () => {
     const history = useHistory();
 
     const [isLoading, setIsLoading] = useState(false);
-    const [isLoginPasswordHidden, setIsLoginPasswordHidden] = useState(false);
+    const [isLoginPasswordHidden, setIsLoginPasswordHidden] = useState(true);
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
     const endpoint = '/auth/login';
 
@@ -150,9 +150,6 @@ const Login = () => {
 
     const togglePasswordEyeIcon = (e) => {
         setIsLoginPasswordHidden(!isLoginPasswordHidden)
-        // var iconElement = document.querySelector("#toggle-password-eye");
-
-        // console.log(iconElement)
     }
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
@@ -175,18 +172,17 @@ const Login = () => {
                                 <form action="" onSubmit={submitHandler}>
                                     <div className="form-group">
                                         <label>
-                                            <strong>Email / Matric no:</strong>
+                                            <strong>Matric no / Email:</strong>
                                         </label>
-                                        <input type="text" placeholder="Enter matric number/username..."
+                                        <input type="text" placeholder="Enter matric no / email..."
                                                id="username_input" onChange={handleOnChange}
                                                className="form-control" />
                                     </div>
                                     <div className="form-group">
                                         <label className="mb-1 "> <strong>Password:</strong> </label>
-
                                         {isLoginPasswordHidden ?
                                          (<>
-                                             <input type="password" placeholder="Enter password..." id="password_input"
+                                             <input type="password" placeholder="Enter your password..." id="password_input"
                                                     onChange={handleOnChange}
                                                     className="form-control" />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
@@ -201,8 +197,6 @@ const Login = () => {
                                          </>
                                         }
 
-                                        {/*<span id="toggle-password-eye" className="eye-icon mdi mdi-eye" onClick={togglePasswordEyeIcon}></span>*/}
-                                        {/*<span className="eye-icon mdi mdi-eye-off"></span>*/}
                                     </div>
                                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                                         <div className="form-group">
@@ -214,6 +208,9 @@ const Login = () => {
                                         </button>
                                     </div>
                                 </form>
+                                <div className="mt-4">
+                                    Forgot password? <Link to={`/forgot-password`} >Click here</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

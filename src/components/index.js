@@ -34,7 +34,7 @@ import StaffAssignedCourses from "./courses/StaffAssignedCourses";
 import NewVirtualClassroom from "./virtual-classroom/NewVirtualClassroom";
 import NewAssignment from "./assignments/NewAssignment";
 import ViewCourseMaterial from "./course-materials/ViewCourseMaterial";
-import DepartmentLecturers from "./department-admin-components/DepartmentLecturers";
+import AssignCourses from "./department-admin-components/AssignCourses";
 import LecturerCourses from "./department-admin-components/LecturerCourses";
 import ModifyAssignedCourses from "./department-admin-components/ModifyAssignedCourses";
 import UnassignedLecturerCourses from "./department-admin-components/UnassignedLecturerCourses";
@@ -42,6 +42,9 @@ import NewCourseMaterial from "./course-materials/NewCourseMaterial";
 import EditAssignment from "./assignments/EditAssignment";
 import LecturerAssignmentView from "./assignments/LecturerAssignmentView";
 import SubmittedAssignments from "./assignments/SubmittedAssignments";
+import DepartmentLecturers from "./department-admin-components/DepartmentLecturers";
+import AddUser from "./Profile/AddUser";
+import ModifyUser from "./Profile/ModifyUser";
 
 
 const Markup = () => {
@@ -63,10 +66,10 @@ const Markup = () => {
                     component={Login}
                     exact
                 />
-                <Route
+                {/*<Route
                     path={`/login`}
                     component={Login}
-                />
+                />*/}
                 <Route
                     path={`/logout`}
                     component={Logout}
@@ -159,7 +162,6 @@ const Markup = () => {
                         path={`/profile`}
                         component={Profile}
                     />
-
                     <Route
                         path={`/continuous-assessments`}
                         component={ContinuousAssessment}
@@ -187,16 +189,32 @@ const Markup = () => {
                         path={`/new-assignment`}
                         component={NewAssignment}
                     />
+                    <Route
+                        path={`/add-new-user`}
+                        component={AddUser}
+                    />
+                    <Route
+                        path={`/modify-user-details/:user_id`}
+                        component={ModifyUser}
+                    />
+                    <Route
+                        path={`/modify-user-details`}
+                        component={ModifyUser} exact
+                    />
 
                     {/* Department Admin Routes*/}
+                    <Route
+                        path={`/assign-courses`}
+                        component={AssignCourses}
+                    />
+
                     <Route
                         path={`/department-lecturers`}
                         component={DepartmentLecturers}
                     />
-
                     <Route
                         path={`/department-lecturers-courses/:lecturer_id`}
-                        component={LecturerCourses}
+                        component={LecturerCourses} 
                     />
 
                     <Route

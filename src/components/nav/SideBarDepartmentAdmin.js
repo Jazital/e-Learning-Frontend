@@ -105,15 +105,29 @@ class SideBarDepartmentAdmin extends Component {
 
                         <li id="department-lecturer-li"
                             className={`${
-                                (currentUrlPath == "department-lecturers") ? "mm-active" : ""
+                                (currentUrlPath == "assign-courses") ? "mm-active" : ""
+                            }`}
+                        >
+                            <Link
+                                className="ai-icon single-nav-wrapper"
+                                to="/assign-courses"
+                            >
+                                <i className="flaticon-381-background-1"></i>
+                                <span className="nav-text">Assign Courses</span>
+                            </Link>
+                        </li>
+
+                        <li id="department-lecturer-li"
+                            className={`${
+                                ((currentUrlPath == "assign-courses") || (currentUrlPath=="department-lecturers")) ? "mm-active" : ""
                             }`}
                         >
                             <Link
                                 className="ai-icon single-nav-wrapper"
                                 to="/department-lecturers"
                             >
-                                <i className="flaticon-381-background-1"></i>
-                                <span className="nav-text">Lecturers</span>
+                                <i className="flaticon-381-user-9"></i>
+                                <span className="nav-text">Manage Lecturers</span>
                             </Link>
                         </li>
                         <li id="timetable-li"
