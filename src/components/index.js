@@ -45,6 +45,7 @@ import SubmittedAssignments from "./assignments/SubmittedAssignments";
 import DepartmentLecturers from "./department-admin-components/DepartmentLecturers";
 import AddUser from "./Profile/AddUser";
 import ModifyUser from "./Profile/ModifyUser";
+import ModifyPassword from "./ModifyPassword";
 
 
 const Markup = () => {
@@ -61,6 +62,10 @@ const Markup = () => {
                     path={`/forgot-password`}
                     component={ForgotPassword}
                 />
+                <Route
+                        path={`/modify-password`}
+                        component={ModifyPassword} 
+                    />
                 <Route
                     path={`/`}
                     component={Login}

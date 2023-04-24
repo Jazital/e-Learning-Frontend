@@ -10,13 +10,12 @@ import {JazitalBackendBaseURL} from "./helpers/Constants";
 
 const ForgotPassword = () => {
     document.title = 'Forgot Password';
-
     const history = useHistory();
 
+
     const [isLoading, setIsLoading] = useState(false);
-    const [isLoginPasswordHidden, setIsLoginPasswordHidden] = useState(true);
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
-    const endpoint = '/auth/login';
+    const endpoint = '/auth/forgot-password';
 
     const [login, setLogin] = useState(
         {
@@ -25,33 +24,21 @@ const ForgotPassword = () => {
         }
     );
 
-    // Reset the error div element when the user starts typing
-    const handleOnChange = () => {
-        setIsLoading(false)
-        setLogin({
-            loginState: null,
-            message: null
-        });
-    }
-
     const submitHandler = async (e) => {
         e.preventDefault();
 
         setIsLoading(true)
         setLogin({loginState: ''})
 
-        await signIn();
+        await ModifyUserPassword();
     }
 
-    const signIn = async () => {
-
+    const ModifyUserPassword = async () => {
         // Get the submitted user details
-        let submittedUsername = document.getElementById("username_input").value;
-        let submittedPassword = document.getElementById("password_input").value;
+        let username = document.getElementById("username").value;
 
         let args = {
-            username: submittedUsername,
-            password: submittedPassword
+            username: username,
         }
 
         // Making request to backend API
@@ -59,81 +46,28 @@ const ForgotPassword = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if ((res.data.code && res.data.code === 'login_success')) {
+            if ((res.data.code && res.data.code === 'modify_password_success')) {
                 let data = res.data;
-                let userDetails = data.data.user;
                 setLogin({loginState: "success", message: data.message});
-                localStorage.setItem('userRole', userDetails.user_role);
-                localStorage.setItem('userToken', data.token)
-                localStorage.setItem('userID', userDetails.id)
-                localStorage.setItem('firstName', userDetails.first_name)
-                localStorage.setItem('lastName', userDetails.last_name)
-                localStorage.setItem('otherName', userDetails.other_names)
-                localStorage.setItem('department', userDetails.department)
-                localStorage.setItem('email', userDetails.user_email)
-                localStorage.setItem('userID', userDetails.id)
-                localStorage.setItem('matricNumber', userDetails.matric_number)
-                localStorage.setItem('phoneNumber', userDetails.phone_number)
+                // localStorage.setItem('userRole', userDetails.user_role);
 
                 setIsLoading(false)
                 setTimeout(() => {
-                    history.push('/dashboard')
-                }, 1000)
+                    // history.push('./')
+                }, 2000)
             }
             else {
-                localStorage.removeItem('userRole');
-                localStorage.removeItem('userToken')
-                localStorage.removeItem('userID')
-                localStorage.removeItem('firstName')
-                localStorage.removeItem('lastName')
-                localStorage.removeItem('otherName')
-                localStorage.removeItem('department')
-                localStorage.removeItem('email')
-                localStorage.removeItem('userID')
-                localStorage.removeItem('matricNumber')
-                localStorage.removeItem('phoneNumber')
-                localStorage.removeItem('page_title')
-
                 setIsLoading(false)
                 setLogin({
                     loginState: "failed",
-                    message: "Sorry, we could not sign you in at the moment. Please try again"
+                    message: "Sorry, your username could not be submitted. Please try again"
                 });
             }
+            console.log(res.data)
         }).catch(error => {
-            localStorage.removeItem('userRole');
-            localStorage.removeItem('userToken')
-            localStorage.removeItem('userID')
-            localStorage.removeItem('firstName')
-            localStorage.removeItem('lastName')
-            localStorage.removeItem('otherName')
-            localStorage.removeItem('department')
-            localStorage.removeItem('email')
-            localStorage.removeItem('userID')
-            localStorage.removeItem('matricNumber')
-            localStorage.removeItem('phoneNumber')
-            localStorage.removeItem('page_title')
+            setIsLoading(false)
 
-            if (error.response) {
-                if (error.response.data.message) {
-                    setLogin({loginState: "failed", message: error.response.data.message});
-                    setIsLoading(false)
-                }
-                else {
-                    setLogin({
-                        loginState: "failed",
-                        message: "Sorry, we could not sign you in at the moment. Please try again"
-                    });
-                    setIsLoading(false)
-                }
-            }
-            else {
-                setLogin({
-                    loginState: "failed",
-                    message: "Sorry, we could not sign you in at the moment. Kindly check your internet connection"
-                });
-                setIsLoading(false)
-            }
+            console.log(error)
         })
     }
 
@@ -145,8 +79,14 @@ const ForgotPassword = () => {
         );
     };
 
-    const togglePasswordEyeIcon = (e) => {
-        setIsLoginPasswordHidden(!isLoginPasswordHidden)
+    
+    // Reset the error div element when the user starts typing
+    const handleOnChange = () => {
+        setIsLoading(false)
+        setLogin({
+            loginState: null,
+            message: null
+        });
     }
     return (
         <div className="row justify-content-center h-100 align-items-center h-80">
@@ -162,19 +102,18 @@ const ForgotPassword = () => {
                                 <h4 className="text-center mb-4 "> Forgot Password </h4>
                                 {/* Display success or error messages to the user when available */}
                                 {(login.loginState === "success") && (
-                                    <div className="alert alert-success">{login.message}</div>) || ("")}
+                                    <div className="alert alert-success">{login.message}</div>)}
                                 {(login.loginState === "failed") && (
-                                    <div className="alert alert-error">{login.message}</div>) || ("")}
+                                    <div className="alert alert-error">{login.message}</div>)}
 
                                 <form action="" onSubmit={submitHandler}>
                                     <div className="form-group">
-                                        <label>
-                                            <strong>Email / Matric no:</strong>
-                                        </label>
-                                        <input type="text" placeholder="Enter username/matric number..."
-                                               id="username_input" onChange={handleOnChange}
-                                               className="form-control" />
+                                        <label className="mb-1 "> <strong>Email/Matric number:</strong> </label>
+                                        <input type="text" placeholder="Enter your email or matric number..." id="username"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" />
                                     </div>
+
                                     <div className="text-center">
                                         <button type="submit" className="btn btn-primary btn-block"
                                                 onClick={submitHandler}> Submit

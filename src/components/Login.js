@@ -62,7 +62,7 @@ const Login = () => {
             if ((res.data.code && res.data.code === 'login_success')) {
                 let data = res.data;
                 let userDetails = data.data.user;
-                setLogin({loginState: "success", message: data.message});
+                setLogin({loginState: "success", message: "Sign in success"});
                 localStorage.setItem('userRole', userDetails.user_role);
                 localStorage.setItem('userToken', data.token)
                 localStorage.setItem('userID', userDetails.id)
@@ -80,8 +80,15 @@ const Login = () => {
                     history.push('/dashboard')
                 }, 1000)
 
-                // console.log(userDetails)
-
+            }
+            else if ((res.data.code && res.data.code === 'temp_login_success')) {
+                // If it is the initial temporary password, redirect to the modify password page
+                localStorage.setItem('userToken', res.data.token)
+                let userToken = res.data.token;
+                let userID = res.data.user_id;
+                setTimeout(() => {
+                    history.push(`/modify-password/?token=${userToken}&user_id=${userID}`)
+                }, 1000)
             }
             else {
                 localStorage.removeItem('userRole');
@@ -103,6 +110,8 @@ const Login = () => {
                     message: "Sorry, we could not sign you in at the moment. Please try again"
                 });
             }
+
+            console.log(res.data);
         }).catch(error => {
             localStorage.removeItem('userRole');
             localStorage.removeItem('userToken')
@@ -119,7 +128,7 @@ const Login = () => {
 
             if (error.response) {
                 if (error.response.data.message) {
-                    setLogin({loginState: "failed", message: error.response.data.message});
+                    setLogin({loginState: "failed", message: "Sorry, we encountered an error while trying to sign you in at the moment. Please try again"});
                     setIsLoading(false)
                 }
                 else {
@@ -165,9 +174,9 @@ const Login = () => {
                                 <h4 className="text-center mb-4 "> Sign in your account </h4>
                                 {/* Display success or error messages to the user when available */}
                                 {(login.loginState === "success") && (
-                                    <div className="alert alert-success">{login.message}</div>) || ("")}
+                                    <div className="alert alert-success">{login.message}</div>)}
                                 {(login.loginState === "failed") && (
-                                    <div className="alert alert-error">{login.message}</div>) || ("")}
+                                    <div className="alert alert-error">{login.message}</div>)}
 
                                 <form action="" onSubmit={submitHandler}>
                                     <div className="form-group">
@@ -189,7 +198,7 @@ const Login = () => {
                                                    onClick={togglePasswordEyeIcon}></span>
                                          </>) :
                                          <>
-                                             <input type="text" placeholder="Enter password..." id="password_input"
+                                             <input type="text" placeholder="Enter your password..." id="password_input"
                                                     onChange={handleOnChange}
                                                     className="form-control" />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
