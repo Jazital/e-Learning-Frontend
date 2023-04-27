@@ -82,13 +82,21 @@ const Login = () => {
 
             }
             else if ((res.data.code && res.data.code === 'temp_login_success')) {
+                setIsLoading(false)
                 // If it is the initial temporary password, redirect to the modify password page
                 localStorage.setItem('userToken', res.data.token)
                 let userToken = res.data.token;
                 let userID = res.data.user_id;
                 setTimeout(() => {
-                    history.push(`/modify-password/?token=${userToken}&user_id=${userID}`)
+                    history.push(`/modify-password/?token=${userToken}&user_id=${userID}&is_temp_login=true`)
                 }, 1000)
+            }
+            else if ((res.data.code && res.data.code === 'error_login')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: res.data.message
+                });
             }
             else {
                 localStorage.removeItem('userRole');
@@ -111,8 +119,9 @@ const Login = () => {
                 });
             }
 
-            console.log(res.data);
+            // console.log(res.data);
         }).catch(error => {
+            // console.log(error);
             localStorage.removeItem('userRole');
             localStorage.removeItem('userToken')
             localStorage.removeItem('userID')
@@ -127,6 +136,15 @@ const Login = () => {
             localStorage.removeItem('page_title')
 
             if (error.response) {
+                if ((error.response.data.code && error.response.data.code === 'error_login')) {
+                    setIsLoading(false)
+                    setLogin({
+                        loginState: "failed",
+                        message: error.response.data.message
+                    });
+                    return;
+                }
+
                 if (error.response.data.message) {
                     setLogin({loginState: "failed", message: "Sorry, we encountered an error while trying to sign you in at the moment. Please try again"});
                     setIsLoading(false)

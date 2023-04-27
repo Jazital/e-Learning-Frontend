@@ -10,12 +10,19 @@ import "./login.css";
 import {JazitalBackendBaseURL} from "./helpers/Constants";
 
 const ModifyPassword = () => {
-    document.title = 'Modify Password';
     const history = useHistory();
 
     let URLQueryParams = new URLSearchParams(history.location.search);
-    let token = URLQueryParams.get('token') || 0;
+    let urlToken = URLQueryParams.get('token');
+    let user_id = URLQueryParams.get('user_id');
+    let isTempLogin = URLQueryParams.get('is_temp_login');
+    if(isTempLogin){
+        document.title = 'Modify Details';
+    }else{
+        document.title = 'Modify Password';
+    }
 
+    let userToken = localStorage.getItem('userToken') || '';
 
     const [isLoading, setIsLoading] = useState(false);
     const [isLoginPasswordHidden1, setIsLoginPasswordHidden1] = useState(true);
@@ -40,10 +47,20 @@ const ModifyPassword = () => {
     }
 
     const ModifyUserPassword = async () => {
+        let firstName, lastName, otherNames, phoneNumber;
 
-        // Get the submitted user details
+        if(isTempLogin){
+            // Get the submitted user details
+            firstName = document.getElementById("new-firstname").value;
+            lastName = document.getElementById("new-lastname").value;
+            otherNames = document.getElementById("new-othernames").value;
+            phoneNumber = document.getElementById("new-phone").value;
+        }
+
+
         let newPassword = document.getElementById("new-password").value;
         let confirmPassword = document.getElementById("confirm-password").value;
+        
 
         if(!(newPassword==confirmPassword)){
             setIsLoading(false)
@@ -62,16 +79,39 @@ const ModifyPassword = () => {
             });
             return false;
         }
+        var data;
+        let args;
 
-        var data = {
-            "new_password": newPassword,
-        };
+        // If token and user ID are provided
+        if(isTempLogin){
+            data = {
+                user_id: user_id,
+                reset_token: urlToken,
+                new_password: newPassword,
 
-        let args = {
-            headers: {
-                'Token': token,
-                'Content-Type': 'multipart/form-data',
-            },
+                first_name: firstName,
+                last_name: lastName,
+                other_names: otherNames,
+                phone: phoneNumber,
+            };
+
+            args = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        }
+        else{
+            data = {
+                new_password: newPassword,
+            };
+
+            args = {
+                headers: {
+                    'Token': userToken,
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
         }
 
         // Making request to backend API
@@ -80,16 +120,34 @@ const ModifyPassword = () => {
             data,
             args
         ).then((res) => {
-            if ((res.data.code && res.data.code === 'modify_password_success')) {
-                let data = res.data;
-                let userDetails = data.data.user;
-                setLogin({loginState: "success", message: data.message});
-                localStorage.setItem('userRole', userDetails.user_role);
+            // console.log(res);
+            
+            if ((res.data.code && res.data.code === 'password_update_success')) {
+                if(isTempLogin){
+                    setLogin({loginState: "success", message: "Your details has been updated successfully"});
+                } else{
+                    setLogin({loginState: "success", message: "Your password has been updated successfully"});
+                }
 
                 setIsLoading(false)
                 setTimeout(() => {
-                    history.push('./')
+                    // history.push('./')
                 }, 2000)
+                document.getElementById("upload-document-form").reset()
+            } 
+            else if ((res.data.code && res.data.code === 'invalid_reset_token_1')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: res.data.message
+                });
+            }
+            else if ((res.data.code && res.data.code === 'invalid_reset_token_2')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: res.data.message
+                });
             }
             else {
                 setIsLoading(false)
@@ -98,8 +156,30 @@ const ModifyPassword = () => {
                     message: "Sorry, your password could not be modified at the moment. Please try again"
                 });
             }
+            // console.log(res.data)
+            setIsLoading(false)
         }).catch(error => {
-           
+            // console.log(error)
+            // let data = error.data;
+            
+            if ((error.response.data.code && error.response.data.code === 'invalid_reset_token_1')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: error.response.data.message
+                });
+            }
+
+            else if ((error.response.data.code && error.response.data.code === 'invalid_reset_token_2')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: error.response.data.message
+                });
+            }
+
+            setIsLoading(false)
+
         })
     }
 
@@ -118,7 +198,6 @@ const ModifyPassword = () => {
     const togglePasswordEyeIcon2 = (e) => {
         setIsLoginPasswordHidden2(!isLoginPasswordHidden2)
     }
-
     
     // Reset the error div element when the user starts typing
     const handleOnChange = () => {
@@ -136,36 +215,78 @@ const ModifyPassword = () => {
                     <div className="row no-gutters">
                         <div className="col-xl-12">
                             <div className="auth-form">
+                                {(isTempLogin) && (
+                                    <h4 className="text-center mb-4 "> Update Details </h4>
+                                )||
+                                (
+                                    <h4 className="text-center mb-4 "> Modify Password </h4>
+                                )}
+
+                                {(isTempLogin) && (
+                                    <div className="alert alert-info">You are required to update your details to continue on this platform.</div>)}
                                 {/*<div className="text-center">*/}
                                 {/*    <img className="signin-logo mb-3" alt="logo" src={logo} />*/}
                                 {/*</div>*/}
-                                <h4 className="text-center mb-4 "> Modify Password </h4>
+                                
+
                                 {/* Display success or error messages to the user when available */}
                                 {(login.loginState === "success") && (
-                                    <div className="alert alert-success">{login.message}</div>) || ("")}
+                                    <div className="alert alert-success">{login.message}</div>)}
+
                                 {(login.loginState === "failed") && (
-                                    <div className="alert alert-error">{login.message}</div>) || ("")}
+                                    <div className="alert alert-error">{login.message}</div>)}
 
                                 <form action="" onSubmit={submitHandler}>
-                                <div className="form-group">
+                                {(isTempLogin) && (
+                                    <>
+                                        <div className="form-group">
+                                            <label className="mb-1 "> <strong>First Name:</strong> </label>
+                                            <input type="text" placeholder="Enter your first name..." id="new-firstname"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" required />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="mb-1 "> <strong>Last Name:</strong> </label>
+                                            <input type="text" placeholder="Enter your last name..." id="new-lastname"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" required />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="mb-1 "> <strong>Other Names:</strong> </label>
+                                            <input type="text" placeholder="Enter your other names..." id="new-othernames"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" />
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="mb-1 "> <strong>Phone Number:</strong> </label>
+                                            <input type="text" placeholder="Enter your phone number..." id="new-phone"
+                                                    onChange={handleOnChange}
+                                                    className="form-control" required />
+                                        </div>
+                                    </>
+                                )}
+
+                                    <div className="form-group">
                                         <label className="mb-1 "> <strong>New Password:</strong> </label>
                                         {isLoginPasswordHidden1 ?
                                          (<>
                                              <input type="password" placeholder="Enter new password..." id="new-password"
                                                     onChange={handleOnChange}
-                                                    className="form-control" />
+                                                    className="form-control" required />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
                                                    onClick={togglePasswordEyeIcon1}></span>
                                          </>) :
                                          <>
                                              <input type="text" placeholder="Enter new password..." id="new-password"
                                                     onChange={handleOnChange}
-                                                    className="form-control" />
+                                                    className="form-control" required />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
                                                    onClick={togglePasswordEyeIcon1}></span>
                                          </>
                                         }
-
                                     </div>
 
                                     <div className="form-group">
@@ -174,14 +295,14 @@ const ModifyPassword = () => {
                                          (<>
                                              <input type="password" placeholder="Confirm new password..." id="confirm-password"
                                                     onChange={handleOnChange}
-                                                    className="form-control" />
+                                                    className="form-control" required />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
                                                    onClick={togglePasswordEyeIcon2}></span>
                                          </>) :
                                          <>
                                              <input type="text" placeholder="Confirm new password..." id="confirm-password"
                                                     onChange={handleOnChange}
-                                                    className="form-control" />
+                                                    className="form-control" required />
                                              <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
                                                    onClick={togglePasswordEyeIcon2}></span>
                                          </>

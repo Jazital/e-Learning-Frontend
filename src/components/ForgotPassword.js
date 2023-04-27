@@ -46,28 +46,24 @@ const ForgotPassword = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            if ((res.data.code && res.data.code === 'modify_password_success')) {
+            if ((res.data.code && res.data.code === 'password_reset_success')) {
                 let data = res.data;
                 setLogin({loginState: "success", message: data.message});
-                // localStorage.setItem('userRole', userDetails.user_role);
 
                 setIsLoading(false)
-                setTimeout(() => {
-                    // history.push('./')
-                }, 2000)
             }
             else {
                 setIsLoading(false)
                 setLogin({
                     loginState: "failed",
-                    message: "Sorry, your username could not be submitted. Please try again"
+                    message: "Sorry, your request could not be completed. Please try again"
                 });
             }
-            console.log(res.data)
+            // console.log(res.data)
         }).catch(error => {
             setIsLoading(false)
 
-            console.log(error)
+            // console.log(error)
         })
     }
 
