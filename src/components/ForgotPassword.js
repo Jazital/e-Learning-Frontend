@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory, Link} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
@@ -49,6 +49,7 @@ const ForgotPassword = () => {
             if ((res.data.code && res.data.code === 'password_reset_success')) {
                 let data = res.data;
                 setLogin({loginState: "success", message: data.message});
+                document.getElementById("details-form").reset()
 
                 setIsLoading(false)
             }
@@ -102,7 +103,7 @@ const ForgotPassword = () => {
                                 {(login.loginState === "failed") && (
                                     <div className="alert alert-error">{login.message}</div>)}
 
-                                <form action="" onSubmit={submitHandler}>
+                                <form action="" onSubmit={submitHandler} id="details-form">
                                     <div className="form-group">
                                         <label className="mb-1 "> <strong>Email/Matric number:</strong> </label>
                                         <input type="text" placeholder="Enter your email or matric number..." id="username"
@@ -116,6 +117,9 @@ const ForgotPassword = () => {
                                         </button>
                                     </div>
                                 </form>
+                                <div className="mt-4">
+                                <Link to={`/`} >&lt;&lt; Back to login</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

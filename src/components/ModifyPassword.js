@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
 import logo from "./images/ospolylogo.png"
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useHistory} from "react-router-dom";
 
 import "./login.css";
 import {JazitalBackendBaseURL} from "./helpers/Constants";
@@ -103,12 +102,13 @@ const ModifyPassword = () => {
         }
         else{
             data = {
+                user_id: user_id,
+                reset_token: urlToken,
                 new_password: newPassword,
             };
 
             args = {
                 headers: {
-                    'Token': userToken,
                     'Content-Type': 'multipart/form-data',
                 },
             }
@@ -133,7 +133,7 @@ const ModifyPassword = () => {
                 setTimeout(() => {
                     // history.push('./')
                 }, 2000)
-                document.getElementById("upload-document-form").reset()
+                document.getElementById("details-form").reset()
             } 
             else if ((res.data.code && res.data.code === 'invalid_reset_token_1')) {
                 setIsLoading(false)
@@ -156,7 +156,7 @@ const ModifyPassword = () => {
                     message: "Sorry, your password could not be modified at the moment. Please try again"
                 });
             }
-            // console.log(res.data)
+
             setIsLoading(false)
         }).catch(error => {
             // console.log(error)
@@ -171,6 +171,14 @@ const ModifyPassword = () => {
             }
 
             else if ((error.response.data.code && error.response.data.code === 'invalid_reset_token_2')) {
+                setIsLoading(false)
+                setLogin({
+                    loginState: "failed",
+                    message: error.response.data.message
+                });
+            }
+
+            else if ((error.response.data.code && error.response.data.code === 'password_update_error')) {
                 setIsLoading(false)
                 setLogin({
                     loginState: "failed",
@@ -236,7 +244,7 @@ const ModifyPassword = () => {
                                 {(login.loginState === "failed") && (
                                     <div className="alert alert-error">{login.message}</div>)}
 
-                                <form action="" onSubmit={submitHandler}>
+                                <form action="" onSubmit={submitHandler} id="details-form">
                                 {(isTempLogin) && (
                                     <>
                                         <div className="form-group">
@@ -316,6 +324,9 @@ const ModifyPassword = () => {
                                         </button>
                                     </div>
                                 </form>
+                                <div className="mt-4">
+                                    <Link to={`/`} >&lt;&lt; Back to login</Link>
+                                </div>
                             </div>
                         </div>
                     </div>
