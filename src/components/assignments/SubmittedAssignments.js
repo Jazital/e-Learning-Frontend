@@ -15,6 +15,8 @@ const SubmittedAssignments = () => {
 
     const history = useHistory();
 
+    var modifiedArray = [];
+
     localStorage.setItem('page_title', 'Assignment Submissions');
     let userRole = localStorage.getItem('userRole');
     const [responseOK, setResponseOK] = useState(null);
@@ -106,18 +108,56 @@ const SubmittedAssignments = () => {
     // Reset the error div element when the user starts typing
     const handleScoreOnChange = (inputRowID) => {
         var scoreInput = document.querySelector(`#input-score-${inputRowID}`).value;
+        var initialArray = [...submissions];
 
-        var modifiedArray = [];
-        modifiedArray = [...submissions];
+        modifiedArray = [...finalScoreInputArray];
 
         modifiedArray[inputRowID] = {
-            studentId: modifiedArray[inputRowID].student_details.id,
-            newScore: scoreInput,
+            student_id: parseInt(initialArray[inputRowID].student_details.id),
+            score: parseInt(scoreInput),
         }
 
-      setFinalScoreInputArray(modifiedArray);
+        setFinalScoreInputArray(modifiedArray);
+    }
 
-        console.log(finalScoreInputArray)
+
+    const submitScoresArray = async () => {
+        // e.preventDefault()
+        setIsLoading(true)
+
+        var endpoint = '/assignments/submit-scores-array';
+        var args2 = {
+            headers: {
+                'Token': userToken,
+            },
+        }
+
+        let data = {
+            assignment_id: assignment_id,
+            scores_array: finalScoreInputArray,
+        }
+
+        // Making request to backend API
+        await axios.post(
+            BACKEND_BASE_URL + endpoint,
+            data,
+            args2
+        ).then(response => {
+            if (response.data.code === 'scores_uploaded') {
+                setResponseOKMessage(response.data.message)
+                setResponseOK(true)
+                setResponseError(false)
+            }
+            setIsLoading(false)
+            // console.log(response.data)
+        }).catch(error => {
+            setResponseErrorMessage(error.response.data.message)
+            setResponseError(true)
+            setResponseOK(false)
+
+            // console.error(error.response)
+            setIsLoading(false)
+        })
     }
 
     const columns = [
@@ -286,7 +326,7 @@ const SubmittedAssignments = () => {
 
             <div className="pb-4 bg-white mb-6 card shadow align-items-start">
                 {userRole == "lecturer" &&
-                <button className="btn btn-success">Update Scores</button>}
+                <button className="btn btn-success" onClick={submitScoresArray}>Update Scores</button>}
             </div>
 
             <div className="d-flex">
