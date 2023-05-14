@@ -29,21 +29,18 @@ const SubmittedAssignments = () => {
         message: ''
     }); // either success or failed
 
-
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
-
-    var scoreCSVSampleURL = BACKEND_BASE_URL.slice(0, -7)+"/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv";
-
-
+    var scoreCSVSampleURL = BACKEND_BASE_URL.slice(0, -7) + "/wp-content/uploads/e-learning-core-sample-files/upload-assignment-scores-234435f65.csv";
     let userToken = localStorage.getItem('userToken') || '';
 
-
     const [submissions, setSubmissions] = useState([])
+    const [inputScoreArray, setInputScoreArray] = useState([]);
+    const [finalScoreInputArray, setFinalScoreInputArray] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -52,7 +49,7 @@ const SubmittedAssignments = () => {
         setTimeout(() => {
             fetchAssignmentSubmissions();
             fetchAssignment();
-        }, 2000)
+        }, 1000)
     }, [])
 
     const fetchAssignmentSubmissions = async () => {
@@ -71,8 +68,9 @@ const SubmittedAssignments = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            if(response.data.code === 'assignment_fetched'){
-                setSubmissions(response.data.data.submissions)
+            if (response.data.code === 'assignment_fetched') {
+                var fetchedData = response.data.data.submissions;
+                setSubmissions(fetchedData);
             }
             setIsLoading(false)
             // console.log(response.data)
@@ -103,6 +101,23 @@ const SubmittedAssignments = () => {
         }).catch(error => {
             setIsLoading(false)
         })
+    }
+
+    // Reset the error div element when the user starts typing
+    const handleScoreOnChange = (inputRowID) => {
+        var scoreInput = document.querySelector(`#input-score-${inputRowID}`).value;
+
+        var modifiedArray = [];
+        modifiedArray = [...submissions];
+
+        modifiedArray[inputRowID] = {
+            studentId: modifiedArray[inputRowID].student_details.id,
+            newScore: scoreInput,
+        }
+
+      setFinalScoreInputArray(modifiedArray);
+
+        console.log(finalScoreInputArray)
     }
 
     const columns = [
@@ -136,6 +151,17 @@ const SubmittedAssignments = () => {
             options: {
                 filter: false,
                 sort: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <>
+                        {userRole === "lecturer" &&
+                        <input className="ps-2" type="text" onChange={() => {
+                            handleScoreOnChange(tableMeta.rowIndex)
+                        }}
+                               defaultValue={`${(submissions[tableMeta.rowIndex].score) == null ? '' : submissions[tableMeta.rowIndex].score}`}
+                               placeholder="No score yet"
+                               id={`input-score-${tableMeta.rowIndex}`}/>}
+                    </>
+                )
             }
         },
         {
@@ -152,7 +178,9 @@ const SubmittedAssignments = () => {
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole === "lecturer" && <a href={submissions[tableMeta.rowIndex].attachments[0].file_uri} target="_blank" className="btn btn-primary">Download solution</a>}
+                        {userRole === "lecturer" && submissions[tableMeta.rowIndex].attachments[0].file_uri &&
+                        <a href={`${submissions[tableMeta.rowIndex].attachments[0].file_uri}`} target="_blank"
+                           className="btn btn-primary">Download solution</a>}
                     </>
                 )
             }
@@ -166,8 +194,8 @@ const SubmittedAssignments = () => {
             data2.push({
                 Number: sn,
                 MatricNumber: data.student_details.matric_number,
-                Name: data.student_details.first_name+" "+data.student_details.last_name,
-                Score: data.score,
+                Name: data.student_details.first_name + " " + data.student_details.last_name,
+                // Score: data.score,
                 SubmissionDate: data.submission_date,
             })
             sn++;
@@ -181,11 +209,9 @@ const SubmittedAssignments = () => {
         viewColumns: false,
         filter: false,
         responsive: "standard",
-        tableBodyMaxHeight: '400px',
         selectableRowsHideCheckboxes: true
 
     };
-
 
 
     async function handleAssignmentScoreSubmit(e) {
@@ -216,16 +242,16 @@ const SubmittedAssignments = () => {
                 setResponseOK(true)
                 setResponseError(false)
 
-                setTimeout(()=>{
-                   window.location.reload(false);
+                setTimeout(() => {
+                    window.location.reload(false);
                 }, 3000)
             }
             setIsLoading(false)
             // console.log(response.data)
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
-                setResponseError(true)
-                setResponseOK(false)
+            setResponseError(true)
+            setResponseOK(false)
 
             // console.error(error.response)
             setIsLoading(false)
@@ -237,19 +263,20 @@ const SubmittedAssignments = () => {
             {loadingModal(isLoading)}
 
             {responseOK && <div className="alert alert-success col-12">
-                    {responseOKMessage}
-                </div>}
+                {responseOKMessage}
+            </div>}
 
-                {responseError && <div className="alert alert-danger col-12">
-                    {responseErrorMessage}
-                </div>}
+            {responseError && <div className="alert alert-danger col-12">
+                {responseErrorMessage}
+            </div>}
 
             <div className="pb-4">
-                {userRole == "lecturer" && <Link to={'/assignment-list'} className="btn btn-primary">Back to assignments</Link>}
+                {userRole == "lecturer" &&
+                <Link to={'/assignment-list'} className="btn btn-primary">Back to assignments</Link>}
             </div>
 
             <MUIDataTable
-            className="mb-4"
+                className="mb-1"
                 title={"Assignment Submissions"}
                 data={data2}
                 columns={columns}
@@ -257,31 +284,36 @@ const SubmittedAssignments = () => {
                 pagination
             />
 
+            <div className="pb-4 bg-white mb-6 card shadow align-items-start">
+                {userRole == "lecturer" &&
+                <button className="btn btn-success">Update Scores</button>}
+            </div>
+
             <div className="d-flex">
                 <Card border="light" className='main-body-card col-xl-6 col-lg-6 col-sm-12'>
                     <div>
                         <div className="centercoursetext">
                             <img className="center-image mb-2"
-                                    src={coursematerial}
-                                    alt=""
+                                 src={coursematerial}
+                                 alt=""
                             />
                             {/*<p className="indicator-open">Open</p>*/}
                         </div>
                         <div className="centercoursetext mb-2">
                             {
-                                assignmentDocumentURI && (<a className="btn btn-primary" href={assignmentDocumentURI}  target="_blank">
-                                    View Assignment Attachment
-                                </a>)
+                                assignmentDocumentURI && (
+                                    <a className="btn btn-primary" href={assignmentDocumentURI} target="_blank">
+                                        View Assignment Attachment
+                                    </a>)
                             }
-
                         </div>
                         <div id="firstAssignText">
                             <div>
-                            <strong> Title: {assignment.assignment_title}</strong> <br />
-                                <strong> Course: {assignment.course_code}</strong> <br />
-                                Assigned Date: {assignment.creation_date} <br />
-                                <strong>Due Date: {assignment.due_date}</strong> <br />
-                                <strong>Description:</strong> <br />
+                                <strong> Title: {assignment.assignment_title}</strong> <br/>
+                                <strong> Course: {assignment.course_code}</strong> <br/>
+                                Assigned Date: {assignment.creation_date} <br/>
+                                <strong>Due Date: {assignment.due_date}</strong> <br/>
+                                <strong>Description:</strong> <br/>
                                 <div>{assignment.assignment_description}</div>
 
                             </div>
@@ -299,17 +331,20 @@ const SubmittedAssignments = () => {
                         {submissionResponse.status === "error" && (<div className="alert alert-danger mb-2">
                             {submissionResponse.message}
                         </div>)}
-                        <p className="pb-0 pt-1">Upload the CSV file having the assignment scores <span className='text-danger'>(only comma-delimited CSV files are allowed)</span>.</p>
+                        <p className="pb-0 pt-1">Upload the CSV file having the assignment scores <span
+                            className='text-danger'>(only comma-delimited CSV files are allowed)</span>.</p>
                     </div>
                     <form onSubmit={handleAssignmentScoreSubmit}>
-                        <input type="file" id="assignment-score-file-input" className="form-control mb-3" required />
-                        <input className="btn btn-primary" type="submit" value="Submit Scores" />
+                        <input type="file" id="assignment-score-file-input" className="form-control mb-3" required/>
+                        <input className="btn btn-primary" type="submit" value="Submit Scores"/>
                     </form>
 
-                    <br />
-                    <br />
-                    <br />
-                    <a href={scoreCSVSampleURL} className="btn-warning p-2 ps-3">Click here to download scores CSV file sample</a>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <a href={scoreCSVSampleURL} className="btn-warning p-2 ps-3" target="_blank">Click here to download
+                        scores CSV file
+                        sample</a>
                 </div>
             </div>
 
