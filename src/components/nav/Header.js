@@ -17,8 +17,8 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
     let userToken = localStorage.getItem('userToken');
     var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
     var finalName = filterName.includes("app")
-                    ? filterName.filter((f) => f !== "app")
-                    : filterName;
+        ? filterName.filter((f) => f !== "app")
+        : filterName;
 
     var page_name = (finalName.join(" ") === '') ? 'Dashboard' : finalName.join(" ");
 
@@ -44,8 +44,7 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
                 setUnauthorizedMessage(res.data.message)
                 setUnauthorizedHeading(res.data.heading)
                 setUnauthorized(true);
-            }
-            else {
+            } else {
                 setUnauthorized(false);
             }
             // console.log(res.data)
@@ -54,23 +53,20 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
         })
     }
 
-
-
     const infoModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
                 <div className="text-center info-modal-content-wrapper">
-                    <img className="wait" src={wait} alt="" />
+                    <img className="wait" src={wait} alt=""/>
                     <h1>{unauthorizedHeading}</h1>
 
-                <Modal.Body>
-                    <p className="color-white">{unauthorizedMessage}</p>
-                </Modal.Body>
+                    <Modal.Body>
+                        <p className="color-white">{unauthorizedMessage}</p>
+                    </Modal.Body>
                 </div>
             </Modal>
         );
     };
-
 
 
     return (
@@ -104,10 +100,10 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
                                 >
                                     <div className="header-info">
                                         <small>Good day!</small>
-                                        <span>{localStorage.getItem('firstName')+" "+localStorage.getItem('lastName')}</span>
+                                        <span>{localStorage.getItem('firstName') + " " + localStorage.getItem('lastName')}</span>
                                         <small className='alert-info text-center'>{localStorage.getItem('userRole')}</small>
                                     </div>
-                                    <img src={profile} height="10" alt="" />
+                                    <img src={profile} height="10" alt=""/>
                                 </Link>
                                 <div
                                     className={`dropdown-menu dropdown-menu-right ${toggle === "profile" ? "show" : ""}`}

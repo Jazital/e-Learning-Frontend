@@ -4,6 +4,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const VirtualClassroomTable = (props) => {
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
@@ -30,8 +31,7 @@ const VirtualClassroomTable = (props) => {
             }
         }
         endpoint = '/lectures/fetch-by-course-id';
-    }
-    else {
+    } else {
         args = {
             headers: {
                 'Token': userToken,
@@ -43,7 +43,7 @@ const VirtualClassroomTable = (props) => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -65,10 +65,11 @@ const VirtualClassroomTable = (props) => {
                 setLectures(response.data.data.lectures)
             }
             setIsLoading(false)
-            // console.log(response)
+
+            closeNavMenu();
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -93,11 +94,11 @@ const VirtualClassroomTable = (props) => {
                 setAttendanceSubmitted(true)
             }
             setIsLoading(false)
-            // console.log(res)
+            closeNavMenu();
 
         }).catch(error => {
             setIsLoading(false)
-            // console.log(error)
+            closeNavMenu();
         })
     }
 
@@ -132,29 +133,28 @@ const VirtualClassroomTable = (props) => {
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 1000)
-            }
-            else {
+            } else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
             setIsLoading(false)
+            closeNavMenu();
 
-            // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
             }
 
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -191,7 +191,7 @@ const VirtualClassroomTable = (props) => {
                 sort: false,
             }
         },
-        
+
         {
             name: "DateTime",
             label: "Date & Time",
@@ -226,7 +226,9 @@ const VirtualClassroomTable = (props) => {
 
                         {userRole === "lecturer" && <a href={`#`}
 
-                                                       onClick={()=>{deleteLecture(lectures[tableMeta.rowIndex].lecture_id)}}
+                                                       onClick={() => {
+                                                           deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
+                                                       }}
                                                        className="btn btn-danger">Delete</a>}
                     </>
                 )

@@ -13,6 +13,7 @@ import pendinassingment from "../../images/HomePageIcons/pendinassingment.png"
 import discussion from "../images/discussion board icondiscussionboard.png"
 import coursematerial from "../images/Vectorcourses.png"
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const SingleCourse = (props) => {
@@ -62,14 +63,17 @@ const SingleCourse = (props) => {
                 })
                 setShowContent(true)
                 setIsLoading(false)
+closeNavMenu();
             }
             else {
                 setShowContent(false)
                 setIsLoading(false)
+closeNavMenu();
             }
         }).catch(error => {
             setShowContent(false)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

@@ -5,6 +5,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from "react-router-dom"
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const LecturerCourses = () => {
     localStorage.setItem('page_title', 'Assigned Courses');
@@ -54,10 +55,10 @@ const LecturerCourses = () => {
                 setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
-            // console.log(res.data)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-            // console.error(error)
+closeNavMenu();
         })
     }
 

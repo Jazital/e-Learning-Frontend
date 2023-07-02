@@ -5,6 +5,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const DepartmentLecturers = () => {
     localStorage.setItem('page_title', 'Department Lecturers');
@@ -49,10 +50,10 @@ const DepartmentLecturers = () => {
                 setTableLecturers(res.data.data.lecturers);
             }
             setIsLoading(false)
-            // console.log(res.data)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-            // console.error(error)
+closeNavMenu();
         })
     }
 
@@ -106,6 +107,7 @@ const DepartmentLecturers = () => {
                 setResponseOK(false)
             }
             setIsLoading(false)
+closeNavMenu();
 
             // console.log(response.data.data)
         }).catch(error => {
@@ -122,6 +124,7 @@ const DepartmentLecturers = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

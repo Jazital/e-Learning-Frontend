@@ -6,6 +6,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const AssignmentList = () => {
@@ -69,10 +70,10 @@ const AssignmentList = () => {
                 setAssignments(response.data.data.lecture_assignments)
             }
             setIsLoading(false)
-            // console.log(response)
+            closeNavMenu();
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -110,8 +111,8 @@ const AssignmentList = () => {
                 setResponseOK(false)
             }
             setIsLoading(false)
+            closeNavMenu();
 
-            // console.log(response.data.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
@@ -126,6 +127,7 @@ const AssignmentList = () => {
             }
 
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 

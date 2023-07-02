@@ -11,6 +11,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 function LecturerAssignmentView() {
@@ -66,8 +67,10 @@ function LecturerAssignmentView() {
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
             }
             setIsLoading(false)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

@@ -10,6 +10,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import coursematerial from "../images/Vectorcourses.png"
 import Card from 'react-bootstrap/Card';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const ViewCourseMaterial = (props) => {
@@ -76,9 +77,10 @@ const ViewCourseMaterial = (props) => {
 
             }
             setIsLoading(false)
+closeNavMenu();
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
     return (

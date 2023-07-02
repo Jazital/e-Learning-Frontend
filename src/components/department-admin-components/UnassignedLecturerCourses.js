@@ -6,6 +6,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from "react-router-dom"
 import { VapingRooms } from "@mui/icons-material";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const UnassignedLecturerCourses = () => {
     localStorage.setItem('page_title', 'Assign New Courses');
@@ -56,10 +57,10 @@ const UnassignedLecturerCourses = () => {
                 setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
-            // console.log(res.data)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-            // console.error(error)
+closeNavMenu();
         })
     }
 
@@ -100,6 +101,7 @@ const UnassignedLecturerCourses = () => {
                 setResponseOK(true)
             }
             setIsLoading(false)
+closeNavMenu();
 
             // console.log(response.data)
         }).catch(error => {
@@ -114,6 +116,7 @@ const UnassignedLecturerCourses = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

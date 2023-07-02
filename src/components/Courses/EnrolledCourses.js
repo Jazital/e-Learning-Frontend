@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
+
 
 import "../CSS/Home.css";
 import coursematerial from "../images/Vectorcourses.png"
@@ -44,21 +46,23 @@ const EnrolledCourses = () => {
                 setCourses(res.data.data.courses);
                 setTableCourses(res.data.data.courses);
                 setIsLoading(false)
-            }
-            else {
+                closeNavMenu();
+            } else {
                 setIsLoading(false)
+closeNavMenu();
             }
-            // console.log(res.data)
         }).catch(error => {
-            // console.log(error)
             setIsLoading(false)
+closeNavMenu();
+            closeNavMenu();
+
         })
     }
 
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -80,17 +84,17 @@ const EnrolledCourses = () => {
                 </div>
                 <div className="col-12 col-lg-6 text-right">
                     <input className="form-control" onChange={filterCoursesOnchange} type="search"
-                           id="course-ajax-search-input" placeholder="Search courses..." />
+                           id="course-ajax-search-input" placeholder="Search courses..."/>
                 </div>
             </div>
             <div className="row">
                 {tableCourses && tableCourses.map((course, index) => <div key={index}
-                    className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
+                                                                          className=" main-body-card col-xl-3 col-lg-6 col-sm-6">
                     <Link to={`/single-course/${course['course_id']}`}>
                         <div className="card overflow-hidden">
                             <div className="card-header media border-0 pb-788">
                                 <div className="media-body">
-                                    <img className="center-image" alt='' src={coursematerial} />
+                                    <img className="center-image" alt='' src={coursematerial}/>
                                 </div>
                             </div>
                             <div className="card-body pt-4 p-0">

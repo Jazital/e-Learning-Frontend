@@ -26,3 +26,7 @@ span.eye-icon {
     font-size: 20px;
     cursor: pointer;
 }
+
+img.tetfund-footer-logo {
+    max-height: 40px;
+}

@@ -44,11 +44,11 @@ const NavHader = () => {
 
     return (
         <div className="nav-header">
-            <Link to="/dashboard" className="brand-logo text-yellow flex-column pt-4">
+            <Link to="/dashboard" className="brand-logo text-yellow flex-column pt-lg-4">
                 <div>
                     <img className="logo-abbr" src={logo} alt="" />
                 </div>
-                <div className="ml-4 header-brand-name">Osun State Polytechnic, Iree</div>
+                <div className="ml-4 header-brand-name d-none d-lg-block">Osun State Polytechnic, Iree</div>
             </Link>
 
             <div className="nav-control" onClick={() => setToggle(!toggle)}>

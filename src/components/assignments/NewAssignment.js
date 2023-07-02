@@ -5,6 +5,8 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
+
 
 const NewAssignment = () => {
     localStorage.setItem('page_title', 'New Assignment');
@@ -69,6 +71,7 @@ const NewAssignment = () => {
                 setResponseOK(true)
             }
             setIsLoading(false)
+closeNavMenu();
             document.getElementById("assignment-form").reset()
 
             // console.log(response.data)
@@ -84,6 +87,7 @@ const NewAssignment = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -106,14 +110,17 @@ const NewAssignment = () => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
+closeNavMenu();
             }
             else {
                 setIsLoading(false)
+closeNavMenu();
             }
             // console.log(res)
         }).catch(error => {
             // console.log(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

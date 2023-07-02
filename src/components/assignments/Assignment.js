@@ -11,7 +11,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
-
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 function Assignment() {
 
@@ -67,8 +67,10 @@ function Assignment() {
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
             }
             setIsLoading(false)
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -104,16 +106,18 @@ function Assignment() {
                     message: response.data.message
                 })
                 setIsLoading(false)
+                closeNavMenu();
             }
             setIsLoading(false)
+            closeNavMenu();
             // console.log(response)
         }).catch(error => {
             setSubmissionResponse({
                 status: 'error',
                 message: error.response.data.message
             })
-            // console.error(error.response.status)
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -123,7 +127,7 @@ function Assignment() {
                 {userRole=="lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link> }
             </div>
 
-            <div className='the col-xl-10 col-lg-12 col-sm-12'>
+            <div className='the col-xl-10 col-lg-12 col-sm-12 d-block d-lg-flex'>
                 {loadingModal(isLoading)}
 
                 <Card border="light" className='main-body-card col-xl-6 col-lg-12 col-sm-12'>
@@ -157,7 +161,7 @@ function Assignment() {
 
                     </div>
                 </Card>
-                <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column m-3 p-3'>
+                <div className='Formdiv main-body-card col-xl-6 col-lg-6 col-sm-12 d-flex flex-column mx-0 mx-lg-3 p-3'>
                     <div className="centercoursetext">
                         <h2 className="pb-3">Submit Assignment</h2>
                         {submissionResponse.status === "success" && (<div className="alert alert-success mb-2">

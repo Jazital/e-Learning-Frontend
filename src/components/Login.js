@@ -4,6 +4,7 @@ import axios from "axios";
 import ScaleLoader from 'rayloading/lib/ScaleLoader';
 import {Modal} from "react-bootstrap";
 import logo from "./images/ospolylogo.png"
+import tetfundLogo from "./images/tetfund.png"
 
 import "./login.css";
 import {JazitalBackendBaseURL} from "./helpers/Constants";
@@ -28,6 +29,7 @@ const Login = () => {
     // Reset the error div element when the user starts typing
     const handleOnChange = () => {
         setIsLoading(false)
+
         setLogin({
             loginState: null,
             message: null
@@ -80,8 +82,7 @@ const Login = () => {
                     history.push('/dashboard')
                 }, 1000)
 
-            }
-            else if ((res.data.code && res.data.code === 'temp_login_success')) {
+            } else if ((res.data.code && res.data.code === 'temp_login_success')) {
                 setIsLoading(false)
                 // If it is the initial temporary password, redirect to the modify password page
                 localStorage.setItem('userToken', res.data.token)
@@ -90,15 +91,13 @@ const Login = () => {
                 setTimeout(() => {
                     history.push(`/modify-password/?token=${userToken}&user_id=${userID}&is_temp_login=true`)
                 }, 1000)
-            }
-            else if ((res.data.code && res.data.code === 'error_login')) {
+            } else if ((res.data.code && res.data.code === 'error_login')) {
                 setIsLoading(false)
                 setLogin({
                     loginState: "failed",
                     message: res.data.message
                 });
-            }
-            else {
+            } else {
                 localStorage.removeItem('userRole');
                 localStorage.removeItem('userToken')
                 localStorage.removeItem('userID')
@@ -148,16 +147,14 @@ const Login = () => {
                 if (error.response.data.message) {
                     setLogin({loginState: "failed", message: "Sorry, we encountered an error while trying to sign you in at the moment. Please try again"});
                     setIsLoading(false)
-                }
-                else {
+                } else {
                     setLogin({
                         loginState: "failed",
                         message: "Sorry, we could not sign you in at the moment. Please try again"
                     });
                     setIsLoading(false)
                 }
-            }
-            else {
+            } else {
                 setLogin({
                     loginState: "failed",
                     message: "Sorry, we could not sign you in at the moment. Kindly check your internet connection"
@@ -170,7 +167,7 @@ const Login = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -179,15 +176,15 @@ const Login = () => {
         setIsLoginPasswordHidden(!isLoginPasswordHidden)
     }
     return (
-        <div className="row justify-content-center h-100 align-items-center h-80">
+        <div className="row justify-content-between h-100 align-items-center flex-column">
             {loadingModal(isLoading)}
-            <div className="col-md-5">
+            <div className="col-md-4 d-flex justify-content-center align-content-center flex-column flex-grow-1">
                 <div className="authincation-content">
                     <div className="row no-gutters">
                         <div className="col-xl-12">
                             <div className="auth-form">
                                 <div className="text-center">
-                                    <img className="signin-logo mb-3" alt="logo" src={logo} />
+                                    <img className="signin-logo mb-3" alt="logo" src={logo}/>
                                 </div>
                                 <h4 className="text-center mb-4 "> Sign in your account </h4>
                                 {/* Display success or error messages to the user when available */}
@@ -203,25 +200,25 @@ const Login = () => {
                                         </label>
                                         <input type="text" placeholder="Enter matric no / email..."
                                                id="username_input" onChange={handleOnChange}
-                                               className="form-control" />
+                                               className="form-control"/>
                                     </div>
                                     <div className="form-group">
                                         <label className="mb-1 "> <strong>Password:</strong> </label>
                                         {isLoginPasswordHidden ?
-                                         (<>
-                                             <input type="password" placeholder="Enter your password..." id="password_input"
-                                                    onChange={handleOnChange}
-                                                    className="form-control" />
-                                             <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
-                                                   onClick={togglePasswordEyeIcon}></span>
-                                         </>) :
-                                         <>
-                                             <input type="text" placeholder="Enter your password..." id="password_input"
-                                                    onChange={handleOnChange}
-                                                    className="form-control" />
-                                             <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
-                                                   onClick={togglePasswordEyeIcon}></span>
-                                         </>
+                                            (<>
+                                                <input type="password" placeholder="Enter your password..." id="password_input"
+                                                       onChange={handleOnChange}
+                                                       className="form-control"/>
+                                                <span id="toggle-password-eye" className="eye-icon mdi mdi-eye"
+                                                      onClick={togglePasswordEyeIcon}></span>
+                                            </>) :
+                                            <>
+                                                <input type="text" placeholder="Enter your password..." id="password_input"
+                                                       onChange={handleOnChange}
+                                                       className="form-control"/>
+                                                <span id="toggle-password-eye" className="eye-icon mdi mdi-eye-off"
+                                                      onClick={togglePasswordEyeIcon}></span>
+                                            </>
                                         }
 
                                     </div>
@@ -236,13 +233,14 @@ const Login = () => {
                                     </div>
                                 </form>
                                 <div className="mt-4">
-                                    Forgot password? <Link to={`/forgot-password`} >Click here</Link>
+                                    Forgot password? <Link to={`/forgot-password`}>Click here</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div>Powered by <img className="tetfund-footer-logo" src={tetfundLogo} /></div>
         </div>
     );
 };

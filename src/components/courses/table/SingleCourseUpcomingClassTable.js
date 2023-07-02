@@ -6,6 +6,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../../helpers/Constants";
 
 const SingleCourseUpcomingClassTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
@@ -78,8 +79,10 @@ const SingleCourseUpcomingClassTable = (props) => {
                 setLectures(res.data.data.lectures);
             }
             setIsLoading(false)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -105,11 +108,11 @@ const SingleCourseUpcomingClassTable = (props) => {
                 setAttendanceSubmitted(true)
             }
             setIsLoading(false)
-            // console.log(res)
+closeNavMenu();
 
         }).catch(error => {
             setIsLoading(false)
-            // console.log(error)
+closeNavMenu();
         })
     }
 
@@ -152,8 +155,7 @@ const SingleCourseUpcomingClassTable = (props) => {
                 setResponseOK(false)
             }
             setIsLoading(false)
-
-            // console.log(response.data.data)
+closeNavMenu();
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
@@ -168,6 +170,7 @@ const SingleCourseUpcomingClassTable = (props) => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

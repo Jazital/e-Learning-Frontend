@@ -63,6 +63,7 @@ const ModifyPassword = () => {
 
         if(!(newPassword==confirmPassword)){
             setIsLoading(false)
+
             setLogin({
                 loginState: "failed",
                 message: "Your password do not match. Please try again"

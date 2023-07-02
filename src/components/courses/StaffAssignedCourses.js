@@ -7,6 +7,7 @@ import {Modal} from "react-bootstrap";
 import "../CSS/Home.css";
 import coursematerial from "../images/Vectorcourses.png"
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const StaffAssignedCourses = () => {
     localStorage.setItem('page_title', 'Assigned Courses');
@@ -47,14 +48,17 @@ const StaffAssignedCourses = () => {
                 setCourses(res.data.data.courses);
                 setTableCourses(res.data.data.courses);
                 setIsLoading(false)
+closeNavMenu();
             }
             else {
                 setIsLoading(false)
+closeNavMenu();
             }
-            // console.log(res.data)
+
         }).catch(error => {
-            // console.log(error)
+
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

@@ -5,6 +5,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const NewCourseMaterial = () => {
     localStorage.setItem('page_title', 'New Document');
@@ -76,8 +77,8 @@ const NewCourseMaterial = () => {
                 document.getElementById("upload-document-form").reset()
             }
             setIsLoading(false)
+closeNavMenu();
 
-            // console.log(response.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
@@ -92,6 +93,7 @@ const NewCourseMaterial = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -114,15 +116,15 @@ const NewCourseMaterial = () => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
+closeNavMenu();
             }
             else {
-                // console.log("No course(s) found!")
                 setIsLoading(false)
+closeNavMenu();
             }
-            // console.log(res)
         }).catch(error => {
-            // console.log(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

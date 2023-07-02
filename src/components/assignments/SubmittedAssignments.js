@@ -8,6 +8,7 @@ import coursematerial from "../images/Vectorcourses.png"
 import axios from "axios";
 import Card from 'react-bootstrap/Card';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const SubmittedAssignments = () => {
@@ -75,10 +76,10 @@ const SubmittedAssignments = () => {
                 setSubmissions(fetchedData);
             }
             setIsLoading(false)
-            // console.log(response.data)
+closeNavMenu();
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -100,8 +101,10 @@ const SubmittedAssignments = () => {
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
             }
             setIsLoading(false)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -149,14 +152,14 @@ const SubmittedAssignments = () => {
                 setResponseError(false)
             }
             setIsLoading(false)
-            // console.log(response.data)
+closeNavMenu();
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
             setResponseError(true)
             setResponseOK(false)
 
-            // console.error(error.response)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -287,14 +290,14 @@ const SubmittedAssignments = () => {
                 }, 3000)
             }
             setIsLoading(false)
-            // console.log(response.data)
+closeNavMenu();
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
             setResponseError(true)
             setResponseOK(false)
 
-            // console.error(error.response)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

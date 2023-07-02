@@ -6,6 +6,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link, useParams} from 'react-router-dom';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const ContinuousAssessmentTable = (props) => {
@@ -47,10 +48,11 @@ const ContinuousAssessmentTable = (props) => {
                 setAssessments(response.data.data.assessments_fetched)
             }
             setIsLoading(false)
+closeNavMenu();
 
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

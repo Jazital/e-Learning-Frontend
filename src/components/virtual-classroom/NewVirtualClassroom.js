@@ -6,6 +6,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const NewVirtualClassroom = () => {
     localStorage.setItem('page_title', 'New Virtual Classroom');
@@ -67,14 +68,15 @@ const NewVirtualClassroom = () => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
+closeNavMenu();
             }
             else {
                 setIsLoading(false)
+closeNavMenu();
             }
-            // console.log(res)
         }).catch(error => {
-            // console.log(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
@@ -118,6 +120,7 @@ const NewVirtualClassroom = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
 
             console.log(response)
         }).catch(error => {
@@ -132,6 +135,7 @@ const NewVirtualClassroom = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

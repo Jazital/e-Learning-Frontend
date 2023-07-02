@@ -5,6 +5,7 @@ import "../CSS/Home.css";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 
 const TimeTable = () => {
@@ -47,9 +48,11 @@ const TimeTable = () => {
                 setTimetable(response.data.data.lecture_timetable)
             }
             setIsLoading(false)
+closeNavMenu();
             setTimetable2(response.data.data.lecture_timetable)
         }).catch(error => {
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

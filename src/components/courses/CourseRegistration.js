@@ -5,6 +5,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import MUIDataTable from "mui-datatables";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const CourseRegistration = () => {
     localStorage.setItem('page_title', 'Course Registration');
@@ -55,10 +56,10 @@ const CourseRegistration = () => {
                 setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
-            // console.log(res.data)
+closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-            // console.error(error)
+closeNavMenu();
         })
     }
 
@@ -99,8 +100,8 @@ const CourseRegistration = () => {
                 setResponseError(false)
             }
             setIsLoading(false)
+closeNavMenu();
 
-            // console.log(response.data)
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
@@ -115,6 +116,7 @@ const CourseRegistration = () => {
             }
 
             setIsLoading(false)
+closeNavMenu();
         })
     }
 

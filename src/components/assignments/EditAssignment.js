@@ -5,6 +5,7 @@ import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 const EditAssignment = () => {
     localStorage.setItem('page_title', 'Modify Assignment');
@@ -59,9 +60,10 @@ const EditAssignment = () => {
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
             }
             setIsLoading(false)
-            // console.log(response.data)
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -104,6 +106,7 @@ const EditAssignment = () => {
                 setResponseError(false)
             }
             setIsLoading(false)
+            closeNavMenu();
             document.getElementById("assignment-form").reset()
 
             // console.log(response.data);
@@ -121,6 +124,7 @@ const EditAssignment = () => {
             }
 
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 
@@ -143,15 +147,16 @@ const EditAssignment = () => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
+                closeNavMenu();
             }
             else {
-                // console.log("No course(s) found!")
                 setIsLoading(false)
+                closeNavMenu();
             }
-            // console.log(res)
+
         }).catch(error => {
-            // console.log(error)
             setIsLoading(false)
+            closeNavMenu();
         })
     }
 

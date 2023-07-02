@@ -6,6 +6,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import {Link} from 'react-router-dom';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
+import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 function toTitleCase(string) {
     var sentence = string.toLowerCase().split(" ");
@@ -72,11 +73,11 @@ const CourseMaterialTable = (props) => {
                 setDocuments(response.data.data.lecture_document)
             }
             setIsLoading(false)
+closeNavMenu();
 
-            // console.log(response.data.data.lecture_document)
         }).catch(error => {
-            // console.error(error)
             setIsLoading(false)
+closeNavMenu();
         })
     }
 
