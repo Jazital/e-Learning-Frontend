@@ -293,7 +293,7 @@ closeNavMenu();
 
             {data2 &&
             <MUIDataTable
-                title={"Upcoming Lecturers"}
+                title={"Upcoming Lectures"}
                 data={data2}
                 columns={columns}
                 options={options}
