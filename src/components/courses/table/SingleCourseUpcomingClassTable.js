@@ -121,7 +121,6 @@ closeNavMenu();
     }
 
     const deleteLecture = async (lectureId) => {
-
         setIsLoading(true)
 
         endpoint = '/lectures/delete';
@@ -146,8 +145,8 @@ closeNavMenu();
                 setResponseError(false)
 
                 setTimeout(() => {
-                    // window.location.reload(false);
-                }, 2000)
+                    window.location.reload(false);
+                }, 1000)
             }
             else {
                 setResponseErrorMessage(response.data.message)
@@ -239,8 +238,7 @@ closeNavMenu();
                          return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
                          }}
                          className="btn btn-warning">Modify</a>}*/}
-                        {userRole === "lecturer" && <a href={`#`}
-
+                        {userRole === "lecturer" && <a href="javascript: void(0)"
                                                        onClick={()=>{deleteLecture(lectures[tableMeta.rowIndex].lecture_id)}}
 
                                                        className="btn btn-danger">Delete</a>}

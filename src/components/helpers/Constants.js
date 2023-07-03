@@ -1,4 +1,4 @@
-var isDevelopmentMode = false;
+var isDevelopmentMode = true;
 var url = '';
 if (isDevelopmentMode) {
     url = "http://elearning-backend.local/api/v1";

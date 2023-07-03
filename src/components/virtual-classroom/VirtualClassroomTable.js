@@ -55,8 +55,6 @@ const VirtualClassroomTable = (props) => {
     }, [])
 
     const fetchLectures = async () => {
-
-
         await axios.get(
             BACKEND_BASE_URL + endpoint,
             args
@@ -148,7 +146,7 @@ const VirtualClassroomTable = (props) => {
                 setResponseError(true)
                 setResponseOK(false)
             } else {
-                setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
+                setResponseErrorMessage("Sorry, we cannot delete the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
             }
@@ -224,8 +222,7 @@ const VirtualClassroomTable = (props) => {
                          }}
                          className="btn btn-warning">Modify</a>}*/}
 
-                        {userRole === "lecturer" && <a href={`#`}
-
+                        {userRole === "lecturer" && <a href="javascript: void(0)"
                                                        onClick={() => {
                                                            deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
                                                        }}
