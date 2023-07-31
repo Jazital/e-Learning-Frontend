@@ -28,7 +28,7 @@ function Assignment() {
 
     args = {
         headers: {
-            'Token': userToken,
+            'Authorization': 'Bearer '+userToken,
         },
     }
     endpoint = '/assignments/' + assignment_id;
@@ -83,7 +83,7 @@ function Assignment() {
         endpoint = '/assignments/submit';
         let args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }

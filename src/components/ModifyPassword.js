@@ -125,15 +125,15 @@ const ModifyPassword = () => {
             
             if ((res.data.code && res.data.code === 'password_update_success')) {
                 if(isTempLogin){
-                    setLogin({loginState: "success", message: "Your details has been updated successfully"});
+                    setLogin({loginState: "success", message: "Your details has been updated successfully. You should be redirected to the login page soon; otherwise, click on the \'<< Back to login\' button below."});
                 } else{
                     setLogin({loginState: "success", message: "Your password has been updated successfully"});
                 }
 
                 setIsLoading(false)
                 setTimeout(() => {
-                    // history.push('./')
-                }, 2000)
+                    history.push('/')
+                }, 3000)
                 document.getElementById("details-form").reset()
             } 
             else if ((res.data.code && res.data.code === 'invalid_reset_token_1')) {

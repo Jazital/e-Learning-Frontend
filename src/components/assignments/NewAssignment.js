@@ -43,7 +43,7 @@ const NewAssignment = () => {
 
         let args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -95,7 +95,7 @@ closeNavMenu();
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),

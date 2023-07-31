@@ -26,7 +26,7 @@ const SingleCourseUpcomingClassTable = (props) => {
     useEffect(() => {
         setTimeout(() => {
             fetchLectures();
-        }, 2000)
+        }, 2500)
     }, [])
 
     if (props.courseCode) {
@@ -34,10 +34,9 @@ const SingleCourseUpcomingClassTable = (props) => {
         // A course ID would be passed, so we fetch the upcoming lectures for that course alone
         //URL for fetch with course ID here
         endpoint = '/lectures/fetch-by-course-code';
-
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'course_code': courseCode
@@ -52,7 +51,7 @@ const SingleCourseUpcomingClassTable = (props) => {
 
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'course_id': courseID
@@ -64,7 +63,7 @@ const SingleCourseUpcomingClassTable = (props) => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -75,14 +74,15 @@ const SingleCourseUpcomingClassTable = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
+
             if (res.data.code && res.data.code === "lecture_fetched") {
                 setLectures(res.data.data.lectures);
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -91,7 +91,7 @@ closeNavMenu();
         endpoint = '/lecture-attendance/add';
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         let data = {
@@ -108,16 +108,16 @@ closeNavMenu();
                 setAttendanceSubmitted(true)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
 
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
     const modifyLecture = (lectureId) => {
-        console.log("Modify lecture clicked")
+       // console.log("Modify lecture clicked")
     }
 
     const deleteLecture = async (lectureId) => {
@@ -127,7 +127,7 @@ closeNavMenu();
 
         let args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -147,29 +147,27 @@ closeNavMenu();
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 1000)
-            }
-            else {
+            } else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -239,8 +237,9 @@ closeNavMenu();
                          }}
                          className="btn btn-warning">Modify</a>}*/}
                         {userRole === "lecturer" && <a href="javascript: void(0)"
-                                                       onClick={()=>{deleteLecture(lectures[tableMeta.rowIndex].lecture_id)}}
-
+                                                       onClick={() => {
+                                                           deleteLecture(lectures[tableMeta.rowIndex].lecture_id)
+                                                       }}
                                                        className="btn btn-danger">Delete</a>}
                     </>
                 )

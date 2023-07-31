@@ -32,7 +32,7 @@ const ViewCourseMaterial = (props) => {
         // This is passed in SingleCourseMaterial.js
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'course_id': props.courseID,
@@ -42,7 +42,7 @@ const ViewCourseMaterial = (props) => {
     else {
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
     }

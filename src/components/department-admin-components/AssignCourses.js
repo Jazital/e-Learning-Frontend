@@ -34,7 +34,7 @@ const AssignCourses = () => {
         endpoint = `/departmental-admin/fetch-department-lecturers?department_id=${departmentID}`;
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         // Making request to backend API

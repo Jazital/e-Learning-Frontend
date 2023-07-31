@@ -16,17 +16,6 @@ const NewVirtualClassroom = () => {
     const [selectedPlatform, setSelectedPlatform] = useState("Google Meet");
     const [platformCreationURL, setPlatformCreationURL] = useState("https://meet.google.com/new");
     const [platformPlaceholderURL, setPlatformPlaceholderURL] = useState("https://meet.google.com/pqd-chdf-apf");
-    
-
-//     var isDevelopmentMode = true;
-// var url = '';
-// if (isDevelopmentMode) {
-//     url = "http://elearning-backend.local/api/v1";
-// }
-// else {
-//     url = "https://pandagiantltd.com/e-learning-backend-api/api/v1";
-// }
-
 
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
@@ -38,7 +27,7 @@ const NewVirtualClassroom = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -53,7 +42,7 @@ const NewVirtualClassroom = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -68,15 +57,14 @@ const NewVirtualClassroom = () => {
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
-closeNavMenu();
-            }
-            else {
+                closeNavMenu();
+            } else {
                 setIsLoading(false)
-closeNavMenu();
+                closeNavMenu();
             }
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -103,7 +91,7 @@ closeNavMenu();
 
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
         }
 
@@ -120,22 +108,21 @@ closeNavMenu();
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
 
-            console.log(response)
+            // console.log(response)
         }).catch(error => {
-            console.error(error)
+            // console.error(error)
             if (error.response.data.message) {
                 setResponseMessage(error.response.data.message)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseOK(false)
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -145,7 +132,7 @@ closeNavMenu();
 
         var creationLink = document.getElementById("obtain-lecture-url-link");
 
-        switch (event.target.value){
+        switch (event.target.value) {
             case "Google Meet":
                 setPlatformPlaceholderURL("https://meet.google.com/pqd-chdf-apf");
                 setPlatformCreationURL("https://meet.google.com/new");
@@ -191,21 +178,21 @@ closeNavMenu();
                     <div className="col-12 col-md-8 pr-3">
                         <div className="form-group">
                             <label htmlFor="vc-title">Title:</label>
-                            <input className="form-control" type="text" placeholder="Enter title..." id="vc-title" required />
+                            <input className="form-control" type="text" placeholder="Enter title..." id="vc-title" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-description">Description:</label>
                             <textarea className="form-control" rows="8" id="vc-description"
-                                      placeholder="Enter description..." ></textarea>
+                                      placeholder="Enter description..."></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-url">Meeting URL:</label>
                             <input className="form-control" type="text"
-                                   placeholder={`E.g. ${platformPlaceholderURL}`} id="vc-lecture-url" required />
+                                   placeholder={`E.g. ${platformPlaceholderURL}`} id="vc-lecture-url" required/>
                         </div>
 
                         <div className="d-none d-md-block">
-                            <input type="submit" value="Create Classroom" className="btn btn-primary" />
+                            <input type="submit" value="Create Classroom" className="btn btn-primary"/>
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
@@ -213,19 +200,18 @@ closeNavMenu();
                         <div className="form-group">
                             {/*TODO: Fetch only assigned courses here*/}
                             <label htmlFor="vc-course-id">Course:</label>
-                            <select className="form-control" id="vc-course-id">
-                                <option value="null">Select course</option>
+                            <select className="form-control" id="vc-course-id" required>
                                 {courses && courses.map((course, index) => <option key={index}
                                                                                    value={`${course.course_id}`}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-date">Lecture Date:</label>
-                            <input className="form-control" type="datetime-local" id="vc-lecture-date" required />
+                            <input className="form-control" type="datetime-local" id="vc-lecture-date" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-platform">Platform:</label>
-                            <select className="form-control" onChange={handlePlatformOnchange} id="vc-platform">
+                            <select className="form-control" onChange={handlePlatformOnchange} id="vc-platform" required>
                                 <option value="Google Meet">Google Meet</option>
                                 <option value="Zoom">Zoom</option>
                                 <option value="YouTube">YouTube</option>
@@ -235,10 +221,11 @@ closeNavMenu();
                         </div>
 
                         <div className="d-md-none">
-                            <input type="submit" value="Create Classroom" className="btn btn-primary" />
+                            <input type="submit" value="Create Classroom" className="btn btn-primary"/>
                         </div>
 
-                        <a href={`${platformCreationURL}`} id="obtain-lecture-url-link" class="text-info" target="_blank">Click here to obtain <b>meeting URL</b></a>
+                        <a href={`${platformCreationURL}`} id="obtain-lecture-url-link" class="text-info" target="_blank">Click here to obtain <b>meeting
+                            URL</b></a>
                     </div>
                 </div>
             </form>

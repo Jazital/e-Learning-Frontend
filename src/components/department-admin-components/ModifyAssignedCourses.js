@@ -21,8 +21,8 @@ const ModifyAssignedCourses = () => {
     const [selectedSemester, setSelectedSemester] = useState("first-semester")
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
-    let endpoint = ''
-    let args = ''
+    let endpoint = '';
+    let args = '';
 
         // Get ID from URL
         const {lecturer_id} = useParams();
@@ -41,10 +41,10 @@ const ModifyAssignedCourses = () => {
 
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
-                "lecturer_id": lecturer_id,
+                // "lecturer_id": lecturer_id,
                 "department_id": department_id,
             }
         }
@@ -89,7 +89,7 @@ closeNavMenu();
 
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
 

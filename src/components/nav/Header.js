@@ -32,7 +32,7 @@ const Header = ({onNote, toggle, onProfile, onActivity, onNotification}) => {
         const endpoint = '/courses/all';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         // Making request to backend API

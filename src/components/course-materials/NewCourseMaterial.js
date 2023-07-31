@@ -44,7 +44,7 @@ const NewCourseMaterial = () => {
 
         let args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -101,7 +101,7 @@ closeNavMenu();
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -146,16 +146,16 @@ closeNavMenu();
                         <div className="form-group">
                             <label htmlFor="document-title">Title:</label>
                             <input className="form-control" type="text" placeholder="Enter title..."
-                                   id="document-title" />
+                                   id="document-title" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="document-description">Description:</label>
                             <textarea className="form-control" rows="8" id="document-description"
-                                      placeholder="Enter description..."></textarea>
+                                      placeholder="Enter description..." ></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="document-attachments">Document Attachment:</label>
-                            <input type="file" id="document-attachments" className="form-control mb-3" />
+                            <input type="file" id="document-attachments" className="form-control mb-3" required />
                         </div>
 
                         <div className="d-none d-md-block">
@@ -166,15 +166,15 @@ closeNavMenu();
 
                         <div className="form-group">
                             <label htmlFor="document-course-id">Course:</label>
-                            <select className="form-control" id="document-course-id">
+                            <select className="form-control" id="document-course-id" required>
                                 {courses && courses.map((course, index) => <option value={`${course.course_id}`}
                                                                             key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group" >
                             <label htmlFor="document-type">Document Type:</label>
-                            <select className="form-control" id="document-type">
+                            <select className="form-control" id="document-type" required>
                                 <option value="3">Lecture Material</option>
                                 <option value="1">Journal</option>
                                 <option value="2">Textbook</option>

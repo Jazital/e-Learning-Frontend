@@ -17,7 +17,7 @@ const TimeTable = () => {
     let userToken = localStorage.getItem('userToken') || '';
     let args = {
         headers: {
-            'Token': userToken,
+            'Authorization': 'Bearer '+userToken,
         },
     }
     endpoint = '/lecture-timetable/fetch';

@@ -59,7 +59,7 @@ const SubmittedAssignments = () => {
 
         var args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'assignment_id': assignment_id,
@@ -87,7 +87,7 @@ closeNavMenu();
 
         var args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         var endpoint = '/assignments/' + assignment_id;
@@ -131,7 +131,7 @@ closeNavMenu();
         var endpoint = '/assignments/submit-scores-array';
         var args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
 
@@ -247,11 +247,12 @@ closeNavMenu();
 
     const options = {
         search: true,
-        download: false,
-        print: false,
+        download: true,
+        print: true,
         viewColumns: false,
         filter: false,
         responsive: "standard",
+        tableBodyMaxHeight: '600px',
         selectableRowsHideCheckboxes: true
 
     };
@@ -264,7 +265,7 @@ closeNavMenu();
         var endpoint = '/assignments/upload-scores';
         var args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }

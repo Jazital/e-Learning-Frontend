@@ -22,7 +22,7 @@ function ProtectedContainer(props) {
         let stateUpdated = false;
         if (!stateUpdated) {
             !signedIn && history.push('/');
-            verifySignedIn()
+            // verifySignedIn()
         }
 
         stateUpdated = false;
@@ -32,7 +32,7 @@ function ProtectedContainer(props) {
         const endpoint = '/auth/verify-login';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         // Making request to backend API

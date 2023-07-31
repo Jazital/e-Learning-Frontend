@@ -28,7 +28,7 @@ function LecturerAssignmentView() {
 
     args = {
         headers: {
-            'Token': userToken,
+            'Authorization': 'Bearer '+userToken,
         },
     }
     endpoint = '/assignments/' + assignment_id;

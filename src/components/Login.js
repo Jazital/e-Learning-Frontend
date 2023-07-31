@@ -84,6 +84,7 @@ const Login = () => {
 
             } else if ((res.data.code && res.data.code === 'temp_login_success')) {
                 setIsLoading(false)
+                setLogin({loginState: "success", message: "Initial sign in successful"});
                 // If it is the initial temporary password, redirect to the modify password page
                 localStorage.setItem('userToken', res.data.token)
                 let userToken = res.data.token;
@@ -120,7 +121,7 @@ const Login = () => {
 
             // console.log(res.data);
         }).catch(error => {
-            console.log(error);
+           // console.log(error);
             localStorage.removeItem('userRole');
             localStorage.removeItem('userToken')
             localStorage.removeItem('userID')

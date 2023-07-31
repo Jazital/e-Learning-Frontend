@@ -33,7 +33,7 @@ const CourseRegistration = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -43,7 +43,7 @@ const CourseRegistration = () => {
         endpoint = '/courses/all';
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         // Making request to backend API
@@ -56,10 +56,10 @@ const CourseRegistration = () => {
                 setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -85,7 +85,7 @@ closeNavMenu();
 
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
 
@@ -94,13 +94,15 @@ closeNavMenu();
             data,
             args
         ).then(response => {
+            // console.log(response.data)
+            // return
             if (response.data.code == 'courses_enrolled') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
                 setResponseError(false)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
 
         }).catch(error => {
             // console.error(error)
@@ -108,15 +110,14 @@ closeNavMenu();
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -150,9 +151,10 @@ closeNavMenu();
     return (
         <>
             {loadingModal(isLoading)}
-            <div className="col-lg-12">
+            <div className="col-lg-12 pb-lg-5">
                 <div className="row my-3">
-                    <h4 className="text-danger">*** Please note that clicking on the submit button replace your currently enrolled courses with the selected courses ***</h4>
+                    <h4 className="text-danger">*** Please note that clicking on the submit button replace your currently enrolled courses with the selected
+                        courses ***</h4>
                 </div>
 
                 {responseOK && <div className="alert alert-success col-11">
@@ -169,7 +171,7 @@ closeNavMenu();
                     </div>
                     <div className="col-12 col-lg-6 text-right">
                         <input className="form-control" onChange={filterCoursesOnchange} type="search"
-                               id="course-ajax-search-input" placeholder="Search courses..." />
+                               id="course-ajax-search-input" placeholder="Search courses..."/>
                     </div>
                 </div>
                 <form onSubmit={submitRegistredCourses}>
@@ -191,7 +193,7 @@ closeNavMenu();
                             <tr key={index}>
                                 <td><input className="form-check courses-checkbox" name="selectedCourses[]"
                                            value={course.course_code}
-                                           type="checkbox" id="selectedCourses" /></td>
+                                           type="checkbox" id="selectedCourses"/></td>
                                 <td>{index + 1}</td>
                                 <td>{course.course_code}</td>
                                 <td>{course.course_title}</td>
@@ -201,7 +203,7 @@ closeNavMenu();
                         ))}
                         </tbody>
                     </table>
-                    <button type="submit" className="btn btn-primary mt-3">Register Courses</button>
+                    <button type="submit" className="btn btn-primary my-3">Register Courses</button>
                 </form>
             </div>
         </>

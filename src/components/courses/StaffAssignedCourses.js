@@ -32,7 +32,7 @@ const StaffAssignedCourses = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),

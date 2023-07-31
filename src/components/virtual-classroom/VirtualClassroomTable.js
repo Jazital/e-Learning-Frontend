@@ -21,24 +21,13 @@ const VirtualClassroomTable = (props) => {
     const [responseError, setResponseError] = useState(null);
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
 
-    if (props.courseID) {
-        args = {
-            headers: {
-                'Token': userToken,
-            },
-            params: {
-                'course_id': props.courseID,
-            }
-        }
-        endpoint = '/lectures/fetch-by-course-id';
-    } else {
-        args = {
-            headers: {
-                'Token': userToken,
-            },
-        }
-        endpoint = '/lectures/fetch-student-upcoming-lectures';
+    args = {
+        headers: {
+            'Authorization': 'Bearer '+userToken,
+        },
     }
+    // endpoint = '/lectures/fetch-student-upcoming-lectures';
+    endpoint = '/lectures/fetch-by-course-id';
 
     const loadingModal = (isOpen = false) => {
         return (
@@ -51,7 +40,7 @@ const VirtualClassroomTable = (props) => {
     useEffect(() => {
         setTimeout(() => {
             fetchLectures();
-        }, 2000)
+        }, 2500)
     }, [])
 
     const fetchLectures = async () => {
@@ -71,13 +60,13 @@ const VirtualClassroomTable = (props) => {
         })
     }
 
-
     const attendLecture = async (lectureId) => {
+        // TODO: Call a function here that records attendance and submit to a new attendance endpoint
         // Making request to backend API
         endpoint = '/lecture-attendance/add';
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
         let data = {
@@ -100,8 +89,9 @@ const VirtualClassroomTable = (props) => {
         })
     }
 
+    // TODO: Complete modify lecture
     const modifyLecture = (lectureId) => {
-        console.log("Modify lecture clicked")
+       // console.log("Modify lecture clicked")
     }
 
     const deleteLecture = async (lectureId) => {
@@ -111,7 +101,7 @@ const VirtualClassroomTable = (props) => {
 
         let args2 = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -258,7 +248,7 @@ const VirtualClassroomTable = (props) => {
         viewColumns: false,
         filter: false,
         responsive: "standard",
-        tableBodyMaxHeight: '400px',
+        tableBodyMaxHeight: '600px',
         selectableRowsHideCheckboxes: true
 
     };

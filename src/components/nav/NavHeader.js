@@ -18,7 +18,7 @@ const NavHader = () => {
     let userToken = localStorage.getItem('userToken') || '';
     let args = {
         headers: {
-            'Token': userToken,
+            'Authorization': 'Bearer '+userToken,
         },
     }
 

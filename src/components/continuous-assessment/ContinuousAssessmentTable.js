@@ -17,7 +17,7 @@ const ContinuousAssessmentTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
         args = {
             headers: {
-                'Token': userToken,
+                'Authorization': 'Bearer '+userToken,
             },
         }
     const [assessments, setAssessments] = useState([])
@@ -133,7 +133,7 @@ closeNavMenu();
         viewColumns: false,
         filter: false,
         responsive: "standard",
-        tableBodyMaxHeight:'400px',
+        tableBodyMaxHeight:'600px',
         selectableRowsHideCheckboxes:true
 
     };
