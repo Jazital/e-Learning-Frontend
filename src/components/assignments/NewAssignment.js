@@ -24,7 +24,7 @@ const NewAssignment = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -43,7 +43,7 @@ const NewAssignment = () => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -69,25 +69,22 @@ const NewAssignment = () => {
             if (response.data.code === 'assignment_created') {
                 setResponseMessage(response.data.message)
                 setResponseOK(true)
+                document.getElementById("assignment-form").reset()
             }
             setIsLoading(false)
-closeNavMenu();
-            document.getElementById("assignment-form").reset()
-
-            // console.log(response.data)
+            closeNavMenu();
         }).catch(error => {
             // console.error(error)
             if (error.response.data.message) {
                 setResponseMessage(error.response.data.message)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseMessage("Sorry, we cannot create the assignment at the moment. Please try again later.")
                 setResponseOK(false)
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -95,7 +92,7 @@ closeNavMenu();
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -110,17 +107,16 @@ closeNavMenu();
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
-closeNavMenu();
-            }
-            else {
+                closeNavMenu();
+            } else {
                 setIsLoading(false)
-closeNavMenu();
+                closeNavMenu();
             }
             // console.log(res)
         }).catch(error => {
             // console.log(error)
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -140,7 +136,7 @@ closeNavMenu();
                         <div className="form-group">
                             <label htmlFor="vc-title">Title:</label>
                             <input className="form-control" type="text" placeholder="Enter title..."
-                                   id="new-assignment-title" required />
+                                   id="new-assignment-title" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-description">Description:</label>
@@ -149,11 +145,11 @@ closeNavMenu();
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-url">Document Attachment:</label>
-                            <input type="file" id="new-assignment-attachment" className="form-control mb-3" />
+                            <input type="file" id="new-assignment-attachment" className="form-control mb-3"/>
                         </div>
 
                         <div className="d-none d-md-block">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Create Assignment" className="btn btn-primary"/>
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
@@ -164,16 +160,16 @@ closeNavMenu();
                             <select className="form-control" id="new-assignment-course">
                                 <option value="">Select course</option>
                                 {courses && courses.map((course, index) => <option value={`${course.course_id}`}
-                                                                            key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
+                                                                                   key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="vc-lecture-date">Due Date:</label>
-                            <input className="form-control" type="date" id="new-assignment-due-date" required />
+                            <input className="form-control" type="datetime-local" id="new-assignment-due-date" required/>
                         </div>
 
                         <div className="d-md-none">
-                            <input type="submit" value="Create Assignment" className="btn btn-primary" />
+                            <input type="submit" value="Create Assignment" className="btn btn-primary"/>
                         </div>
                     </div>
                 </div>

@@ -76,8 +76,6 @@ const AddUser = () => {
             formData,
             args2
         ).then(response => {
-            // console.log(response);
-            return; // TODO: REMOVE RETURN AFTER LECTURER DEPARTMENT NOT SUBMITTING BUG FIX
             if (response.data.code == 'new_user_created') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
