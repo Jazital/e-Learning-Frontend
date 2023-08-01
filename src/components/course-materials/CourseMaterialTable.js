@@ -10,12 +10,12 @@ import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
 function toTitleCase(string) {
     var sentence = string.toLowerCase().split(" ");
-    for(var i = 0; i< sentence.length; i++){
-       sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+    for (var i = 0; i < sentence.length; i++) {
+        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
     }
- document.write(sentence.join(" "));
- return sentence;
- }
+    document.write(sentence.join(" "));
+    return sentence;
+}
 
 
 const CourseMaterialTable = (props) => {
@@ -31,17 +31,16 @@ const CourseMaterialTable = (props) => {
         //This is passed in SingleCourseMaterial.js
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'course_id': props.courseID,
             }
         }
-    }
-    else {
+    } else {
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
         }
     }
@@ -51,7 +50,7 @@ const CourseMaterialTable = (props) => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -69,15 +68,16 @@ const CourseMaterialTable = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
+            // console.log(response)
             if (response.data.code === 'lecture_document_fetched') {
                 setDocuments(response.data.data.lecture_document)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
 
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -124,7 +124,7 @@ closeNavMenu();
                 empty: true,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        <Link to={`/course-material/view/${documents[tableMeta.rowIndex].lecture_doc_id}`} className="btn btn-primary" onClick={()=>{
+                        <Link to={`/course-material/view/${documents[tableMeta.rowIndex].lecture_doc_id}`} className="btn btn-primary" onClick={() => {
                         }}>view</Link>
                     </>
                 )
@@ -156,8 +156,8 @@ closeNavMenu();
         viewColumns: false,
         filter: false,
         responsive: "standard",
-        tableBodyMaxHeight:'400px',
-        selectableRowsHideCheckboxes:true
+        tableBodyMaxHeight: '400px',
+        selectableRowsHideCheckboxes: true
 
     };
 

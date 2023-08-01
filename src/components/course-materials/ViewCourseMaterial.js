@@ -117,7 +117,7 @@ closeNavMenu();
                     <h3>Attachment(s)</h3>
                     {attachments.map((data, index) => {
                             var i = 1;
-                                return (<a key={index} className="btn btn-primary" href={data.file_uri} target="_blank">
+                                return (<a key={index} className="btn btn-primary" href={data} target="_blank">
                                 {`Download Attachment ${i}`}
                             </a>)
                             i++;

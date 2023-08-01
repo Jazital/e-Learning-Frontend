@@ -25,7 +25,7 @@ const NewCourseMaterial = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -44,7 +44,7 @@ const NewCourseMaterial = () => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -70,14 +70,18 @@ const NewCourseMaterial = () => {
             formData,
             args2
         ).then(response => {
+            // console.log(response);
             if (response.data.code == 'document_uploaded') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
                 setResponseError(false)
+
+
+
                 document.getElementById("upload-document-form").reset()
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
 
         }).catch(error => {
             // console.error(error)
@@ -85,15 +89,14 @@ closeNavMenu();
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseErrorMessage("Sorry, we cannot create the assignment at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
             }
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -101,7 +104,7 @@ closeNavMenu();
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -113,28 +116,27 @@ closeNavMenu();
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
+
             if (res.data.code && res.data.code === "courses_fetched") {
                 setCourses(res.data.data.courses);
                 setIsLoading(false)
-closeNavMenu();
-            }
-            else {
+                closeNavMenu();
+            } else {
                 setIsLoading(false)
-closeNavMenu();
+                closeNavMenu();
             }
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
-
 
     return (
         <>
             {loadingModal(isLoading)}
             {responseOK && <div className="alert alert-success col-12">
-                    {responseOKMessage}
-                </div>}
+                {responseOKMessage}
+            </div>}
 
             {responseError && <div className="alert alert-danger col-12">
                 {responseErrorMessage}
@@ -146,20 +148,20 @@ closeNavMenu();
                         <div className="form-group">
                             <label htmlFor="document-title">Title:</label>
                             <input className="form-control" type="text" placeholder="Enter title..."
-                                   id="document-title" required />
+                                   id="document-title" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="document-description">Description:</label>
                             <textarea className="form-control" rows="8" id="document-description"
-                                      placeholder="Enter description..." ></textarea>
+                                      placeholder="Enter description..."></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="document-attachments">Document Attachment:</label>
-                            <input type="file" id="document-attachments" className="form-control mb-3" required />
+                            <input type="file" id="document-attachments" className="form-control mb-3" required/>
                         </div>
 
                         <div className="d-none d-md-block">
-                            <input type="submit" value="Upload Document" className="btn btn-primary" />
+                            <input type="submit" value="Upload Document" className="btn btn-primary"/>
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
@@ -168,11 +170,11 @@ closeNavMenu();
                             <label htmlFor="document-course-id">Course:</label>
                             <select className="form-control" id="document-course-id" required>
                                 {courses && courses.map((course, index) => <option value={`${course.course_id}`}
-                                                                            key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
+                                                                                   key={index}>{`${course.course_code} - ${course.course_title}`}</option>)}
                             </select>
                         </div>
 
-                        <div className="form-group" >
+                        <div className="form-group">
                             <label htmlFor="document-type">Document Type:</label>
                             <select className="form-control" id="document-type" required>
                                 <option value="3">Lecture Material</option>
@@ -185,7 +187,7 @@ closeNavMenu();
                         </div>
 
                         <div className="d-md-none">
-                            <input type="submit" value="Upload Document" className="btn btn-primary" />
+                            <input type="submit" value="Upload Document" className="btn btn-primary"/>
                         </div>
                     </div>
                 </div>

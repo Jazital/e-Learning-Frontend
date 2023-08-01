@@ -28,18 +28,17 @@ const AssignmentList = () => {
     if (course_id) {
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'course_id': course_id,
             }
         }
         endpoint = '/assignments/fetch-by-course-id';
-    }
-    else {
+    } else {
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
         }
         endpoint = '/assignments/fetch-all-assignments';
@@ -50,7 +49,7 @@ const AssignmentList = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
+                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
             </Modal>
         );
     };
@@ -66,6 +65,7 @@ const AssignmentList = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
+            // console.log(response)
             if (response.data.code === 'assignment_fetched') {
                 setAssignments(response.data.data.lecture_assignments)
             }
@@ -84,7 +84,7 @@ const AssignmentList = () => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -104,8 +104,7 @@ const AssignmentList = () => {
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 2000)
-            }
-            else {
+            } else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -119,8 +118,7 @@ const AssignmentList = () => {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            }
-            else {
+            } else {
                 setResponseErrorMessage("Sorry, we cannot create the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -189,7 +187,9 @@ const AssignmentList = () => {
                         {/*{userRole === "lecturer" && <Link to={`/assignment/edit/${assignments[tableMeta.rowIndex].assignment_id}`} className="btn btn-warning">modify</Link>}*/}
 
                         {userRole === "lecturer" && <Link to={`#`} className="btn btn-danger"
-                                                          onClick={()=>{handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)}}>delete</Link>}
+                                                          onClick={() => {
+                                                              handleAssignmentDelete(assignments[tableMeta.rowIndex].assignment_id)
+                                                          }}>delete</Link>}
                     </>
                 )
             }
