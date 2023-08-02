@@ -221,9 +221,9 @@ closeNavMenu();
                 filter: false,
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <>
-                        {userRole === "lecturer" && submissions[tableMeta.rowIndex].attachments[0].file_uri &&
-                        <a href={`${submissions[tableMeta.rowIndex].attachments[0].file_uri}`} target="_blank"
-                           className="btn btn-primary">Download solution</a>}
+                        {userRole === "lecturer" && submissions[tableMeta.rowIndex].attachments[0] &&
+                        <a href={`${submissions[tableMeta.rowIndex].attachments[0]}`} target="_blank"
+                           className="btn btn-primary d-print-none">Download solution</a>}
                     </>
                 )
             }
@@ -238,7 +238,7 @@ closeNavMenu();
                 Number: sn,
                 MatricNumber: data.student_details.matric_number,
                 Name: data.student_details.first_name + " " + data.student_details.last_name,
-                // Score: data.score,
+                Score: data.score,
                 SubmissionDate: data.submission_date,
             })
             sn++;

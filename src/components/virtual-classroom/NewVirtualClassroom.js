@@ -224,7 +224,7 @@ const NewVirtualClassroom = () => {
                             <input type="submit" value="Create Classroom" className="btn btn-primary"/>
                         </div>
 
-                        <a href={`${platformCreationURL}`} id="obtain-lecture-url-link" class="text-info" target="_blank">Click here to obtain <b>meeting
+                        <a href={`${platformCreationURL}`} id="obtain-lecture-url-link" className="text-info" target="_blank">Click here to obtain <b>meeting
                             URL</b></a>
                     </div>
                 </div>
