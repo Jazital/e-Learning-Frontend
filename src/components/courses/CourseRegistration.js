@@ -43,7 +43,7 @@ const CourseRegistration = () => {
         endpoint = '/courses/all';
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
         // Making request to backend API
@@ -85,7 +85,7 @@ const CourseRegistration = () => {
 
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
 

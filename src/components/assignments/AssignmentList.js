@@ -28,7 +28,7 @@ const AssignmentList = () => {
     if (course_id) {
         args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
             },
             params: {
                 'course_id': course_id,
@@ -38,7 +38,7 @@ const AssignmentList = () => {
     } else {
         args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
             },
         }
         endpoint = '/assignments/fetch-all-assignments';
@@ -65,13 +65,14 @@ const AssignmentList = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            // console.log(response)
+           // console.log(response)
             if (response.data.code === 'assignment_fetched') {
                 setAssignments(response.data.data.lecture_assignments)
             }
             setIsLoading(false)
             closeNavMenu();
         }).catch(error => {
+           // console.log(error)
             setIsLoading(false)
             closeNavMenu();
         })
@@ -84,7 +85,7 @@ const AssignmentList = () => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -96,6 +97,7 @@ const AssignmentList = () => {
             BACKEND_BASE_URL + endpoint,
             args2
         ).then(response => {
+            // console.log(response)
             if (response.data.code === 'assignment_deleted') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)

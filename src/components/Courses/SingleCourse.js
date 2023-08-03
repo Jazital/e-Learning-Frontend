@@ -47,7 +47,7 @@ const SingleCourse = (props) => {
         const endpoint = '/courses/' + course_id;
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
         // Making request to backend API

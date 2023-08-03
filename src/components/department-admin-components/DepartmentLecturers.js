@@ -37,7 +37,7 @@ const DepartmentLecturers = () => {
         endpoint = `/departmental-admin/fetch-department-lecturers?department_id=${departmentID}`;
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
         // Making request to backend API
@@ -80,7 +80,7 @@ closeNavMenu();
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {

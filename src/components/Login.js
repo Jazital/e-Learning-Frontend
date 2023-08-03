@@ -61,6 +61,7 @@ const Login = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
+            //console.log(res)
             if ((res.data.code && res.data.code === 'login_success')) {
                 let data = res.data;
                 let userDetails = data.data.user;
@@ -121,7 +122,7 @@ const Login = () => {
 
             // console.log(res.data);
         }).catch(error => {
-           // console.log(error);
+           //console.log(error);
             localStorage.removeItem('userRole');
             localStorage.removeItem('userToken')
             localStorage.removeItem('userID')

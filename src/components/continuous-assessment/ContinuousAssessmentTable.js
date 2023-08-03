@@ -17,7 +17,7 @@ const ContinuousAssessmentTable = (props) => {
     let userToken = localStorage.getItem('userToken') || '';
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
     const [assessments, setAssessments] = useState([])

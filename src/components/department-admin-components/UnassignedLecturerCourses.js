@@ -39,7 +39,7 @@ const UnassignedLecturerCourses = () => {
 
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
             params: {
                 "lecturer_id": lecturer_id,
@@ -87,7 +87,7 @@ closeNavMenu();
 
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
 

@@ -42,7 +42,7 @@ const NewVirtualClassroom = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization':  userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -91,7 +91,7 @@ const NewVirtualClassroom = () => {
 
         let args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization':  + userToken,
             },
         }
 

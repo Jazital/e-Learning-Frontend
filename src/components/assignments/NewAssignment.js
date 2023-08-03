@@ -43,7 +43,7 @@ const NewAssignment = () => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization':  + userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -92,7 +92,7 @@ const NewAssignment = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization':  + userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),

@@ -31,7 +31,7 @@ const EnrolledCourses = () => {
         const endpoint = '/courses/enrolled';
         let args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
             params: {
                 'student_id': localStorage.getItem('userID')

@@ -28,7 +28,7 @@ function Assignment() {
 
     args = {
         headers: {
-            'Authorization': 'Bearer ' + userToken,
+            'Authorization': userToken,
         },
     }
     endpoint = '/assignments/' + assignment_id;
@@ -82,7 +82,7 @@ function Assignment() {
         endpoint = '/assignments/submit';
         let args2 = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -99,7 +99,7 @@ function Assignment() {
             formData,
             args2
         ).then(response => {
-            console.log(response)
+            //console.log(response)
             if (response.data.code === 'assignment_submitted') {
                 setSubmissionResponse({
                     status: 'success',

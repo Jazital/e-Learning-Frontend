@@ -31,7 +31,7 @@ const CourseMaterialTable = (props) => {
         //This is passed in SingleCourseMaterial.js
         args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
             },
             params: {
                 'course_id': props.courseID,
@@ -40,7 +40,7 @@ const CourseMaterialTable = (props) => {
     } else {
         args = {
             headers: {
-                'Authorization': 'Bearer ' + userToken,
+                'Authorization': userToken,
             },
         }
     }

@@ -36,7 +36,7 @@ const SingleCourseUpcomingClassTable = (props) => {
         endpoint = '/lectures/fetch-by-course-code';
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
             params: {
                 'course_code': courseCode
@@ -51,7 +51,7 @@ const SingleCourseUpcomingClassTable = (props) => {
 
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
             params: {
                 'course_id': courseID
@@ -91,7 +91,7 @@ const SingleCourseUpcomingClassTable = (props) => {
         endpoint = '/lecture-attendance/add';
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
         let data = {
@@ -127,7 +127,7 @@ const SingleCourseUpcomingClassTable = (props) => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {

@@ -23,7 +23,7 @@ const VirtualClassroomTable = (props) => {
 
     args = {
         headers: {
-            'Authorization': 'Bearer '+userToken,
+            'Authorization': userToken,
         },
     }
     // endpoint = '/lectures/fetch-student-upcoming-lectures';
@@ -66,7 +66,7 @@ const VirtualClassroomTable = (props) => {
         endpoint = '/lecture-attendance/add';
         args = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
             },
         }
         let data = {
@@ -101,7 +101,7 @@ const VirtualClassroomTable = (props) => {
 
         let args2 = {
             headers: {
-                'Authorization': 'Bearer '+userToken,
+                'Authorization': userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
