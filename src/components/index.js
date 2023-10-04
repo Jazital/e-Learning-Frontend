@@ -46,6 +46,7 @@ import DepartmentLecturers from "./department-admin-components/DepartmentLecture
 import AddUser from "./Profile/AddUser";
 import ModifyUser from "./Profile/ModifyUser";
 import ModifyPassword from "./ModifyPassword";
+import LectureAttendance from "./virtual-classroom/ClassAttendance";
 
 
 const Markup = () => {
@@ -63,9 +64,9 @@ const Markup = () => {
                     component={ForgotPassword}
                 />
                 <Route
-                        path={`/modify-password`}
-                        component={ModifyPassword} 
-                    />
+                    path={`/modify-password`}
+                    component={ModifyPassword}
+                />
                 <Route
                     path={`/`}
                     component={Login}
@@ -136,7 +137,7 @@ const Markup = () => {
                         component={AssignmentList}
                     />
                     <Route
-                       exact path={`/assignment/:assignment_id`}
+                        exact path={`/assignment/:assignment_id`}
                         component={Assignment}
                     />
                     <Route
@@ -148,7 +149,7 @@ const Markup = () => {
                         component={SubmittedAssignments}
                     />
                     <Route
-                         path={`/assignment/edit/:assignment_id`}
+                        path={`/assignment/edit/:assignment_id`}
                         component={EditAssignment}
                     />
                     <Route
@@ -191,6 +192,11 @@ const Markup = () => {
                         component={NewVirtualClassroom}
                     />
                     <Route
+                        path={`/lecture/attendance/:lecture_id`}
+                        component={LectureAttendance}
+                        exact
+                    />
+                    <Route
                         path={`/new-assignment`}
                         component={NewAssignment}
                     />
@@ -219,7 +225,7 @@ const Markup = () => {
                     />
                     <Route
                         path={`/department-lecturers-courses/:lecturer_id`}
-                        component={LecturerCourses} 
+                        component={LecturerCourses}
                     />
 
                     <Route

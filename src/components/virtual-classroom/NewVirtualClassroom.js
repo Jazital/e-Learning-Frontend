@@ -42,7 +42,7 @@ const NewVirtualClassroom = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization':  userToken,
+                'Authorization': userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),
@@ -91,7 +91,7 @@ const NewVirtualClassroom = () => {
 
         let args = {
             headers: {
-                'Authorization':  + userToken,
+                'Authorization': userToken,
             },
         }
 
@@ -100,6 +100,7 @@ const NewVirtualClassroom = () => {
             data,
             args
         ).then(response => {
+
             if (response.data.code === 'lecture_created') {
                 setResponseMessage(response.data.message)
                 setResponseOK(true)

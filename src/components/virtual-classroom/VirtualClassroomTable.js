@@ -201,6 +201,7 @@ const VirtualClassroomTable = (props) => {
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
                                                       className="btn btn-primary">Attend</a>}
+                        {userRole === "lecturer" && <a href={`./lecture/attendance/${lectures[tableMeta.rowIndex].lecture_id}`} className="btn btn-primary">View Attendance</a>}
                         {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)

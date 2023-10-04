@@ -37,7 +37,7 @@ const LecturerCourses = () => {
 
         let args = {
             headers: {
-                'Authorization': +userToken,
+                'Authorization': userToken,
             },
             params: {
                 'lecturer_id': lecturer_id,
