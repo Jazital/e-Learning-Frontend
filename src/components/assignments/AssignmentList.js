@@ -208,7 +208,6 @@ const AssignmentList = () => {
                 Course: data.course_code,
                 Status: "open",
                 DueDate: data.due_date,
-                // Lecturer: "Dr. E. Dayo",
             })
             sn++;
         })

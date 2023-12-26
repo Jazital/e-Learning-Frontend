@@ -11,6 +11,7 @@ const VirtualClassroomTable = (props) => {
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = ''
     let args = {}
+    // let {course_id} = useParams();
 
     let userToken = localStorage.getItem('userToken') || '';
     let userRole = localStorage.getItem('userRole');
@@ -26,6 +27,9 @@ const VirtualClassroomTable = (props) => {
         headers: {
             'Authorization': 'Bearer ' + userToken,
         },
+        // params: {
+        //     'course_id': course_id,
+        // },
     }
     // endpoint = '/lectures/fetch-student-upcoming-lectures';
     endpoint = '/lectures/fetch-by-course-id';

@@ -26,9 +26,6 @@ const CourseMaterialTable = (props) => {
     let userToken = localStorage.getItem('userToken');
 
     if (props.courseID) {
-        // A course ID was passed, so we fetch the course materials for the passed course ID; else we fetch all the
-        // course materials for all courses.
-        //This is passed in SingleCourseMaterial.js
         args = {
             headers: {
                 'Authorization': 'Bearer ' + userToken,
@@ -45,6 +42,7 @@ const CourseMaterialTable = (props) => {
             },
         }
     }
+
     const [documents, setDocuments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [fileURI, setFileURI] = useState(null)
@@ -69,7 +67,7 @@ const CourseMaterialTable = (props) => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.data.code === 'lecture_document_fetched') {
                 setDocuments(response.data.data.lecture_document)
             }
