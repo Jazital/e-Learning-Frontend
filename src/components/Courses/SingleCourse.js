@@ -4,7 +4,7 @@ import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 
-import SingleCourseUpcomingClassTable from "./table/SingleCourseUpcomingClassTable";
+// import SingleCourseUpcomingClassTable from "./table/SingleCourseUpcomingClassTable";
 
 import "../CSS/Home.css";
 
@@ -47,7 +47,7 @@ const SingleCourse = (props) => {
         const endpoint = '/courses/' + course_id;
         let args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         // Making request to backend API
@@ -170,7 +170,7 @@ closeNavMenu();
                         </div>
 
                     </div>
-                    <SingleCourseUpcomingClassTable courseID={course.courseID} />
+                    {/*<SingleCourseUpcomingClassTable courseID={course.courseID} />*/}
                 </div>
             </div>)}
         </>

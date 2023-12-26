@@ -32,7 +32,7 @@ function ProtectedContainer(props) {
         const endpoint = '/auth/verify-login';
         let args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         // Making request to backend API
@@ -47,7 +47,7 @@ function ProtectedContainer(props) {
                 setSignedIn(false);
             }
         }).catch(error => {
-            
+
         })
     }
 

@@ -37,7 +37,7 @@ const DepartmentLecturers = () => {
         endpoint = `/departmental-admin/fetch-department-lecturers?department_id=${departmentID}`;
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         // Making request to backend API
@@ -80,7 +80,7 @@ closeNavMenu();
 
         let args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -145,7 +145,7 @@ closeNavMenu();
             </div>
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
-                        <Link className="btn btn-primary"to={`/add-new-user`}>Add New Lecturer</Link> 
+                        <Link className="btn btn-primary"to={`/add-new-user`}>Add New Lecturer</Link>
                     </div>
                     <div className="col-12 col-lg-6 text-right">
                         <input className="form-control" onChange={filterLecturerOnchange} type="search"

@@ -37,7 +37,7 @@ const LecturerCourses = () => {
 
         let args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'lecturer_id': lecturer_id,
@@ -55,10 +55,10 @@ const LecturerCourses = () => {
                 setTableCourses(res.data.data.courses);
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -67,7 +67,7 @@ closeNavMenu();
         var searchQuery = e.target.value;
         var newCourses = courses.filter(course => {
             return ((course.course_code.toLowerCase().includes(searchQuery.toLowerCase())) || (course.course_title.toLowerCase().includes(searchQuery.toLowerCase())));
-    })
+        })
         setTableCourses(newCourses);
     }
 
@@ -83,17 +83,17 @@ closeNavMenu();
         <>
             {loadingModal(isLoading)}
             <div className="col-lg-12">
-            <div className="row my-3">
-            </div>
+                <div className="row my-3">
+                </div>
                 <div className="row mb-3">
-                <div className="col-12 col-lg-6 text-right">
+                    <div className="col-12 col-lg-6 text-right">
                         <input className="form-control" onChange={filterCoursesOnchange} type="search"
                                id="course-ajax-search-input" placeholder="Search courses..." />
                     </div>
                     <div className="col-12 col-lg-6">
                     </div>
                 </div>
-                    <div className="table-responsive">
+                <div className="table-responsive">
                     <table
                         className="table table-borderless table-hover table-striped">
                         <thead>
@@ -103,7 +103,7 @@ closeNavMenu();
                         <td>Unit</td>
                         </thead>
                         <tbody>
-                        {tableCourses.map((course, index) =>  (
+                        {tableCourses.map((course, index) => (
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{course.course_code}</td>
@@ -114,9 +114,11 @@ closeNavMenu();
                         </tbody>
                     </table>
                     <div>
-                        <Link className="btn btn-primary mr-3"to={`/modify-assigned-courses/${lecturer_id}`}>Modify Assigned Courses</Link> <Link className="btn btn-danger"to={`/unassigned-courses/${lecturer_id}`}>Un-assign Courses</Link>
+                        <Link className="btn btn-primary mr-3"
+                              to={`/modify-assigned-courses/${lecturer_id}`}>Modify Assigned Courses</Link> <Link
+                        className="btn btn-danger" to={`/unassigned-courses/${lecturer_id}`}>Un-assign Courses</Link>
                     </div>
-                    </div>
+                </div>
             </div>
         </>
     );

@@ -27,7 +27,7 @@ const LectureAttendance = () => {
     if (lecture_id) {
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'lecture_id': lecture_id,
@@ -37,7 +37,7 @@ const LectureAttendance = () => {
         // If lecture ID is not found
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'lecture_id': 0,

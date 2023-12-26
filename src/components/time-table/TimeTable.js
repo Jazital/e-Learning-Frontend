@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
-import { Modal} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 
 import "../CSS/Home.css";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 import {closeNavMenu, openNavMenu} from "../helpers/Constants";
-
 
 const TimeTable = () => {
     localStorage.setItem('page_title', 'Lecture Timetable');
@@ -17,7 +16,7 @@ const TimeTable = () => {
     let userToken = localStorage.getItem('userToken') || '';
     let args = {
         headers: {
-            'Authorization': userToken,
+            'Authorization':'Bearer '+ userToken,
         },
     }
     endpoint = '/lecture-timetable/fetch';
@@ -48,11 +47,11 @@ const TimeTable = () => {
                 setTimetable(response.data.data.lecture_timetable)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
             setTimetable2(response.data.data.lecture_timetable)
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -60,7 +59,7 @@ closeNavMenu();
         <div>
             {loadingModal(isLoading)}
             {(timetable2.length > 0) && (timetable2.map((data, index) => {
-               return <img src={data} key={index} alt="" className="m-2 timetable-img" />
+                return <img src={data} key={index} alt="" className="m-2 timetable-img" />
             }))}
             <br />
         </div>

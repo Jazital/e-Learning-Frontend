@@ -28,7 +28,7 @@ const AssignmentList = () => {
     if (course_id) {
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'course_id': course_id,
@@ -38,7 +38,7 @@ const AssignmentList = () => {
     } else {
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         endpoint = '/assignments/fetch-all-assignments';
@@ -85,7 +85,7 @@ const AssignmentList = () => {
 
         let args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {

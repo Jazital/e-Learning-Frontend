@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 /// React router dom
-import {/*BrowserRouter*/ HashRouter as Router, Switch, Route} from "react-router-dom";
+import {HashRouter as Router, Switch, Route} from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -15,9 +15,9 @@ import Home from "./dashboard/Home";
 import ProtectedContainer from "./hoc/ProtectedContainer";
 import Profile from "./Profile/Profile";
 import Error404 from "../components/Error404";
-import EnrolledCourses from "./courses/EnrolledCourses";
+import EnrolledCourses from "./Courses/EnrolledCourses";
 import AssignmentList from "./assignments/AssignmentList";
-import SingleCourse from "../components/courses/SingleCourse";
+import SingleCourse from "../components/Courses/SingleCourse";
 import Assignment from "./assignments/Assignment";
 import SingleCourseMaterial from "../components/course-materials/SingleCourseMaterial";
 import Logout from "./Logout";
@@ -25,12 +25,12 @@ import CourseMaterials from "./course-materials/CourseMaterials";
 import DiscussionBoard from "./discussion-board/DiscussionBoard";
 import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
 import TimeTable from "./time-table/TimeTable";
-import CourseRegistration from "./courses/CourseRegistration";
+// import CourseRegistration from "./Courses/CourseRegistration";
 import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 import SingleVirtualClassroom from "./virtual-classroom/SingleVirtualClassroom";
 import ContinuousAssessment from "./continuous-assessment/ContinuousAssessment";
 import SingleContinuousAssessment from "./continuous-assessment/SingleContinuousAssessment";
-import StaffAssignedCourses from "./courses/StaffAssignedCourses";
+import StaffAssignedCourses from "./Courses/StaffAssignedCourses";
 import NewVirtualClassroom from "./virtual-classroom/NewVirtualClassroom";
 import NewAssignment from "./assignments/NewAssignment";
 import ViewCourseMaterial from "./course-materials/ViewCourseMaterial";
@@ -72,10 +72,10 @@ const Markup = () => {
                     component={Login}
                     exact
                 />
-                {/*<Route
+                <Route
                     path={`/login`}
                     component={Login}
-                />*/}
+                />
                 <Route
                     path={`/logout`}
                     component={Logout}
@@ -114,11 +114,11 @@ const Markup = () => {
                         component={ViewCourseMaterial}
                         exact
                     />
-                    <Route
-                        path={`/course-registration`}
-                        component={CourseRegistration}
-                        exact
-                    />
+                    {/* <Route
+                     path={`/course-registration`}
+                     component={CourseRegistration}
+                     exact
+                     />*/}
                     <Route
                         path={`/discussion-board/course/:course_id`}
                         component={SingleDiscussionBoard}

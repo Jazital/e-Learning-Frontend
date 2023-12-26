@@ -47,6 +47,7 @@
       "draft-js": "^0.11.7",
       "flexbox-react": "^4.4.0",
       "html-to-draftjs": "^1.5.0",
+      "material-ui": "^0.20.2",
       "mdbootstrap": "^4.20.0",
       "mdbreact": "^5.0.1",
       "metismenujs": "^1.2.1",

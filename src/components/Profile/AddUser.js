@@ -47,7 +47,7 @@ const AddUser = () => {
 
         let args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }

@@ -46,7 +46,7 @@ const EditAssignment = () => {
 
         var args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         var endpoint = '/assignments/' + assignment_id;
@@ -76,7 +76,7 @@ const EditAssignment = () => {
 
         let args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -132,7 +132,7 @@ const EditAssignment = () => {
         const endpoint = '/courses/assigned';
         let args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'lecturer_id': localStorage.getItem('userID'),

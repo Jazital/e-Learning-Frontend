@@ -1,9 +1,11 @@
 import React from "react";
 import "../CSS/Home.css";
 import {Link, useParams} from "react-router-dom";
-import SingleCourseUpcomingClassTable from "../courses/table/SingleCourseUpcomingClassTable";
+import SingleCourseUpcomingClassTable from "./SingleVirtualClassroomTable";
 
 const SingleVirtualClassroom = () => {
+    localStorage.setItem('page_title', 'Virtual Classroom');
+
     let userRole = localStorage.getItem('userRole');
 // Get ID from URL
     const {course_id} = useParams();

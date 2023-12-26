@@ -59,7 +59,7 @@ const SubmittedAssignments = () => {
 
         var args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 'assignment_id': assignment_id,
@@ -87,7 +87,7 @@ closeNavMenu();
 
         var args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
         var endpoint = '/assignments/' + assignment_id;
@@ -131,7 +131,7 @@ closeNavMenu();
         var endpoint = '/assignments/submit-scores-array';
         var args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
 
@@ -264,7 +264,7 @@ closeNavMenu();
         var endpoint = '/assignments/upload-scores';
         var args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization':'Bearer '+ userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }

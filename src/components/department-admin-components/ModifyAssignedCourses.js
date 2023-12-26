@@ -41,7 +41,7 @@ const ModifyAssignedCourses = () => {
 
         let args = {
             headers: {
-                'Authorization':  + userToken,
+                'Authorization':'Bearer '+ userToken,
             },
             params: {
                 // "lecturer_id": lecturer_id,
@@ -92,7 +92,7 @@ const ModifyAssignedCourses = () => {
 
         let args = {
             headers: {
-                'Authorization':  + userToken,
+                'Authorization':'Bearer '+ userToken,
             },
         }
 

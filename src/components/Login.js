@@ -61,7 +61,6 @@ const Login = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then((res) => {
-            //console.log(res)
             if ((res.data.code && res.data.code === 'login_success')) {
                 let data = res.data;
                 let userDetails = data.data.user;

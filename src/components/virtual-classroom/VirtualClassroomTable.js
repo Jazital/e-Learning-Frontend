@@ -5,6 +5,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 import {closeNavMenu, openNavMenu} from "../helpers/Constants";
+import {useParams} from "react-router-dom";
 
 const VirtualClassroomTable = (props) => {
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
@@ -23,7 +24,7 @@ const VirtualClassroomTable = (props) => {
 
     args = {
         headers: {
-            'Authorization': userToken,
+            'Authorization': 'Bearer ' + userToken,
         },
     }
     // endpoint = '/lectures/fetch-student-upcoming-lectures';
@@ -32,7 +33,7 @@ const VirtualClassroomTable = (props) => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
             </Modal>
         );
     };
@@ -66,7 +67,7 @@ const VirtualClassroomTable = (props) => {
         endpoint = '/lecture-attendance/add';
         args = {
             headers: {
-                'Authorization': userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
         }
         let data = {
@@ -91,7 +92,7 @@ const VirtualClassroomTable = (props) => {
 
     // TODO: Complete modify lecture
     const modifyLecture = (lectureId) => {
-       // console.log("Modify lecture clicked")
+        // console.log("Modify lecture clicked")
     }
 
     const deleteLecture = async (lectureId) => {
@@ -101,7 +102,7 @@ const VirtualClassroomTable = (props) => {
 
         let args2 = {
             headers: {
-                'Authorization': userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
             params: {
@@ -121,7 +122,8 @@ const VirtualClassroomTable = (props) => {
                 setTimeout(() => {
                     window.location.reload(false);
                 }, 1000)
-            } else {
+            }
+            else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -135,7 +137,8 @@ const VirtualClassroomTable = (props) => {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            } else {
+            }
+            else {
                 setResponseErrorMessage("Sorry, we cannot delete the virtual classroom at the moment. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -201,7 +204,9 @@ const VirtualClassroomTable = (props) => {
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
                         }}
                                                       className="btn btn-primary">Attend</a>}
-                        {userRole === "lecturer" && <a href={`./lecture/attendance/${lectures[tableMeta.rowIndex].lecture_id}`} className="btn btn-primary">View Attendance</a>}
+                        {userRole === "lecturer" &&
+                        <a href={`./lecture/attendance/${lectures[tableMeta.rowIndex].lecture_id}`}
+                           className="btn btn-primary">View Attendance</a>}
                         {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
