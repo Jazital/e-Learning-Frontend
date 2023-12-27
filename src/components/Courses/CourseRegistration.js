@@ -3,53 +3,43 @@ import "../CSS/Home.css";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import ScaleLoader from "rayloading/lib/ScaleLoader";
-import {Link, useParams} from "react-router-dom"
-import {VapingRooms} from "@mui/icons-material";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
-const ModifyAssignedCourses = () => {
-    localStorage.setItem('page_title', 'Assign New Courses');
+const CourseRegistration = () => {
+    localStorage.setItem('page_title', 'Course Registration');
     let userToken = localStorage.getItem('userToken') || '';
-    let department_id = localStorage.getItem('department') || '';
     const [responseOK, setResponseOK] = useState(null);
     const [responseOKMessage, setResponseOKMessage] = useState('');
     const [responseError, setResponseError] = useState(null);
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
     const [courses, setCourses] = useState([])
     const [tableCourses, setTableCourses] = useState([])
-    const [selectedSemester, setSelectedSemester] = useState("first-semester")
 
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
     let endpoint = '';
     let args = '';
 
-    // Get ID from URL
-    const {lecturer_id} = useParams();
+
+    var studentId = localStorage.getItem('userID') || null;
 
     useEffect(() => {
         setTimeout(() => {
-            fetchLecturerCourses();
+            fetchStudentCourses();
         }, 2000)
     }, [])
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchLecturerCourses = () => {
+    const fetchStudentCourses = () => {
         setIsLoading(true);
-        endpoint = `/courses/courses-by-department`;
+        endpoint = `/courses/all`;
 
         let args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
-            params: {
-                // "lecturer_id": lecturer_id,
-                "department_id": department_id,
-            }
         }
-
-        // console.log(department_id)
 
         // Making request to backend API
         axios.get(
@@ -69,12 +59,15 @@ const ModifyAssignedCourses = () => {
         })
     }
 
-    const submitAssignedCourses = async (e) => {
+    const submitRegisteredCourses = async (e) => {
         e.preventDefault();
 
         setIsLoading(true)
 
-        endpoint = '/departmental-admin/assign-courses-by-course-code';
+        endpoint = '/courses/enrol-courses-by-course-code';
+
+        // endpoint = '/courses/enrol-courses';
+        // endpoint = '/departmental-admin/assign-courses-by-course-code';
 
         var items = document.getElementsByName("selectedCourses[]");
 
@@ -85,27 +78,27 @@ const ModifyAssignedCourses = () => {
             }
         }
 
-        var data = {
-            "lecturer_id": lecturer_id,
-            "course_codes": arr,
-        };
-
         let args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
+            params: {
+                "course_codes": arr,
+                "student_id": studentId,
+            }
         }
 
         await axios.post(
             BACKEND_BASE_URL + endpoint,
-            data,
             args
         ).then(response => {
-            if (response.data.code === 'courses_assigned') {
+            // console.log(response);
+            if (response.data.code === 'courses_enrolled') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
                 setResponseError(false)
-            } else {
+            }
+            else {
                 setResponseErrorMessage(response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
@@ -113,14 +106,13 @@ const ModifyAssignedCourses = () => {
             setIsLoading(false)
             closeNavMenu();
 
-            // console.log(response.data)
         }).catch(error => {
-            // console.error(error)
             if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
                 setResponseOK(false)
-            } else {
+            }
+            else {
                 setResponseErrorMessage("Sorry, something went wrong. Please try again later.")
                 setResponseError(true)
                 setResponseOK(false)
@@ -142,7 +134,7 @@ const ModifyAssignedCourses = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
             </Modal>
         );
     };
@@ -155,13 +147,11 @@ const ModifyAssignedCourses = () => {
                 </div>
 
                 <div className="row mb-3">
-                    <h4 className="alert alert-danger text-center">***Please note that new courses submitted will replace any other courses previously assigned
-                        to this lecturer***</h4>
+                    <h4 className="alert alert-danger text-center">*** Please note that submitted courses will replace any previously registered courses ***</h4>
 
                     {responseOK && <div className="alert alert-success col-11">
                         {responseOKMessage}
                     </div>}
-
                     {responseError && <div className="alert alert-danger col-11">
                         {responseErrorMessage}
                     </div>}
@@ -170,11 +160,11 @@ const ModifyAssignedCourses = () => {
                     </div>
                     <div className="col-12 col-lg-6 text-right">
                         <input className="form-control" onChange={filterCoursesOnchange} type="search"
-                               id="course-ajax-search-input" placeholder="Search courses..."/>
+                               id="course-ajax-search-input" placeholder="Search courses..." />
                     </div>
                 </div>
                 <div className="table-responsive">
-                    <form onSubmit={submitAssignedCourses}>
+                    <form onSubmit={submitRegisteredCourses}>
                         <table
                             className="table table-borderless table-hover table-responsive table-striped table-">
                             <thead>
@@ -189,12 +179,11 @@ const ModifyAssignedCourses = () => {
                             </thead>
 
                             <tbody>
-                            {/* {course.course_semester.semester_slug.toLowerCase().includes(selectedSemester.toLowerCase()) && */}
                             {tableCourses.map((course, index) => (
                                 <tr key={index}>
                                     <td><input className="form-check courses-checkbox" name="selectedCourses[]"
                                                value={course.course_code}
-                                               type="checkbox" id="selectedCourses"/></td>
+                                               type="checkbox" id="selectedCourses" /></td>
                                     <td>{index + 1}</td>
                                     <td>{course.course_code}</td>
                                     <td>{course.course_title}</td>
@@ -204,8 +193,7 @@ const ModifyAssignedCourses = () => {
                             ))}
                             </tbody>
                         </table>
-                        <div><input type="submit" className="btn btn-primary" value="Submit Courses"/></div>
-
+                        <div><input type="submit" className="btn btn-primary" value="Submit Courses" /></div>
                     </form>
                 </div>
             </div>
@@ -213,4 +201,4 @@ const ModifyAssignedCourses = () => {
     );
 };
 
-export default ModifyAssignedCourses;
+export default CourseRegistration;

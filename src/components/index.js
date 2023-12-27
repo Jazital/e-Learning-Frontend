@@ -25,7 +25,7 @@ import CourseMaterials from "./course-materials/CourseMaterials";
 import DiscussionBoard from "./discussion-board/DiscussionBoard";
 import VirtualClassroom from "./virtual-classroom/VirtualClassroom";
 import TimeTable from "./time-table/TimeTable";
-// import CourseRegistration from "./Courses/CourseRegistration";
+import CourseRegistration from "./Courses/CourseRegistration";
 import SingleDiscussionBoard from "./discussion-board/SingleDiscussionBoard";
 import SingleVirtualClassroom from "./virtual-classroom/SingleVirtualClassroom";
 import ContinuousAssessment from "./continuous-assessment/ContinuousAssessment";
@@ -114,11 +114,11 @@ const Markup = () => {
                         component={ViewCourseMaterial}
                         exact
                     />
-                    {/* <Route
-                     path={`/course-registration`}
-                     component={CourseRegistration}
-                     exact
-                     />*/}
+                    <Route
+                        path={`/course-registration`}
+                        component={CourseRegistration}
+                        exact
+                    />
                     <Route
                         path={`/discussion-board/course/:course_id`}
                         component={SingleDiscussionBoard}

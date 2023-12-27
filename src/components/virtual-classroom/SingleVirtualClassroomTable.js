@@ -27,8 +27,6 @@ const VirtualClassroomTable = (props) => {
         course_id = props.courseID;
     }
 
-    console.log(course_id)
-
     args = {
         headers: {
             'Authorization': 'Bearer ' + userToken,

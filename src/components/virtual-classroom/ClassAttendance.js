@@ -67,14 +67,14 @@ const LectureAttendance = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.data.code === 'attendance_fetched') {
                 setAttendance(response.data.data.submitted_attendance)
             }
             setIsLoading(false)
             closeNavMenu();
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
             setIsLoading(false)
             closeNavMenu();
         })
