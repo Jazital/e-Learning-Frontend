@@ -10,7 +10,6 @@ import Card from 'react-bootstrap/Card';
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 import {closeNavMenu, openNavMenu} from "../helpers/Constants";
 
-
 const SubmittedAssignments = () => {
     const {assignment_id} = useParams();
 

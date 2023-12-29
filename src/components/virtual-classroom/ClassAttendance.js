@@ -27,17 +27,19 @@ const LectureAttendance = () => {
     if (lecture_id) {
         args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'lecture_id': lecture_id,
             }
         }
-    } else {
+
+    }
+    else {
         // If lecture ID is not found
         args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'lecture_id': 0,
@@ -52,7 +54,7 @@ const LectureAttendance = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
             </Modal>
         );
     };
@@ -69,7 +71,7 @@ const LectureAttendance = () => {
         ).then(response => {
             // console.log(response)
             if (response.data.code === 'attendance_fetched') {
-                setAttendance(response.data.data.submitted_attendance)
+                setAttendance(response.data.data)
             }
             setIsLoading(false)
             closeNavMenu();
@@ -89,32 +91,24 @@ const LectureAttendance = () => {
             }
         },
         {
-            name: "Title",
-            label: "Title",
+            name: "Matric",
+            label: "Matric No.",
             options: {
                 filter: false,
                 sort: false,
             }
         },
         {
-            name: "Course",
-            label: "Courses",
+            name: "Name",
+            label: "Name",
             options: {
                 filter: false,
                 sort: false,
             }
         },
         {
-            name: "Status",
-            label: "Status",
-            options: {
-                filter: false,
-                sort: false,
-            }
-        },
-        {
-            name: "DueDate",
-            label: "Due Date",
+            name: "Date",
+            label: "Date",
             options: {
                 filter: false,
                 sort: false,
@@ -128,10 +122,9 @@ const LectureAttendance = () => {
         attendance.forEach((data) => {
             data2.push({
                 Number: sn,
-                Title: data.assignment_title,
-                Course: data.course_code,
-                Status: "open",
-                DueDate: data.due_date,
+                Matric: data.db_student_info.matric_number,
+                Name: data.db_student_info.first_name + " " + data.db_student_info.last_name,
+                Date: data.date_attended,
             })
             sn++;
         })
@@ -139,14 +132,13 @@ const LectureAttendance = () => {
 
     const options = {
         search: true,
-        download: false,
-        print: false,
+        download: true,
+        print: true,
         viewColumns: false,
         filter: false,
         responsive: "standard",
         tableBodyMaxHeight: '400px',
         selectableRowsHideCheckboxes: true
-
     };
 
     return (

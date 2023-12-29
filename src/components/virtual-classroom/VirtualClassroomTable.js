@@ -5,7 +5,7 @@ import ScaleLoader from "rayloading/lib/ScaleLoader";
 import axios from "axios";
 import {JazitalBackendBaseURL} from "../helpers/Constants";
 import {closeNavMenu, openNavMenu} from "../helpers/Constants";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const VirtualClassroomTable = (props) => {
     const BACKEND_BASE_URL = JazitalBackendBaseURL;
@@ -209,8 +209,8 @@ const VirtualClassroomTable = (props) => {
                         }}
                                                       className="btn btn-primary">Attend</a>}
                         {userRole === "lecturer" &&
-                        <a href={`./lecture/attendance/${lectures[tableMeta.rowIndex].lecture_id}`}
-                           className="btn btn-primary">View Attendance</a>}
+                        <Link to={`/class-attendance/${lectures[tableMeta.rowIndex].lecture_id}`}
+                              className="btn btn-primary">View Attendance</Link>}
                         {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                             setIsLoading(true);
                             return attendLecture(lectures[tableMeta.rowIndex].lecture_id)

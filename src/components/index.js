@@ -192,9 +192,9 @@ const Markup = () => {
                         component={NewVirtualClassroom}
                     />
                     <Route
-                        path={`/lecture/attendance/:lecture_id`}
+                        path={`/class-attendance/:lecture_id`}
                         component={LectureAttendance}
-                        exact
+
                     />
                     <Route
                         path={`/new-assignment`}
