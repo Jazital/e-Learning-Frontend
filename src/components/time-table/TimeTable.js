@@ -16,12 +16,10 @@ const TimeTable = () => {
     let userToken = localStorage.getItem('userToken') || '';
     let args = {
         headers: {
-            'Authorization':'Bearer '+ userToken,
+            'Authorization': 'Bearer ' + userToken,
         },
     }
     endpoint = '/lecture-timetable/fetch';
-
-    const [timetable, setTimetable] = useState([])
     const [timetable2, setTimetable2] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const loadingModal = (isOpen = false) => {
@@ -44,11 +42,11 @@ const TimeTable = () => {
             args
         ).then(response => {
             if (response.data.code === 'timetable_fetched') {
-                setTimetable(response.data.data.lecture_timetable)
+                setTimetable2(response.data.data.lecture_timetable)
             }
             setIsLoading(false)
             closeNavMenu();
-            setTimetable2(response.data.data.lecture_timetable)
+
         }).catch(error => {
             setIsLoading(false)
             closeNavMenu();
@@ -58,7 +56,7 @@ const TimeTable = () => {
     return (
         <div>
             {loadingModal(isLoading)}
-            {(timetable2.length > 0) && (timetable2.map((data, index) => {
+            {(Array.isArray(timetable2)) && (timetable2.map((data, index) => {
                 return <img src={data} key={index} alt="" className="m-2 timetable-img" />
             }))}
             <br />
