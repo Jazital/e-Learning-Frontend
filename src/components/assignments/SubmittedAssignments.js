@@ -141,9 +141,8 @@ const SubmittedAssignments = () => {
         }
 
         // Making request to backend API
-        await axios.post(
+        await axios.get(
             BACKEND_BASE_URL + endpoint,
-            // data,
             args2
         ).then(response => {
             // console.log(response)
