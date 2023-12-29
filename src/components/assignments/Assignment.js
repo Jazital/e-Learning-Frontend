@@ -28,7 +28,7 @@ function Assignment() {
 
     args = {
         headers: {
-            'Authorization':'Bearer '+ userToken,
+            'Authorization': 'Bearer ' + userToken,
         },
     }
     endpoint = '/assignments/' + assignment_id;
@@ -45,7 +45,7 @@ function Assignment() {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
             </Modal>
         );
     };
@@ -62,6 +62,7 @@ function Assignment() {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
+            // console.log(response)
             if (response.data.code === 'assignment_fetched') {
                 setAssignment(response.data.data.lecture_assignment)
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]);
@@ -82,7 +83,7 @@ function Assignment() {
         endpoint = '/assignments/submit';
         let args2 = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -99,7 +100,7 @@ function Assignment() {
             formData,
             args2
         ).then(response => {
-            //console.log(response)
+            // console.log(response)
             if (response.data.code === 'assignment_submitted') {
                 setSubmissionResponse({
                     status: 'success',
@@ -123,8 +124,10 @@ function Assignment() {
 
     return (<>
             <div className="pb-4">
-                {userRole == "student" && <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>}
-                {userRole == "lecturer" && <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link>}
+                {userRole == "student" &&
+                <Link to={'/enrolled-courses'} className="btn btn-primary">Back to courses</Link>}
+                {userRole == "lecturer" &&
+                <Link to={'/assigned-courses'} className="btn btn-primary">Back to courses</Link>}
             </div>
 
             <div className='the col-xl-10 col-lg-12 col-sm-12 d-block d-lg-flex'>
@@ -141,19 +144,20 @@ function Assignment() {
                         </div>
                         <div className="centercoursetext mb-2">
                             {
-                                assignmentDocumentURI && (<a className="btn btn-primary" target="_blank" href={assignmentDocumentURI}>
-                                    Download Assignment
-                                </a>)
+                                assignmentDocumentURI && (
+                                    <a className="btn btn-primary" target="_blank" href={assignmentDocumentURI}>
+                                        Download Assignment
+                                    </a>)
                             }
 
                         </div>
                         <div id="firstAssignText">
                             <div>
-                                <strong> Title: {assignment.assignment_title}</strong> <br/>
-                                <strong> Course: {assignment.course_code}</strong> <br/>
-                                Assigned Date: {assignment.creation_date} <br/>
-                                <strong>Due Date: {assignment.due_date}</strong> <br/>
-                                <strong>Description:</strong> <br/>
+                                <strong> Title: {assignment.assignment_title}</strong> <br />
+                                <strong> Course: {assignment.course_code}</strong> <br />
+                                Assigned Date: {assignment.creation_date} <br />
+                                <strong>Due Date: {assignment.due_date}</strong> <br />
+                                <strong>Description:</strong> <br />
                                 <div>{assignment.assignment_description}</div>
 
                             </div>
@@ -173,11 +177,11 @@ function Assignment() {
                         <p className="pb-0 pt-1">Upload your assignment below to submit</p>
                     </div>
                     <form onSubmit={handleAssignmentSubmit}>
-                        <input type="file" id="assignment-file-input" className="form-control mb-3"/>
+                        <input type="file" id="assignment-file-input" className="form-control mb-3" />
                         <label htmlFor="assignment-comment-input">Comment (optional)</label>
                         <textarea rows="5" id="assignment-comment-input" className="form-control mb-3"
                                   placeholder="Enter your comment here..."></textarea>
-                        <input className="btn btn-primary" type="submit" value="Submit Assignment"/>
+                        <input className="btn btn-primary" type="submit" value="Submit Assignment" />
                     </form>
 
                 </div>

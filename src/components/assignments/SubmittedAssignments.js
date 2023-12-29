@@ -43,7 +43,7 @@ const SubmittedAssignments = () => {
     const loadingModal = (isOpen = false) => {
         return (
             <Modal show={isOpen}>
-                <ScaleLoader color="#ffffff" size="18px" margin="4px"/>
+                <ScaleLoader color="#ffffff" size="18px" margin="4px" />
             </Modal>
         );
     };
@@ -59,7 +59,7 @@ const SubmittedAssignments = () => {
 
         var args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
             params: {
                 'assignment_id': assignment_id,
@@ -71,15 +71,16 @@ const SubmittedAssignments = () => {
             BACKEND_BASE_URL + endpoint,
             args
         ).then(response => {
+            //console.log(response)
             if (response.data.code === 'assignment_fetched') {
                 var fetchedData = response.data.data.submissions;
                 setSubmissions(fetchedData);
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -87,7 +88,7 @@ closeNavMenu();
 
         var args = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
         }
         var endpoint = '/assignments/' + assignment_id;
@@ -101,10 +102,10 @@ closeNavMenu();
                 setAssignmentDocumentURI(response.data.data.lecture_assignment.attachments[0]['file_uri']);
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -131,35 +132,35 @@ closeNavMenu();
         var endpoint = '/assignments/submit-scores-array';
         var args2 = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
             },
-        }
-
-        let data = {
-            assignment_id: assignment_id,
-            scores_array: finalScoreInputArray,
+            params: {
+                "assignment_id": assignment_id,
+                "scores_array": finalScoreInputArray,
+            }
         }
 
         // Making request to backend API
         await axios.post(
             BACKEND_BASE_URL + endpoint,
-            data,
+            // data,
             args2
         ).then(response => {
+            // console.log(response)
             if (response.data.code === 'scores_uploaded') {
                 setResponseOKMessage(response.data.message)
                 setResponseOK(true)
                 setResponseError(false)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
             setResponseError(true)
             setResponseOK(false)
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -202,7 +203,7 @@ closeNavMenu();
                         }}
                                defaultValue={`${(submissions[tableMeta.rowIndex].score) == null ? '' : submissions[tableMeta.rowIndex].score}`}
                                placeholder="No score yet"
-                               id={`input-score-${tableMeta.rowIndex}`}/>}
+                               id={`input-score-${tableMeta.rowIndex}`} />}
                     </>
                 )
             }
@@ -264,7 +265,7 @@ closeNavMenu();
         var endpoint = '/assignments/upload-scores';
         var args2 = {
             headers: {
-                'Authorization':'Bearer '+ userToken,
+                'Authorization': 'Bearer ' + userToken,
                 'Content-Type': 'multipart/form-data',
             },
         }
@@ -290,14 +291,14 @@ closeNavMenu();
                 }, 3000)
             }
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         }).catch(error => {
             setResponseErrorMessage(error.response.data.message)
             setResponseError(true)
             setResponseOK(false)
 
             setIsLoading(false)
-closeNavMenu();
+            closeNavMenu();
         })
     }
 
@@ -352,11 +353,11 @@ closeNavMenu();
                         </div>
                         <div id="firstAssignText">
                             <div>
-                                <strong> Title: {assignment.assignment_title}</strong> <br/>
-                                <strong> Course: {assignment.course_code}</strong> <br/>
-                                Assigned Date: {assignment.creation_date} <br/>
-                                <strong>Due Date: {assignment.due_date}</strong> <br/>
-                                <strong>Description:</strong> <br/>
+                                <strong> Title: {assignment.assignment_title}</strong> <br />
+                                <strong> Course: {assignment.course_code}</strong> <br />
+                                Assigned Date: {assignment.creation_date} <br />
+                                <strong>Due Date: {assignment.due_date}</strong> <br />
+                                <strong>Description:</strong> <br />
                                 <div>{assignment.assignment_description}</div>
 
                             </div>
@@ -378,16 +379,16 @@ closeNavMenu();
                             className='text-danger'>(only comma-delimited CSV files are allowed)</span>.</p>
                     </div>
                     <form onSubmit={handleAssignmentScoreSubmit}>
-                        <input type="file" id="assignment-score-file-input" className="form-control mb-3" required/>
-                        <input className="btn btn-primary" type="submit" value="Submit Scores"/>
+                        <input type="file" id="assignment-score-file-input" className="form-control mb-3" required />
+                        <input className="btn btn-primary" type="submit" value="Submit Scores" />
                     </form>
 
-                    <br/>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
+                    <br />
                     <a href={scoreCSVSampleURL} className="btn-warning p-2 ps-3" target="_blank">Click here to download
-                        scores CSV file
-                        sample</a>
+                                                                                                 scores CSV file
+                                                                                                 sample</a>
                 </div>
             </div>
 
