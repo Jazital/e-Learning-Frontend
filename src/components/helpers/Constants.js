@@ -4,7 +4,9 @@ if (isDevelopmentMode) {
     url = "http://e-learning-platform.local/api/v1";
 }
 else {
-    url = "https://elearning.ospoly.edu.ng/e-learning-backend-api/api/v1";
+    // url = "https://elearning.ospoly.edu.ng/e-learning-backend-api/api/v1";
+    // url = "https://elearning-com.preview-domain.com/api/v1";
+    url = "https://elearning-com.preview-domain.com/backend/api/v1";
 }
 
 exports.JazitalBackendBaseURL = url;
