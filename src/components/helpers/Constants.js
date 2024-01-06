@@ -5,7 +5,6 @@ if (isDevelopmentMode) {
 }
 else {
     // url = "https://elearning.ospoly.edu.ng/e-learning-backend-api/api/v1";
-    // url = "https://elearning-com.preview-domain.com/api/v1";
     url = "https://elearning-com.preview-domain.com/backend/api/v1";
 }
 

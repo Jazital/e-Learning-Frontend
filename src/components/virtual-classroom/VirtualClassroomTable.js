@@ -114,7 +114,7 @@ const VirtualClassroomTable = (props) => {
             }
         }
 
-        await axios.delete(
+        await axios.get(
             BACKEND_BASE_URL + endpoint,
             args2
         ).then(response => {
@@ -136,7 +136,7 @@ const VirtualClassroomTable = (props) => {
             closeNavMenu();
 
         }).catch(error => {
-            // console.error(error)
+            // console.error(error.response.data)
             if (error.response.data.message) {
                 setResponseErrorMessage(error.response.data.message)
                 setResponseError(true)
@@ -211,11 +211,9 @@ const VirtualClassroomTable = (props) => {
                         {userRole === "lecturer" &&
                         <Link to={`/class-attendance/${lectures[tableMeta.rowIndex].lecture_id}`}
                               className="btn btn-primary">View Attendance</Link>}
-                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
-                            setIsLoading(true);
-                            return attendLecture(lectures[tableMeta.rowIndex].lecture_id)
-                        }}
-                                                       className="btn btn-primary">Start Lecture</a>}
+
+                        {userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url}  className="btn btn-primary">Start Lecture</a>}
+
                         {/*{userRole === "lecturer" && <a href={lectures[tableMeta.rowIndex].lecture_url} onClick={() => {
                          setIsLoading(true);
                          return modifyLecture(lectures[tableMeta.rowIndex].lecture_id)
